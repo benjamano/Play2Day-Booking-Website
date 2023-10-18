@@ -1,0 +1,83 @@
+<head>
+    <title>New Party Booking</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+</head>
+<div class="sidebar">
+    <a href="/account">Home</a>
+    <a class="active" href="/account/newbooking">New Booking</a>
+    <a href="/account/managebooking">Manage Bookings</a>
+    <a href="/account/editaccountdetails">Edit Account Details</a>
+</div>
+<center>
+    <div class="content">
+        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+        <div class="pair">
+            <body>
+                <h5>
+                    New Party Booking
+                </h5>
+                <h3>
+                    Select the time
+                </h3>
+                <form action="#" method="post">
+                    <p>
+                        <input type="radio" id="bookingtime" name="bookingtime" value="11:00-13:30" required>
+                        <label for="11:00-13:30">11:00 - 13:30</label>
+                    </p>
+                    <p>
+                        <input type="radio" id="bookingtime" name="bookingtime" value="15:00-17:30" required>
+                        <label for="15:00-17:30"> 15:00 - 17:30</label>
+                    </p>
+                    <p>
+                    <h3>
+                        Select approximate number of attendees
+                    </h3>
+                    <label>
+                        Number of Adults:
+                    </label>
+                    <label>
+                        <input type="radio" name="numberadults" value="5" required>
+                        5
+                    </label>
+                    <label>
+                        <input type="radio" name="numberadults" value="10">
+                        10
+                    </label>
+                    <label>
+                        <input type="radio" name="numberadults" value="15">
+                        15
+                    </label>
+                    <label>
+                        <input type="radio" name="numberadults" value="30">
+                        30
+                    </label>
+                    <p>
+                        <label>
+                            Number of Children:
+                        </label>
+                        <label>
+                            <input type="radio" name="numberchildren" value="5" required>
+                            5
+                        </label>
+                        <label>
+                            <input type="radio" name="numberchildren" value="10">
+                            10
+                        </label>
+                        <label>
+                            <input type="radio" name="numberchildren" value="15">
+                            15
+                        </label>
+                        <label>
+                            <input type="radio" name="numberchildren" value="30">
+                            30
+                        </label>
+                    </p>
+                    </p>
+                        <input type="submit" name="Submit" value="Next"/>
+                    </p>
+                </form>
+            </body>
+        </div>
+    </div>
+</center>

@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>Error!</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+        <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+    </head>
+    <body>
+        <center>
+            <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+            <h4>
+                {{ error }}
+            </h4>
+        </center>
+    </body>
+</html>

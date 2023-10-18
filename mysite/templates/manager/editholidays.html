@@ -1,0 +1,25 @@
+<head>
+    <title>Manage A Booking</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+</head>
+<div class="sidebar">
+    <a href="/manager/account">Home</a>
+    <a href="/manager/editbooking">Booking Report</a>
+    <a href="/manager/editcustomer">Edit a Customer</a>
+    <a class="active" href="/manager/holidays">Upcoming Holidays</a>
+    <a href="/logout"> Log Out</a>
+</div>
+
+<div class="content">
+    <center>
+        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+        <div class="pair">
+            <center>
+                <h5>
+                    Manage upcoming public holidays
+                </h5>
+            </center>
+        </div>
+    </center>
+</div>

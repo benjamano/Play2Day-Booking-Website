@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title>Account Details</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+        <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+    </head>
+    <div class="sidebar">
+        <a href="/account">Home</a>
+        <a href="/account/newbooking">New Booking</a>
+        <a href="/account/managebooking">Manage Booking</a>
+        <a class="active" href="/account/editaccountdetails">Edit Account Details</a>
+        <a href="/logout">Log Out</a>
+    </div>
+
+    <body>
+        <div class="content">
+            <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+            <center>
+                <div class="pair">
+                    <center>
+                        <h5>
+                            Account Details
+                        </h5>
+                        <br>
+                        <br>
+                        <form method="POST" action="#">
+                            <h12>First name:</h12>
+                            <br>
+                            <input type="text" id="NewFirst" name="NewFirst" value={{First}} required  maxlength="30">
+                            <p>
+                            <br>
+                            <br>
+                            <h12>Last name:</h12>
+                            <br>
+                            <input type="text" id="NewLast" name="NewLast" value={{Last}} required  maxlength="30">
+                            </p>
+                            <br>
+                            <p>
+                            <h12>Email:</h12>
+                            <br>
+                            <input type="text" id="Email" name="Email" value={{Email}} readonly>
+                            </p>
+                            <br>
+                            <br>
+                            <p>
+                            <h12>Phone Number:</h12>
+                            <br>
+                            <input type="text" id="NewPhone" name="NewPhone" value={{Phone}}  maxlength="11">
+                            </p>
+                            <br>
+                            <br>
+                            <button type="submit" class="savebutton" onclick="return confirm('Save new details?')">Save</button>
+                        </form>
+                        <form method="POST" action="/account/delete_account">
+                            <button type="submit" class="deletebutton" onclick="return confirm('Are you sure you want to delete your account? It will delete ALL your bookings!')">Delete Account</button>
+                        </form>
+                    </center>
+                </div>
+            </center>
+        </div>
+    </body>
+</html>

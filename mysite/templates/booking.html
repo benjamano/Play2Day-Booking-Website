@@ -1,0 +1,43 @@
+<head>
+    <title>Manage Your Booking</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+</head>
+<div class="sidebar">
+    <a href="/account">Home</a>
+    <a href="/account/newbooking">New Booking</a>
+    <a class="active" href="/account/managebooking">Manage Bookings</a>
+    <a href="/account/editaccountdetails">Edit Account Details</a>
+    <a href="/logout"> Log Out</a>
+</div>
+
+<div class="content">
+    <center>
+        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+        <div class="pair">
+            <center>
+                <h5>
+                    Manage Booking
+                </h5>
+                <h2>
+                    Booking Type: {{SessionType}}
+                </h2>
+                <h2>
+                    Booking Date: {{BookingDate}}
+                </h2>
+                <h2>
+                    Booking Time: {{BookingTime}}
+                </h2>
+                <h2>
+                    Booking Price: £{{BookingPrice}}
+                </h2>
+                <h2>
+                    Extra Notes: {{Extra}}
+                </h2>
+                <form method="POST" action="/account/managebooking/deletebooking">
+                    <button type="submit" class="deletebutton" onclick="return confirm('Are you sure you want to delete this Booking?')">Delete Booking</button>
+                </form>
+            </center>
+        </div>
+    </center>
+</div>

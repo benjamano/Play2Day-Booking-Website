@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>Account</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+        <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+    </head>
+    <div class="sidebar">
+        <a class="active" href="/account">Home</a>
+        <a href="/account/newbooking">New Booking</a>
+        <a href="/account/managebooking">Manage Bookings</a>
+        <a href="/centerinfo/home">Play2Day Information</a>
+        <a href="/account/editaccountdetails">Edit Account Details</a>
+        <a href="/logout"> Log Out</a>
+        <button onclick="myFunction()">Toggle dark mode (Experimental)</button>
+    </div>
+    <body>
+        <div class="content">
+            <center>
+                <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+                <body>
+                    <h6>
+                        Welcome, {{First}}
+                    </h6>
+                </body>
+                <div class="slideshow-container">
+                    <div class="mySlides fade">
+                      <img src="{{ url_for('static',filename='/images/privatehiresslide.png') }}" style="width:60%; border: 5px solid #000000;">
+                    </div>
+
+                    <div class="mySlides fade">
+                      <img src="{{ url_for('static',filename='/images/partybookingsslide.png') }}" style="width:60%; border: 5px solid #000000;">
+                    </div>
+
+                    <div class="mySlides fade">
+                      <img src="{{ url_for('static',filename='/images/NewFriday8th.png') }}" style="width:50%; border: 5px solid #000000;">
+                    </div>
+                </div>
+                <div style="text-align:center">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+                <script>
+                    let slideIndex = 0;
+                    showSlides();
+
+                    function showSlides() {
+                      let i;
+                      let slides = document.getElementsByClassName("mySlides");
+                      let dots = document.getElementsByClassName("dot");
+                      for (i = 0; i < slides.length; i++) {
+                        slides[i].style.display = "none";
+                      }
+                      slideIndex++;
+                      if (slideIndex > slides.length) {slideIndex = 1}
+                      for (i = 0; i < dots.length; i++) {
+                        dots[i].className = dots[i].className.replace(" active", "");
+                      }
+                      slides[slideIndex-1].style.display = "block";
+                      dots[slideIndex-1].className += " active";
+                      setTimeout(showSlides, 5000); // Change every 5 seconds
+                    }
+                </script>
+                <script>
+                function myFunction() {
+                    var element = document.body;
+                    element.classList.toggle("dark-mode");
+                }
+                </script>
+            </center>
+        </div>
+    </body>
+</html>

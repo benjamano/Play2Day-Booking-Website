@@ -1,0 +1,38 @@
+<head>
+    <title>Home</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+</head>
+
+<div class="sidebar">
+    <a class="active" href="/manager/account"><img src"{{url_for('static',filename='/images/icons/editbooking.png') }}"/>Home</a>
+    <a href="/manager/editbooking">Booking Report</a>
+    <a href="/manager/editcustomer">Edit a Customer</a>
+    <a href="/manager/holidays">Upcoming Holidays</a>
+    <a href="/logout"> Log Out</a>
+</div>
+<body>
+    <div class="content">
+        <center>
+            <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+            <center>
+                <div class="numberpair">
+                    <center>
+                        <h11>{{TotalBookings}}</h11>
+                        <p>
+                            <h9><br>Total<br></b>Bookings</h9>
+                        </p>
+                    </center>
+                </div>
+                <div class="numberpair">
+                    <center>
+                        <h11>{{TommorowsBookings}}</h11>
+                        <p>
+                            <h9><br>Tommorows<br></b>Bookings</h9>
+                        </p>
+                    </center>
+                </div>
+            </center>
+        </center>
+    </div>
+</body>

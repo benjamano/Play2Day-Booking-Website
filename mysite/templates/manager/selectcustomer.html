@@ -1,0 +1,54 @@
+<head>
+    <title>Select Customer to edit</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+</head>
+
+<div class="sidebar">
+    <a href="/manager/account">Home</a>
+    <a href="/manager/editbooking">Booking Report</a>
+    <a class="active" href="/manager/editcustomer">Edit a Customer</a>
+    <a href="/manager/holidays">Upcoming Holidays</a>
+    <a href="/logout"> Log Out</a>
+</div>
+
+<div class="content">
+    <center>
+        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+        <center>
+            <div class="pair">
+                <h5>Select the Customer</h5>
+                <center>
+                    <table style="width:90%">
+                        <tr>
+                            <th>CustomerID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Edit</th>
+                        </tr>
+                        {% for customer in activecustomers %}
+                            <form action="#" method="POST">
+                                <input type="hidden" name="CustomerID" value="{{ customer.0 }}">
+                                <input type="hidden" name="FirstName" value="{{ customer.1 }}">
+                                <input type="hidden" name="LastName" value="{{ customer.2 }}">
+                                <input type="hidden" name="Email" value="{{ customer.3 }}">
+                                <input type="hidden" name="PhoneNo" value="{{ customer.4 }}">
+                                <center>
+                                    <tr>
+                                        <td>{{ customer.0 }}</td>
+                                        <td>{{ customer.1 }} {{ customer.2 }}</td>
+                                        <td>{{ customer.3 }}</td>
+                                        <td>{{ customer.4 }}</td>
+                                        <td><button class="select" type="submit">Edit</button></td>
+                                    </tr>
+                                </center>
+                            </form>
+                        {% endfor %}
+                    </table>
+                    <br>
+                </center>
+            </div>
+        </center>
+    </center>
+</div>

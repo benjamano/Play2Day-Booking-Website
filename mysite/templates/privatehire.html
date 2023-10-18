@@ -1,0 +1,94 @@
+<head>
+    <title>New Private Hire Booking</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+</head>
+<div class="sidebar">
+    <a href="/account">Home</a>
+    <a class="active" href="/account/newbooking">New Booking</a>
+    <a href="/account/managebooking">Manage Bookings</a>
+    <a href="/account/editaccountdetails">Edit Account Details</a>
+</div>
+<center>
+    <div class="content">
+        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+        <div class="pair">
+            <body>
+                <h5>
+                    New Private Hire Booking
+                </h5>
+                <h3>
+                    Select the date and Type of Booking
+                </h3>
+                <form action="#" method="POST">
+                    <p>
+                        <label>
+                            <input type="radio" name="privatehiretype" value="Adventure Play Private Hire" required>
+                            Adventure Play Party
+                        </label>
+                    </p>
+
+                    <p>
+                        <label>
+                            <input type="radio" name="privatehiretype" value="Laser Tag Private Hire">
+                            Shoot and Slide Party
+                        </label>
+                    </p>
+
+                    <p>
+                        <label>
+                            <input type="radio" name="privatehiretype" value="Laser Tag + Adventure Play Private Hire">
+                            Adventure Play + Laser Tag
+                        </label>
+                    </p>
+                    <h3>
+                        Select approximate number of attendees
+                    </h3>
+                    <label>
+                        Number of Adults:
+                    </label>
+                    <label>
+                        <input type="radio" name="numberadults" value="1-10" required>
+                        1 - 10
+                    </label>
+                    <label>
+                        <input type="radio" name="numberadults" value="10-30">
+                        10 - 30
+                    </label>
+                    <label>
+                        <input type="radio" name="numberadults" value="30-50">
+                        30 - 50
+                    </label>
+                    <label>
+                        <input type="radio" name="numberadults" value="50+">
+                        50+
+                    </label>
+                    <p>
+                        <label>
+                            Number of Children:
+                        </label>
+                        <label>
+                            <input type="radio" name="numberchildren" value="1-10" required>
+                            1 - 10
+                        </label>
+                        <label>
+                            <input type="radio" name="numberchildren" value="10-30">
+                            10 - 30
+                        </label>
+                        <label>
+                            <input type="radio" name="numberchildren" value="30-50">
+                            30 - 50
+                        </label>
+                        <label>
+                            <input type="radio" name="numberchildren" value="50+">
+                            50+
+                        </label>
+                    </p>
+                    <p>
+                        <input type="submit" name="Submit" value="Next"/>
+                    </p>
+                </form>
+            </body>
+        </div>
+    </div>
+</center>

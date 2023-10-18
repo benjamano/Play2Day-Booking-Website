@@ -1,0 +1,54 @@
+<head>
+    <title>Sign Up</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+</head>
+    <body style="background-color:#ffffff;" align=center>
+        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+        <center>
+            <div class="pair">
+                <h5>
+                    Sign Up
+                </h5>
+                <h7>
+                    Fields marked with * are required
+                </h7>
+                <form action="#" method="post">
+                    <h6>
+                        First Name *
+                    </h6>
+                    <p>
+                        <input type="text" name="First" placeholder="Rupert" required  maxlength="30"/>
+                    </p>
+                    <h6>
+                        Last Name *
+                    </h6>
+                    <p>
+                        <input type="text" name="Last" placeholder="Marlowe" required  maxlength="30"/>
+                    </p>
+                    <h6>
+                        Email *
+                    </h6>
+                    <p>
+                        <input type="email" name="Email" placeholder="RupertM@play2day.biz" required  maxlength="30"/>
+                    </p>
+                    <h6>
+                    Phone Number
+                    </h6>
+                    <p>
+                        <input type="text" name="Phone" placeholder="01473611333" minlength="11" maxlength="11"/>
+                    </p>
+                    <h6>
+                        Password *
+                    </h6>
+                    <p>
+                        <input type="password" name="Password" placeholder="Password" required  maxlength="30"/>
+                    </p>
+                    <p>
+                        <button type="submit" class="buttonsignup">Signup</button>
+                    </p>
+                </form>
+            </div>
+        </center>
+    </body>
+</html>

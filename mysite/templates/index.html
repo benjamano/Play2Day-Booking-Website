@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Log In Or Sign Up</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+        <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+    </head>
+    <center>
+        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+        <h2>
+            Warning: THIS IS NOT THE OFFICIAL PLAY2DAY WEBSITE
+        </h2>
+
+        <div class="pair">
+            <body style="background-color:#ffffff;">
+                <span>
+                    <h5>
+                        Welcome, Login or Signup
+                    </h5>
+                </span>
+                <center>
+                    <button class="buttonsignup" onclick="location.href = 'https://benjamano.pythonanywhere.com/login';">
+                        Log In
+                    </button>
+                    <button class="buttonlogin" onclick="location.href = 'https://benjamano.pythonanywhere.com/signup';">
+                        Sign Up
+                    </button>
+                    <p>
+                    <button class="buttonmanagerlogin" onclick="location.href = 'https://benjamano.pythonanywhere.com/managerlogin';">
+                        Manager Login
+                    </button>
+                    </p>
+                </center>
+            </body>
+        </div>
+    </center>
+</html>

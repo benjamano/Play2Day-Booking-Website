@@ -1,0 +1,52 @@
+<head>
+    <title>Confirm Your Booking</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+</head>
+<div class="sidebar">
+    <a href="/account">Home</a>
+    <a class="active" href="/account/newbooking">New Booking</a>
+    <a href="/account/managebooking">Manage Bookings</a>
+    <a href="/account/editaccountdetails">Edit Account Details</a>
+</div>
+<center>
+    <div class="content">
+        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+        <div class="pair">
+            <body>
+                <h5>
+                    Booking Confirmation
+                </h5>
+                <center>
+                    <form action="#" method="post">
+
+                        <h2>
+                           Session: {{ PrivateHireType }}
+                            {% if PrivateHireType == '' %}
+                                {{ BookingType }}
+                            {% endif %}
+                        </h2>
+                        <h2>
+                            Booking Date: {{BookingDate}}
+                        </h2>
+                        <h2>
+                            Booking Time: {{BookingTime}}
+                        </h2>
+                        <h2>
+                            Number of Children: {{NumberChildren}}
+                        </h2>
+                        <h2>
+                            Number of Adults: {{NumberAdults}}
+                        </h2>
+                        <h2>
+                            Final Price: £{{Price}}
+                        </h2>
+                        <p>
+                            <input type="submit" name="Submit" value="Confirm Details"/>
+                        </p>
+                    </form>
+                </center>
+            </body>
+        </div>
+    </div>
+</center>

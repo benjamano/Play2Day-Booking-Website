@@ -1,0 +1,60 @@
+<head>
+    <title>Manage A Customer</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+</head>
+<div class="sidebar">
+    <a href="/manager/account">Home</a>
+    <a href="/manager/editbooking">Booking Report</a>
+    <a class="active" href="/manager/editcustomer">Edit a Customer</a>
+    <a href="/manager/holidays">Upcoming Holidays</a>
+    <a href="/logout"> Log Out</a>
+</div>
+
+<div class="content">
+    <center>
+        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+        <center>
+            <div class="pair">
+                <center>
+                    <h5>
+                        Manage Customer
+                    </h5>
+                    <br>
+                    <br>
+                    <form method="POST" action="#">
+                        <h12>First name:</h12>
+                        <br>
+                        <input type="text" id="NewFirst" name="NewFirst" value={{FirstName}} required  maxlength="15">
+                        <p>
+                        <br>
+                        <br>
+                        <h12>Last name:</h12>
+                        <br>
+                        <input type="text" id="NewLast" name="NewLast" value={{LastName}} required  maxlength="15">
+                        </p>
+                        <br>
+                        <p>
+                        <h12>Email:</h12>
+                        <br>
+                        <input type="text" id="Email" name="Email" value={{Email}} readonly>
+                        </p>
+                        <br>
+                        <br>
+                        <p>
+                        <h12>Phone Number:</h12>
+                        <br>
+                        <input type="text" id="NewPhone" name="NewPhone" value={{PhoneNumber}}  maxlength="11">
+                        </p>
+                        <br>
+                        <br>
+                        <button type="submit" class="savebutton" onclick="return confirm('Save new details?')">Save</button>
+                    </form>
+                    <form method="POST" action="#">
+                        <button type="submit" class="deletebutton" onclick="return confirm('Are you sure you want to delete this Customer? It will delete all their bookings too!')">Delete Customer</button>
+                    </form>
+                </center>
+            </div>
+        </center>
+    </center>
+</div>

@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>New Booking</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+        <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+    </head>
+    <div class="sidebar">
+        <a href="/account">Home</a>
+        <a class="active" href="/account/newbooking">New Booking</a>
+        <a href="/account/managebooking">Manage Bookings</a>
+        <a href="/account/editaccountdetails">Edit Account Details</a>
+    </div>
+    <center>
+        <div class="content">
+            <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+            <div class="pair">
+                <body>
+                    <h5>
+                        New Booking
+                    </h5>
+                    <h3>
+                        Select the type of booking
+                    </h3>
+                    <form action="#" method="post">
+                        <p>
+                            {% if WeekdayBooking == True %}
+                                <input type="radio" id="bookingtype" name="bookingtype" value="Weekday Play Session">
+                                <label for="weekday">Weekday Session</label>
+                            {% else %}
+                                <input type="radio" id="bookingtype" name="bookingtype" value="Weekend Play Session" required>
+                                <label for="weekendholiday">Weekend or Holiday Session</label>
+                            {% endif %}
+                        </p>
+                        <p>
+                            <input type="radio" id="bookingtype" name="bookingtype" value="Party">
+                            <label for="Party">Party</label><br>
+                        </p>
+                        <p>
+                            <input type="radio" id="bookingtype" name="bookingtype" value="Private Hire">
+                            <label for="Private Hire">Private Hire</label>
+                        </p>
+                        <p>
+                            <input type="submit" name="Submit" value="Next"/>
+                        </p>
+                    </form>
+                </body>
+            </div>
+        </div>
+    </center>
+</html>
