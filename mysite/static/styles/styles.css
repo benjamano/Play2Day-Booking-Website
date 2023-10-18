@@ -281,7 +281,7 @@ label{
 }
 .accountbutton{
     height: 80px;
-    width: 250px; !important
+    width: 250px !important;
     color: white;
     border: none;
     border-radius: 20px;
