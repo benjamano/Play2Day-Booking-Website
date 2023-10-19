@@ -44,12 +44,20 @@
 |3,1,36,0,1,0,1694125672,"# On"
 
 # File marks:
-'0  79  0  ~/mysite/.git/COMMIT_EDITMSG
-|4,48,79,0,1694125751,"~/mysite/.git/COMMIT_EDITMSG"
+'0  1  0  ~/.git/COMMIT_EDITMSG
+|4,48,1,0,1697757455,"~/.git/COMMIT_EDITMSG"
+'1  79  0  ~/mysite/.git/COMMIT_EDITMSG
+|4,49,79,0,1694125751,"~/mysite/.git/COMMIT_EDITMSG"
 
 # Jumplist (newest first):
+-'  1  0  ~/.git/COMMIT_EDITMSG
+|4,39,1,0,1697757455,"~/.git/COMMIT_EDITMSG"
 -'  79  0  ~/mysite/.git/COMMIT_EDITMSG
 |4,39,79,0,1694125751,"~/mysite/.git/COMMIT_EDITMSG"
+-'  79  0  ~/mysite/.git/COMMIT_EDITMSG
+|4,39,79,0,1694125751,"~/mysite/.git/COMMIT_EDITMSG"
+-'  1  0  ~/mysite/.git/COMMIT_EDITMSG
+|4,39,1,0,1694125660,"~/mysite/.git/COMMIT_EDITMSG"
 -'  1  0  ~/mysite/.git/COMMIT_EDITMSG
 |4,39,1,0,1694125660,"~/mysite/.git/COMMIT_EDITMSG"
 
