@@ -47,7 +47,7 @@
                                 <th>Name</th>
                                 <th>Type</th>
                                 <th>Date & Time</th>
-                                <th>Edit</th>
+                                <th>Details</th>
                                 <th>Arrived</th>
                             </tr>
                             {% for booking in activebookings %}
@@ -66,17 +66,17 @@
                                         <td>{{ booking.8 }} {{ booking.9 }}</td>
                                         <td>{{ booking.3 }}</td>
                                         <td>{{ booking.1 }}<br>{{booking.2}}</td>
-                                        <td><button class="select" type="submit">Edit</button></td>
+                                        <td><button class="select" type="submit">Details</button></td>
                                         </form>
                                             <td>
                                                 <center>
                                                 <form action="/manager/arrived" method="POST">
                                                     <input type="hidden" name="BookingID" value="{{ booking.0 }}">
                                                     <input type="hidden" name="Arrived" value="{{ booking.10 }}">
-                                                    <button class="arrived" type="submit">{{ booking.10}}</button>
-                                                </form>
+                                                    <button class="arrived {% if booking.10 == 'True' %}arrived-true{% else %}arrived-false{% endif %}" type="submit">{{ booking.10}}</button>
                                                 </center>
                                             </td>
+                                        </form>
                                     </tr>
                             {% endfor %}
                         </table>

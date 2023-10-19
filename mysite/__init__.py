@@ -86,7 +86,7 @@ elif function == 3:
 def onStart():
     try:
 
-        tblCustomer = "CREATE TABLE IF NOT EXISTS Customer (CustomerID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, FirstName TEXT NOT NULL, LastName TEXT NOT NULL, Email TEXT NOT NULL, PhoneNumber TEXT, Password VARCHAR(255) NOT NULL, PasswordSalt VARCHAR(255))"
+        tblCustomer = "CREATE TABLE IF NOT EXISTS Customer (CustomerID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, FirstName TEXT NOT NULL, LastName TEXT NOT NULL, Email TEXT NOT NULL, PhoneNumber VARCHAR(11), Password VARCHAR(255) NOT NULL, PasswordSalt VARCHAR(255))"
 
         tblManager = "CREATE TABLE IF NOT EXISTS Manager (ManagerID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Username VARCHAR(30) NOT NULL, Password VARCHAR(255) NOT NULL)"
 
@@ -181,9 +181,9 @@ def CheckInputValid(FirstName, LastName, Email, PhoneNumber, Password, Function)
     elif Function != "IgnoreEmailandPassword" and len(Email) > 30:
 
         return False, "Email is too long"
-    elif len(PhoneNumber) > 11:
+    elif len(PhoneNumber) > 11 or not PhoneNumber.isnumeric():
 
-        return False, "Phone Number is too long"
+        return False, "Phone Number is too long or includes non-number characters"
     elif Function == "Full" and len(Password) > 30:
 
         return False, "Password is too long"
@@ -1391,48 +1391,53 @@ def managercustomer():
     Phone = session["Phone"]
 
     if request.method == "POST":
-
-        try:
-
-            NewFirst = request.form["NewFirst"]
-
-            app.logger.info(NewFirst)
-
-            if NewFirst != First:
-
+        
+        Delete = request.form["delete"]
+        
+        if Delete == "False":
+            
+            try:
+    
+                NewFirst = request.form["NewFirst"]
                 NewLast = request.form["NewLast"]
                 NewPhone = request.form["NewPhone"]
-
-                Fetch = CheckInputValid(FirstName=NewFirst, LastName=NewLast, Email=Email, PhoneNumber=NewPhone, Password="", Function="IgnoreEmailandPassword")
-
-                valid = Fetch[0]
-                error = Fetch[1]
-
-                if not valid:
-
-                    app.logger.info(f"Error while validating details: {error}")
-
-                    return render_template("error.html", error=error)
-                    #return False, f"Error while validating details: {error}"
+    
+                if NewFirst != First or NewLast != Last or NewPhone != Phone:
+    
+                    Fetch = CheckInputValid(FirstName=NewFirst, LastName=NewLast, Email=Email, PhoneNumber=NewPhone, Password="", Function="IgnoreEmailandPassword")
+    
+                    valid = Fetch[0]
+                    error = Fetch[1]
+    
+                    if not valid:
+    
+                        app.logger.info(f"Error while validating details: {error}")
+    
+                        return render_template("error.html", error=error)
+                        #return False, f"Error while validating details: {error}"
+                    else:
+    
+                        details = (NewFirst, NewLast, NewPhone, CustomerID)
+    
+                        app.logger.info(f"Editing account details, New name = {NewFirst} {NewLast}, New phone = {NewPhone}, CustomerID = {CustomerID}")
+    
+                        update = "UPDATE Customer SET FirstName = (?), LastName = (?), PhoneNumber = (?) WHERE CustomerID = (?)"
+    
+                        q.execute(update, details)
+    
+                        sql.commit()
+    
+                        return redirect(url_for("managereditcustomer"))
+                
                 else:
-
-                    details = (NewFirst, NewLast, NewPhone, CustomerID)
-
-                    app.logger.info(f"Editing account details, New name = {NewFirst} {NewLast}, New phone = {NewPhone}, CustomerID = {CustomerID}")
-
-                    update = "UPDATE Customer SET FirstName = (?), LastName = (?), PhoneNumber = (?) WHERE CustomerID = (?)"
-
-                    q.execute(update, details)
-
-                    sql.commit()
-
+                    
                     return redirect(url_for("managereditcustomer"))
+                
+            except Exception as error:
+                
+                return render_template("error.html", error=error)
 
-            else:
-                return redirect(url_for("managereditcustomer"))
-
-        except:
-
+        else:
             app.logger.info(f"Deleting Customer with Customer ID: {CustomerID}")
 
             DeleteCustomer = "DELETE FROM Customer WHERE CustomerID = (?)"
@@ -1442,10 +1447,10 @@ def managercustomer():
                 sql.commit()
                 app.logger.info("Customer Deleted Succesfully")
                 return redirect(url_for("managereditcustomer"))
-
+            
             except Exception as error:
                 return render_template("error.html", error=error)
-
+        
     else:
 
         return render_template("manager/customer.html", CustomerID = CustomerID, FirstName = First, LastName = Last, Email = Email, PhoneNumber = Phone)

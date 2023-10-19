@@ -352,6 +352,15 @@ label{
     background-color: #8DFF97;
     cursor: pointer;
 }
+.arrived-true {
+    background-color: #8DFF97;
+    color: black;
+}
+
+.arrived-false {
+    background-color: #E84A5A;
+    color: white;
+}
 input[type=submit] {
     background-color: #bc1e2d;
     border: none;
@@ -400,6 +409,17 @@ input[type=password]{
     background-color: #cccccc;
 
 }
+input[type=tel]{
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    height: 30px;
+    max-width: 250px;
+    font-size: 20;
+    padding-left: 20px;
+    background-color: #cccccc;
+    margin-top: 20px;
+}
 .pair{
     text-align: center;
     border: none;
@@ -433,14 +453,14 @@ input[type=password]{
     background-color: white;
     text-align: center;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    max-width: 80%;
+    max-width: 90%;
     margin-top: 20px;
     margin-bottom: 20px;
     word-wrap: break-word;
     padding: 10px;
 }
 
-td:hover {background-color: #D6EEEE;}
+table:hover {background-color: #D6EEEE;}
 
 .dark-mode {
   background-color: black;

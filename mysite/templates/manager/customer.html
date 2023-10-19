@@ -23,15 +23,16 @@
                     <br>
                     <br>
                     <form method="POST" action="#">
+                        <input type="hidden" id="delete" name="delete" value="False"/>
                         <h12>First name:</h12>
                         <br>
-                        <input type="text" id="NewFirst" name="NewFirst" value={{FirstName}} required  maxlength="15">
+                        <input type="text" id="NewFirst" name="NewFirst" value={{FirstName}} required maxlength="15">
                         <p>
                         <br>
                         <br>
                         <h12>Last name:</h12>
                         <br>
-                        <input type="text" id="NewLast" name="NewLast" value={{LastName}} required  maxlength="15">
+                        <input type="text" id="NewLast" name="NewLast" value={{LastName}} required maxlength="15">
                         </p>
                         <br>
                         <p>
@@ -44,13 +45,14 @@
                         <p>
                         <h12>Phone Number:</h12>
                         <br>
-                        <input type="text" id="NewPhone" name="NewPhone" value={{PhoneNumber}}  maxlength="11">
+                        <input type="tel" id="NewPhone" name="NewPhone" value={{PhoneNumber}} minlength="11" maxlength="11">
                         </p>
                         <br>
                         <br>
                         <button type="submit" class="savebutton" onclick="return confirm('Save new details?')">Save</button>
                     </form>
                     <form method="POST" action="#">
+                        <input type="hidden" id="delete" name="delete" value="True"/>
                         <button type="submit" class="deletebutton" onclick="return confirm('Are you sure you want to delete this Customer? It will delete all their bookings too!')">Delete Customer</button>
                     </form>
                 </center>
