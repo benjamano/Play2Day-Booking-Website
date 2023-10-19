@@ -478,7 +478,55 @@ class Booking:
             app.logger.info("Too many bookings for Weekday Play Session: {BookingDate}, {BookingTime}")
 
             return False, "Sorry, there are too many bookings for this Weekday Play Session, please book another day or time."
+    
+    def WeekendOrHoliday(self, BookingTime, numberadults, numberchildren):
+        
+        BookingDate = session["BookingDate"]
+        CustomerID = session["CustomerID"]
 
+        session["BookingTime"] = BookingTime
+        session["numberadults"] = numberadults
+        session["numberchildren"] = numberchildren
+
+        if checkdate(Date=BookingDate) == False:
+            return render_template("error.html", error="Please book a date in the future!")
+
+        if BookingTime == "10:00-14:00":
+
+            app.logger.info("Weekend Play AM = True")
+            get = "SELECT SessionID FROM Session WHERE SessionType = (?)"
+            q.execute(get, ["Weekend Play AM"])
+
+            session["PlaySessionType"] = "Weekend Play AM"
+
+        else:
+
+            app.logger.info("Weekend Play PM = True")
+            get = "SELECT SessionID FROM Session WHERE SessionType = (?)"
+            q.execute(get, ["Weekend Play PM"])
+
+            session["PlaySessionType"] = "Weekend Play PM"
+
+        fetch = q.fetchone()
+        SessionID = fetch[0]
+
+        session["SessionID"] = SessionID
+
+        checkplaysessionexists = "SELECT count(*) FROM Booking WHERE CustomerID = (?) AND SessionID = (?) AND Date = (?)"
+        details = ((CustomerID), (SessionID), (BookingDate))
+        q.execute(checkplaysessionexists, details)
+        exists=q.fetchone()[0]
+
+        if exists < 75:
+            app.logger.info("Session is open, redirecting to confirm booking page")
+            
+            return True, None
+
+        else:
+            app.logger.info("Too many bookings for Weekday Play Session: {BookingDate}, {BookingTime}")
+            
+            return False, error="Sorry, there are too many bookings for this Weekday Play Session, please book another day or time."
+    
     def DeleteBooking(self):
 
         return True, None
@@ -780,52 +828,19 @@ def weekendplaysession():
         BookingTime = request.form["bookingtime"]
         numberadults = request.form["numberadults"]
         numberchildren = request.form["numberchildren"]
+        
+        NewBooking = Booking(CustomerID=None, SessionID=None, BookingDate=None, BookingTime=BookingTime, NumberOfChildren=numberchildren, NumberOfAdults=numberadults, BookingPrice=None, ExtraNotes=None)
 
-        BookingDate = session["BookingDate"]
-        CustomerID = session["CustomerID"]
+        Result = NewBooking.WeekendOrHoliday(BookingTime=BookingTime, numberadults=numberadults, numberchildren=numberchildren)
 
-        session["BookingTime"] = BookingTime
-        session["numberadults"] = numberadults
-        session["numberchildren"] = numberchildren
-
-        if checkdate(Date=BookingDate) == False:
-            return render_template("error.html", error="Please book a date in the future!")
-
-        if BookingTime == "10:00-14:00":
-
-            app.logger.info("Weekend Play AM = True")
-            get = "SELECT SessionID FROM Session WHERE SessionType = (?)"
-            q.execute(get, ["Weekend Play AM"])
-
-            session["PlaySessionType"] = "Weekend Play AM"
-
-        else:
-
-            app.logger.info("Weekend Play PM = True")
-            get = "SELECT SessionID FROM Session WHERE SessionType = (?)"
-            q.execute(get, ["Weekend Play PM"])
-
-            session["PlaySessionType"] = "Weekend Play PM"
-
-        fetch = q.fetchone()
-        SessionID = fetch[0]
-
-        session["SessionID"] = SessionID
-
-        checkplaysessionexists = "SELECT count(*) FROM Booking WHERE CustomerID = (?) AND SessionID = (?) AND Date = (?)"
-        details = ((CustomerID), (SessionID), (BookingDate))
-        q.execute(checkplaysessionexists, details)
-        exists=q.fetchone()[0]
-
-        app.logger.info(f"Details: CID: {CustomerID}, SID: {CustomerID}, Date: {BookingDate}, Exists: {exists}")
-
-        if exists < 75:
-            app.logger.info("Session is open, redirecting to confirm booking page")
+        Success = Result[0]
+        error = Result[1]
+        
+        if Success:
             return redirect(url_for("confirmbooking"))
-
+            
         else:
-            app.logger.info("Too many bookings for Weekday Play Session: {BookingDate}, {BookingTime}")
-            return render_template("error.html", error= "Sorry, there are too many bookings for this Weekday Play Session, please book another day or time.")
+            return render_template("error.html", error=error)
 
     else:
         return render_template("weekendplaysession.html")
