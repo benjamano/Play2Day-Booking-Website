@@ -378,10 +378,9 @@ class Booking:
         self.BookingPrice = BookingPrice
         self.ExtraNotes = ExtraNotes
 
-    def AddBookingDate(self, BookingDate):
+    def AddBookingDate(self):
 
         try:
-            session["BookingDate"] = BookingDate
 
             if checkdate(self.BookingDate) == False:
                 # If booking date is in the past
@@ -396,7 +395,9 @@ class Booking:
                 # If booking date is on the weekend
                 app.logger.info("Booking is beng made on the weekend")
                 session["WeekdayBooking"] = False
-
+            
+            session["BookingDate"] = self.BookingDate
+        
         except Exception as error:
 
             return False, f"Error while checking booking date validility: {error}"
@@ -525,7 +526,178 @@ class Booking:
         else:
             app.logger.info("Too many bookings for Weekday Play Session: {BookingDate}, {BookingTime}")
             
-            return False, error="Sorry, there are too many bookings for this Weekday Play Session, please book another day or time."
+            return False, "Sorry, there are too many bookings for this Weekday Play Session, please book another day or time."
+    
+    def Party(self, BookingTime, NumberAdults, NumberChildren):
+        
+        CustomerID = session["CustomerID"]
+        BookingTime = session["BookingTime"]
+        BookingDate = session["BookingDate"]
+
+        session["BookingTime"] = BookingTime
+        session["numberadults"] = NumberAdults
+        session["numberchildren"] = NumberChildren
+
+        try:
+            if BookingTime == "11:00-13:30":
+
+                app.logger.info("Party AM = True")
+                get = "SELECT SessionID FROM Session WHERE SessionType = (?)"
+                q.execute(get, ["Party AM"])
+
+                session["PartyType"] = "Party AM"
+
+            elif BookingTime == "15:00-17:30":
+
+                app.logger.info("Party PM = True")
+                get = "SELECT SessionID FROM Session WHERE SessionType = (?)"
+                q.execute(get, ["Party PM"])
+
+                session["PartyType"] = "Party PM"
+
+            fetch = q.fetchone()
+            SessionID = fetch[0]
+
+            session["SessionID"] = SessionID
+
+            checkparty = "SELECT count(*) FROM Booking WHERE CustomerID = (?) AND SessionID = (?) AND Date = (?)"
+            details = (CustomerID, SessionID, BookingDate)
+            q.execute(checkparty, details)
+            exists=q.fetchone()[0]
+            app.logger.info(f"Details: CID: {CustomerID}, SID: {SessionID}, Date: {BookingDate}, Exists: {exists}")
+
+            if exists < 2:
+
+                app.logger.info("Party Session is open, redirecting to confirm booking page")
+                return True, None
+
+            else:
+
+                app.logger.info("Too many bookings for Party: {BookingDate}, {BookingTime}")
+                
+                return False, "Sorry, there are no party booking available for this date or time, please book another day or time."
+
+        except Exception as error:
+            return False, "Error while making party booking: {error}"
+    
+    def PrivateHire(self, PrivateHireType):
+        
+        BookingDate = session["BookingDate"]
+
+        session["numberadults"] = self.NumberOfAdults
+        session["numberchildren"] = self.NumberOfChildren
+        session["PrivateHireType"] = PrivateHireType
+        session["BookingTime"] = "18:30 - 20:30"
+        
+        try:
+
+            get = "SELECT SessionID FROM Session WHERE SessionType = (?)"
+            q.execute(get, [PrivateHireType])
+            fetch = q.fetchone()
+            SessionID = fetch[0]
+
+            session["SessionID"] = SessionID
+
+            checkexists = "SELECT count(*) FROM Booking WHERE SessionID IN (7, 8, 9) AND Date = (?)"
+            app.logger.info(f"Looking for private hire booking with and Booking date = {BookingDate}")
+            q.execute(checkexists, [BookingDate])
+            exists=q.fetchone()[0]
+
+            if exists == 0:
+
+                session["PrivateHire"] = True
+
+                app.logger.info("Session is open, redirecting to confirm booking page")
+
+                return True, None
+
+            else:
+                return False, "This slot is booked, please book another date!"
+
+        except Exception as error:
+            return False, f"Error while making private hire booking: {error}"
+    
+    def GetFinalPrice(self, BookingType):
+              
+        try:
+            
+            if BookingType != "Private Hire":
+
+                app.logger.info(self.SessionID)
+                getprices = "SELECT AdultPrice, ChildPrice FROM Session WHERE SessionID = (?)"
+                q.execute(getprices, [self.SessionID])
+                prices = q.fetchone()
+
+                adultprice = prices[0]
+                childprice = prices[1]
+
+                NumberAdults = int(self.NumberOfAdults)
+                NumberChildren = int(self.NumberOfChildren)
+                adultprice = float(adultprice)
+                childprice = float(childprice)
+
+                adulttotal = adultprice * NumberAdults
+                childtotal = childprice * NumberChildren
+
+                Price = adulttotal + childtotal
+
+                session["Price"] = Price
+
+                app.logger.info(f"({adultprice} * {NumberAdults} = {adulttotal}) + ({childprice} * {NumberChildren} = {childtotal}) = {Price}")
+
+            else:
+
+                Price = 250.0
+
+            session["Price"] = Price
+            
+            return True, None, Price            
+
+        except Exception as error:
+            return False, f"Error while grabbing booking details: {error}", None
+
+    def CreateBooking(self):
+        
+        try:
+
+            app.logger.info(f"Making booking with details: CustomerID = {self.CustomerID}, SessionID =  {self.SessionID}, Booking Date = {self.BookingDate}, Booking Time = {self.BookingTime}, Price = {self.BookingPrice}")
+
+            new = "INSERT INTO Booking(CustomerID, SessionID, Date, Time, NumberOfChildren, NumberOfAdults, Price, Arrived, ExtraNotes) VALUES (?,?,?,?,?,?,?,'False',?)"
+            details = (self.CustomerID, self.SessionID, self.BookingDate, self.BookingTime, self.NumberOfChildren, self.NumberOfAdults, self.BookingPrice, "None")
+            q.execute(new, details)
+            sql.commit()
+
+            app.logger.info(f"Retrieving booking ID, data = {self.CustomerID}, {self.SessionID}, {self.BookingDate}, {self.BookingTime}")
+
+            get = "SELECT BookingID FROM Booking WHERE CustomerID = (?) AND SessionID = (?) AND Date = (?) AND Time = (?)"
+            details = (self.CustomerID, self.SessionID, self.BookingDate, self.BookingTime)
+            q.execute (get, details)
+            fetch = q.fetchone()
+            BookingID = fetch[0]
+
+            app.logger.info(f"BookingID: {BookingID} Redirecting to Manage Booking template")
+
+            session["BookingID"] = BookingID
+
+            return True, None
+
+        except Exception as error:
+            
+            return False, f"Error while creating booking: {error}"
+    
+    def ManageBooking(self):
+        
+        try:
+
+            getactivebookings = "SELECT Booking.BookingID, Booking.Date, Booking.Time, Session.SessionType, Booking.ExtraNotes, Booking.Price FROM Booking INNER JOIN Session ON Booking.SessionID = Session.SessionID WHERE Booking.CustomerID = ?;"
+            q.execute(getactivebookings, [self.CustomerID])
+            activebookings = q.fetchall()
+
+            return True, None, activebookings           
+
+        except Exception as error:
+
+            return False, f"Error while opening manage booking template: {error}", None
     
     def DeleteBooking(self):
 
@@ -545,7 +717,6 @@ class Booking:
 
 @app.route('/')
 def index():
-
     return render_template("index.html")
 
 @app.route('/login', methods=["POST","GET"])
@@ -744,8 +915,9 @@ def newbooking():
         CustomerID = session["CustomerID"]
         BookingDate = request.form["BookingDate"]
 
-        NewBooking = Booking(CustomerID=CustomerID, SessionID=None, BookingDate=BookingDate, BookingTime=None, NumberOfChildren=None, NumberOfAdults=None, BookingPrice=None, ExtraNotes=None)
-        Result = NewBooking.AddBookingDate(BookingDate=BookingDate)
+        NewBooking = Booking(CustomerID=CustomerID, SessionID=None, NumberOfAdults=None, NumberOfChildren=None, ExtraNotes=None, BookingDate=BookingDate, BookingTime=None, BookingPrice=None)
+        
+        Result = NewBooking.AddBookingDate()
 
         Success = Result[0]
         error = Result[1]
@@ -852,61 +1024,25 @@ def party():
     if customerloggedin() == False:
         return redirect(url_for("index"))
 
-    CustomerID = session["CustomerID"]
-    BookingTime = session["BookingTime"]
-    BookingDate = session["BookingDate"]
-
     if request.method == "POST":
 
         BookingTime = request.form["bookingtime"]
         NumberAdults = request.form["numberadults"]
         NumberChildren = request.form["numberchildren"]
+        
+        NewBooking = Booking(CustomerID=None, SessionID=None, BookingDate=None, BookingTime=BookingTime, NumberOfChildren=NumberChildren, NumberOfAdults=NumberAdults, BookingPrice=None, ExtraNotes=None)
 
-        session["BookingTime"] = BookingTime
-        session["numberadults"] = NumberAdults
-        session["numberchildren"] = NumberChildren
+        Result = NewBooking.WeekendOrHoliday(BookingTime=BookingTime, numberadults=NumberAdults, numberchildren=NumberChildren)
 
-        try:
-            if BookingTime == "11:00-13:30":
-
-                app.logger.info("Party AM = True")
-                get = "SELECT SessionID FROM Session WHERE SessionType = (?)"
-                q.execute(get, ["Party AM"])
-
-                session["PartyType"] = "Party AM"
-
-            elif BookingTime == "15:00-17:30":
-
-                app.logger.info("Party PM = True")
-                get = "SELECT SessionID FROM Session WHERE SessionType = (?)"
-                q.execute(get, ["Party PM"])
-
-                session["PartyType"] = "Party PM"
-
-            fetch = q.fetchone()
-            SessionID = fetch[0]
-
-            session["SessionID"] = SessionID
-
-            checkparty = "SELECT count(*) FROM Booking WHERE CustomerID = (?) AND SessionID = (?) AND Date = (?)"
-            details = (CustomerID, SessionID, BookingDate)
-            q.execute(checkparty, details)
-            exists=q.fetchone()[0]
-            app.logger.info(f"Details: CID: {CustomerID}, SID: {SessionID}, Date: {BookingDate}, Exists: {exists}")
-
-            if exists < 2:
-
-                app.logger.info("Party Session is open, redirecting to confirm booking page")
-                return redirect(url_for("confirmbooking"))
-
-            else:
-
-                app.logger.info("Too many bookings for Party: {BookingDate}, {BookingTime}")
-                return render_template("error.html", error= "Sorry, there are no party booking available for this date or time, please book another day or time.")
-
-        except Exception as error:
+        Success = Result[0]
+        error = Result[1]
+        
+        if Success:
+            return redirect(url_for("confirmbooking"))
+        
+        else:
             return render_template("error.html", error=error)
-
+        
     else:
         return render_template("party.html")
 
@@ -922,39 +1058,17 @@ def privatehire():
         NumberAdults = request.form["numberadults"]
         NumberChildren = request.form["numberchildren"]
 
-        BookingDate = session["BookingDate"]
+        NewBooking = Booking(CustomerID=None, SessionID=None, BookingDate=None, BookingTime=None, NumberOfChildren=NumberChildren, NumberOfAdults=NumberAdults, BookingPrice=None, ExtraNotes=None)
 
-        session["numberadults"] = NumberAdults
-        session["numberchildren"] = NumberChildren
-        session["PrivateHireType"] = PrivateHireType
-        session["BookingTime"] = "18:30 - 20:30"
+        Result = NewBooking.PrivateHire(PrivateHireType=PrivateHireType)
 
-        try:
-
-            get = "SELECT SessionID FROM Session WHERE SessionType = (?)"
-            q.execute(get, [PrivateHireType])
-            fetch = q.fetchone()
-            SessionID = fetch[0]
-
-            session["SessionID"] = SessionID
-
-            checkexists = "SELECT count(*) FROM Booking WHERE SessionID IN (7, 8, 9) AND Date = (?)"
-            app.logger.info(f"Looking for private hire booking with and Booking date = {BookingDate}")
-            q.execute(checkexists, [BookingDate])
-            exists=q.fetchone()[0]
-
-            if exists == 0:
-
-                session["PrivateHire"] = True
-
-                app.logger.info("Session is open, redirecting to confirm booking page")
-
-                return redirect(url_for("confirmbooking"))
-
-            else:
-                return render_template("error.html", error="This slot is booked, please book another date!")
-
-        except Exception as error:
+        Success = Result[0]
+        error = Result[1]
+        
+        if Success:
+            return redirect(url_for("confirmbooking"))
+        
+        else:
             return render_template("error.html", error=error)
 
     else:
@@ -976,7 +1090,7 @@ def managebooking():
         SessionType = request.form["SessionType"]
         Extra = request.form["Extra"]
         BookingPrice = request.form["BookingPrice"]
-
+        
         session["BookingPrice"] = BookingPrice
         session["BookingID"] = BookingID
         session["BookingDate"] = BookingDate
@@ -989,22 +1103,22 @@ def managebooking():
         return redirect('/account/managebooking/booking')
 
     else:
-
-        try:
-
-            getactivebookings = "SELECT Booking.BookingID, Booking.Date, Booking.Time, Session.SessionType, Booking.ExtraNotes, Booking.Price FROM Booking INNER JOIN Session ON Booking.SessionID = Session.SessionID WHERE Booking.CustomerID = ?;"
-            q.execute(getactivebookings, [CustomerID])
-            activebookings = q.fetchall()
-
-            app.logger.info(activebookings)
-
+        
+        NewBooking = Booking(CustomerID=CustomerID, BookingDate=None, BookingTime=None,BookingPrice=None, SessionID=None, NumberOfAdults=None, NumberOfChildren=None, ExtraNotes=None)
+        
+        Result = NewBooking.ManageBooking()
+        
+        Success = Result[0]
+        error = Result[1]
+        activebookings = Result[2]
+        
+        if Success:
             return render_template("managebooking.html", activebookings = activebookings)
-
-        except Exception as error:
-
+        
+        else:
             return render_template("error.html", error=error)
-
-        return render_template("managebooking.html")
+        
+        
 
 @app.route('/account/managebooking/booking', methods=["POST", "GET"])
 def booking():
@@ -1021,8 +1135,10 @@ def booking():
 
     if request.method == "POST":
         return redirect(url_for("deletebooking"))
+    
+    else:
 
-    return render_template("booking.html", BookingID = BookingID, BookingDate = BookingDate, BookingTime = BookingTime, Extra = Extra, SessionType = SessionType, BookingPrice = BookingPrice)
+        return render_template("booking.html", BookingID = BookingID, BookingDate = BookingDate, BookingTime = BookingTime, Extra = Extra, SessionType = SessionType, BookingPrice = BookingPrice)
 
 @app.route('/account/managebooking/deletebooking', methods=["POST", "GET"])
 def deletebooking():
@@ -1054,53 +1170,32 @@ def confirmbooking():
     if customerloggedin() == False:
         return redirect(url_for("index"))
 
-    NumberAdults = session["numberadults"]
-    NumberChildren = session["numberchildren"]
-    BookingType = session["BookingSession"]
-    BookingTime = session["BookingTime"]
-    BookingDate = session["BookingDate"]
-    PrivateHireType = session["PrivateHireType"]
-    SessionID = session["SessionID"]
-
     if request.method == "POST":
         return redirect(url_for("createbooking"))
 
     else:
-        try:
-            if BookingType != "Private Hire":
+        
+        NumberOfAdults = session["numberadults"]
+        NumberOfChildren = session["numberchildren"]
+        BookingType = session["BookingSession"]
+        BookingTime = session["BookingTime"]
+        BookingDate = session["BookingDate"]
+        PrivateHireType = session["PrivateHireType"]
+        SessionID = session["SessionID"]
+        
+        NewBooking = Booking(CustomerID=None, SessionID=SessionID, BookingDate=None, BookingTime=None,NumberOfChildren=NumberOfChildren, NumberOfAdults=NumberOfAdults, BookingPrice=None, ExtraNotes=None)
 
-                app.logger.info(SessionID)
-                getprices = "SELECT AdultPrice, ChildPrice FROM Session WHERE SessionID = (?)"
-                q.execute(getprices, [SessionID])
-                prices = q.fetchone()
+        Result = NewBooking.GetFinalPrice(BookingType=BookingType)
 
-                adultprice = prices[0]
-                childprice = prices[1]
-
-                NumberAdults = int(NumberAdults)
-                NumberChildren = int(NumberChildren)
-                adultprice = float(adultprice)
-                childprice = float(childprice)
-
-                adulttotal = adultprice * NumberAdults
-                childtotal = childprice * NumberChildren
-
-                Price = adulttotal + childtotal
-
-                session["Price"] = Price
-
-                app.logger.info(f"({adultprice} * {NumberAdults} = {adulttotal}) + ({childprice} * {NumberChildren} = {childtotal}) = {Price}")
-
-            else:
-
-                Price = 250.0
-
-            session["Price"] = Price
-
-        except Exception as error:
+        Success = Result[0]
+        error = Result[1]
+        Price = Result[2]
+        
+        if Success:
+            return render_template("confirmbooking.html", BookingType = BookingType, BookingTime = BookingTime, BookingDate = BookingDate, PrivateHireType = PrivateHireType, NumberAdults = NumberOfAdults, NumberChildren = NumberOfChildren, Price = Price)
+        
+        else:
             return render_template("error.html", error=error)
-
-        return render_template("confirmbooking.html", BookingType = BookingType, BookingTime = BookingTime, BookingDate = BookingDate, PrivateHireType = PrivateHireType, NumberAdults = NumberAdults, NumberChildren = NumberChildren, Price = Price)
 
 @app.route('/account/newbooking/createbooking')
 def createbooking():
@@ -1112,36 +1207,21 @@ def createbooking():
     SessionID = session["SessionID"]
     BookingTime = session["BookingTime"]
     BookingDate = session["BookingDate"]
-    NumberAdults = session["numberadults"]
-    NumberChildren = session["numberchildren"]
+    NumberOfAdults = session["numberadults"]
+    NumberOfChildren = session["numberchildren"]
     Price = session["Price"]
 
-    #app.logger.info(f"{Email}, {BookingTime}, {BookingDate}, {NumberAdults}, {NumberChildren}, Booking Type: {BookingType}, Private Hire Type: {PrivateHireType}, Price: {Price}")
+    NewBooking = Booking(CustomerID=CustomerID, SessionID=SessionID, BookingDate=BookingDate, BookingTime=BookingTime,NumberOfChildren=NumberOfChildren, NumberOfAdults=NumberOfAdults, BookingPrice=Price, ExtraNotes=None)
 
-    try:
+    Result = NewBooking.CreateBooking()
 
-        app.logger.info(f"Making booking with details: CustomerID = {CustomerID}, SessionID =  {SessionID}, Booking Date = {BookingDate}, Booking Time = {BookingTime}, Price = {Price}")
-
-        new = "INSERT INTO Booking(CustomerID, SessionID, Date, Time, NumberOfChildren, NumberOfAdults, Price, Arrived, ExtraNotes) VALUES (?,?,?,?,?,?,?,'False',?)"
-        details = (CustomerID, SessionID, BookingDate, BookingTime, NumberChildren, NumberAdults, Price, "None")
-        q.execute(new, details)
-        sql.commit()
-
-        app.logger.info(f"Retrieving booking ID, data = {CustomerID}, {SessionID}, {BookingDate}, {BookingTime}")
-
-        get = "SELECT BookingID FROM Booking WHERE CustomerID = (?) AND SessionID = (?) AND Date = (?) AND Time = (?)"
-        details = (CustomerID, SessionID, BookingDate, BookingTime)
-        q.execute (get, details)
-        fetch = q.fetchone()
-        BookingID = fetch[0]
-
-        app.logger.info(f"BookingID: {BookingID} Redirecting to Manage Booking template")
-
-        session["BookingID"] = BookingID
-
+    Success = Result[0]
+    error = Result[1]
+    
+    if Success:
         return redirect(url_for("managebooking"))
-
-    except Exception as error:
+    
+    else:
         return render_template("error.html", error=error)
 
 @app.route('/account/newbooking/numberofpeople', methods=["POST","GET"])
