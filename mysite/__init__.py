@@ -1229,19 +1229,19 @@ def createbooking():
 
 # ---------------------------------------------| Information |----------------------------------------- #
 
-@app.route('/centerinfo')
+@app.route("/centerinfo")
 def centerinfo():
     return render_template("centredetails/home.html")
 
-@app.route('/centerinfo/lasertag')
+@app.route("/centerinfo/lasertag")
 def laserinfo():
     return render_template("centredetails/laser.html")
 
-@app.route('/centerinfo/parties')
+@app.route("/centerinfo/parties")
 def partyinfo():
     return render_template("centredetails/parties.html")
 
-@app.route('/centerinfo/menus')
+@app.route("/centerinfo/menus")
 def menuinfo():
     return render_template("centredetails/menus.html")
 
