@@ -79,6 +79,9 @@ div.content {
   }
   .sidebar a {float: left;}
   div.content {margin-left: 0;}
+
+  .sidebar b {float: left;}
+  div.content {margin-left: 0;}
 }
 
 @media screen and (max-width: 400px) {
@@ -86,6 +89,11 @@ div.content {
     text-align: center;
     float: none;
   }
+  .sidebar b {
+    text-align: center;
+    float: none;
+  }
+  
 }
 img.one {
     object-fit: scale-down;
