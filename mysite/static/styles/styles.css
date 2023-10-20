@@ -44,6 +44,7 @@
 .bottom {
     font-size: 30;
     margin-top: auto;
+    margin-bottom: 20px;
     border: #ccc;
     border-radius: 10px;
 }
