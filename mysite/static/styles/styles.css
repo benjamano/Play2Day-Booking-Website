@@ -258,7 +258,7 @@ h12{
 }
 
 .dark-mode h5{
-    color: white;
+    color: black;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 40px;
     background-color: #ffaa34;
@@ -278,7 +278,7 @@ h12{
 }
 
 .dark-mode h7{
-    color:#97000f8c;
+    color:#a81d2bcc;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 30;
     background-color: #ffaa34 !important;
