@@ -44,6 +44,8 @@
 .bottom {
     font-size: 30;
     margin-top: auto;
+    border: #ccc;
+    border-radius: 10px;
 }
 
 .sidebar a {
