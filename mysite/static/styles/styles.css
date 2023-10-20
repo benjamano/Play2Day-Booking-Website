@@ -56,14 +56,6 @@
   background-color: #f7941d;
   color: white;
 }
-.sidebar b{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    display: block;
-    color: black;
-    padding: 16px;
-    text-align: end;
-    text-decoration: none;
-}
 
 div.content {
   margin-left: 200px;
@@ -80,16 +72,10 @@ div.content {
   .sidebar a {float: left;}
   div.content {margin-left: 0;}
 
-  .sidebar b {float: left;}
-  div.content {margin-left: 0;}
 }
 
 @media screen and (max-width: 400px) {
   .sidebar a {
-    text-align: center;
-    float: none;
-  }
-  .sidebar b {
     text-align: center;
     float: none;
   }
