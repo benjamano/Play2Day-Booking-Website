@@ -593,4 +593,18 @@ input[type=tel]{
     padding: 10px;
 }
 
+.dark-mode table, .dark-mode th, .dark-mode td {
+    background-color: #333333;
+    color: white;
+    border: 2px solid #cccccc;
+    border-collapse: collapse;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    max-width: 90%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+    padding: 10px;
+}
+
 table:hover {background-color: #D6EEEE;}
