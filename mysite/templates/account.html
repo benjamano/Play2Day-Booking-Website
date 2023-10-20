@@ -83,14 +83,20 @@
   <script>
     // Function to apply the initial dark mode state
     function applyInitialDarkMode() {
-        var isDarkMode = localStorage.getItem("darkMode") === "true";
-        var bodyElement = document.body;
-        var sidebarElement = document.querySelector(".sidebar");
+      var isDarkMode = localStorage.getItem("darkMode") === "true";
+      var bodyElement = document.body;
+      var sidebarElement = document.querySelector(".sidebar");
 
-        if (isDarkMode) {
-            bodyElement.classList.add("dark-mode");
-            sidebarElement.classList.add("dark-mode");
-        }
+      var fontsToStyle = document.querySelectorAll(".dark-font");
+      for (var i = 0; i < fontsToStyle.length; i++) {
+          fontsToStyle[i].classList.add("dark-mode");
+      }
+      if (isDarkMode) {
+          bodyElement.classList.add("dark-mode");
+          sidebarElement.classList.add("dark-mode");
+      }
+      var pairElement = document.querySelector(".pair");
+      pairElement.classList.add("dark-mode");
     }
 
       // Call the function to apply the initial dark mode state

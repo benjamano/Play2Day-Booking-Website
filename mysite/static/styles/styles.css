@@ -575,6 +575,10 @@ input[type=tel]{
     display: inline-block;
 }
 
+.dark-mode .pair {
+    background-color: #333333;
+}
+
  table, th, td {
     table-layout: fixed ;
     border: 2px solid #cccccc;
