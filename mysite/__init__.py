@@ -725,6 +725,11 @@ class Booking:
 
 # ------------------------------------------------------------------------------------------------------------- #
 
+@app.route("/ToggleDMode", methods=["POST"])
+def ToggleDarkMode():
+    # This method toggles the dark mode displayed on the site
+    session["DarkMode"] = not session.get("DarkMode", False)
+    return redirect(request.referrer)
 
 @app.route('/')
 def index():
