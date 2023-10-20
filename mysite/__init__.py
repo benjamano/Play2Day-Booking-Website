@@ -181,7 +181,7 @@ def CheckInputValid(FirstName, LastName, Email, PhoneNumber, Password, Function)
     elif Function != "IgnoreEmailandPassword" and len(Email) > 30:
 
         return False, "Email is too long"
-    elif len(PhoneNumber) > 11 or not PhoneNumber.isnumeric():
+    elif len(PhoneNumber) > 11 or (not PhoneNumber.isnumeric() and PhoneNumber != ""):
 
         return False, "Phone Number is too long or includes non-number characters"
     elif Function == "Full" and len(Password) > 30:

@@ -59,13 +59,25 @@
 }
 
 .sidebar a.active {
-  background-color: #b7232b;
-  color: white;
+    background-color: #b7232b;
+    color: white;
 }
 
 .sidebar a:hover:not(.active) {
-  background-color: #f7941d;
-  color: white;
+    background-color: #f7941d;
+    color: white;
+}
+
+.dark-mode .sidebar {
+    background-color: #333;
+}
+
+.dark-mode .sidebar a.active {
+    background-color: #555; 
+}
+
+.dark-mode .sidebar a {
+    color: #fff;
 }
 
 div.content {

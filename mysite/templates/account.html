@@ -11,7 +11,7 @@
         <a href="/centerinfo">Play2Day Information</a>
         <a href="/account/editaccountdetails">Edit Account Details</a>
         <a href="/logout">Log Out</a>
-        <button onclick="myFunction()">Toggle dark mode (Experimental)</button>
+        <button onclick="ToggleDarkMode()">Toggle dark mode (Experimental)</button>
     </div>
     <body>
         <div class="content">
@@ -62,9 +62,11 @@
                     }
                 </script>
                 <script>
-                function myFunction() {
+                function ToggleDarkMode() {
                     var element = document.body;
                     element.classList.toggle("dark-mode");
+                    var sidebar = document.querySelector(".sidebar");
+                    sidebar.classList.toggle("dark-mode");
                 }
                 </script>
             </center>
