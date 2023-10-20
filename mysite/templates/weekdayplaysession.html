@@ -10,6 +10,7 @@
     <a href="/centerinfo">Play2Day Information</a>
     <a href="/account/editaccountdetails">Edit Account Details</a>
     <a href="/logout">Log Out</a>
+    <button onclick="ToggleDarkMode()">Toggle Dark Mode</button>
 </div>
 <center>
     <div class="content">
@@ -98,3 +99,33 @@
         </div>
     </div>
 </center>
+
+<script>
+    function ToggleDarkMode() {
+      var element = document.body;
+      element.classList.toggle("dark-mode");
+      var sidebar = document.querySelector(".sidebar");
+      sidebar.classList.toggle("dark-mode");
+  
+      // Update the user's dark mode preference in localStorage
+      var isDarkMode = element.classList.contains("dark-mode");
+      localStorage.setItem("darkMode", isDarkMode);
+      }
+    </script>
+  
+    <script>
+      // Function to apply the initial dark mode state
+      function applyInitialDarkMode() {
+          var isDarkMode = localStorage.getItem("darkMode") === "true";
+          var bodyElement = document.body;
+          var sidebarElement = document.querySelector(".sidebar");
+  
+          if (isDarkMode) {
+              bodyElement.classList.add("dark-mode");
+              sidebarElement.classList.add("dark-mode");
+          }
+      }
+  
+        // Call the function to apply the initial dark mode state
+        applyInitialDarkMode();
+</script>

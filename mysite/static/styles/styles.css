@@ -80,6 +80,11 @@
     color: #fff;
 }
 
+.dark-mode {
+    background-color: black;
+    color: white;
+  }
+
 div.content {
   margin-left: 200px;
   padding: 1px 16px;
@@ -230,6 +235,93 @@ h12{
     font-size:30;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+/* Dark mode styles for the text */
+.dark-mode h1 {
+    color: white;
+}
+
+
+.dark-mode h2 {
+    color: white;
+    background-color: #333;
+}
+
+.dark-mode h3 {
+    color: white;
+}
+
+.dark-mode h4{
+    color:rgba(122, 0, 0, 0.61);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 40;
+}
+
+.dark-mode h5{
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 40px;
+    background-color: #ffaa34;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 10px;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.dark-mode h6{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 30;
+    margin-top: 40px !important;
+    margin-bottom: 20px !important;
+    color: white
+
+}
+
+.dark-mode h7{
+    color:#97000f8c;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 30;
+    background-color: #ffaa34 !important;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    padding: 10px;
+    border-radius: 0px 0px 20px 20px;
+
+}
+
+.dark-mode h8{
+    text-align: center;
+    width: 70%;
+    padding: 10px;
+    border-radius: 15px;
+    margin-top: 40px;
+    border-style: solid;
+    border-color: grey;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: white;
+    font-size: 20;
+}
+
+.dark-mode h9{
+    color:white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 40;
+}
+
+.dark-mode h10 {
+    color: white;
+    background-color: #333;
+}
+
+.dark-mode h11 {
+    color: white;
+}
+
+.dark-mode h12 {
+    color: white;
+}
+
 label{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
@@ -498,8 +590,3 @@ input[type=tel]{
 }
 
 table:hover {background-color: #D6EEEE;}
-
-.dark-mode {
-  background-color: black;
-  color: white;
-}
