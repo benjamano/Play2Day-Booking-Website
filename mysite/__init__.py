@@ -407,12 +407,13 @@ class Booking:
 
     def SelectSessionType(self, option):
 
+        app.logger.info(f"Option: {option}")
+
         if option == "Weekend Play Session":
             session["BookingSession"] = "Weekend Play Session"
             session["PlaySession"] = True
 
             return True, None, "weekendplaysession"
-
 
         elif option == "Weekday Play Session":
             session["BookingSession"] = "Weekday Play Session"
@@ -431,19 +432,19 @@ class Booking:
         else:
             return False, "Option selected is not valid!"
 
-    def Weekday(self, BookingTime, numberadults, numberchildren):
+    def Weekday(self):
 
         BookingDate = session["BookingDate"]
         CustomerID = session["CustomerID"]
 
-        session["BookingTime"] = BookingTime
-        session["numberadults"] = numberadults
-        session["numberchildren"] = numberchildren
+        session["BookingTime"] = self.BookingTime
+        session["numberadults"] = self.NumberOfAdults
+        session["numberchildren"] = self.NumberOfChildren
 
         if checkdate(Date=BookingDate) == False:
             return render_template("error.html", error="Please book a date in the future!")
 
-        if BookingTime == "10:00-14:00":
+        if self.BookingTime == "10:00-14:00":
 
             app.logger.info("Weekday Play AM = True")
             get = "SELECT SessionID FROM Session WHERE SessionType = (?)"
@@ -481,19 +482,19 @@ class Booking:
 
             return False, "Sorry, there are too many bookings for this Weekday Play Session, please book another day or time."
     
-    def WeekendOrHoliday(self, BookingTime, numberadults, numberchildren):
+    def WeekendOrHoliday(self):
         
         BookingDate = session["BookingDate"]
         CustomerID = session["CustomerID"]
 
-        session["BookingTime"] = BookingTime
-        session["numberadults"] = numberadults
-        session["numberchildren"] = numberchildren
+        session["BookingTime"] = self.BookingTime
+        session["numberadults"] = self.NumberOfAdults
+        session["numberchildren"] = self.NumberOfChildren
 
         if checkdate(Date=BookingDate) == False:
             return render_template("error.html", error="Please book a date in the future!")
 
-        if BookingTime == "10:00-14:00":
+        if self.BookingTime == "10:00-14:00":
 
             app.logger.info("Weekend Play AM = True")
             get = "SELECT SessionID FROM Session WHERE SessionType = (?)"
@@ -529,35 +530,29 @@ class Booking:
             
             return False, "Sorry, there are too many bookings for this Weekday Play Session, please book another day or time."
     
-    def Party(self, BookingTime, NumberAdults, NumberChildren):
+    def Party(self):
         
         CustomerID = session["CustomerID"]
-        BookingTime = session["BookingTime"]
         BookingDate = session["BookingDate"]
 
-        session["BookingTime"] = BookingTime
-        session["numberadults"] = NumberAdults
-        session["numberchildren"] = NumberChildren
+        session["BookingTime"] = self.BookingTime
+        session["numberadults"] = self.NumberOfAdults
+        session["numberchildren"] = self.NumberOfChildren
 
+        app.logger.info(f"{self.BookingTime}")
+        
         try:
-            if BookingTime == "11:00-13:30":
+            if self.BookingTime == "11:00-13:30":
 
-                app.logger.info("Party AM = True")
-                get = "SELECT SessionID FROM Session WHERE SessionType = (?)"
-                q.execute(get, ["Party AM"])
-
+                SessionID = "5"
+        
                 session["PartyType"] = "Party AM"
 
-            elif BookingTime == "15:00-17:30":
+            elif self.BookingTime == "15:00-17:30":
 
-                app.logger.info("Party PM = True")
-                get = "SELECT SessionID FROM Session WHERE SessionType = (?)"
-                q.execute(get, ["Party PM"])
+                SessionID = "6"
 
                 session["PartyType"] = "Party PM"
-
-            fetch = q.fetchone()
-            SessionID = fetch[0]
 
             session["SessionID"] = SessionID
 
@@ -565,7 +560,7 @@ class Booking:
             details = (CustomerID, SessionID, BookingDate)
             q.execute(checkparty, details)
             exists=q.fetchone()[0]
-            app.logger.info(f"Details: CID: {CustomerID}, SID: {SessionID}, Date: {BookingDate}, Exists: {exists}")
+            app.logger.info(f"Details: CID: {CustomerID}, SID: {self.SessionID}, Date: {BookingDate}, Exists: {exists}")
 
             if exists < 2:
 
@@ -579,7 +574,7 @@ class Booking:
                 return False, "Sorry, there are no party booking available for this date or time, please book another day or time."
 
         except Exception as error:
-            return False, "Error while making party booking: {error}"
+            return False, f"Error while making party booking: {error}"
     
     def PrivateHire(self, PrivateHireType):
         
@@ -620,42 +615,44 @@ class Booking:
     
     def GetFinalPrice(self, BookingType):
               
-        try:
+        #try:
             
-            if BookingType != "Private Hire":
+        if BookingType != "Private Hire":
 
-                app.logger.info(self.SessionID)
-                getprices = "SELECT AdultPrice, ChildPrice FROM Session WHERE SessionID = (?)"
-                q.execute(getprices, [self.SessionID])
-                prices = q.fetchone()
+            SessionID = session["SessionID"]
+            
+            app.logger.info(SessionID)
+            getprices = "SELECT AdultPrice, ChildPrice FROM Session WHERE SessionID = (?)"
+            q.execute(getprices, [SessionID])
+            prices = q.fetchone()
 
-                adultprice = prices[0]
-                childprice = prices[1]
+            adultprice = prices[0]
+            childprice = prices[1]
 
-                NumberAdults = int(self.NumberOfAdults)
-                NumberChildren = int(self.NumberOfChildren)
-                adultprice = float(adultprice)
-                childprice = float(childprice)
+            NumberAdults = int(self.NumberOfAdults)
+            NumberChildren = int(self.NumberOfChildren)
+            adultprice = float(adultprice)
+            childprice = float(childprice)
 
-                adulttotal = adultprice * NumberAdults
-                childtotal = childprice * NumberChildren
+            adulttotal = adultprice * NumberAdults
+            childtotal = childprice * NumberChildren
 
-                Price = adulttotal + childtotal
-
-                session["Price"] = Price
-
-                app.logger.info(f"({adultprice} * {NumberAdults} = {adulttotal}) + ({childprice} * {NumberChildren} = {childtotal}) = {Price}")
-
-            else:
-
-                Price = 250.0
+            Price = adulttotal + childtotal
 
             session["Price"] = Price
-            
-            return True, None, Price            
 
-        except Exception as error:
-            return False, f"Error while grabbing booking details: {error}", None
+            app.logger.info(f"({adultprice} * {NumberAdults} = {adulttotal}) + ({childprice} * {NumberChildren} = {childtotal}) = {Price}")
+
+        else:
+
+            Price = 250.0
+
+        session["Price"] = Price
+        
+        return True, None, Price            
+
+        #except Exception as error:
+           # return False, f"Error while grabbing booking details: {error}", None
 
     def CreateBooking(self):
         
@@ -989,7 +986,7 @@ def weekdayplaysession():
 
         NewBooking = Booking(CustomerID=None, BookingID=None, SessionID=None, BookingDate=None, BookingTime=BookingTime, NumberOfChildren=numberchildren, NumberOfAdults=numberadults, BookingPrice=None, ExtraNotes=None)
 
-        Result = NewBooking.Weekday(BookingTime=BookingTime, numberadults=numberadults, numberchildren=numberchildren)
+        Result = NewBooking.Weekday()
 
         Success = Result[0]
         error = Result[1]
@@ -1017,7 +1014,7 @@ def weekendplaysession():
         
         NewBooking = Booking(CustomerID=None, BookingID=None, SessionID=None, BookingDate=None, BookingTime=BookingTime, NumberOfChildren=numberchildren, NumberOfAdults=numberadults, BookingPrice=None, ExtraNotes=None)
 
-        Result = NewBooking.WeekendOrHoliday(BookingTime=BookingTime, numberadults=numberadults, numberchildren=numberchildren)
+        Result = NewBooking.WeekendOrHoliday()
 
         Success = Result[0]
         error = Result[1]
@@ -1046,7 +1043,7 @@ def party():
         
         NewBooking = Booking(CustomerID=None, BookingID=None, SessionID=None, BookingDate=None, BookingTime=BookingTime, NumberOfChildren=NumberChildren, NumberOfAdults=NumberAdults, BookingPrice=None, ExtraNotes=None)
 
-        Result = NewBooking.WeekendOrHoliday(BookingTime=BookingTime, numberadults=NumberAdults, numberchildren=NumberChildren)
+        Result = NewBooking.Party()
 
         Success = Result[0]
         error = Result[1]
@@ -1131,7 +1128,7 @@ def managebooking():
         
         else:
             return render_template("error.html", error=error)
-        
+
 @app.route('/account/managebooking/booking', methods=["POST", "GET"])
 def booking():
 
@@ -1189,7 +1186,7 @@ def confirmbooking():
         PrivateHireType = session["PrivateHireType"]
         SessionID = session["SessionID"]
         
-        NewBooking = Booking(CustomerID=None, SessionID=SessionID, BookingDate=None, BookingTime=None,NumberOfChildren=NumberOfChildren, NumberOfAdults=NumberOfAdults, BookingPrice=None, ExtraNotes=None)
+        NewBooking = Booking(CustomerID=None, BookingID = None, SessionID=SessionID, BookingDate=None, BookingTime=None,NumberOfChildren=NumberOfChildren, NumberOfAdults=NumberOfAdults, BookingPrice=None, ExtraNotes=None)
 
         Result = NewBooking.GetFinalPrice(BookingType=BookingType)
 
@@ -1217,7 +1214,7 @@ def createbooking():
     NumberOfChildren = session["numberchildren"]
     Price = session["Price"]
 
-    NewBooking = Booking(CustomerID=CustomerID, SessionID=SessionID, BookingDate=BookingDate, BookingTime=BookingTime,NumberOfChildren=NumberOfChildren, NumberOfAdults=NumberOfAdults, BookingPrice=Price, ExtraNotes=None)
+    NewBooking = Booking(CustomerID=CustomerID, BookingID=None, SessionID=SessionID, BookingDate=BookingDate, BookingTime=BookingTime,NumberOfChildren=NumberOfChildren, NumberOfAdults=NumberOfAdults, BookingPrice=Price, ExtraNotes=None)
 
     Result = NewBooking.CreateBooking()
 
@@ -1229,28 +1226,6 @@ def createbooking():
     
     else:
         return render_template("error.html", error=error)
-
-@app.route('/account/newbooking/numberofpeople', methods=["POST","GET"])
-def numberofpeople():
-
-    if customerloggedin() == False:
-        return redirect(url_for("index"))
-
-    BookingType = session["BookingSession"]
-    if request.method == "POST":
-
-        NumberAdults = request.form["numberadults"]
-        NumberChildren = request.form["numberchildren"]
-
-        session["NumberAdults"] = NumberAdults
-        session["NumberChildren"] = NumberChildren
-
-        app.logger.info(f"Redirecting to Confirm Booking page with details: Number of Adults: {NumberAdults}, Number of Children: {NumberChildren}")
-
-        return redirect(url_for("confirmbooking"))
-
-    else:
-        return render_template("numberofpeople.html", BookingType = BookingType)
 
 # ---------------------------------------------| Information |----------------------------------------- #
 
