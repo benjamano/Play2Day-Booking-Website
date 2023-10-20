@@ -1237,6 +1237,14 @@ def centerinfo():
 def laserinfo():
     return render_template("centredetails/laser.html")
 
+@app.route('/centerinfo/parties')
+def partyinfo():
+    return render_template("centredetails/parties.html")
+
+@app.route('/centerinfo/menus')
+def menuinfo():
+    return render_template("centredetails/menus.html")
+
 # ---------------------------------------------| Manager |--------------------------------------------- #
 
 @app.route("/managerlogin", methods=["POST","GET"])
