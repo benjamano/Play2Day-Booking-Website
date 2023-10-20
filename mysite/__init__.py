@@ -1231,11 +1231,11 @@ def createbooking():
 
 @app.route('/centerinfo')
 def centerinfo():
-    return render_template("home.html")
+    return render_template("centredetails/home.html")
 
 @app.route('/centerinfo/lasertag')
 def laserinfo():
-    return render_template("laser.html")
+    return render_template("centredetails/laser.html")
 
 # ---------------------------------------------| Manager |--------------------------------------------- #
 
