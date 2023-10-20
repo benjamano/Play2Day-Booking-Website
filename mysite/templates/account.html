@@ -110,4 +110,13 @@ function applyInitialDarkMode() {
 applyInitialDarkMode();
 </script>
 
+<script>
+
+  function handleLogout() {
+      localStorage.setItem("darkMode", "false");
+  }
+  document.getElementById("logoutButton").addEventListener("click", handleLogout);
+
+</script>
+
 
