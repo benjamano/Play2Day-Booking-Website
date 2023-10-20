@@ -72,34 +72,34 @@
       var isDarkMode = element.classList.contains("dark-mode");
       localStorage.setItem("darkMode", isDarkMode);
       }
-    </script>
+</script>
   
-    <script>
+<script>
 
-      function applyInitialDarkMode() {
-        var isDarkMode = localStorage.getItem("darkMode") === "true";
-        var bodyElement = document.body;
-        var sidebarElement = document.querySelector(".sidebar");
-    
-        if (isDarkMode) {
-            bodyElement.classList.add("dark-mode");
-            sidebarElement.classList.add("dark-mode");
-    
-            var fontsToStyle = document.querySelectorAll(".dark-font");
-            for (var i = 0; i < fontsToStyle.length; i++) {
-                fontsToStyle[i].classList.add("dark-mode");
-            }
-    
-            var pairElement = document.querySelector(".pair");
-            pairElement.classList.add("dark-mode");
-    
-            
-            var tableElements = document.querySelectorAll("table, th, td");
-            for (var j = 0; j < tableElements.length; j++) {
-                tableElements[j].classList.add("dark-mode");
-            }
+function applyInitialDarkMode() {
+    var isDarkMode = localStorage.getItem("darkMode") === "true";
+    var bodyElement = document.body;
+    var sidebarElement = document.querySelector(".sidebar");
+
+    if (isDarkMode) {
+        bodyElement.classList.add("dark-mode");
+        sidebarElement.classList.add("dark-mode");
+
+        var fontsToStyle = document.querySelectorAll(".dark-font");
+        for (var i = 0; i < fontsToStyle.length; i++) {
+            fontsToStyle[i].classList.add("dark-mode");
+        }
+
+        var pairElement = document.querySelector(".pair");
+        pairElement.classList.add("dark-mode");
+
+        
+        var tableElements = document.querySelectorAll("table, th, td");
+        for (var j = 0; j < tableElements.length; j++) {
+            tableElements[j].classList.add("dark-mode");
         }
     }
-  
-    applyInitialDarkMode();
+}
+
+applyInitialDarkMode();
 </script>
