@@ -108,7 +108,7 @@ img.menus {
     object-fit: scale-down;
     max-width: 10%;
     height: auto;
-    float: right !important;
+    align-self: center !important;
     margin-top: 0px !important;
     padding-right: 0 !important;
     padding-left: 0 !important;
