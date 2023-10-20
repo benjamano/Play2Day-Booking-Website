@@ -108,8 +108,7 @@ img.menus {
     object-fit: scale-down;
     max-width: 10%;
     height: auto;
-    display: block;
-    cursor: pointer;
+    float: right !important;
     margin-top: 0px !important;
     padding-right: 0 !important;
     padding-left: 0 !important;
