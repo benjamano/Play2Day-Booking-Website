@@ -11,9 +11,7 @@
         <a href="/centerinfo">Play2Day Information</a>
         <a href="/account/editaccountdetails">Edit Account Details</a>
         <a href="/logout">Log Out</a>
-        <form method="POST" action="/ToggleDMode">
-          <button type="submit">Toggle Dark Mode</button>
-        </form>
+        <button onclick="ToggleDarkMode()">Toggle Dark Mode</button>
     </div>
     <body>
         <div class="content">
@@ -44,44 +42,59 @@
                   <span class="dot"></span>
                   <span class="dot"></span>
                 </div>
-                <script>
-                    let slideIndex = 0;
-                    showSlides();
-
-                    function showSlides() {
-                      let i;
-                      let slides = document.getElementsByClassName("mySlides");
-                      let dots = document.getElementsByClassName("dot");
-                      for (i = 0; i < slides.length; i++) {
-                        slides[i].style.display = "none";
-                      }
-                      slideIndex++;
-                      if (slideIndex > slides.length) {slideIndex = 1}
-                      for (i = 0; i < dots.length; i++) {
-                        dots[i].className = dots[i].className.replace(" active", "");
-                      }
-                      slides[slideIndex-1].style.display = "block";
-                      dots[slideIndex-1].className += " active";
-                      setTimeout(showSlides, 5000); // Change every 5 seconds
-                    }
-                </script>
-                <script>
-                  // Function to toggle dark mode
-                  function ToggleDarkMode() {
-                      var element = document.body;
-                      var sidebar = document.querySelector(".sidebar");
-                  
-                      // Check if dark mode is currently enabled
-                      var isDarkMode = element.classList.contains("DarkMode");
-                  
-                      // Toggle dark mode class on the body and sidebar if it's not enabled
-                      if (!isDarkMode) {
-                          element.classList.add("dark-mode");
-                          sidebar.classList.add("dark-mode");
-                      }
-                  }
-                  </script>
             </center>
         </div>
     </body>
+
+    <script>
+      let slideIndex = 0;
+      showSlides();
+
+      function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+        setTimeout(showSlides, 5000); // Change every 5 seconds
+      }
+  </script>
+  <script>
+  function ToggleDarkMode() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+    var sidebar = document.querySelector(".sidebar");
+    sidebar.classList.toggle("dark-mode");
+
+    // Update the user's dark mode preference in localStorage
+    var isDarkMode = element.classList.contains("dark-mode");
+    localStorage.setItem("darkMode", isDarkMode);
+    }
+  </script>
+
+  <script>
+    // Function to apply the initial dark mode state
+    function applyInitialDarkMode() {
+        var isDarkMode = localStorage.getItem("darkMode") === "true";
+        var bodyElement = document.body;
+        var sidebarElement = document.querySelector(".sidebar");
+
+        if (isDarkMode) {
+            bodyElement.classList.add("dark-mode");
+            sidebarElement.classList.add("dark-mode");
+        }
+    }
+
+      // Call the function to apply the initial dark mode state
+      applyInitialDarkMode();
+  </script>
 </html>
+
