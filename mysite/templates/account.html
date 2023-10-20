@@ -69,15 +69,26 @@
   </script>
   </html>
 <script>
-    function ToggleDarkMode() {
-      var element = document.body;
-      element.classList.toggle("dark-mode");
-      var sidebar = document.querySelector(".sidebar");
-      sidebar.classList.toggle("dark-mode");
-  
-      var isDarkMode = element.classList.contains("dark-mode");
-      localStorage.setItem("darkMode", isDarkMode);
-      }
+  function ToggleDarkMode() {
+    var bodyElement = document.body;
+    var sidebar = document.querySelector(".sidebar");
+    var tableElements = document.querySelectorAll("table, th, td");
+    var fontsToStyle = document.querySelectorAll(".dark-font");
+    var pairElement = document.querySelector(".pair");
+
+    bodyElement.classList.toggle("dark-mode");
+    sidebar.classList.toggle("dark-mode");
+
+    for (var i = 0; i < tableElements.length; i++) {
+        tableElements[i].classList.toggle("dark-mode");
+    }
+
+    for (var j = 0; j < fontsToStyle.length; j++) {
+        fontsToStyle[j].classList.toggle("dark-mode");
+    }
+
+    pairElement.classList.toggle("dark-mode");
+  }
 </script>
   
 <script>
