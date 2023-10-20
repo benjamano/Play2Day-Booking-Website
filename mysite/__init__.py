@@ -368,7 +368,7 @@ class Customer:
             return False, error
 
 class Booking:
-    def __init__(self, CustomerID, SessionID, BookingDate, BookingTime, NumberOfChildren, NumberOfAdults, BookingPrice, ExtraNotes):
+    def __init__(self, CustomerID, SessionID, BookingDate, BookingTime, NumberOfChildren, NumberOfAdults, BookingPrice, ExtraNotes, BookingID):
         self.CustomerID = CustomerID
         self.SessionID = SessionID
         self.BookingDate = BookingDate
@@ -377,6 +377,7 @@ class Booking:
         self.NumberOfAdults = NumberOfAdults
         self.BookingPrice = BookingPrice
         self.ExtraNotes = ExtraNotes
+        self.BookingID = BookingID
 
     def AddBookingDate(self):
 
@@ -701,7 +702,20 @@ class Booking:
     
     def DeleteBooking(self):
 
-        return True, None
+        app.logger.info(f"Deleting Booking with Booking ID: {self.BookingID}")
+
+        DeleteBooking = "DELETE FROM Booking WHERE BookingID = (?)"
+
+        try:
+            q.execute(DeleteBooking, [self.BookingID])
+            sql.commit()
+            app.logger.info("Booking Deleted Succesfully")
+
+            return True, None
+
+        except Exception as error:
+            
+            return False, f"Error while deleting booking: {error}"
 
 #class Session:
     #def __init__(self, SessionType):
@@ -915,7 +929,7 @@ def newbooking():
         CustomerID = session["CustomerID"]
         BookingDate = request.form["BookingDate"]
 
-        NewBooking = Booking(CustomerID=CustomerID, SessionID=None, NumberOfAdults=None, NumberOfChildren=None, ExtraNotes=None, BookingDate=BookingDate, BookingTime=None, BookingPrice=None)
+        NewBooking = Booking(CustomerID=CustomerID, BookingID=None,SessionID=None, NumberOfAdults=None, NumberOfChildren=None, ExtraNotes=None, BookingDate=BookingDate, BookingTime=None, BookingPrice=None)
         
         Result = NewBooking.AddBookingDate()
 
@@ -943,7 +957,7 @@ def sessiontype():
     if request.method == "POST":
         option = request.form["bookingtype"]
 
-        NewBooking = Booking(CustomerID=None, SessionID=None, BookingDate=None, BookingTime=None, NumberOfChildren=None, NumberOfAdults=None, BookingPrice=None, ExtraNotes=None)
+        NewBooking = Booking(CustomerID=None, BookingID=None, SessionID=None, BookingDate=None, BookingTime=None, NumberOfChildren=None, NumberOfAdults=None, BookingPrice=None, ExtraNotes=None)
 
         Result = NewBooking.SelectSessionType(option)
 
@@ -973,7 +987,7 @@ def weekdayplaysession():
         numberadults = request.form["numberadults"]
         numberchildren = request.form["numberchildren"]
 
-        NewBooking = Booking(CustomerID=None, SessionID=None, BookingDate=None, BookingTime=BookingTime, NumberOfChildren=numberchildren, NumberOfAdults=numberadults, BookingPrice=None, ExtraNotes=None)
+        NewBooking = Booking(CustomerID=None, BookingID=None, SessionID=None, BookingDate=None, BookingTime=BookingTime, NumberOfChildren=numberchildren, NumberOfAdults=numberadults, BookingPrice=None, ExtraNotes=None)
 
         Result = NewBooking.Weekday(BookingTime=BookingTime, numberadults=numberadults, numberchildren=numberchildren)
 
@@ -1001,7 +1015,7 @@ def weekendplaysession():
         numberadults = request.form["numberadults"]
         numberchildren = request.form["numberchildren"]
         
-        NewBooking = Booking(CustomerID=None, SessionID=None, BookingDate=None, BookingTime=BookingTime, NumberOfChildren=numberchildren, NumberOfAdults=numberadults, BookingPrice=None, ExtraNotes=None)
+        NewBooking = Booking(CustomerID=None, BookingID=None, SessionID=None, BookingDate=None, BookingTime=BookingTime, NumberOfChildren=numberchildren, NumberOfAdults=numberadults, BookingPrice=None, ExtraNotes=None)
 
         Result = NewBooking.WeekendOrHoliday(BookingTime=BookingTime, numberadults=numberadults, numberchildren=numberchildren)
 
@@ -1030,7 +1044,7 @@ def party():
         NumberAdults = request.form["numberadults"]
         NumberChildren = request.form["numberchildren"]
         
-        NewBooking = Booking(CustomerID=None, SessionID=None, BookingDate=None, BookingTime=BookingTime, NumberOfChildren=NumberChildren, NumberOfAdults=NumberAdults, BookingPrice=None, ExtraNotes=None)
+        NewBooking = Booking(CustomerID=None, BookingID=None, SessionID=None, BookingDate=None, BookingTime=BookingTime, NumberOfChildren=NumberChildren, NumberOfAdults=NumberAdults, BookingPrice=None, ExtraNotes=None)
 
         Result = NewBooking.WeekendOrHoliday(BookingTime=BookingTime, numberadults=NumberAdults, numberchildren=NumberChildren)
 
@@ -1058,7 +1072,7 @@ def privatehire():
         NumberAdults = request.form["numberadults"]
         NumberChildren = request.form["numberchildren"]
 
-        NewBooking = Booking(CustomerID=None, SessionID=None, BookingDate=None, BookingTime=None, NumberOfChildren=NumberChildren, NumberOfAdults=NumberAdults, BookingPrice=None, ExtraNotes=None)
+        NewBooking = Booking(CustomerID=None, BookingID=None, SessionID=None, BookingDate=None, BookingTime=None, NumberOfChildren=NumberChildren, NumberOfAdults=NumberAdults, BookingPrice=None, ExtraNotes=None)
 
         Result = NewBooking.PrivateHire(PrivateHireType=PrivateHireType)
 
@@ -1104,7 +1118,7 @@ def managebooking():
 
     else:
         
-        NewBooking = Booking(CustomerID=CustomerID, BookingDate=None, BookingTime=None,BookingPrice=None, SessionID=None, NumberOfAdults=None, NumberOfChildren=None, ExtraNotes=None)
+        NewBooking = Booking(CustomerID=CustomerID, BookingID=None,BookingDate=None, BookingTime=None,BookingPrice=None, SessionID=None, NumberOfAdults=None, NumberOfChildren=None, ExtraNotes=None)
         
         Result = NewBooking.ManageBooking()
         
@@ -1118,8 +1132,6 @@ def managebooking():
         else:
             return render_template("error.html", error=error)
         
-        
-
 @app.route('/account/managebooking/booking', methods=["POST", "GET"])
 def booking():
 
@@ -1143,26 +1155,20 @@ def booking():
 @app.route('/account/managebooking/deletebooking', methods=["POST", "GET"])
 def deletebooking():
 
-    #Booking = ()
-
-    #Result = Booking.DeleteBooking()
-
     BookingID = session["BookingID"]
 
-    app.logger.info(f"Deleting Booking with Booking ID: {BookingID}")
+    NewBooking = Booking(CustomerID=None, BookingID = BookingID, BookingDate=None, BookingTime=None,BookingPrice=None, SessionID=None, NumberOfAdults=None, NumberOfChildren=None, ExtraNotes=None)
 
-    DeleteBooking = "DELETE FROM Booking WHERE BookingID = (?)"
+    Result = NewBooking.DeleteBooking()
 
-    try:
-        q.execute(DeleteBooking, [BookingID])
-        sql.commit()
-        app.logger.info("Booking Deleted Succesfully")
-
+    Success = Result[0]
+    error = Result[1]
+    
+    if Success:
         return redirect(url_for("managebooking"))
-
-    except Exception as error:
+    
+    else:
         return render_template("error.html", error=error)
-
 
 @app.route('/account/newbooking/confirmbooking', methods=["POST","GET"])
 def confirmbooking():
