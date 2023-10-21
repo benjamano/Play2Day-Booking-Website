@@ -240,6 +240,13 @@ h13{
     font-size: 20;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+h14{
+    color: black;
+    font-size:30;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: left !important;
+}
+
 
 /* Dark mode styles for the text */
 .dark-mode h1 {
@@ -331,6 +338,13 @@ h13{
     font-size: 20;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+.dark-mode h14{
+    color: white;
+    font-size:30;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: left !important;
+}
+
 label{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
