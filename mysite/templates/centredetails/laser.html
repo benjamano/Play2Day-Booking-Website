@@ -1,87 +1,90 @@
-<head>
-    <title>Play2Day Info</title>
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
-    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
-</head>
+<html>
+    <head>
+        <title>Play2Day Info</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+        <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+    </head>
 
-<div class="sidebar">
-    <a href="/centerinfo">Centre Details Home</a>
-    <a href="/centerinfo/parties">Party Details</a>
-    <a href="/centerinfo/menus">Food Menu</a>
-    <a class=active href="/centerinfo/lasertag">Laser Tag</a>
-    <button onclick="ToggleDarkMode()">Toggle Dark Mode</button>
-    <a class=bottom href="/account">Account Home</a>
-</div>
+    <div class="sidebar">
+        <a href="/centerinfo">Centre Details Home</a>
+        <a href="/centerinfo/parties">Party Details</a>
+        <a href="/centerinfo/menus">Food Menu</a>
+        <a class=active href="/centerinfo/lasertag">Laser Tag</a>
+        <button onclick="ToggleDarkMode()">Toggle Dark Mode</button>
+        <a class=bottom href="/account">Account Home</a>
+    </div>
 
-<center>
-    
-    <div class="pair">
+    <div class="content">
         <center>
-            <h5>Laser Tag!!</h5>
-            <h6>
-                Jam packed to the brim with action and adrenaline, our laser tag arena is sure to excite and occupy the little ones, but also awake the hidden inner child in every adult who joins in!
-            </h6>
-
-            <h12>
-                Our laser tag arena is filled with the best UV lighting and only the best UV flourescent murals, as well as some extra laser lighting effects - Installed by one of our amazingly talented employees -  that really brings the atmosphere to life!
-            </h12>
             
-            <h12>
-                As well as the exciting lighting, we also have pumping music, equipped with subwoofers that makes the ground shake! (No, literally)
-            </h12>
-            
-            <br>
+            <div class="pair">
+                <center>
+                    <h5>Laser Tag!!</h5>
+                    <h6>
+                        Jam packed to the brim with action and adrenaline, our laser tag arena is sure to excite and occupy the little ones, but also awake the hidden inner child in every adult who joins in!
+                    </h6>
 
-            <h8>
-                So why not come along, its included FREE OF PRICE in our weekend or holiday sessions!
-                <br>
-                OR you can book a private hire with use to have the whole arena to yourself!
-            </h8>
+                    <h12>
+                        Our laser tag arena is filled with the best UV lighting and only the best UV flourescent murals, as well as some extra laser lighting effects - Installed by one of our amazingly talented employees -  that really brings the atmosphere to life!
+                    </h12>
+                    
+                    <h12>
+                        As well as the exciting lighting, we also have pumping music, equipped with subwoofers that makes the ground shake! (No, literally)
+                    </h12>
+                    
+                    <br>
+
+                    <h8>
+                        So why not come along, its included FREE OF PRICE in our weekend or holiday sessions!
+                        <br>
+                        OR you can book a private hire with use to have the whole arena to yourself!
+                    </h8>
+                </center>
+            </div>
+        </center>
+
+        <br>
+        <br>
+
+        <center>
+            <div class="pair">
+                <center>
+                <h5>
+                    Here is our LIVE laser tag scoreboard:
+                </h5>
+                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQiDPlpKG47PNM7eOZ54PTnbuU00CyKdJzfyO_w8uKzpp1AvBarf9JOoyvdRl3BaX2P0kXo-SNxo8az/pubhtml?widget=false&headers=false&amp;" width="900" height="600"></iframe>
+                </center>
+            </div>
         </center>
     </div>
-</center>
 
-<br>
-<br>
-
-<center>
-    <div class="pair">
-        <center>
-        <h5>
-            Here is our LIVE laser tag scoreboard:
-        </h5>
-        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQiDPlpKG47PNM7eOZ54PTnbuU00CyKdJzfyO_w8uKzpp1AvBarf9JOoyvdRl3BaX2P0kXo-SNxo8az/pubhtml?widget=false&headers=false&amp;" width="900" height="600"></iframe>
-        </center>
-    </div>
-</center>
-
-
-<script>
-    function ToggleDarkMode() {
-      var element = document.body;
-      element.classList.toggle("dark-mode");
-      var sidebar = document.querySelector(".sidebar");
-      sidebar.classList.toggle("dark-mode");
-  
-      // Update the user's dark mode preference in localStorage
-      var isDarkMode = element.classList.contains("dark-mode");
-      localStorage.setItem("darkMode", isDarkMode);
-      }
-    </script>
-  
     <script>
-      // Function to apply the initial dark mode state
-      function applyInitialDarkMode() {
-          var isDarkMode = localStorage.getItem("darkMode") === "true";
-          var bodyElement = document.body;
-          var sidebarElement = document.querySelector(".sidebar");
-  
-          if (isDarkMode) {
-              bodyElement.classList.add("dark-mode");
-              sidebarElement.classList.add("dark-mode");
-          }
-      }
-  
-        // Call the function to apply the initial dark mode state
-        applyInitialDarkMode();
-</script>
+        function ToggleDarkMode() {
+        var element = document.body;
+        element.classList.toggle("dark-mode");
+        var sidebar = document.querySelector(".sidebar");
+        sidebar.classList.toggle("dark-mode");
+    
+        // Update the user's dark mode preference in localStorage
+        var isDarkMode = element.classList.contains("dark-mode");
+        localStorage.setItem("darkMode", isDarkMode);
+        }
+        </script>
+    
+        <script>
+        // Function to apply the initial dark mode state
+        function applyInitialDarkMode() {
+            var isDarkMode = localStorage.getItem("darkMode") === "true";
+            var bodyElement = document.body;
+            var sidebarElement = document.querySelector(".sidebar");
+    
+            if (isDarkMode) {
+                bodyElement.classList.add("dark-mode");
+                sidebarElement.classList.add("dark-mode");
+            }
+        }
+    
+            // Call the function to apply the initial dark mode state
+            applyInitialDarkMode();
+    </script>
+</html>
