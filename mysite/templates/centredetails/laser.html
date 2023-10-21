@@ -1,129 +1,131 @@
 <script src="https://kit.fontawesome.com/9d35a24d36.js" crossorigin="anonymous"></script>
-<html>
-    <head>
-        <title>Play2Day Info</title>
-        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
-        <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
-    </head>
+<head>
+    <title>Play2Day Info</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+</head>
 
-    <div class="sidebar">
-        <a href="/centerinfo"><i class="fa-solid fa-circle-info"></i>    Centre Details Home</a>
-        <a href="/centerinfo/parties"><i class="fa-solid fa-cake-candles"></i>    Party Details</a>
-        <a href="/centerinfo/menus"><i class="fa-solid fa-mug-hot"></i>    Food Menu</a>
-        <a class=active href="/centerinfo/lasertag"><i class="fa-solid fa-gun"></i>    Laser Tag</a>
-        <button onclick="ToggleDarkMode()">Toggle Dark Mode</button>
-        <a class=bottom href="/account">Account Home</a>
-    </div>
+<div class="sidebar">
+    <a href="/centerinfo"><i class="fa-solid fa-circle-info"></i>    Centre Details Home</a>
+    <a href="/centerinfo/parties"><i class="fa-solid fa-cake-candles"></i>    Party Details</a>
+    <a href="/centerinfo/menus"><i class="fa-solid fa-mug-hot"></i>    Food Menu</a>
+    <a class=active href="/centerinfo/lasertag"><i class="fa-solid fa-gun"></i>    Laser Tag</a>
+    <button onclick="ToggleDarkMode()">Toggle Dark Mode</button>
+    <a class=bottom href="/account">Account Home</a>
+</div>
 
-    <div class="content">
-        <center>
-            <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/centerinfo';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
-            <div class="pair" style="text-align: left !important;">
-                <h5 style="text-align: center;">
-                    Laser Tag
-                </h5>
+<div class="content">
+    <center>
+        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/centerinfo';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+        <div class="pair" style="text-align: left !important;">
+            <h5 style="text-align: center;">
+                Laser Tag
+            </h5>
 
-                <h6 style="font-size: 40; margin-left: 30px;">
-                    So.. what is it??
-                </h6>
+            <h6 style="font-size: 40; margin-left: 30px; text-decoration: underline;">
+                So.. what is it??
+            </h6>
 
-                <h6 style="margin-left: 30px !important; font-size: 20 !important;">
-                    Laser Tag is a high energy, high adrenaline, action-filled game that's main aim is to shoot the players on the opposing team, and to rack up as many points as you can!
-                </6>
+            <h6 style="margin-left: 30px !important; font-size: 20 !important; margin-top: 8px !important">
+                Laser Tag is a high energy, high adrenaline, action-filled game that's main aim is to shoot the players on the opposing team, and to rack up as many points as you can!
+            </h6>
 
-                <h6 style="color:blueviolet !important; margin-left: 30px !important; font-size: 35 !important;">
-                    Jam packed to the brim with action and adrenaline, our laser tag arena is sure to excite and occupy the little ones, but also awake the hidden inner child in every adult who joins in!
-                </h6>
+            <h6 style="font-size: 40; margin-left: 30px; text-decoration: underline;">
+                What's Laser Tag Arena like??
+            </h6>
 
-                <h6 style="margin-left: 30px !important; font-size: 20 !important;">
-                    Our laser tag arena is filled with the best UV lighting and only the best UV flourescent murals, as well as some extra laser lighting effects - Installed by one of our amazingly talented employees -  that really brings the atmosphere to life!
-                </h6>
+            <h6 style="color:blueviolet !important; margin-left: 30px !important; font-size: 35 !important;">
+                Jam packed to the brim with action and adrenaline, our laser tag arena is sure to excite and occupy the little ones, but also awake the hidden inner child in every adult who joins in!
+            </h6>
 
-                <br>
-                <br>
+            <h6 style="margin-left: 30px !important; font-size: 20 !important;">
+                Our laser tag arena is filled with the best UV lighting and only the best UV flourescent murals, as well as some extra laser lighting effects - Installed by one of our amazingly talented employees -  that really brings the atmosphere to life!
+            </h6>
 
-                <h6 style="margin-left: 30px !important; font-size: 20 !important;">
-                    As well as the exciting lighting, we also have pumping music, equipped with subwoofers that make the ground shake! (No, really, you'd have to experience it to believe it!)
-                </h6>
-                
-                <br>
-                <br>
-                <br>
-                <center>
-                    <div class="pair" style="background-color: gray !important; padding: 20px; margin-bottom: 20px !important;">
-                            <h12 style="color: rgba(21, 255, 0, 0.842); margin-bottom: 30px !important; font-size: 30 !important;">
-                                So why not come along, its included FREE OF CHARGE in our weekend or holiday sessions!
-                                OR you can book a private hire with use to have the whole arena to yourself!
-                            </h12>
-                    </div>
-                </center>
-            </div>
+            <br>
+            <br>
 
-            <div class="pair">
-                <h5>
-                    FAQ
-                </h5>
+            <h6 style="margin-left: 30px !important; font-size: 20 !important;">
+                As well as the exciting lighting, we also have pumping music, equipped with subwoofers that make the ground shake! (No, really, you'd have to experience it to believe it!)
+            </h6>
+            
+            <br>
+            <br>
+            <br>
+            <center>
+                <div class="pair" style="background-color: gray !important; padding: 20px; margin-bottom: 20px !important;">
+                        <h12 style="color: rgba(21, 255, 0, 0.842); margin-bottom: 30px !important; font-size: 30 !important;">
+                            So why not come along, its included FREE OF CHARGE in our weekend or holiday sessions!
+                            OR you can book a private hire with use to have the whole arena to yourself!
+                        </h12>
+                </div>
+            </center>
+        </div>
 
-                <h6 style="text-align: left !important;">
-                    What's the age requirement??
-                </h6>
+        <div class="pair">
+            <h5>
+                FAQ
+            </h5>
 
-                <h12 style="padding-left: 50px !important; padding-right: 50px !important; font-size: 20 !important;">
-                    Our minimum age requirement to play is 6 years, and our maximum age requirement is... UNLIMITED! 
-                </h12>
+            <h6 style="text-align: left !important;">
+                What's the age requirement??
+            </h6>
 
-                <h6 style="text-align: left !important;">
-                    Okay, so I, as well as my child can play, but how many others??
-                </h6>
+            <h12 style="padding-left: 50px !important; padding-right: 50px !important; font-size: 20 !important;">
+                Our minimum age requirement to play is 6 years, and our maximum age requirement is... UNLIMITED! 
+            </h12>
 
-                <h12 style="padding-left: 50px !important; padding-right: 50px !important; font-size: 20 !important;">
-                    We have, on a good day, 21 guns available for use, but to be safe, we'd recommend booking the slots in, as it does get very busy sometimes, so we can't always guarantee the entry into every game.
-                </h12>
-            </div>
-        </center>
+            <h6 style="text-align: left !important;">
+                Okay, so I, as well as my child can play, but how many others??
+            </h6>
 
-        <br>
-        <br>
+            <h12 style="padding-left: 50px !important; padding-right: 50px !important; font-size: 20 !important;">
+                We have, on a good day, 21 guns available for use, but to be safe, we'd recommend booking the slots in, as it does get very busy sometimes, so we can't always guarantee the entry into every game.
+            </h12>
+        </div>
+    </center>
 
-        <center>
-            <div class="pair">
-                <center>
-                <h5>
-                    Here is our LIVE laser tag scoreboard:
-                </h5>
-                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQiDPlpKG47PNM7eOZ54PTnbuU00CyKdJzfyO_w8uKzpp1AvBarf9JOoyvdRl3BaX2P0kXo-SNxo8az/pubhtml?widget=false&headers=false&amp;" width="900" height="600"></iframe>
-                </center>
-            </div>
-        </center>
-    </div>
+    <br>
+    <br>
+
+    <center>
+        <div class="pair">
+            <center>
+            <h5>
+                Here is our LIVE laser tag scoreboard:
+            </h5>
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQiDPlpKG47PNM7eOZ54PTnbuU00CyKdJzfyO_w8uKzpp1AvBarf9JOoyvdRl3BaX2P0kXo-SNxo8az/pubhtml?widget=false&headers=false&amp;" width="900" height="600"></iframe>
+            </center>
+        </div>
+    </center>
+</div>
+
+<script>
+    function ToggleDarkMode() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+    var sidebar = document.querySelector(".sidebar");
+    sidebar.classList.toggle("dark-mode");
+
+    // Update the user's dark mode preference in localStorage
+    var isDarkMode = element.classList.contains("dark-mode");
+    localStorage.setItem("darkMode", isDarkMode);
+    }
+    </script>
 
     <script>
-        function ToggleDarkMode() {
-        var element = document.body;
-        element.classList.toggle("dark-mode");
-        var sidebar = document.querySelector(".sidebar");
-        sidebar.classList.toggle("dark-mode");
-    
-        // Update the user's dark mode preference in localStorage
-        var isDarkMode = element.classList.contains("dark-mode");
-        localStorage.setItem("darkMode", isDarkMode);
+    // Function to apply the initial dark mode state
+    function applyInitialDarkMode() {
+        var isDarkMode = localStorage.getItem("darkMode") === "true";
+        var bodyElement = document.body;
+        var sidebarElement = document.querySelector(".sidebar");
+
+        if (isDarkMode) {
+            bodyElement.classList.add("dark-mode");
+            sidebarElement.classList.add("dark-mode");
         }
-        </script>
-    
-        <script>
-        // Function to apply the initial dark mode state
-        function applyInitialDarkMode() {
-            var isDarkMode = localStorage.getItem("darkMode") === "true";
-            var bodyElement = document.body;
-            var sidebarElement = document.querySelector(".sidebar");
-    
-            if (isDarkMode) {
-                bodyElement.classList.add("dark-mode");
-                sidebarElement.classList.add("dark-mode");
-            }
-        }
-    
-            // Call the function to apply the initial dark mode state
-            applyInitialDarkMode();
-    </script>
-</html>
+    }
+
+        // Call the function to apply the initial dark mode state
+        applyInitialDarkMode();
+</script>
