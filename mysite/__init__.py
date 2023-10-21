@@ -1574,7 +1574,7 @@ def mark_arrived():
 @app.route("/account/developer")
 def devtest():
     
-    return render_template("/manager/devtest.html")
+    return render_template("devtest.html")
 
 
 if __name__ == '__main__':
