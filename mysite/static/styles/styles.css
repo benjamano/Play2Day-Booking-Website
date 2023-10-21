@@ -265,60 +265,32 @@ h14{
 
 .dark-mode h4{
     color:rgba(122, 0, 0, 0.61);
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 40;
 }
 
 .dark-mode h5{
     color: black;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 40px;
     background-color: #ffaa34;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    padding: 10px;
-    border-radius: 20px 20px 0px 0px;
 }
 
 .dark-mode h6{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 30;
-    margin-top: 40px !important;
-    margin-bottom: 20px !important;
     color: white
 
 }
 
 .dark-mode h7{
     color:#a81d2bcc;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 30;
     background-color: #ffaa34 !important;
-    margin-top: 0px !important;
-    margin-bottom: 0px !important;
-    padding: 10px;
-    border-radius: 0px 0px 20px 20px;
 
 }
 
 .dark-mode h8{
-    text-align: center;
-    width: 70%;
-    padding: 10px;
-    border-radius: 15px;
-    margin-top: 40px;
-    border-style: solid;
     border-color: grey;
     color: black;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     background-color: grey;
-    font-size: 20;
 }
 
 .dark-mode h9{
     color:white;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 40;
 }
 
 .dark-mode h10 {
@@ -335,14 +307,9 @@ h14{
 }
 .dark-mode h13{
     color:white;
-    font-size: 20;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .dark-mode h14{
     color: white;
-    font-size:30;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    text-align: left !important;
 }
 
 label{
