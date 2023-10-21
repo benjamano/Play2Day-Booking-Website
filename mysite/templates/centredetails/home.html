@@ -1,7 +1,6 @@
 <script src="https://kit.fontawesome.com/9d35a24d36.js" crossorigin="anonymous"></script>
-
 <head>
-    <title>Play2Day Info</title>
+    <title>Play2Day Info Home</title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
     <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
 </head>
@@ -15,33 +14,65 @@
     <a class=bottom href="/account">Account Home</a>
 </div>
 
+<div class="content">
+    <center>
+        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/centerinfo';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+        <div class="pair" style="text-align: left !important;">
+            <h5 style="text-align: center;">
+                Welcome to Play2Day!
+            </h5>
+
+            <h6 style="font-size: 40; margin-left: 32px; text-decoration: underline;">
+                Who are we?
+            </h6>
+
+            <h6 style="margin-left: 32px !important; font-size: 20 !important; margin-top: 16px !important">
+                Play2Day is a childrens play center who aim to deliver joy and happiness to children and their parent/guardians alike!
+            </h6>
+
+            <h6 style="font-size: 40; margin-left: 32px; text-decoration: underline;">
+                What facilities do we offer?
+            </h6>
+
+            <h6 style="margin-left: 32px !important; font-size: 20 !important; margin-top: 16px !important">
+                We have many different facilities available to accommodate all ages, including the adults: 
+            </h6>
+            <ul>
+                <li>A GIANT Inflatable park, one of the biggest in suffolk</li>
+                <li>Two large Play Structers, one included a high-tech football-pitch with digital targets to aim for!</li>
+                <li>A state of the art Laser-Tag arena, this is the perfect event space for a staff night out, or a quick way to tire out the little ones!</li>
+                <li>An always-open snack bar that offers cooked hot child and adult meals, as well as the best coffee and hot chocolate!</li>
+                <li>Dedicated party spaces with their very own party hosts, giving the party groups aa private room to eat their food before going off to play!</li>
+                <li>A specialised "TinyTots" area, designed for children under the age of 4, this is the best place for parents and their children to make life-lasting memories!</li>
+              </ul>  
+
 
 <script>
     function ToggleDarkMode() {
-      var element = document.body;
-      element.classList.toggle("dark-mode");
-      var sidebar = document.querySelector(".sidebar");
-      sidebar.classList.toggle("dark-mode");
-  
-      // Update the user's dark mode preference in localStorage
-      var isDarkMode = element.classList.contains("dark-mode");
-      localStorage.setItem("darkMode", isDarkMode);
-      }
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+    var sidebar = document.querySelector(".sidebar");
+    sidebar.classList.toggle("dark-mode");
+
+    // Update the user's dark mode preference in localStorage
+    var isDarkMode = element.classList.contains("dark-mode");
+    localStorage.setItem("darkMode", isDarkMode);
+    }
     </script>
-  
+
     <script>
-      // Function to apply the initial dark mode state
-      function applyInitialDarkMode() {
-          var isDarkMode = localStorage.getItem("darkMode") === "true";
-          var bodyElement = document.body;
-          var sidebarElement = document.querySelector(".sidebar");
-  
-          if (isDarkMode) {
-              bodyElement.classList.add("dark-mode");
-              sidebarElement.classList.add("dark-mode");
-          }
-      }
-  
+    // Function to apply the initial dark mode state
+    function applyInitialDarkMode() {
+        var isDarkMode = localStorage.getItem("darkMode") === "true";
+        var bodyElement = document.body;
+        var sidebarElement = document.querySelector(".sidebar");
+
+        if (isDarkMode) {
+            bodyElement.classList.add("dark-mode");
+            sidebarElement.classList.add("dark-mode");
+        }
+    }
+
         // Call the function to apply the initial dark mode state
         applyInitialDarkMode();
 </script>
