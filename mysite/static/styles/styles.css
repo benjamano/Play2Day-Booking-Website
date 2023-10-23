@@ -396,7 +396,7 @@ ul li{
     margin-right: 20px;
     margin-left: 20px;
     margin-top: 10px !important;
-    margin-bottom: 30px !important;
+    margin-bottom: 10px !important;
     background-color: #fc687e;
     cursor: pointer;
 }
@@ -456,6 +456,20 @@ ul li{
     margin-right: 20px;
     margin-left: 20px;
     margin-top: 10px !important;
+    margin-bottom: 30px !important;
+    background-color: #52AA5E;
+    cursor: pointer;
+}
+.printbutton {
+    height: 80px;
+    width: 200px;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 30;
+    margin-right: 20px;
+    margin-left: 20px;
     margin-bottom: 30px !important;
     background-color: #52AA5E;
     cursor: pointer;

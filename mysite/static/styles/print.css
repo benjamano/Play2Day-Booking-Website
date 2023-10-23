@@ -1,3 +1,7 @@
-header, footer, aside, nav, form, iframe, .menu, .hero, .adslot, .sidebar {
+header, footer, aside, nav, form, iframe, .menu, .hero, .adslot, .sidebar .printbutton {
     display: none;
   }
+
+.pair {
+    text-align: center;
+}
