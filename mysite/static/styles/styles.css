@@ -89,6 +89,12 @@ div.content {
   margin-left: 200px;
   padding: 1px 16px;
   height: auto;
+
+  @media print{
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
 }
 
 @media screen and (max-width: 700px) {
@@ -317,7 +323,18 @@ label{
 }
 ul li{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-   }
+}
+
+.print {
+    display: none;
+ }
+  
+@media print {
+  
+    .print {
+        display: block;
+    }
+}
 
 .buttonmanagerlogin {
     height: 80px;

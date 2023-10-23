@@ -17,6 +17,7 @@
 
 <div class="content">
     <center>
+        <p class="print">Article printed at 1:23pm 5 September 2020. Please see https://site.com/page for the latest version.</p>
         <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
         <div class="pair">
             <center>
@@ -41,7 +42,7 @@
                 <form method="POST" action="/account/managebooking/deletebooking">
                     <button type="submit" class="deletebutton" onclick="return confirm('Are you sure you want to delete this Booking?')">Delete Booking</button>
                 </form>
-                <button class="printbutton">Print this page</button>
+                <button class="printbutton" onclick="window.print();return false;"">Print this page</button>
             </center>
         </div>
     </center>
