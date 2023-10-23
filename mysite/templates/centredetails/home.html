@@ -129,18 +129,18 @@ function showLaserSlides() {
 }
 
 function showinflatableSlides() {
-    let i;
-    let slides = document.getElementsByClassName("InflatableSlides");
+    let j;
+    let Inflatableslides = document.getElementsByClassName("InflatableSlides");
     let dots = document.getElementsByClassName("dot");
-    for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
+    for (j = 0; j < Inflatableslides.length; j++) {
+    Inflatableslides[j].style.display = "none";
     }
     InflatableSlideIndex++;
-    if (InflatableSlideIndex > slides.length) {InflatableSlideIndex = 1}
-    for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-    }
-    slides[InflatableSlideIndex-1].style.display = "block";
+    if (InflatableSlideIndex > Inflatableslides.length) {InflatableSlideIndex = 1}
+    for (j = 0; j < dots.length; j++) {
+    dots[j].className = dots[j].className.replace(" active", "");
+    } 
+    Inflatableslides[InflatableSlideIndex-1].style.display = "block";
     dots[InflatableSlideIndex-1].className += " active";
     setTimeout(showLaserSlides, 5000); // Change every 5 seconds
 }
