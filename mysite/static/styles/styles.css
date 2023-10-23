@@ -1,3 +1,7 @@
+.centered-content {
+    margin: 0 auto;
+    max-width: 90%
+}
 .slideshow-container {
   max-width: 1000px;
   position: relative;
@@ -89,12 +93,6 @@ div.content {
   margin-left: 200px;
   padding: 1px 16px;
   height: auto;
-
-  @media print{
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-  }
 }
 
 @media screen and (max-width: 700px) {
@@ -323,17 +321,6 @@ label{
 }
 ul li{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-.print {
-    display: none;
- }
-  
-@media print {
-  
-    .print {
-        display: block;
-    }
 }
 
 .buttonmanagerlogin {
@@ -597,12 +584,6 @@ input[type=tel]{
     border-radius: 20px;
     text-align: center;
     display: inline-block;
-
-    @media print{
-        display: inline-block;
-        height: 100%;
-        vertical-align: middle;
-      }
 }
 
 .dark-mode .pair {

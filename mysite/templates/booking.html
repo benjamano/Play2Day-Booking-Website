@@ -2,7 +2,6 @@
 <head>
     <title>Manage Your Booking</title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
-    <link rel="stylesheet" media="print" href="{{ url_for('static',filename='/styles/print.css') }}" />
     <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
 </head>
 <div class="sidebar">
@@ -41,7 +40,7 @@
                 <form method="POST" action="/account/managebooking/deletebooking">
                     <button type="submit" class="deletebutton" onclick="return confirm('Are you sure you want to delete this Booking?')">Delete Booking</button>
                 </form>
-                <button class="printbutton" onclick="window.print();return false;"">Print this page</button>
+                <button class="printbutton" onclick="togglePrintView()">Print this page</button>
             </center>
         </div>
     </center>
@@ -98,5 +97,19 @@
   }
   
   applyInitialDarkMode();
+  </script>
+  <script>
+    function togglePrintView() {
+        var contentElement = document.querySelector(".content");
+        var sidebar = document.querySelector(".sidebar");
+    
+        contentElement.classList.toggle("centered-content");
+        sidebar.classList.toggle("hidden-sidebar");
+    
+        if (window.matchMedia('print').matches) {
+            // This is the print view, so hide the sidebar
+            sidebar.style.display = "none";
+        }
+    }
   </script>
   
