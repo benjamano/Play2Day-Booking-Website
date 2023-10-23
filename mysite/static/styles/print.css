@@ -2,7 +2,8 @@ header, footer, aside, nav, form, iframe, .menu, .hero, .adslot, .sidebar, .prin
     display: none;
   }
 
-  @media print {
+/* Hide sidebar and other elements for printing */
+@media print {
     .sidebar, .printbutton {
         display: none;
     }
@@ -13,6 +14,7 @@ header, footer, aside, nav, form, iframe, .menu, .hero, .adslot, .sidebar, .prin
         justify-content: center;
         align-items: center;
         min-height: 100vh; /* Ensure content takes full height */
+        text-align: center; /* Center text inside the container */
     }
 
     /* Reset centering for child elements */
