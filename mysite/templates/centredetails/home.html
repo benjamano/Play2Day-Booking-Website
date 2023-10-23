@@ -106,8 +106,10 @@
                 <span class="dot"></span>
             </div>
 <script>
-let slideIndex = 0;
-showSlides();
+let LaserslideIndex = 0;
+showLaserSlides();
+let InflatableSlideIndex = 0;
+showinflatableSlides();
 
 function showLaserSlides() {
     let i;
@@ -116,13 +118,13 @@ function showLaserSlides() {
     for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
     }
-    slideIndex++;
-    if (slideIndex > slides.length) {slideIndex = 1}
+    LaserslideIndex++;
+    if (LaserslideIndex > slides.length) {LaserslideIndex = 1}
     for (i = 0; i < dots.length; i++) {
     dots[i].className = dots[i].className.replace(" active", "");
     }
-    slides[slideIndex-1].style.display = "block";
-    dots[slideIndex-1].className += " active";
+    slides[LaserslideIndex-1].style.display = "block";
+    dots[LaserslideIndex-1].className += " active";
     setTimeout(showLaserSlides, 5000); // Change every 5 seconds
 }
 </script>
@@ -134,13 +136,13 @@ function showinflatableSlides() {
     for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
     }
-    slideIndex++;
-    if (slideIndex > slides.length) {slideIndex = 1}
+    InflatableSlideIndex++;
+    if (InflatableSlideIndex > slides.length) {InflatableSlideIndex = 1}
     for (i = 0; i < dots.length; i++) {
     dots[i].className = dots[i].className.replace(" active", "");
     }
-    slides[slideIndex-1].style.display = "block";
-    dots[slideIndex-1].className += " active";
+    slides[InflatableSlideIndex-1].style.display = "block";
+    dots[InflatableSlideIndex-1].className += " active";
     setTimeout(showLaserSlides, 5000); // Change every 5 seconds
 }
 </script>
