@@ -14,37 +14,38 @@
     <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>    Log Out</a>
     <button onclick="ToggleDarkMode()">Toggle Dark Mode</button>
 </div>
-
-<div class="content">
-    <center>
-        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
-        <div class="pair">
-            <center>
-                <h5>
-                    Manage Booking
-                </h5>
-                <h2>
-                    Booking Type: {{SessionType}}
-                </h2>
-                <h2>
-                    Booking Date: {{BookingDate}}
-                </h2>
-                <h2>
-                    Booking Time: {{BookingTime}}
-                </h2>
-                <h2>
-                    Booking Price: £{{BookingPrice}}
-                </h2>
-                <h2>
-                    Extra Notes: {{Extra}}
-                </h2>
-                <form method="POST" action="/account/managebooking/deletebooking">
-                    <button type="submit" class="deletebutton" onclick="return confirm('Are you sure you want to delete this Booking?')">Delete Booking</button>
-                </form>
-                <button class="printbutton" onclick="window.print();return false;">Print this page</button>
-            </center>
-        </div>
-    </center>
+<div class="content-container">
+    <div class="content">
+        <center>
+            <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+            <div class="pair">
+                <center>
+                    <h5>
+                        Manage Booking
+                    </h5>
+                    <h2>
+                        Booking Type: {{SessionType}}
+                    </h2>
+                    <h2>
+                        Booking Date: {{BookingDate}}
+                    </h2>
+                    <h2>
+                        Booking Time: {{BookingTime}}
+                    </h2>
+                    <h2>
+                        Booking Price: £{{BookingPrice}}
+                    </h2>
+                    <h2>
+                        Extra Notes: {{Extra}}
+                    </h2>
+                    <form method="POST" action="/account/managebooking/deletebooking">
+                        <button type="submit" class="deletebutton" onclick="return confirm('Are you sure you want to delete this Booking?')">Delete Booking</button>
+                    </form>
+                    <button class="printbutton" onclick="window.print();return false;">Print this page</button>
+                </center>
+            </div>
+        </center>
+    </div>
 </div>
 
 <script>
