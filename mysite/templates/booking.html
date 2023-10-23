@@ -2,6 +2,7 @@
 <head>
     <title>Manage Your Booking</title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+    <link rel="stylesheet" media="print" href="{{ url_for('static',filename='/styles/print.css') }}" />
     <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
 </head>
 <div class="sidebar">
@@ -40,6 +41,7 @@
                 <form method="POST" action="/account/managebooking/deletebooking">
                     <button type="submit" class="deletebutton" onclick="return confirm('Are you sure you want to delete this Booking?')">Delete Booking</button>
                 </form>
+                <button class="savebutton">Print this page</button>
             </center>
         </div>
     </center>
