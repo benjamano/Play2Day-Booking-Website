@@ -44,9 +44,88 @@
                 <li>An always-open snack bar that offers cooked hot child and adult meals, as well as the best coffee and hot chocolate!</li>
                 <li>Dedicated party spaces with their very own party hosts, giving the party groups aa private room to eat their food before going off to play!</li>
                 <li>A specialised "TinyTots" area, designed for children under the age of 4, this is the best place for parents and their children to make life-lasting memories!</li>
-              </ul>  
+                <li>Many interactive playthings to play with! One example being our amazing interactive football wall, which counts a score based on how many times the targets get hit!!</li>
+                <li>Private hire parties, giving exclusive access to our play center!!</li>
+            </ul> 
+            
+            <br>
 
+            <h6 style="font-size: 40; margin-left: 32px; text-decoration: underline;">
+                The Bouncy Inflatable Park
+            </h6>
 
+            <div class="slideshow-container">
+                <div class="mySlides fade">
+                    <img src="{{ url_for('static',filename='/images/center/InflatableMain.jpg') }}" style="max-width:50%; border: 5px solid #000000">
+                </div>
+
+                <div class="mySlides fade">
+                <img src="{{ url_for('static',filename='/images/center/InflatableWall.jpg') }}" style="max-width:60%; border: 5px solid #000000;">
+                </div>
+
+                <div class="mySlides fade">
+                <img src="{{ url_for('static',filename='/images/center/InflatableSlide.jpg') }}" style="max-width:60%; border: 5px solid #000000;">
+                </div>
+
+                <div class="mySlides fade">
+                <img src="{{ url_for('static',filename='/images/center/InflatableFront.jpg') }}" style="max-width:50%; border: 5px solid #000000;">
+                </div>
+            </div>
+            <div style="text-align:center">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+
+            <h6 style="font-size: 40; margin-left: 32px; text-decoration: underline;">
+                The Laser-Tag Arena
+            </h6>
+
+            <div class="slideshow-container" style="border: 5px solid #000000">
+                <div class="mySlides fade">
+                    <img src="{{ url_for('static',filename='/images/center/AlienWall.jpg') }}" style="max-width:50%;">
+                </div>
+
+                <div class="mySlides fade">
+                <img src="{{ url_for('static',filename='/images/center/TapeWall.jpg') }}" style="max-width:60%;">
+                </div>
+
+                <div class="mySlides fade">
+                <img src="{{ url_for('static',filename='/images/center/GlowingAlienWall.jpg') }}" style="max-width:60%;">
+                </div>
+
+                <div class="mySlides fade">
+                <img src="{{ url_for('static',filename='/images/center/GlowingIcicles.jpg') }}" style="max-width:50%;">
+                </div>
+            </div>
+            <div style="text-align:center">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+<script>
+let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {slideIndex = 1}
+    for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += " active";
+    setTimeout(showSlides, 5000); // Change every 5 seconds
+}
+</script>
 <script>
     function ToggleDarkMode() {
     var element = document.body;

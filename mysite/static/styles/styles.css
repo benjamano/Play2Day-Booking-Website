@@ -315,6 +315,9 @@ h14{
 label{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+ul li{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   }
 
 .buttonmanagerlogin {
     height: 80px;
