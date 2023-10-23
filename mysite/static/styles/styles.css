@@ -597,6 +597,12 @@ input[type=tel]{
     border-radius: 20px;
     text-align: center;
     display: inline-block;
+
+    @media print{
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+      }
 }
 
 .dark-mode .pair {
