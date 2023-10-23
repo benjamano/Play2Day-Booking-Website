@@ -2,12 +2,21 @@ header, footer, aside, nav, form, iframe, .menu, .hero, .adslot, .sidebar, .prin
     display: none;
   }
 
-@media print {
+  @media print {
     .sidebar, .printbutton {
         display: none;
     }
-    .content {
-        margin: 0 auto;
-        max-width: 600px; 
+
+    /* Center the content for printing */
+    .content-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh; /* Ensure content takes full height */
+    }
+
+    /* Reset centering for child elements */
+    .content-container center {
+        display: initial;
     }
 }
