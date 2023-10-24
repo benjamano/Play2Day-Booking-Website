@@ -127,7 +127,7 @@ img.one {
 }
 img.menus {
     object-fit: scale-down;
-    max-width: 30%;
+    max-width: 80%;
     height: auto;
     display: block;
     margin-left: auto;
@@ -136,6 +136,7 @@ img.menus {
     padding-right: 0 !important;
     padding-left: 0 !important;
     padding-top: 0 !important;
+    border: 5px solid;
 }
 
 h1 {
