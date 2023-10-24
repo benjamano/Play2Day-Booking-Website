@@ -1055,7 +1055,7 @@ def party():
     else:
         return render_template("party.html")
 
-@app.route('/account/newbooking/privatehire', methods=["POST","GET"])
+@app.route("/account/newbooking/privatehire", methods=["POST","GET"])
 def privatehire():
 
     if customerloggedin() == False:
@@ -1075,15 +1075,30 @@ def privatehire():
         error = Result[1]
         
         if Success:
-            return redirect(url_for("confirmbooking"))
-        
+            return redirect(url_for(optionalextras))        
         else:
             return render_template("error.html", error=error)
 
     else:
         return render_template("privatehire.html")
 
-@app.route('/account/managebooking', methods=["POST","GET"])
+@app.route("/account/newbooking/optionalextras", methods=["POST","GET"])
+def optionalextras():
+    
+    if customerloggedin() == False:
+        return redirect(url_for("index"))
+    
+    PrivateHireType = session["PrivateHireType"]
+    BookingType = session["BookingSession"]
+    
+    if request.method == "POST":
+
+        return redirect(url_for("confirmbooking"))
+    
+    else:
+        return render_template("optionalextras.html", BookingType = BookingType, privatehiretype = PrivateHireType)
+
+@app.route("/account/managebooking", methods=["POST","GET"])
 def managebooking():
 
     if customerloggedin() == False:
