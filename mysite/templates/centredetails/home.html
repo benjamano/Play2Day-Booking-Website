@@ -55,19 +55,19 @@
             </h6>
 
             <div class="slideshow-container">
-                <div class="mySlides fade">
+                <div class="InflatableSlides fade">
                     <img src="{{ url_for('static',filename='/images/center/InflatableMain.jpg') }}" style="max-width:50%; border: 5px solid #000000">
                 </div>
 
-                <div class="mySlides fade">
+                <div class="InflatableSlides fade">
                 <img src="{{ url_for('static',filename='/images/center/InflatableWall.jpg') }}" style="max-width:60%; border: 5px solid #000000;">
                 </div>
 
-                <div class="mySlides fade">
+                <div class="InflatableSlides fade">
                 <img src="{{ url_for('static',filename='/images/center/InflatableSlide.jpg') }}" style="max-width:20%; border: 5px solid #000000;">
                 </div>
 
-                <div class="mySlides fade">
+                <div class="InflatableSlides fade">
                 <img src="{{ url_for('static',filename='/images/center/InflatableFront.jpg') }}" style="max-width:50%; border: 5px solid #000000;">
                 </div>
             </div>
@@ -83,19 +83,19 @@
             </h6>
 
             <div class="slideshow-container" style="border: 5px solid #000000">
-                <div class="mySlides fade">
+                <div class="LaserSlides fade">
                     <img src="{{ url_for('static',filename='/images/center/AlienWall.jpg') }}" style="max-width:50%;">
                 </div>
 
-                <div class="mySlides fade">
+                <div class="LaserSlides fade">
                 <img src="{{ url_for('static',filename='/images/center/TapeWall.jpg') }}" style="max-width:60%;">
                 </div>
 
-                <div class="mySlides fade">
+                <div class="LaserSlides fade">
                 <img src="{{ url_for('static',filename='/images/center/GlowingAlienWall.jpg') }}" style="max-width:60%;">
                 </div>
 
-                <div class="mySlides fade">
+                <div class="LaserSlides fade">
                 <img src="{{ url_for('static',filename='/images/center/GlowingIcicles.jpg') }}" style="max-width:50%;">
                 </div>
             </div>
@@ -120,10 +120,10 @@ function showSlides(slideshowIndex) {
     let slides;
     let dots;
     if (slideshowIndex === 1) {
-        slides = document.getElementsByClassName("mySlides1");
+        slides = document.getElementsByClassName("LaserSlides");
         dots = document.getElementsByClassName("dot1");
     } else if (slideshowIndex === 2) {
-        slides = document.getElementsByClassName("mySlides2");
+        slides = document.getElementsByClassName("InflatableSlides");
         dots = document.getElementsByClassName("dot2");
     } else {
         return;
