@@ -55,19 +55,19 @@
             </h6>
 
             <div class="slideshow-container">
-                <div class="InflatableSlides fade">
+                <div class="mySlides fade">
                     <img src="{{ url_for('static',filename='/images/center/InflatableMain.jpg') }}" style="max-width:50%; border: 5px solid #000000">
                 </div>
 
-                <div class="InflatableSlides fade">
+                <div class="mySlides fade">
                 <img src="{{ url_for('static',filename='/images/center/InflatableWall.jpg') }}" style="max-width:60%; border: 5px solid #000000;">
                 </div>
 
-                <div class="InflatableSlides fade">
+                <div class="mySlides fade">
                 <img src="{{ url_for('static',filename='/images/center/InflatableSlide.jpg') }}" style="max-width:20%; border: 5px solid #000000;">
                 </div>
 
-                <div class="InflatableSlides fade">
+                <div class="mySlides fade">
                 <img src="{{ url_for('static',filename='/images/center/InflatableFront.jpg') }}" style="max-width:50%; border: 5px solid #000000;">
                 </div>
             </div>
@@ -83,19 +83,19 @@
             </h6>
 
             <div class="slideshow-container" style="border: 5px solid #000000">
-                <div class="LaserSlides fade">
+                <div class="mySlides fade">
                     <img src="{{ url_for('static',filename='/images/center/AlienWall.jpg') }}" style="max-width:50%;">
                 </div>
 
-                <div class="LaserSlides fade">
+                <div class="mySlides fade">
                 <img src="{{ url_for('static',filename='/images/center/TapeWall.jpg') }}" style="max-width:60%;">
                 </div>
 
-                <div class="LaserSlides fade">
+                <div class="mySlides fade">
                 <img src="{{ url_for('static',filename='/images/center/GlowingAlienWall.jpg') }}" style="max-width:60%;">
                 </div>
 
-                <div class="LaserSlides fade">
+                <div class="mySlides fade">
                 <img src="{{ url_for('static',filename='/images/center/GlowingIcicles.jpg') }}" style="max-width:50%;">
                 </div>
             </div>
@@ -105,44 +105,61 @@
                 <span class="dot"></span>
                 <span class="dot"></span>
             </div>
+        </div>
+    </center>
+</div>
 <script>
-let LaserslideIndex = 0;
-showLaserSlides();
-let InflatableSlideIndex = 0;
-showinflatableSlides();
+let slideIndex1 = 0;
+let slideIndex2 = 0;
 
-function showLaserSlides() {
+showSlides(1); // Start the first slideshow
+showSlides(2); // Start the second slideshow
+
+function showSlides(slideshowIndex) {
     let i;
-    let slides = document.getElementsByClassName("LaserSlides");
-    let dots = document.getElementsByClassName("dot");
-    for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
+    let slides;
+    let dots;
+    if (slideshowIndex === 1) {
+        slides = document.getElementsByClassName("mySlides1");
+        dots = document.getElementsByClassName("dot1");
+    } else if (slideshowIndex === 2) {
+        slides = document.getElementsByClassName("mySlides2");
+        dots = document.getElementsByClassName("dot2");
+    } else {
+        return;
     }
-    LaserslideIndex++;
-    if (LaserslideIndex > slides.length) {LaserslideIndex = 1}
-    for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-    }
-    slides[LaserslideIndex-1].style.display = "block";
-    dots[LaserslideIndex-1].className += " active";
-    setTimeout(showLaserSlides, 5000); // Change every 5 seconds
-}
 
-function showinflatableSlides() {
-    let j;
-    let Inflatableslides = document.getElementsByClassName("InflatableSlides");
-    let dots = document.getElementsByClassName("dot");
-    for (j = 0; j < Inflatableslides.length; j++) {
-    Inflatableslides[j].style.display = "none";
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
     }
-    InflatableSlideIndex++;
-    if (InflatableSlideIndex > Inflatableslides.length) {InflatableSlideIndex = 1}
-    for (j = 0; j < dots.length; j++) {
-    dots[j].className = dots[j].className.replace(" active", "");
-    } 
-    Inflatableslides[InflatableSlideIndex-1].style.display = "block";
-    dots[InflatableSlideIndex-1].className += " active";
-    setTimeout(showLaserSlides, 5000); // Change every 5 seconds
+
+    if (slideshowIndex === 1) {
+        slideIndex1++;
+        if (slideIndex1 > slides.length) {
+            slideIndex1 = 1;
+        }
+    } else if (slideshowIndex === 2) {
+        slideIndex2++;
+        if (slideIndex2 > slides.length) {
+            slideIndex2 = 1;
+        }
+    }
+
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+
+    if (slideshowIndex === 1) {
+        slides[slideIndex1 - 1].style.display = "block";
+        dots[slideIndex1 - 1].className += " active";
+    } else if (slideshowIndex === 2) {
+        slides[slideIndex2 - 1].style.display = "block";
+        dots[slideIndex2 - 1].className += " active";
+    }
+
+    setTimeout(function () {
+        showSlides(slideshowIndex);
+    }, 5000); // Change every 5 seconds
 }
 </script>
 <script>
