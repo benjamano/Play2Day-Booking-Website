@@ -410,24 +410,19 @@ class Booking:
         app.logger.info(f"Option: {option}")
 
         if option == "Weekend Play Session":
-            session["BookingSession"] = "Weekend Play Session"
-            session["PlaySession"] = True
-
+            session["BookingType"] = "Weekend Play Session"
             return True, None, "weekendplaysession"
 
         elif option == "Weekday Play Session":
-            session["BookingSession"] = "Weekday Play Session"
-            session["PlaySession"] = True
+            session["BookingType"] = "Weekday Play Session"
             return True, None, "weekdayplaysession"
 
         elif option == "Party":
-            session["BookingSession"] = "Party"
-            session["Party"] = True
+            session["BookingType"] = "Party"
             return True, None, "party"
 
         elif option == "Private Hire":
-            session["BookingSession"] = "Private Hire"
-            session["PrivateHire"] = True
+            session["BookingType"] = "Private Hire"
             return True, None, "privatehire"
         else:
             return False, "Option selected is not valid!"
@@ -768,13 +763,13 @@ def logout():
         session["PrivateHire"] = False
         session["CustomerID"] = ""
         session["PlaySessionType"] = ""
-        session["BookingSession"] = ""
         session["BookingID"] = ""
         session["BookingDate"] = ""
         session["PrivateHireType"] = ""
         session["BookingTime"] = ""
         session["numberadults"] = ""
         session["numberchildren"] = ""
+        session["BookingType"] = ""
 
 
         return redirect(url_for("index"))
@@ -1089,7 +1084,7 @@ def extras():
         return redirect(url_for("index"))
     
     PrivateHireType = session["PrivateHireType"]
-    BookingType = session["BookingSession"]
+    BookingType = session["BookingType"]
     
     if request.method == "POST":
 
@@ -1193,7 +1188,7 @@ def confirmbooking():
         
         NumberOfAdults = session["numberadults"]
         NumberOfChildren = session["numberchildren"]
-        BookingType = session["BookingSession"]
+        BookingType = session["BookingType"]
         BookingTime = session["BookingTime"]
         BookingDate = session["BookingDate"]
         PrivateHireType = session["PrivateHireType"]
