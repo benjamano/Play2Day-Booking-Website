@@ -985,7 +985,7 @@ def weekdayplaysession():
         error = Result[1]
 
         if Success:
-            return redirect(url_for("confirmbooking"))
+            return redirect(url_for("extras"))    
 
         else:
             return render_template("error.html", error=error)
@@ -1013,7 +1013,7 @@ def weekendplaysession():
         error = Result[1]
         
         if Success:
-            return redirect(url_for("confirmbooking"))
+            return redirect(url_for("extras"))    
             
         else:
             return render_template("error.html", error=error)
@@ -1042,7 +1042,7 @@ def party():
         error = Result[1]
         
         if Success:
-            return redirect(url_for("confirmbooking"))
+            return redirect(url_for("extras"))
         
         else:
             return render_template("error.html", error=error)
