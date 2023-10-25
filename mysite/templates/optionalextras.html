@@ -19,20 +19,49 @@
             <h3>
                 {{BookingType}}, {{privatehiretype}}
             </h3>
-            
-            {% if BookingType == "Party" %}
-                <h3>
-                    Party Booking
-                </h3>
+            <div class="pair">
 
-            {% elif privatehiretype == "Laser Tag Private Hire" %}
+                <h5>
+                    New {{ PrivateHireType }}
+                    {% if PrivateHireType == '' %}
+                        {{ BookingType }}
+                    {% endif %}
+                    Booking
+                </h5>
+
                 <h3>
-                    Laser Tag Private Hire
+                    Select any optional extras
                 </h3>
-            
-            {% elif BookingType == "Weekday Play Session" or "Weekend Play Session" %}
-                <h3>
-                    Play Session
-                </h3>
-            {% endif %}
+                <form action="#" method="post">
+                    {% if BookingType == "Party" %}
+                    
+                    <p>
+                        <input type="checkbox" id="Extra" name="Extra" value="PartyBags">
+                        <label for="PartyBags">Extra Party Bags +£10</label><br>
+                        <input type="checkbox" id="Extra" name="Extra" value="LaserParty">
+                        <label for="PartyBags">Laser-Tag Party +£50</label><br>
+                        <input type="checkbox" id="Extra" name="Extra" value="PizzaParty">
+                        <label for="PartyBags">Pizza + Laser-Tag Party +£80</label><br>
+                    </p>
+
+                    {% elif privatehiretype == "Laser Tag Private Hire" %}
+
+                    <p>
+                        <input type="checkbox" id="Extra" name="Extra" value="Temp">
+                        <label for="Temp">Temp</label><br>
+                    </p>
+                    
+                    {% elif BookingType == "Weekday Play Session" or "Weekend Play Session" %}
+
+                        <h3>Play Session extras here</h3>
+
+                    {% endif %}
+
+                    </p>
+                        <input type="submit" name="Submit" value="Next"/>
+                    </p>
+                </form>
+            </div>
         </center>
+    </div>
+</body>
