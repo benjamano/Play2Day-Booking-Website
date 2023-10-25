@@ -18,13 +18,16 @@
     <h3>
         Party Booking
     </h3>
+{% endif %}
 
-{% else if BookingType == "Private Hire" and privatehiretype == "Laser Tag Private Hire" %}
+{% if BookingType == "Private Hire" and privatehiretype == "Laser Tag Private Hire" %}
     <h3>
         Laser Tag Private Hire
     </h3>
 
-{% else if BookingType == "Weekday Play Session" or "Weekend Play Session" %}
+{% endif %}
+
+{% if BookingType == "Weekday Play Session" or "Weekend Play Session" %}
     <h3>
         Play Session
     </h3>
