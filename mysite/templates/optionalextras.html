@@ -39,21 +39,28 @@
                         <input type="checkbox" id="Extra" name="Extra" value="PartyBags">
                         <label for="PartyBags">Extra Party Bags +£10</label><br>
                         <input type="checkbox" id="Extra" name="Extra" value="LaserParty">
-                        <label for="PartyBags">Laser-Tag Party +£50</label><br>
+                        <label for="LaserParty">Laser-Tag Party +£50</label><br>
                         <input type="checkbox" id="Extra" name="Extra" value="PizzaParty">
-                        <label for="PartyBags">Pizza + Laser-Tag Party +£80</label><br>
+                        <label for="PizzaParty">Pizza + Laser-Tag Party +£80</label>
                     </p>
 
                     {% elif privatehiretype == "Laser Tag Private Hire" %}
 
                     <p>
                         <input type="checkbox" id="Extra" name="Extra" value="Temp">
-                        <label for="Temp">Temp</label><br>
+                        <label for="Temp">Temp</label>
                     </p>
                     
                     {% elif BookingType == "Weekday Play Session" or "Weekend Play Session" %}
 
                         <h3>Play Session extras here</h3>
+                    
+                    {% elif privatehiretype != "" and privatehiretype != "Laser Tag Private Hire" %}
+
+                        <p>
+                            <input type="checkbox" id="Extra" name="Extra" value="Buffet">
+                            <label for="Buffet">All you can eat buffet</label>
+                        </p>
 
                     {% endif %}
 
