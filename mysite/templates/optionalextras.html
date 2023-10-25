@@ -13,26 +13,29 @@
     <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>    Log Out</a>
     <button onclick="ToggleDarkMode()">Toggle Dark Mode</button>
 </div>
-
-<h3>
-    {{BookingType}}, {{privatehiretype}}
-</h3>
-
-{% if BookingType == "Party" %}
-    <h3>
-        Party Booking
-    </h3>
-{% endif %}
-
-{% if BookingType == "" and privatehiretype == "Laser Tag Private Hire" %}
-    <h3>
-        Laser Tag Private Hire
-    </h3>
-
-{% endif %}
-
-{% if BookingType == "Weekday Play Session" or "Weekend Play Session" %}
-    <h3>
-        Play Session
-    </h3>
-{% endif %}
+<body>
+    <div class="content">
+        <center>
+            <h3>
+                {{BookingType}}, {{privatehiretype}}
+            </h3>
+            
+            {% if BookingType == "Party" %}
+                <h3>
+                    Party Booking
+                </h3>
+            {% endif %}
+            
+            {% if BookingType == "" and privatehiretype == "Laser Tag Private Hire" %}
+                <h3>
+                    Laser Tag Private Hire
+                </h3>
+            
+            {% endif %}
+            
+            {% if BookingType == "Weekday Play Session" or "Weekend Play Session" %}
+                <h3>
+                    Play Session
+                </h3>
+            {% endif %}
+        </center>
