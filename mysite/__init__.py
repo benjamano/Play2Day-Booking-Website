@@ -1075,7 +1075,7 @@ def privatehire():
         error = Result[1]
         
         if Success:
-            return redirect(url_for(optionalextras))        
+            return redirect(url_for(extras))        
         else:
             return render_template("error.html", error=error)
 
@@ -1083,7 +1083,7 @@ def privatehire():
         return render_template("privatehire.html")
 
 @app.route("/account/newbooking/optionalextras", methods=["POST","GET"])
-def optionalextras():
+def extras():
     
     if customerloggedin() == False:
         return redirect(url_for("index"))
