@@ -612,6 +612,7 @@ class Booking:
               
         try:
             
+            
             if BookingType != "Private Hire":
 
                 SessionID = session["SessionID"]
@@ -651,8 +652,26 @@ class Booking:
                 Price = 400.0
             
             else:
-
+                
                 return False, f"Something went wrong", None
+
+            if self.ExtraNotes == "Buffet":
+                
+                Price += 100.0
+            
+            if self.ExtraNotes == "PizzaParty":
+                
+                Price += 80.0
+                
+            if self.ExtraNotes == "LaserParty":
+                
+                Price += 50.0
+                
+            if self.ExtraNotes == "PartyBags":
+                
+                Price += 10.0
+                
+            #if self.ExtraNotes == "":
 
             session["Price"] = Price
             
@@ -721,14 +740,7 @@ class Booking:
             
             return False, f"Error while deleting booking: {error}"
 
-#class Session:
-    #def __init__(self, SessionType):
-        #self.SessionType = SessionType
-
-    #def get_session_details(self):
-        # Implement the logic to retrieve session details.
-
-#class manager:
+#class Manager:
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------ #
 @app.route('/')
@@ -1217,7 +1229,7 @@ def confirmbooking():
         SessionID = session["SessionID"]
         ExtraNotes = session["ExtraNotes"]
         
-        NewBooking = Booking(CustomerID=None, BookingID = None, SessionID=SessionID, BookingDate=None, BookingTime=None,NumberOfChildren=NumberOfChildren, NumberOfAdults=NumberOfAdults, BookingPrice=None, ExtraNotes=None)
+        NewBooking = Booking(CustomerID=None, BookingID = None, SessionID=SessionID, BookingDate=None, BookingTime=None,NumberOfChildren=NumberOfChildren, NumberOfAdults=NumberOfAdults, BookingPrice=None, ExtraNotes=ExtraNotes)
 
         Result = NewBooking.GetFinalPrice(BookingType=BookingType, PrivateHireType=PrivateHireType)
 
