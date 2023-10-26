@@ -1619,7 +1619,7 @@ def devtest():
     
     i = 0
     
-    SessionVars = ["CustomerID","Email","Phone","First","Last","FirstName","LastName","NumberChildren","NumberAdults","BookingPrice","ExtraNotes","SessionType","BookingTime","BookingDate","BookingID","ManagerID","ManagerUsername","PrivateHireType","numberadults","numberchildren","WeekdayBooking","PlaySession","PrivateHire","Party","PlaySessionType","Price","PartyType","","SessionID"]
+    SessionVars = ["CustomerID","Email","Phone","First","Last","FirstName","LastName","NumberChildren","NumberAdults","BookingPrice","ExtraNotes","SessionType","BookingTime","BookingDate","BookingID","ManagerID","ManagerUsername","PrivateHireType","numberadults","numberchildren","WeekdayBooking","PlaySession","PrivateHire","Party","PlaySessionType","Price","PartyType","SessionID"]
     SessionVarsFound = []
     
     # This is grabbing every session variable with the names stated in the "SessionVars" list, then showing it in the html template
