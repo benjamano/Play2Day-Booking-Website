@@ -1631,6 +1631,8 @@ def devtest():
         
         i + 1
     
+    app.logger.info(SessionVarsFound)
+    
     return render_template("devtest.html", SessionVarsFound=SessionVarsFound)
 
 
