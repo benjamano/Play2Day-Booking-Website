@@ -28,11 +28,15 @@
                     <form action="#" method="post">
                         <p>
                             {% if WeekdayBooking == True %}
-                                <input type="radio" id="bookingtype" name="bookingtype" value="Weekday Play Session">
-                                <label for="weekday">Weekday Session</label>
+                                <label>
+                                    <input type="radio" id="bookingtype" name="bookingtype" value="Weekday Play Session">
+                                    Weekday Session
+                                </label>
                             {% else %}
-                                <input type="radio" id="bookingtype" name="bookingtype" value="Weekend Play Session" required>
-                                <label for="weekendholiday">Weekend or Holiday Session</label>
+                                <label>
+                                    <input type="radio" id="bookingtype" name="bookingtype" value="Weekend Play Session" required>
+                                    Weekend or Holiday Session
+                                </label>
                             {% endif %}
                         </p>
                         <p>
@@ -42,17 +46,18 @@
                             </label>
                         </p>
                         <p>
-                            {% if PHBooked == "False" %}
+                            <Label>
+                                {% if PHBooked == "False" %}
 
                                 <input type="radio" id="bookingtype" name="bookingtype" value="Private Hire">
-                                <label for="Private Hire">Private Hire</label>
 
-                            {% else %}
+                                {% else %}
 
                                 <input type="radio" id="bookingtype" name="bookingtype" value="Private Hire" disabled title="This session is booked this day">
-                                <label for="Private Hire">Private Hire</label>
 
-                            {% endif %}
+                                {% endif %}
+                                Private Hire
+                            </Label>
                         </p>
                         <p>
                             <input type="submit" name="Submit" value="Next"/>
