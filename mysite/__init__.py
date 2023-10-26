@@ -1087,6 +1087,10 @@ def extras():
     BookingType = session["BookingType"]
     
     if request.method == "POST":
+        
+        ExtraNotes = request.form["Extra"]
+        
+        app.logger.info(f"ExtraNotes")
 
         return redirect(url_for("confirmbooking"))
     

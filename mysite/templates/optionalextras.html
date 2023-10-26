@@ -22,8 +22,8 @@
             <div class="pair">
 
                 <h5>
-                    New {{ PrivateHireType }}
-                    {% if PrivateHireType == '' %}
+                    New {{ privatehiretype }}
+                    {% if privatehiretype == '' %}
                         {{ BookingType }}
                     {% endif %}
                     Booking
@@ -59,8 +59,12 @@
 
                         <p>
                             <input type="checkbox" id="Extra" name="Extra" value="Buffet">
-                            <label for="Buffet">All you can eat buffet</label>
+                            <label for="Buffet">All you can eat buffet +£100</label>
                         </p>
+                    
+                    {% else %}
+
+                        <h4>Huh, something went wrong, no idea how you managed to get here, James</h4>
 
                     {% endif %}
 
