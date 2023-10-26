@@ -1620,6 +1620,23 @@ def mark_arrived():
 @app.route("/account/developer")
 def devtest():
     
+    i = 0
+    
+    SessionVars = ["CustomerID","SessionID"]
+    SessionVarsFound = []
+    
+    for i in range(len(SessionVars)):
+        
+        data = session(SessionVars[i])
+        
+        app.logger.info(data)
+        
+        SessionVarsFound[i] = data
+        
+        app.logger.info(SessionVarsFound)
+        
+        i += 1
+    
     return render_template("devtest.html")
 
 
