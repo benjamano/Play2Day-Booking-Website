@@ -1627,7 +1627,7 @@ def devtest():
     
     for i in range(len(SessionVars)):
         
-        data = session(SessionVars[i])
+        data = session[SessionVars[i]]
         
         app.logger.info(data)
         
