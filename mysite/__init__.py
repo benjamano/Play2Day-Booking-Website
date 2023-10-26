@@ -1637,7 +1637,7 @@ def devtest():
         
         i + 1
     
-    return render_template("devtest.html")
+    return render_template("devtest.html", SessionVarsFound=SessionVarsFound)
 
 
 if __name__ == '__main__':
