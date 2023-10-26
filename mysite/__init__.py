@@ -1117,7 +1117,7 @@ def managebooking():
         BookingDate = request.form["BookingDate"]
         BookingTime = request.form["BookingTime"]
         SessionType = request.form["SessionType"]
-        Extra = request.form["Extra"]
+        ExtraNotes = request.form["ExtraNotes"]
         BookingPrice = request.form["BookingPrice"]
         
         session["BookingPrice"] = BookingPrice
@@ -1125,11 +1125,11 @@ def managebooking():
         session["BookingDate"] = BookingDate
         session["BookingTime"] = BookingTime
         session["SessionType"] = SessionType
-        session["Extra"] = Extra
+        session["ExtraNotes"] = ExtraNotes
 
         app.logger.info(f"Session Type: {SessionType}")
 
-        return redirect('/account/managebooking/booking')
+        return redirect(url_for("booking"))
 
     else:
         
