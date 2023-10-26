@@ -1631,7 +1631,7 @@ def devtest():
         
         app.logger.info(data)
         
-        SessionVarsFound[i] = data
+        SessionVarsFound.append(data)
         
         app.logger.info(SessionVarsFound)
         
