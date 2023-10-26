@@ -610,53 +610,53 @@ class Booking:
     
     def GetFinalPrice(self, BookingType):
               
-        #try:
+        try:
             
-        if BookingType != "Private Hire":
+            if BookingType != "Private Hire":
 
-            SessionID = session["SessionID"]
-            
-            app.logger.info(SessionID)
-            getprices = "SELECT AdultPrice, ChildPrice FROM Session WHERE SessionID = (?)"
-            q.execute(getprices, [SessionID])
-            prices = q.fetchone()
+                SessionID = session["SessionID"]
+                
+                app.logger.info(SessionID)
+                getprices = "SELECT AdultPrice, ChildPrice FROM Session WHERE SessionID = (?)"
+                q.execute(getprices, [SessionID])
+                prices = q.fetchone()
 
-            adultprice = prices[0]
-            childprice = prices[1]
+                adultprice = prices[0]
+                childprice = prices[1]
 
-            NumberAdults = int(self.NumberOfAdults)
-            NumberChildren = int(self.NumberOfChildren)
-            adultprice = float(adultprice)
-            childprice = float(childprice)
+                NumberAdults = int(self.NumberOfAdults)
+                NumberChildren = int(self.NumberOfChildren)
+                adultprice = float(adultprice)
+                childprice = float(childprice)
 
-            adulttotal = adultprice * NumberAdults
-            childtotal = childprice * NumberChildren
+                adulttotal = adultprice * NumberAdults
+                childtotal = childprice * NumberChildren
 
-            Price = adulttotal + childtotal
+                Price = adulttotal + childtotal
+
+                session["Price"] = Price
+
+                app.logger.info(f"({adultprice} * {NumberAdults} = {adulttotal}) + ({childprice} * {NumberChildren} = {childtotal}) = {Price}")
+
+            else:
+
+                Price = 250.0
 
             session["Price"] = Price
+            
+            return True, None, Price            
 
-            app.logger.info(f"({adultprice} * {NumberAdults} = {adulttotal}) + ({childprice} * {NumberChildren} = {childtotal}) = {Price}")
-
-        else:
-
-            Price = 250.0
-
-        session["Price"] = Price
+        except Exception as error:
+            return False, f"Error while grabbing booking details: {error}", None
         
-        return True, None, Price            
-
-        #except Exception as error:
-           # return False, f"Error while grabbing booking details: {error}", None
-
     def CreateBooking(self):
         
         try:
 
-            app.logger.info(f"Making booking with details: CustomerID = {self.CustomerID}, SessionID =  {self.SessionID}, Booking Date = {self.BookingDate}, Booking Time = {self.BookingTime}, Price = {self.BookingPrice}")
+            app.logger.info(f"Making booking with details: CustomerID = {self.CustomerID}, SessionID =  {self.SessionID}, Booking Date = {self.BookingDate}, Booking Time = {self.BookingTime}, Price = {self.BookingPrice}, ExtraNotes = {self.ExtraNotes}")
 
             new = "INSERT INTO Booking(CustomerID, SessionID, Date, Time, NumberOfChildren, NumberOfAdults, Price, Arrived, ExtraNotes) VALUES (?,?,?,?,?,?,?,'False',?)"
-            details = (self.CustomerID, self.SessionID, self.BookingDate, self.BookingTime, self.NumberOfChildren, self.NumberOfAdults, self.BookingPrice, "None")
+            details = (self.CustomerID, self.SessionID, self.BookingDate, self.BookingTime, self.NumberOfChildren, self.NumberOfAdults, self.BookingPrice, self.ExtraNotes)
             q.execute(new, details)
             sql.commit()
 
@@ -913,6 +913,7 @@ def newbooking():
     session["numberchildren"] = ""
     session["PlaySession"] = False
     session["WeekdayBooking"] = False
+    session["ExtraNotes"] = ""
 
 
     if request.method == "POST":
@@ -1088,12 +1089,17 @@ def extras():
     
     if request.method == "POST":
         
-        ExtraNotes = request.form["Extra"]
-        
-        app.logger.info(f"ExtraNotes: {ExtraNotes}")
-
+        try:
+            
+            ExtraNotes = request.form["Extra"]
+            session["ExtraNotes"] = ExtraNotes
+            
+        except Exception as error:
+            
+            app.logger.info(f"Either no Extra Notes selected or an error happene: {error}")
+            
         return redirect(url_for("confirmbooking"))
-    
+
     else:
         return render_template("optionalextras.html", BookingType = BookingType, privatehiretype = PrivateHireType)
 
@@ -1141,7 +1147,7 @@ def managebooking():
         else:
             return render_template("error.html", error=error)
 
-@app.route('/account/managebooking/booking', methods=["POST", "GET"])
+@app.route("/account/managebooking/booking", methods=["POST", "GET"])
 def booking():
 
     if customerloggedin() == False:
@@ -1161,7 +1167,7 @@ def booking():
 
         return render_template("booking.html", BookingID = BookingID, BookingDate = BookingDate, BookingTime = BookingTime, Extra = Extra, SessionType = SessionType, BookingPrice = BookingPrice)
 
-@app.route('/account/managebooking/deletebooking', methods=["POST", "GET"])
+@app.route("/account/managebooking/deletebooking", methods=["POST", "GET"])
 def deletebooking():
 
     BookingID = session["BookingID"]
@@ -1179,7 +1185,7 @@ def deletebooking():
     else:
         return render_template("error.html", error=error)
 
-@app.route('/account/newbooking/confirmbooking', methods=["POST","GET"])
+@app.route("/account/newbooking/confirmbooking", methods=["POST","GET"])
 def confirmbooking():
 
     if customerloggedin() == False:
@@ -1197,6 +1203,7 @@ def confirmbooking():
         BookingDate = session["BookingDate"]
         PrivateHireType = session["PrivateHireType"]
         SessionID = session["SessionID"]
+        ExtraNotes = session["ExtraNotes"]
         
         NewBooking = Booking(CustomerID=None, BookingID = None, SessionID=SessionID, BookingDate=None, BookingTime=None,NumberOfChildren=NumberOfChildren, NumberOfAdults=NumberOfAdults, BookingPrice=None, ExtraNotes=None)
 
@@ -1207,12 +1214,12 @@ def confirmbooking():
         Price = Result[2]
         
         if Success:
-            return render_template("confirmbooking.html", BookingType = BookingType, BookingTime = BookingTime, BookingDate = BookingDate, PrivateHireType = PrivateHireType, NumberAdults = NumberOfAdults, NumberChildren = NumberOfChildren, Price = Price)
+            return render_template("confirmbooking.html", BookingType = BookingType, BookingTime = BookingTime, BookingDate = BookingDate, PrivateHireType = PrivateHireType, NumberAdults = NumberOfAdults, NumberChildren = NumberOfChildren, Price = Price, ExtraNotes = ExtraNotes)
         
         else:
             return render_template("error.html", error=error)
 
-@app.route('/account/newbooking/createbooking')
+@app.route("/account/newbooking/createbooking")
 def createbooking():
 
     if customerloggedin() == False:
@@ -1225,8 +1232,9 @@ def createbooking():
     NumberOfAdults = session["numberadults"]
     NumberOfChildren = session["numberchildren"]
     Price = session["Price"]
+    ExtraNotes = session["ExtraNotes"]
 
-    NewBooking = Booking(CustomerID=CustomerID, BookingID=None, SessionID=SessionID, BookingDate=BookingDate, BookingTime=BookingTime,NumberOfChildren=NumberOfChildren, NumberOfAdults=NumberOfAdults, BookingPrice=Price, ExtraNotes=None)
+    NewBooking = Booking(CustomerID=CustomerID, BookingID=None, SessionID=SessionID, BookingDate=BookingDate, BookingTime=BookingTime,NumberOfChildren=NumberOfChildren, NumberOfAdults=NumberOfAdults, BookingPrice=Price, ExtraNotes=ExtraNotes)
 
     Result = NewBooking.CreateBooking()
 
