@@ -1627,7 +1627,13 @@ def devtest():
         
         data = session[SessionVars[i]]
         
-        SessionVarsFound.append(data)
+        if data == "":
+            
+            SessionVarsFound.append("Null")
+        
+        else:
+            
+            SessionVarsFound.append(data)
         
         i + 1
     
