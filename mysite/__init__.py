@@ -1090,7 +1090,7 @@ def extras():
         
         ExtraNotes = request.form["Extra"]
         
-        app.logger.info(f"ExtraNotes")
+        app.logger.info(f"ExtraNotes: {ExtraNotes}")
 
         return redirect(url_for("confirmbooking"))
     
