@@ -1629,11 +1629,11 @@ def devtest():
         
         if data == "":
             
-            SessionVarsFound.append("Null")
+            SessionVarsFound.append(f"{SessionVars[i]} : Null")
         
         else:
             
-            SessionVarsFound.append(data)
+            SessionVarsFound.append(f"{SessionVars[i]} : {data}")
         
         i + 1
     
