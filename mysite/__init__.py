@@ -608,7 +608,7 @@ class Booking:
         except Exception as error:
             return False, f"Error while making private hire booking: {error}"
     
-    def GetFinalPrice(self, BookingType):
+    def GetFinalPrice(self, BookingType, PrivateHireType):
               
         try:
             
@@ -638,9 +638,21 @@ class Booking:
 
                 app.logger.info(f"({adultprice} * {NumberAdults} = {adulttotal}) + ({childprice} * {NumberChildren} = {childtotal}) = {Price}")
 
+            elif PrivateHireType == "Adventure Play Private Hire":
+                
+                Price = 300.0
+                
+            elif PrivateHireType == "Laser Tag Private Hire":
+                
+                Price = 200.0
+                
+            elif PrivateHireType == "Laser Tag + Adventure Play Private Hire":
+                
+                Price = 400.0
+            
             else:
 
-                Price = 250.0
+                return False, f"Something went wrong", None
 
             session["Price"] = Price
             
@@ -1207,7 +1219,7 @@ def confirmbooking():
         
         NewBooking = Booking(CustomerID=None, BookingID = None, SessionID=SessionID, BookingDate=None, BookingTime=None,NumberOfChildren=NumberOfChildren, NumberOfAdults=NumberOfAdults, BookingPrice=None, ExtraNotes=None)
 
-        Result = NewBooking.GetFinalPrice(BookingType=BookingType)
+        Result = NewBooking.GetFinalPrice(BookingType=BookingType, PrivateHireType=PrivateHireType)
 
         Success = Result[0]
         error = Result[1]
@@ -1384,7 +1396,7 @@ def managereditbooking():
             BookingDate = request.form["BookingDate"]
             BookingTime = request.form["BookingTime"]
             SessionType = request.form["SessionType"]
-            Extra = request.form["Extra"]
+            ExtraNotes = request.form["ExtraNotes"]
             BookingPrice = request.form["BookingPrice"]
             NumberAdults = request.form["NumberAdults"]
             NumberChildren = request.form["NumberChildren"]
@@ -1398,7 +1410,7 @@ def managereditbooking():
             session["SessionType"] = SessionType
             session["NumberAdults"] = NumberAdults
             session["NumberChildren"] = NumberChildren
-            session["Extra"] = Extra
+            session["ExtraNotes"] = ExtraNotes
             session["FirstName"] = FirstName
             session["LastName"] = LastName
 
@@ -1423,7 +1435,7 @@ def managerbooking():
     BookingDate = session["BookingDate"]
     BookingTime = session["BookingTime"]
     SessionType = session["SessionType"]
-    Extra = session["Extra"]
+    ExtraNotes = session["ExtraNotes"]
     BookingPrice = session["BookingPrice"]
     NumberAdults = session["NumberAdults"]
     NumberChildren = session["NumberChildren"]
@@ -1448,7 +1460,7 @@ def managerbooking():
 
     else:
 
-        return render_template("manager/booking.html", BookingID = BookingID, BookingDate = BookingDate, BookingTime = BookingTime, Extra = Extra, SessionType = SessionType, BookingPrice = BookingPrice, NumberAdults = NumberAdults, NumberChildren = NumberChildren, FirstName = FirstName, LastName = LastName)
+        return render_template("manager/booking.html", BookingID = BookingID, BookingDate = BookingDate, BookingTime = BookingTime, Extra = ExtraNotes, SessionType = SessionType, BookingPrice = BookingPrice, NumberAdults = NumberAdults, NumberChildren = NumberChildren, FirstName = FirstName, LastName = LastName)
 
 @app.route('/manager/editcustomer', methods=["POST","GET"])
 def managereditcustomer():
