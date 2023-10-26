@@ -635,8 +635,6 @@ class Booking:
 
                 Price = adulttotal + childtotal
 
-                session["Price"] = Price
-
                 app.logger.info(f"({adultprice} * {NumberAdults} = {adulttotal}) + ({childprice} * {NumberChildren} = {childtotal}) = {Price}")
 
             elif PrivateHireType == "Adventure Play Private Hire":
@@ -935,7 +933,6 @@ def newbooking():
     session["BookingTime"] = ""
     session["numberadults"] = ""
     session["numberchildren"] = ""
-    session["PlaySession"] = False
     session["WeekdayBooking"] = False
     session["ExtraNotes"] = ""
 
@@ -1622,18 +1619,15 @@ def devtest():
     
     i = 0
     
-    SessionVars = ["CustomerID","SessionID"]
+    SessionVars = ["CustomerID","Email","Phone","First","Last","FirstName","LastName","NumberChildren","NumberAdults","BookingPrice","ExtraNotes","SessionType","BookingTime","BookingDate","BookingID","ManagerID","ManagerUsername","PrivateHireType","numberadults","numberchildren","WeekdayBooking","PlaySession","PrivateHire","Party","PlaySessionType","Price","PartyType","","SessionID"]
     SessionVarsFound = []
     
+    # This is grabbing every session variable with the names stated in the "SessionVars" list, then showing it in the html template
     for i in range(len(SessionVars)):
         
         data = session[SessionVars[i]]
         
-        app.logger.info(data)
-        
         SessionVarsFound.append(data)
-        
-        app.logger.info(SessionVarsFound)
         
         i + 1
     
