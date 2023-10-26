@@ -572,8 +572,6 @@ class Booking:
             return False, f"Error while making party booking: {error}"
     
     def PrivateHire(self, PrivateHireType):
-        
-        BookingDate = session["BookingDate"]
 
         session["numberadults"] = self.NumberOfAdults
         session["numberchildren"] = self.NumberOfChildren
@@ -590,8 +588,8 @@ class Booking:
             session["SessionID"] = SessionID
 
             checkexists = "SELECT count(*) FROM Booking WHERE SessionID IN (7, 8, 9) AND Date = (?)"
-            app.logger.info(f"Looking for private hire booking with and Booking date = {BookingDate}")
-            q.execute(checkexists, [BookingDate])
+            app.logger.info(f"Looking for private hire booking with and Booking date = {self.BookingDate}")
+            q.execute(checkexists, [self.BookingDate])
             exists=q.fetchone()[0]
 
             if exists == 0:
@@ -964,12 +962,13 @@ def sessiontype():
         return redirect(url_for("index"))
 
     WeekdayBooking = session["WeekdayBooking"]
-
+    BookingDate = session["BookingDate"]
+    
     # This checks the option grabbed from the html template and redirects the user accordingly.
     if request.method == "POST":
         option = request.form["bookingtype"]
 
-        NewBooking = Booking(CustomerID=None, BookingID=None, SessionID=None, BookingDate=None, BookingTime=None, NumberOfChildren=None, NumberOfAdults=None, BookingPrice=None, ExtraNotes=None)
+        NewBooking = Booking(CustomerID=None, BookingID=None, SessionID=None, BookingDate=BookingDate, BookingTime=None, NumberOfChildren=None, NumberOfAdults=None, BookingPrice=None, ExtraNotes=None)
 
         Result = NewBooking.SelectSessionType(option)
 
@@ -985,7 +984,20 @@ def sessiontype():
 
     # The variable "WeekdayBooking" is a boolean which tells the booking page if the booking is being made on the weekday or weekend
     else:
-        return render_template("newbooking.html", WeekdayBooking = WeekdayBooking)
+        
+        checkexists = "SELECT count(*) FROM Booking WHERE SessionID IN (7, 8, 9) AND Date = (?)"
+        app.logger.info(f"Looking for private hire booking with and Booking date = {BookingDate}")
+        q.execute(checkexists, [BookingDate])
+        exists=q.fetchone()[0]
+
+        if exists == 0:
+
+            PHBooked = False
+
+        else:
+            PHBooked = True
+        
+        return render_template("newbooking.html", WeekdayBooking = WeekdayBooking, PHBooked = PHBooked)
 
 @app.route('/account/newbooking/playsession/weekday',  methods=["POST","GET"])
 def weekdayplaysession():
