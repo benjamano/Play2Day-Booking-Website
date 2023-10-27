@@ -1129,7 +1129,7 @@ def extras():
             
         except Exception as error:
             
-            app.logger.info(f"Either no Extra Notes selected or an error happene: {error}")
+            app.logger.info(f"Either no Extra Notes selected or an error happened: {error}")
             
         return redirect(url_for("confirmbooking"))
 
