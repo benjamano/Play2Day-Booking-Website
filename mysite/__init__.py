@@ -1127,6 +1127,7 @@ def extras():
             ExtraNotes = request.form["Extra"]
             session["ExtraNotes"] = ExtraNotes
             
+            app.logger.info(f"Extras: {ExtraNotes}")
         except Exception as error:
             
             app.logger.info(f"Either no Extra Notes selected or an error happened: {error}")
