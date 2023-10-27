@@ -261,7 +261,8 @@ h14{
 
 .dark-mode h2 {
     color: white;
-    background-color: #333;
+    background-color: #a8a7a756;
+    border-color: grey;
 }
 
 .dark-mode h3 {
