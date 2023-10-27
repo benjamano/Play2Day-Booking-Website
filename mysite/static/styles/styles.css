@@ -255,17 +255,17 @@ h14{
 
 /* Dark mode styles for the text */
 .dark-mode h1 {
-    color: white;
+    color: grey;
 }
 
 
 .dark-mode h2 {
-    color: white;
+    color: grey;
     background-color: #333;
 }
 
 .dark-mode h3 {
-    color: white;
+    color: grey;
 }
 
 .dark-mode h4{
@@ -278,7 +278,7 @@ h14{
 }
 
 .dark-mode h6{
-    color: white
+    color: grey;
 
 }
 
@@ -295,26 +295,26 @@ h14{
 }
 
 .dark-mode h9{
-    color:white;
+    color:grey;
 }
 
 .dark-mode h10 {
-    color: white;
+    color: grey;
     background-color: #333;
 }
 
 .dark-mode h11 {
-    color: white;
+    color: grey;
 }
 
 .dark-mode h12 {
-    color: white;
+    color: grey;
 }
 .dark-mode h13{
-    color:white;
+    color:grey;
 }
 .dark-mode h14{
-    color: white;
+    color: grey;
 }
 
 label{
@@ -479,6 +479,25 @@ ul li{
     background-color: #52AA5E;
     cursor: pointer;
 }
+
+.nextbutton {
+    background-color: #bc1e2e7c;
+    border: none;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    cursor: pointer;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 30;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.nextbutton :hover {
+
+    background-color: #bc1e2ed8;
+
+}
 .arrived{
     height: 30px;
     width: 80%;
@@ -502,6 +521,7 @@ ul li{
     background-color: #E84A5A;
     color: white;
 }
+
 input[type=submit] {
     background-color: #bc1e2d;
     border: none;
@@ -509,7 +529,7 @@ input[type=submit] {
     text-decoration: bold;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     cursor: pointer;
-    padding: 5px 10px;
+    padding: 20px;
     border-radius: 10px;
     font-size: 30;
     margin-top: 30px;
