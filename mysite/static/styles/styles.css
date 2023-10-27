@@ -486,7 +486,8 @@ ul li{
     color: white;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     cursor: pointer;
-    padding: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     border-radius: 10px;
     font-size: 30;
     margin-top: 30px;
