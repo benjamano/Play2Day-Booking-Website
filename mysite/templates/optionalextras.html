@@ -16,9 +16,7 @@
 <body>
     <div class="content">
         <center>
-            <h3>
-                {{BookingType}}, {{privatehiretype}}
-            </h3>
+            <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
             <div class="pair">
 
                 <h5>
@@ -36,18 +34,24 @@
                     {% if BookingType == "Party" %}
                     
                     <p>
-                        <label>
-                            <input type="checkbox" id="Extra" name="Extra" value="PartyBags">
-                            Extra Party Bags +£10
-                        </label>
-                        <label>
-                            <input type="checkbox" id="Extra" name="Extra" value="LaserParty">
-                            Laser-Tag Party +£50
-                        </label>
-                        <label>
-                            <input type="checkbox" id="Extra" name="Extra" value="PizzaParty">
-                            Pizza + Laser Tag Party +£80
-                        </label>
+                        <p>
+                            <label>
+                                <input type="checkbox" id="Extra" name="Extra" value="PartyBags">
+                                Extra Party Bags +£10
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" id="Extra" name="Extra" value="LaserParty">
+                                Laser-Tag Party +£50
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" id="Extra" name="Extra" value="PizzaParty">
+                                Pizza Party +£50
+                            </label>
+                        </p>
                     </p>
 
                     {% elif privatehiretype == "Laser Tag Private Hire" %}
