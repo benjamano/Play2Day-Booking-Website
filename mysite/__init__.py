@@ -1124,7 +1124,7 @@ def extras():
         
         try:
             
-            ExtraNotes = request.form["Extra"]
+            ExtraNotes = request.form.getlist("Extra")
             session["ExtraNotes"] = ExtraNotes
             
             app.logger.info(f"Extras: {ExtraNotes}")
