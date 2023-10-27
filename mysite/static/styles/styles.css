@@ -324,6 +324,11 @@ ul li{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+progress {
+    width: 0;
+    min-width: 100%;
+  }
+
 .buttonmanagerlogin {
     height: 80px;
     width: 160px;
