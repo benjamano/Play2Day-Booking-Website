@@ -36,19 +36,27 @@
                     {% if BookingType == "Party" %}
                     
                     <p>
-                        <input type="checkbox" id="Extra" name="Extra" value="PartyBags">
-                        <label for="Extra">Extra Party Bags +£10</label><br>
-                        <input type="checkbox" id="Extra" name="Extra" value="LaserParty">
-                        <label for="Extra">Laser-Tag Party +£50</label><br>
-                        <input type="checkbox" id="Extra" name="Extra" value="PizzaParty">
-                        <label for="Extra">Pizza + Laser-Tag Party +£80</label>
+                        <label>
+                            <input type="checkbox" id="Extra" name="Extra" value="PartyBags">
+                            Extra Party Bags +£10
+                        </label>
+                        <label>
+                            <input type="checkbox" id="Extra" name="Extra" value="LaserParty">
+                            Laser-Tag Party +£50
+                        </label>
+                        <label>
+                            <input type="checkbox" id="Extra" name="Extra" value="PizzaParty">
+                            Pizza + Laser Tag Party +£80
+                        </label>
                     </p>
 
                     {% elif privatehiretype == "Laser Tag Private Hire" %}
 
                     <p>
-                        <input type="checkbox" id="Extra" name="Extra" value="Temp">
-                        <label for="Temp">Temp</label>
+                        <label>
+                            <input type="checkbox" id="Extra" name="Extra" value="Temp">
+                            Temp
+                        </label>
                     </p>
                     
                     {% elif BookingType == "Weekday Play Session" or BookingType == "Weekend Play Session" %}
@@ -58,8 +66,10 @@
                     {% elif privatehiretype != "" and privatehiretype != "Laser Tag Private Hire" %}
 
                         <p>
-                            <input type="checkbox" id="Extra" name="Extra" value="Buffet">
-                            <label for="Extra">All you can eat buffet +£100</label>
+                            <label>
+                                <input type="checkbox" id="Extra" name="Extra" value="Buffet">
+                                All you can eat buffet +£100
+                            </label>
                         </p>
                     
                     {% else %}
