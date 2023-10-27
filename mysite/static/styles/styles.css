@@ -255,17 +255,17 @@ h14{
 
 /* Dark mode styles for the text */
 .dark-mode h1 {
-    color: grey;
+    color: white;
 }
 
 
 .dark-mode h2 {
-    color: grey;
+    color: white;
     background-color: #333;
 }
 
 .dark-mode h3 {
-    color: grey;
+    color: white;
 }
 
 .dark-mode h4{
@@ -278,7 +278,7 @@ h14{
 }
 
 .dark-mode h6{
-    color: grey;
+    color: white
 
 }
 
@@ -295,26 +295,26 @@ h14{
 }
 
 .dark-mode h9{
-    color:grey;
+    color:white;
 }
 
 .dark-mode h10 {
-    color: grey;
+    color: white;
     background-color: #333;
 }
 
 .dark-mode h11 {
-    color: grey;
+    color: white;
 }
 
 .dark-mode h12 {
-    color: grey;
+    color: white;
 }
 .dark-mode h13{
-    color:grey;
+    color:white;
 }
 .dark-mode h14{
-    color: grey;
+    color: white;
 }
 
 label{
@@ -339,7 +339,6 @@ ul li{
     background-color: #087E8B;
     cursor: pointer;
 }
-
 
 .buttonsignup {
     height: 80px;
@@ -499,6 +498,7 @@ ul li{
     background-color: #bc1e2ed8;
 
 }
+
 .arrived{
     height: 30px;
     width: 80%;
@@ -522,7 +522,6 @@ ul li{
     background-color: #E84A5A;
     color: white;
 }
-
 input[type=submit] {
     background-color: #bc1e2d;
     border: none;
@@ -530,7 +529,7 @@ input[type=submit] {
     text-decoration: bold;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     cursor: pointer;
-    padding: 20px;
+    padding: 5px 10px;
     border-radius: 10px;
     font-size: 30;
     margin-top: 30px;

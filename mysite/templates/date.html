@@ -3,6 +3,12 @@
     <title>Select the Date</title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
     <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/9d35a24d36.js" crossorigin="anonymous"></script>
 </head>
 <div class="sidebar">
     <a href="/account"><i class="fa-solid fa-house"></i>    Home</a>
@@ -31,6 +37,11 @@
                         <input type="submit" name="Submit" value="Next"/>
                     </p>
                 </form>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%">
+                      40%
+                    </div>
+                </div>
             </body>
         </div>
     </div>
