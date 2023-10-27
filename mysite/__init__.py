@@ -1198,7 +1198,7 @@ def booking():
     
     else:
 
-        return render_template("booking.html", BookingID = BookingID, BookingDate = BookingDate, BookingTime = BookingTime, Extra = ExtraNotes, SessionType = SessionType, BookingPrice = BookingPrice)
+        return render_template("booking.html", BookingID = BookingID, BookingDate = BookingDate, BookingTime = BookingTime, ExtraNotes = ExtraNotes, SessionType = SessionType, BookingPrice = BookingPrice)
 
 @app.route("/account/managebooking/deletebooking", methods=["POST", "GET"])
 def deletebooking():
