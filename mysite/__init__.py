@@ -1190,7 +1190,7 @@ def booking():
     BookingDate = session["BookingDate"]
     BookingTime = session["BookingTime"]
     SessionType = session["SessionType"]
-    Extra = session["Extra"]
+    ExtraNotes = session["ExtraNotes"]
     BookingPrice = session["BookingPrice"]
 
     if request.method == "POST":
@@ -1198,7 +1198,7 @@ def booking():
     
     else:
 
-        return render_template("booking.html", BookingID = BookingID, BookingDate = BookingDate, BookingTime = BookingTime, Extra = Extra, SessionType = SessionType, BookingPrice = BookingPrice)
+        return render_template("booking.html", BookingID = BookingID, BookingDate = BookingDate, BookingTime = BookingTime, Extra = ExtraNotes, SessionType = SessionType, BookingPrice = BookingPrice)
 
 @app.route("/account/managebooking/deletebooking", methods=["POST", "GET"])
 def deletebooking():
