@@ -1,6 +1,4 @@
-import sqlite3
-
-import bcrypt
+import sqlite3, datetime, bcrypt
 
 from flask import Flask, render_template, redirect, request, url_for, session
 
