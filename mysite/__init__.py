@@ -711,8 +711,10 @@ class Booking:
         
         try:
 
+            Date = datetime.date.today()
+            
             getactivebookings = "SELECT Booking.BookingID, Booking.Date, Booking.Time, Session.SessionType, Booking.ExtraNotes, Booking.Price FROM Booking INNER JOIN Session ON Booking.SessionID = Session.SessionID WHERE Booking.CustomerID = ? AND Booking.Date >= ? ORDER BY Booking.Date ASC;"
-            q.execute(getactivebookings, [self.CustomerID, datetime.date])
+            q.execute(getactivebookings, [self.CustomerID, Date])
             activebookings = q.fetchall()
 
             return True, None, activebookings           
