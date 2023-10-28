@@ -604,6 +604,11 @@ input[type=tel]{
     background-color: #cccccc;
     margin-top: 20px;
 }
+input[type=checkbox] { 
+    vertical-align: middle; 
+    position: relative; 
+    bottom: 1px; 
+} 
 .pair{
     text-align: center;
     border: none;
