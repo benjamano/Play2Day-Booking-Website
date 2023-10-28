@@ -60,6 +60,7 @@
     color: black;
     padding: 16px;
     text-decoration: none;
+    font-weight: normal;
 }
 
 .sidebar a.active {
@@ -189,7 +190,7 @@ h6{
     margin-bottom: 20px !important;
 }
 h7{
-    color:#bc1e2d;
+    color:#bc1e2e;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 30;
     background-color: #ffaa34 !important;
@@ -270,7 +271,7 @@ h14{
 }
 
 .dark-mode h4{
-    color:rgba(122, 0, 0, 0.61);
+    color:rgb(160, 0, 0);
 }
 
 .dark-mode h5{
