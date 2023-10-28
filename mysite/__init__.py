@@ -1,4 +1,4 @@
-import sqlite3, datetime, bcrypt
+import sqlite3, bcrypt
 
 from flask import Flask, render_template, redirect, request, url_for, session
 
@@ -709,7 +709,7 @@ class Booking:
         
         try:
 
-            Date = datetime.date.today()
+            Date = date.today()
             
             getactivebookings = "SELECT Booking.BookingID, Booking.Date, Booking.Time, Session.SessionType, Booking.ExtraNotes, Booking.Price FROM Booking INNER JOIN Session ON Booking.SessionID = Session.SessionID WHERE Booking.CustomerID = ? AND Booking.Date >= ? ORDER BY Booking.Date ASC;"
             q.execute(getactivebookings, [self.CustomerID, Date])
