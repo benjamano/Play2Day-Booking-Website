@@ -87,6 +87,7 @@
     var tableElements = document.querySelectorAll("table, th, td");
     var fontsToStyle = document.querySelectorAll(".dark-font");
     var pairElement = document.querySelector(".pair");
+    var numberpairElement = document.querySelector(".numberpair");
 
     bodyElement.classList.toggle("dark-mode");
     sidebar.classList.toggle("dark-mode");
@@ -100,6 +101,8 @@
     }
 
     pairElement.classList.toggle("dark-mode");
+
+    numberpairElement.classList.toggle("dark-mode");
   }
 </script>
   
@@ -121,6 +124,9 @@ function applyInitialDarkMode() {
 
         var pairElement = document.querySelector(".pair");
         pairElement.classList.add("dark-mode");
+
+        var numberpairElement = document.querySelector(".pair");
+        numberpairElement.classList.add("dark-mode");
 
         
         var tableElements = document.querySelectorAll("table, th, td");
