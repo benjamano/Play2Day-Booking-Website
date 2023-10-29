@@ -292,7 +292,7 @@ class Customer:
             
             Date = date.today()
             
-            activebookings = "SELECT Booking.Date, Booking.Time, FROM Booking WHERE Booking.Date >= (?) AND Booking.Arrived = 'False' AND Booking.CustomerID = (?) ORDER BY Booking.Date ASC"
+            activebookings = "SELECT Booking.Date, Booking.Time FROM Booking WHERE Booking.Date >= (?) AND Booking.Arrived = 'False' AND Booking.CustomerID = (?) ORDER BY Booking.Date ASC"
 
             q.execute(activebookings, [Date, CustomerID])
             
