@@ -23,37 +23,37 @@
                   <h6>
                       Welcome, {{First}}
                   </h6>
-                  <div class="numberpair">
-                    <h11>
-                      {{NearestBookingDate}}, {{NearestBookingTime}}
-                    </h11>
-                    <p>
-                      <h9>
-                        <br>Your next booking<br>with us
-                      </h9>
-                    </p>
+                  <div class="numberpair-slideshow">
+                    <div class="numberpair">
+                      <h11 style="font-size: 40">
+                        {{NearestBookingDate}}<br>{{NearestBookingTime}}
+                      </h11>
+                      <p>
+                        <h9>
+                          Your next booking with us
+                        </h9>
+                      </p>
+                    </div>
+                    <div class="slideshow-container">
+                      <div class="mySlides fade">
+                        <img src="{{ url_for('static',filename='/images/privatehiresslide.png') }}" style="max-width:60%; border: 5px solid #000000;">
+                      </div>
+    
+                      <div class="mySlides fade">
+                        <img src="{{ url_for('static',filename='/images/partybookingsslide.png') }}" style="max-width:60%; border: 5px solid #000000;">
+                      </div>
+    
+                      <div class="mySlides fade">
+                        <img src="{{ url_for('static',filename='/images/NewFriday8th.png') }}" style="max-width:50%; border: 5px solid #000000;">
+                      </div>
+                    </div>
+                    <div style="text-align:center">
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                    </div>
                   </div>
               </body>
-              <br>
-              <br>
-              <div class="slideshow-container">
-                  <div class="mySlides fade">
-                    <img src="{{ url_for('static',filename='/images/privatehiresslide.png') }}" style="max-width:60%; border: 5px solid #000000;">
-                  </div>
-
-                  <div class="mySlides fade">
-                    <img src="{{ url_for('static',filename='/images/partybookingsslide.png') }}" style="max-width:60%; border: 5px solid #000000;">
-                  </div>
-
-                  <div class="mySlides fade">
-                    <img src="{{ url_for('static',filename='/images/NewFriday8th.png') }}" style="max-width:50%; border: 5px solid #000000;">
-                  </div>
-              </div>
-              <div style="text-align:center">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-              </div>
           </center>
       </div>
   </body>

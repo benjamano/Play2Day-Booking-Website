@@ -621,7 +621,7 @@ input[type=checkbox] {
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
 }
 .numberpair{
-    padding-top: 60px;
+    padding-top: 32px;
     border: solid;
     border-color: #818589;
     width: 250px;
@@ -635,6 +635,13 @@ input[type=checkbox] {
     text-align: center;
     display: inline-block;
 }
+
+.numberpair-slideshow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
 
 .dark-mode .numberpair{
     background-color: #333333;
