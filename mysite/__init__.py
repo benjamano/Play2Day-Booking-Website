@@ -298,9 +298,10 @@ class Customer:
             
             bookings = q.fetchone()
             
-            NearestBooking = bookings[0]
+            NearestBookingDate = bookings[0]
+            NearestBookingTime = bookings[1]
 
-            return True, None, FirstName, NearestBooking
+            return True, None, FirstName, NearestBookingDate, NearestBookingTime
             
         except Exception as error:
             return False, f"Error while grabbing user's details or the upcoming bookings: {error}", None, None
@@ -919,10 +920,11 @@ def account():
     Success = Result[0]
     error = Result[1]
     First = Result[2]
-    NearestBooking = Result[3]
+    NearestBookingDate = Result[3]
+    NearestBookingTime = Result[4]
 
     if Success:
-        return render_template("account.html", First=First, NearestBooking=NearestBooking)
+        return render_template("account.html", First=First, NearestBookingDate=NearestBookingDate, NearestBookingTime=NearestBookingTime)
 
     else:
         return render_template("error.html", error=error)
