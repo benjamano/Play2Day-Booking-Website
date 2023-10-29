@@ -636,6 +636,11 @@ input[type=checkbox] {
     display: inline-block;
 }
 
+.dark-mode .numberpair{
+    background-color: #333333;
+
+}
+
 .dark-mode .pair {
     background-color: #333333;
 }
