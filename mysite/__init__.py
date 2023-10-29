@@ -289,10 +289,21 @@ class Customer:
             CustomerID = session["CustomerID"]
 
             FirstName = findcustomerdetails(Email="", CustomerID = CustomerID)[1]
+            
+            Date = date.today()
+            
+            activebookings = "SELECT Booking.Date, Booking.Time, FROM Booking WHERE Booking.Date >= (?) AND Booking.Arrived = 'False' AND Booking.CustomerID = (?) ORDER BY Booking.Date ASC"
 
-            return True, None, FirstName
+            q.execute(activebookings, [Date, CustomerID])
+            
+            bookings = q.fetchall()
+            
+            NearestBooking = bookings[0]
+
+            return True, None, FirstName, NearestBooking
+            
         except Exception as error:
-            return False, f"Error while grabbing user's first name: {error}"
+            return False, f"Error while grabbing user's details or the upcoming bookings: {error}", None, None
 
     def EditDetails(self, NewFirst, NewLast, NewPhone, Edit, Email=None, Password=None, FirstName=None, LastName=None, PhoneNumber=None):
 
@@ -908,9 +919,10 @@ def account():
     Success = Result[0]
     error = Result[1]
     First = Result[2]
+    NearestBooking = Result[3]
 
     if Success:
-        return render_template("account.html", First=First)
+        return render_template("account.html", First=First, NearestBooking=NearestBooking)
 
     else:
         return render_template("error.html", error=error)
