@@ -296,7 +296,7 @@ class Customer:
 
             q.execute(activebookings, [Date, CustomerID])
             
-            bookings = q.fetchall()
+            bookings = q.fetchone()
             
             NearestBooking = bookings[0]
 
