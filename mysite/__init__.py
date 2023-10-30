@@ -307,7 +307,7 @@ class Customer:
             except Exception as error:
                 app.logger.info(f"Either no bookings were found, or an error orrcured: {error}")
                 
-                return True, None, FirstName, None, None
+                return True, None, FirstName, "None", "None"
             
         except Exception as error:
             return False, f"Error while grabbing user's details or the upcoming bookings: {error}", None, None, None
@@ -932,9 +932,6 @@ def account():
     First = Result[2]
     NearestBookingDate = Result[3]
     NearestBookingTime = Result[4]
-    
-    app.logger.info(f"Booking details: {NearestBookingDate}, {NearestBookingTime}")
-    app.logger.info(f"{type(NearestBookingDate)}, {type(NearestBookingTime)}")
 
     if Success:
         return render_template("account.html", First=First, NearestBookingDate=NearestBookingDate, NearestBookingTime=NearestBookingTime)
