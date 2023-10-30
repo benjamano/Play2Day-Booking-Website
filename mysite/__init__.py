@@ -1,6 +1,4 @@
-import sqlite3
-
-import bcrypt
+import sqlite3, bcrypt
 
 from flask import Flask, render_template, redirect, request, url_for, session
 
@@ -288,13 +286,31 @@ class Customer:
     def account(self, Email=None, Password=None, FirstName=None, LastName=None, PhoneNumber=None):
         try:
 
-            CustomerID = session["CustomerID"]
+            Email = session["Email"]
 
-            FirstName = findcustomerdetails(Email="", CustomerID = CustomerID)[1]
-
-            return True, None, FirstName
+            details = findcustomerdetails(Email=Email, CustomerID = "")
+            
+            CustomerID = details[0]
+            FirstName = details[1]
+            
+            Date = date.today()
+            
+            activebookings = "SELECT Booking.Date, Booking.Time FROM Booking WHERE Booking.Date >= (?) AND Booking.Arrived = 'False' AND Booking.CustomerID = (?) ORDER BY Booking.Date ASC"
+            try:
+                q.execute(activebookings, [Date, CustomerID])
+                bookings = q.fetchone()
+                NearestBookingDate = bookings[0]
+                NearestBookingTime = bookings[1]
+                
+                return True, None, FirstName, NearestBookingDate, NearestBookingTime
+            
+            except Exception as error:
+                app.logger.info(f"Either no bookings were found, or an error orrcured: {error}")
+                
+                return True, None, FirstName, "None", "None"
+            
         except Exception as error:
-            return False, f"Error while grabbing user's first name: {error}"
+            return False, f"Error while grabbing user's details or the upcoming bookings: {error}", None, None, None
 
     def EditDetails(self, NewFirst, NewLast, NewPhone, Edit, Email=None, Password=None, FirstName=None, LastName=None, PhoneNumber=None):
 
@@ -682,8 +698,10 @@ class Booking:
 
             app.logger.info(f"Making booking with details: CustomerID = {self.CustomerID}, SessionID =  {self.SessionID}, Booking Date = {self.BookingDate}, Booking Time = {self.BookingTime}, Price = {self.BookingPrice}, ExtraNotes = {self.ExtraNotes}")
 
+            ExtraNotesSTR = ', '.join(self.ExtraNotes)
+            
             new = "INSERT INTO Booking(CustomerID, SessionID, Date, Time, NumberOfChildren, NumberOfAdults, Price, Arrived, ExtraNotes) VALUES (?,?,?,?,?,?,?,'False',?)"
-            details = (self.CustomerID, self.SessionID, self.BookingDate, self.BookingTime, self.NumberOfChildren, self.NumberOfAdults, self.BookingPrice, self.ExtraNotes)
+            details = [self.CustomerID, self.SessionID, self.BookingDate, self.BookingTime, self.NumberOfChildren, self.NumberOfAdults, self.BookingPrice, ExtraNotesSTR]
             q.execute(new, details)
             sql.commit()
 
@@ -709,8 +727,10 @@ class Booking:
         
         try:
 
-            getactivebookings = "SELECT Booking.BookingID, Booking.Date, Booking.Time, Session.SessionType, Booking.ExtraNotes, Booking.Price FROM Booking INNER JOIN Session ON Booking.SessionID = Session.SessionID WHERE Booking.CustomerID = ?;"
-            q.execute(getactivebookings, [self.CustomerID])
+            Date = date.today()
+            
+            getactivebookings = "SELECT Booking.BookingID, Booking.Date, Booking.Time, Session.SessionType, Booking.ExtraNotes, Booking.Price FROM Booking INNER JOIN Session ON Booking.SessionID = Session.SessionID WHERE Booking.CustomerID = ? AND Booking.Date >= ? ORDER BY Booking.Date ASC;"
+            q.execute(getactivebookings, [self.CustomerID, Date])
             activebookings = q.fetchall()
 
             return True, None, activebookings           
@@ -759,6 +779,8 @@ def login():
         error = Result[1]
 
         if Success:
+            session["Email"] = Email
+            
             return redirect(url_for("account"))
 
         else:
@@ -816,6 +838,8 @@ def signup():
         error = Result[1]
 
         if Success:
+            session["Email"] = Email
+            
             return redirect(url_for("account"))
 
         else:
@@ -906,9 +930,11 @@ def account():
     Success = Result[0]
     error = Result[1]
     First = Result[2]
+    NearestBookingDate = Result[3]
+    NearestBookingTime = Result[4]
 
     if Success:
-        return render_template("account.html", First=First)
+        return render_template("account.html", First=First, NearestBookingDate=NearestBookingDate, NearestBookingTime=NearestBookingTime)
 
     else:
         return render_template("error.html", error=error)
@@ -1128,6 +1154,7 @@ def extras():
             session["ExtraNotes"] = ExtraNotes
                     
             app.logger.info(f"Extras: {ExtraNotes}")
+            
         except Exception as error:
             app.logger.info(f"Either no Extra Notes selected or an error happened: {error}")
             
