@@ -304,8 +304,9 @@ class Customer:
                 
                 return True, None, FirstName, NearestBookingDate, NearestBookingTime
             
-            except:
+            except Exception as error:
                 app.logger.info(f"Either no bookings were found, or an error orrcured: {error}")
+                
                 return True, None, FirstName, None, None
             
         except Exception as error:
