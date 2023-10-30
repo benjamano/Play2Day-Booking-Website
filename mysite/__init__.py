@@ -286,9 +286,12 @@ class Customer:
     def account(self, Email=None, Password=None, FirstName=None, LastName=None, PhoneNumber=None):
         try:
 
-            CustomerID = session["CustomerID"]
+            Email = session["Email"]
 
-            FirstName = findcustomerdetails(Email="", CustomerID = CustomerID)[1]
+            details = findcustomerdetails(Email=Email, CustomerID = "")
+            
+            CustomerID = details[0]
+            FirstName = details[1]
             
             Date = date.today()
             
@@ -773,6 +776,8 @@ def login():
         error = Result[1]
 
         if Success:
+            session["Email"] = Email
+            
             return redirect(url_for("account"))
 
         else:
