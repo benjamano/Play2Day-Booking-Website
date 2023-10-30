@@ -296,15 +296,17 @@ class Customer:
             Date = date.today()
             
             activebookings = "SELECT Booking.Date, Booking.Time FROM Booking WHERE Booking.Date >= (?) AND Booking.Arrived = 'False' AND Booking.CustomerID = (?) ORDER BY Booking.Date ASC"
-
-            q.execute(activebookings, [Date, CustomerID])
+            try:
+                q.execute(activebookings, [Date, CustomerID])
+                bookings = q.fetchone()
+                NearestBookingDate = bookings[0]
+                NearestBookingTime = bookings[1]
+                
+                return True, None, FirstName, NearestBookingDate, NearestBookingTime
             
-            bookings = q.fetchone()
-            
-            NearestBookingDate = bookings[0]
-            NearestBookingTime = bookings[1]
-
-            return True, None, FirstName, NearestBookingDate, NearestBookingTime
+            except:
+                app.logger.info(f"Either no bookings were found, or an error orrcured: {error}")
+                return True, None, FirstName, None, None
             
         except Exception as error:
             return False, f"Error while grabbing user's details or the upcoming bookings: {error}", None, None, None
