@@ -99,7 +99,8 @@
       var tableElements = document.querySelectorAll("table, th, td");
       var fontsToStyle = document.querySelectorAll(".dark-font");
       var pairElement = document.querySelector(".pair");
-  
+      var numberpairElement = document.querySelector(".numberpair");
+      
       bodyElement.classList.toggle("dark-mode");
       sidebar.classList.toggle("dark-mode");
   
@@ -112,35 +113,38 @@
       }
   
       pairElement.classList.toggle("dark-mode");
-    }
-  </script>
-    
-  <script>
+      numberpairElement.classList.toggle("dark-mode");
   
-  function applyInitialDarkMode() {
+      var isDarkMode = bodyElement.classList.contains("dark-mode");
+      localStorage.setItem("darkMode", isDarkMode);
+    }
+  
+    function applyInitialDarkMode() {
       var isDarkMode = localStorage.getItem("darkMode") === "true";
       var bodyElement = document.body;
       var sidebarElement = document.querySelector(".sidebar");
   
       if (isDarkMode) {
-          bodyElement.classList.add("dark-mode");
-          sidebarElement.classList.add("dark-mode");
+        bodyElement.classList.add("dark-mode");
+        sidebarElement.classList.add("dark-mode");
   
-          var fontsToStyle = document.querySelectorAll(".dark-font");
-          for (var i = 0; i < fontsToStyle.length; i++) {
-              fontsToStyle[i].classList.add("dark-mode");
-          }
+        var fontsToStyle = document.querySelectorAll(".dark-font");
+        for (var i = 0; i < fontsToStyle.length; i++) {
+            fontsToStyle[i].classList.add("dark-mode");
+        }
   
-          var pairElement = document.querySelector(".pair");
-          pairElement.classList.add("dark-mode");
+        var pairElement = document.querySelector(".pair");
+        pairElement.classList.add("dark-mode");
   
-          
-          var tableElements = document.querySelectorAll("table, th, td");
-          for (var j = 0; j < tableElements.length; j++) {
-              tableElements[j].classList.add("dark-mode");
-          }
+        var numberpairElement = document.querySelector(".pair");
+        numberpairElement.classList.add("dark-mode");
+  
+        var tableElements = document.querySelectorAll("table, th, td");
+        for (var j = 0; j < tableElements.length; j++) {
+            tableElements[j].classList.add("dark-mode");
+        }
       }
-  }
+    }
   
-  applyInitialDarkMode();
+    applyInitialDarkMode();
   </script>
