@@ -23,38 +23,40 @@
                   <h11 style="font-size: 40; margin-bottom: 16px">
                       Welcome, {{First}}
                   </h11>
-                  <div class="numberpair-slideshow">
-                    {% if NearestBookingDate != "None" or NearestBookingTime != "None" %}
-                      <div class="numberpair">
-                        <h11 style="font-size: 50">
-                          {{NearestBookingDate}}<br>{{NearestBookingTime}}
-                        </h11>
-                        <p>
-                          <h9 style="font-size: 30">
-                            Your next booking
-                          </h9>
-                        </p>
-                      </div>
-                    {% endif %}
-                    <br>
-                    <div class="slideshow-container">
-                      <div class="mySlides fade">
-                        <img src="{{ url_for('static',filename='/images/privatehiresslide.png') }}" style="max-width:60%; border: 5px solid #000000;">
-                      </div>
-                      <div class="mySlides fade">
-                        <img src="{{ url_for('static',filename='/images/partybookingsslide.png') }}" style="max-width:60%; border: 5px solid #000000;">
-                      </div>
-  
-                      <div class="mySlides fade">
-                        <img src="{{ url_for('static',filename='/images/NewFriday8th.png') }}" style="max-width:50%; border: 5px solid #000000;">
+                  <div class="pair">>
+                    <div class="numberpair-slideshow">
+                      {% if NearestBookingDate != "None" or NearestBookingTime != "None" %}
+                        <div class="numberpair">
+                          <h11 style="font-size: 50">
+                            {{NearestBookingDate}}<br>{{NearestBookingTime}}
+                          </h11>
+                          <p>
+                            <h9 style="font-size: 30">
+                              Your next booking
+                            </h9>
+                          </p>
+                        </div>
+                      {% endif %}
+                      <br>
+                      <div class="slideshow-container">
+                        <div class="mySlides fade">
+                          <img src="{{ url_for('static',filename='/images/privatehiresslide.png') }}" style="max-width:60%; border: 5px solid #000000;">
+                        </div>
+                        <div class="mySlides fade">
+                          <img src="{{ url_for('static',filename='/images/partybookingsslide.png') }}" style="max-width:60%; border: 5px solid #000000;">
+                        </div>
+    
+                        <div class="mySlides fade">
+                          <img src="{{ url_for('static',filename='/images/NewFriday8th.png') }}" style="max-width:50%; border: 5px solid #000000;">
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div style="text-align:center">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                  </div>
+                    <div style="text-align:center">
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                    </div>
+                  </div
               </body>
           </center>
       </div>
@@ -87,7 +89,6 @@
     var bodyElement = document.body;
     var sidebar = document.querySelector(".sidebar");
     var tableElements = document.querySelectorAll("table, th, td");
-    var fontsToStyle = document.querySelectorAll(".dark-font");
     var pairElement = document.querySelector(".pair");
     var numberpairElement = document.querySelector(".numberpair");
 
@@ -96,10 +97,6 @@
 
     for (var i = 0; i < tableElements.length; i++) {
         tableElements[i].classList.toggle("dark-mode");
-    }
-
-    for (var j = 0; j < fontsToStyle.length; j++) {
-        fontsToStyle[j].classList.toggle("dark-mode");
     }
 
     pairElement.classList.toggle("dark-mode");
