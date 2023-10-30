@@ -24,7 +24,7 @@
                       Welcome, {{First}}
                   </h11>
                   <div class="numberpair-slideshow">
-                    {% if NearestBookingDate != "" or NearestBookingTime != "" %}
+                    {% if NearestBookingDate != [] or NearestBookingTime != [] %}
                       <div class="numberpair">
                         <h11 style="font-size: 50">
                           {{NearestBookingDate}}<br>{{NearestBookingTime}}

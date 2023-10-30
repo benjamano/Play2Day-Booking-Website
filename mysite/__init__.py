@@ -932,6 +932,8 @@ def account():
     First = Result[2]
     NearestBookingDate = Result[3]
     NearestBookingTime = Result[4]
+    
+    app.logger.info(f"Booking details: {NearestBookingDate}, {NearestBookingTime}")
 
     if Success:
         return render_template("account.html", First=First, NearestBookingDate=NearestBookingDate, NearestBookingTime=NearestBookingTime)
