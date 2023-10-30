@@ -24,16 +24,18 @@
                       Welcome, {{First}}
                   </h11>
                   <div class="numberpair-slideshow">
-                    <div class="numberpair">
-                      <h11 style="font-size: 50">
-                        {{NearestBookingDate}}<br>{{NearestBookingTime}}
-                      </h11>
-                      <p>
-                        <h9 style="font-size: 30">
-                          Your next booking
-                        </h9>
-                      </p>
-                    </div>
+                    {% if NearestBookingDate != "None" or NearestBookingDate != "None" %}
+                      <div class="numberpair">
+                        <h11 style="font-size: 50">
+                          {{NearestBookingDate}}<br>{{NearestBookingTime}}
+                        </h11>
+                        <p>
+                          <h9 style="font-size: 30">
+                            Your next booking
+                          </h9>
+                        </p>
+                      </div>
+                    {% endif %}
                     <br>
                     <div class="slideshow-container">
                       <div class="mySlides fade">
