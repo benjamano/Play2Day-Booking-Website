@@ -23,7 +23,7 @@
                   <h11 style="font-size: 40; margin-bottom: 16px">
                       Welcome, {{First}}
                   </h11>
-                  <div class="pair">>
+                  <div class="pair">
                     <div class="numberpair-slideshow">
                       {% if NearestBookingDate != "None" or NearestBookingTime != "None" %}
                         <div class="numberpair">
@@ -89,6 +89,7 @@
     var bodyElement = document.body;
     var sidebar = document.querySelector(".sidebar");
     var tableElements = document.querySelectorAll("table, th, td");
+    var fontsToStyle = document.querySelectorAll(".dark-font");
     var pairElement = document.querySelector(".pair");
     var numberpairElement = document.querySelector(".numberpair");
 
@@ -99,6 +100,10 @@
         tableElements[i].classList.toggle("dark-mode");
     }
 
+    for (var j = 0; j < fontsToStyle.length; j++) {
+        fontsToStyle[j].classList.toggle("dark-mode");
+    }
+
     pairElement.classList.toggle("dark-mode");
 
     numberpairElement.classList.toggle("dark-mode");
@@ -106,7 +111,6 @@
 </script>
   
 <script>
-
 function applyInitialDarkMode() {
     var isDarkMode = localStorage.getItem("darkMode") === "true";
     var bodyElement = document.body;
@@ -134,7 +138,6 @@ function applyInitialDarkMode() {
         }
     }
 }
-
 applyInitialDarkMode();
 </script>
 
