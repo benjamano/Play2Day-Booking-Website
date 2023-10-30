@@ -107,12 +107,11 @@
     pairElement.classList.toggle("dark-mode");
 
     numberpairElement.classList.toggle("dark-mode");
-
-    localStorage.setItem("darkMode", "true");
   }
 </script>
   
 <script>
+
 function applyInitialDarkMode() {
     var isDarkMode = localStorage.getItem("darkMode") === "true";
     var bodyElement = document.body;
@@ -140,6 +139,7 @@ function applyInitialDarkMode() {
         }
     }
 }
+
 applyInitialDarkMode();
 </script>
 
