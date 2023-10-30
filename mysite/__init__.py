@@ -307,7 +307,7 @@ class Customer:
             return True, None, FirstName, NearestBookingDate, NearestBookingTime
             
         except Exception as error:
-            return False, f"Error while grabbing user's details or the upcoming bookings: {error}", None, None
+            return False, f"Error while grabbing user's details or the upcoming bookings: {error}", None, None, None
 
     def EditDetails(self, NewFirst, NewLast, NewPhone, Edit, Email=None, Password=None, FirstName=None, LastName=None, PhoneNumber=None):
 
