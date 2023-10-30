@@ -264,7 +264,7 @@ class Customer:
             code = "SELECT Password, PasswordSalt FROM Customer WHERE Email = (?)"
             q.execute(code, [self.Email])
             Fetch = q.fetchone()
-
+            
             StoredPassword = Fetch[0]
             StoredSalt = Fetch[1]
         except Exception as error:
@@ -830,6 +830,8 @@ def signup():
         error = Result[1]
 
         if Success:
+            session["Email"] = Email
+            
             return redirect(url_for("account"))
 
         else:
@@ -1142,10 +1144,9 @@ def extras():
             
             ExtraNotes = request.form.getlist("Extra")
             session["ExtraNotes"] = ExtraNotes
-            
+                    
             app.logger.info(f"Extras: {ExtraNotes}")
         except Exception as error:
-            
             app.logger.info(f"Either no Extra Notes selected or an error happened: {error}")
             
         return redirect(url_for("confirmbooking"))
