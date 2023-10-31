@@ -92,7 +92,7 @@ def onStart():
 
         tblSession = "CREATE TABLE IF NOT EXISTS Session (SessionID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, SessionType TEXT NOT NULL, AdultPrice REAL NOT NULL, ChildPrice REAL NOT NULL)"
 
-        tblHolidays = "CREATE TABLE IF NOT EXISTS Holiday (HolidayID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Holiday Name TEXT NOT NULL, StartDate VARCHAR(20) NOT NULL, EndDate VARCHAR(20) NOT NULL)"
+        tblHolidays = "CREATE TABLE IF NOT EXISTS Holiday (HolidayID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Holiday Name TEXT NOT NULL, StartDate VARCHAR(20) NOT NULL, EndDate VARCHAR(20) NOT NULL, Description VARCHAR(255) NOT NULL)"
 
         q.execute(tblCustomer)
         q.execute(tblManager)
@@ -1623,7 +1623,31 @@ def managercustomer():
 @app.route("/manager/holidays", methods=["POST", "GET"])
 def manageholidays():
 
-    return render_template("/manager/editholidays.html")
+    if request.method == "POST":
+        
+        try:
+            StartDate = request.form["startdate"]
+            EndDate = request.form["enddate"]
+            Name = request.form["name"]
+            Description = request.form["description"]
+            
+            #app.logger.info(f"Start Date: {StartDate} End Date: {EndDate} Name: {Name} Description: {Description}")
+            
+            if StartDate == "" or EndDate == "" or Name == "" or Description == "":
+                
+                return render_template("error.html", error="You must not leave any field blank!")
+            
+            if StartDate == EndDate:
+                
+                return render_template("error.html", error="The start and end date cant be the same!")
+            
+        except Exception as error:
+        
+            return render_template("error.html", error=error)
+        
+    else:
+
+        return render_template("/manager/editholidays.html")
 
 @app.route("/manager/arrived", methods=["POST", "GET"])
 def mark_arrived():
@@ -1665,17 +1689,23 @@ def devtest():
     # This is grabbing every session variable with the names stated in the "SessionVars" list, then showing it in the html template
     for i in range(len(SessionVars)):
         
-        data = session[SessionVars[i]]
+        try:
         
-        if data == "":
+            data = session[SessionVars[i]]
             
-            SessionVarsFound.append(f"{SessionVars[i]} : Null")
-        
-        else:
+            if data == "":
             
-            SessionVarsFound.append(f"{SessionVars[i]} : {data}")
+                SessionVarsFound.append(f"{SessionVars[i]} : Null")
         
-        i + 1
+            else:
+                
+                SessionVarsFound.append(f"{SessionVars[i]} : {data}")
+            
+            i + 1
+        
+        except:
+            
+            i + 1
     
     #app.logger.info(SessionVarsFound)
     
