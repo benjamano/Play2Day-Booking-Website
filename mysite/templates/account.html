@@ -94,22 +94,24 @@
   
       var isDarkMode = bodyElement.classList.contains("dark-mode");
   
+      // Toggle the dark mode
       isDarkMode = !isDarkMode;
   
       bodyElement.classList.toggle("dark-mode", isDarkMode);
-      sidebar.classList.toggle("dark-mode", isDarkMode);
+      if (sidebar) sidebar.classList.toggle("dark-mode", isDarkMode);
   
-      for (var i = 0; i < tableElements.length; i++) {
-          tableElements[i].classList.toggle("dark-mode", isDarkMode);
-      }
+      tableElements.forEach(function (el) {
+          el.classList.toggle("dark-mode", isDarkMode);
+      });
   
-      for (var j = 0; j < fontsToStyle.length; j++) {
-          fontsToStyle[j].classList.toggle("dark-mode", isDarkMode);
-      }
+      fontsToStyle.forEach(function (el) {
+          el.classList.toggle("dark-mode", isDarkMode);
+      });
   
-      pairElement.classList.toggle("dark-mode", isDarkMode);
-      numberpairElement.classList.toggle("dark-mode", isDarkMode);
+      if (pairElement) pairElement.classList.toggle("dark-mode", isDarkMode);
+      if (numberpairElement) numberpairElement.classList.toggle("dark-mode", isDarkMode);
   
+      // Update the local storage with the new dark mode state
       localStorage.setItem("darkMode", isDarkMode.toString());
     }
   
@@ -118,24 +120,24 @@
       var bodyElement = document.body;
       var sidebarElement = document.querySelector(".sidebar");
   
-      bodyElement.classList.toggle("dark-mode", isDarkMode);
-      sidebarElement.classList.toggle("dark-mode", isDarkMode);
+      if (bodyElement) bodyElement.classList.toggle("dark-mode", isDarkMode);
+      if (sidebarElement) sidebarElement.classList.toggle("dark-mode", isDarkMode);
   
       var fontsToStyle = document.querySelectorAll(".dark-font");
-      for (var i = 0; i < fontsToStyle.length; i++) {
-          fontsToStyle[i].classList.toggle("dark-mode", isDarkMode);
-      }
+      fontsToStyle.forEach(function (el) {
+          el.classList.toggle("dark-mode", isDarkMode);
+      });
   
       var pairElement = document.querySelector(".pair");
-      pairElement.classList.toggle("dark-mode", isDarkMode);
+      if (pairElement) pairElement.classList.toggle("dark-mode", isDarkMode);
   
       var numberpairElement = document.querySelector(".numberpair");
-      numberpairElement.classList.toggle("dark-mode", isDarkMode);
+      if (numberpairElement) numberpairElement.classList.toggle("dark-mode", isDarkMode);
   
       var tableElements = document.querySelectorAll("table, th, td");
-      for (var j = 0; j < tableElements.length; j++) {
-          tableElements[j].classList.toggle("dark-mode", isDarkMode);
-      }
+      tableElements.forEach(function (el) {
+          el.classList.toggle("dark-mode", isDarkMode);
+      });
     }
   
     applyInitialDarkMode();
