@@ -71,23 +71,26 @@
       var fontsToStyle = document.querySelectorAll(".dark-font");
       var pairElement = document.querySelector(".pair");
       var numberpairElement = document.querySelector(".numberpair");
-      
-      bodyElement.classList.toggle("dark-mode");
-      sidebar.classList.toggle("dark-mode");
+  
+      var isDarkMode = bodyElement.classList.contains("dark-mode");
+  
+      isDarkMode = !isDarkMode;
+  
+      bodyElement.classList.toggle("dark-mode", isDarkMode);
+      sidebar.classList.toggle("dark-mode", isDarkMode);
   
       for (var i = 0; i < tableElements.length; i++) {
-          tableElements[i].classList.toggle("dark-mode");
+          tableElements[i].classList.toggle("dark-mode", isDarkMode);
       }
   
       for (var j = 0; j < fontsToStyle.length; j++) {
-          fontsToStyle[j].classList.toggle("dark-mode");
+          fontsToStyle[j].classList.toggle("dark-mode", isDarkMode);
       }
   
-      pairElement.classList.toggle("dark-mode");
-      numberpairElement.classList.toggle("dark-mode");
+      pairElement.classList.toggle("dark-mode", isDarkMode);
+      numberpairElement.classList.toggle("dark-mode", isDarkMode);
   
-      var isDarkMode = bodyElement.classList.contains("dark-mode");
-      localStorage.setItem("darkMode", isDarkMode);
+      localStorage.setItem("darkMode", isDarkMode.toString());
     }
   
     function applyInitialDarkMode() {
@@ -95,25 +98,23 @@
       var bodyElement = document.body;
       var sidebarElement = document.querySelector(".sidebar");
   
-      if (isDarkMode) {
-        bodyElement.classList.add("dark-mode");
-        sidebarElement.classList.add("dark-mode");
+      bodyElement.classList.toggle("dark-mode", isDarkMode);
+      sidebarElement.classList.toggle("dark-mode", isDarkMode);
   
-        var fontsToStyle = document.querySelectorAll(".dark-font");
-        for (var i = 0; i < fontsToStyle.length; i++) {
-            fontsToStyle[i].classList.add("dark-mode");
-        }
+      var fontsToStyle = document.querySelectorAll(".dark-font");
+      for (var i = 0; i < fontsToStyle.length; i++) {
+          fontsToStyle[i].classList.toggle("dark-mode", isDarkMode);
+      }
   
-        var pairElement = document.querySelector(".pair");
-        pairElement.classList.add("dark-mode");
+      var pairElement = document.querySelector(".pair");
+      pairElement.classList.toggle("dark-mode", isDarkMode);
   
-        var numberpairElement = document.querySelector(".pair");
-        numberpairElement.classList.add("dark-mode");
+      var numberpairElement = document.querySelector(".numberpair");
+      numberpairElement.classList.toggle("dark-mode", isDarkMode);
   
-        var tableElements = document.querySelectorAll("table, th, td");
-        for (var j = 0; j < tableElements.length; j++) {
-            tableElements[j].classList.add("dark-mode");
-        }
+      var tableElements = document.querySelectorAll("table, th, td");
+      for (var j = 0; j < tableElements.length; j++) {
+          tableElements[j].classList.toggle("dark-mode", isDarkMode);
       }
     }
   
