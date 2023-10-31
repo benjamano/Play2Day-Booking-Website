@@ -110,10 +110,10 @@ def checkdate(Date):
         today = datetime.now().date()
 
         if Date > today:
-            app.logger.info("Date is not in the past")
+            #app.logger.info("Date is not in the past")
             return True
         else:
-            app.logger.info("Date is in the past")
+            #app.logger.info("Date is in the past")
             return False
 
     except Exception as error:
@@ -122,7 +122,7 @@ def checkdate(Date):
 def customerloggedin():
     # Check the customer is logged in by checking if the email is present
     if session["Email"] == "":
-        app.logger.info("Account not logged in")
+        #app.logger.info("Account not logged in")
         return False
 
     else:
@@ -212,7 +212,7 @@ class Customer:
 
         if not valid:
 
-            app.logger.info(f"Error while validating details: {error}")
+            #app.logger.info(f"Error while validating details: {error}")
 
             return False, f"Error while validating details: {error}"
 
@@ -222,16 +222,16 @@ class Customer:
             result = q.fetchone()
 
         except Exception as error:
-            app.logger.info(f"Error while checking if customer already exists: {error}")
+            #app.logger.info(f"Error while checking if customer already exists: {error}")
             return False, f"Error while checking if customer already exists: {error}"
 
         if result[0] > 0:
-            app.logger.info(f"Customer with email '{self.Email}' already exists.")
+            #app.logger.info(f"Customer with email '{self.Email}' already exists.")
 
             return False, "A customer using that email already exists!"
 
         else:
-            app.logger.info(f"Customer with email '{self.Email}' does not exist, creating account")
+            #app.logger.info(f"Customer with email '{self.Email}' does not exist, creating account")
 
             try:
                 Salt, GrabbedHashedPassword = HashPassword(self.Password)
@@ -279,7 +279,7 @@ class Customer:
             return True, None
         else:
             # Passwords don't match
-            app.logger.info("Email or Password Incorrect, redirecting to error page")
+            #app.logger.info("Email or Password Incorrect, redirecting to error page")
 
             return False, "Email or password incorrect, please re-enter your details"
 
@@ -333,7 +333,7 @@ class Customer:
 
             if not valid:
 
-                app.logger.info(f"Error while validating details: {error}")
+                #app.logger.info(f"Error while validating details: {error}")
 
                 return False, f"Error while validating details: {error}"
 
@@ -343,7 +343,7 @@ class Customer:
 
                 details = (NewFirst, NewLast, NewPhone, CustomerID)
 
-                app.logger.info(f"Editing account details, New name = {NewFirst} {NewLast}, New phone = {NewPhone}, CustomerID = {CustomerID}")
+                #app.logger.info(f"Editing account details, New name = {NewFirst} {NewLast}, New phone = {NewPhone}, CustomerID = {CustomerID}")
 
                 update = "UPDATE Customer SET FirstName = (?), LastName = (?), PhoneNumber = (?) WHERE CustomerID = (?)"
 
@@ -375,7 +375,7 @@ class Customer:
             q.execute(DeleteAccount, [CustomerID])
             sql.commit()
 
-            app.logger.info("Account succesfully deleted")
+            #app.logger.info("Account succesfully deleted")
 
             return True, None
 
@@ -405,12 +405,12 @@ class Booking:
 
             elif isweekday(self.BookingDate) == True:
                 # If booking date is on a weekday
-                app.logger.info("Booking is being made on a weekday")
+                #app.logger.info("Booking is being made on a weekday")
                 session["WeekdayBooking"] = True
 
             else:
                 # If booking date is on the weekend
-                app.logger.info("Booking is beng made on the weekend")
+                #app.logger.info("Booking is beng made on the weekend")
                 session["WeekdayBooking"] = False
             
             session["BookingDate"] = self.BookingDate
@@ -453,11 +453,12 @@ class Booking:
         session["numberchildren"] = self.NumberOfChildren
 
         if checkdate(Date=BookingDate) == False:
-            return render_template("error.html", error="Please book a date in the future!")
+            
+            return False, "Please book a date in the future!"
 
         if self.BookingTime == "10:00-14:00":
 
-            app.logger.info("Weekday Play AM = True")
+            #app.logger.info("Weekday Play AM = True")
             get = "SELECT SessionID FROM Session WHERE SessionType = (?)"
             q.execute(get, ["Weekday Play AM"])
 
@@ -465,7 +466,7 @@ class Booking:
 
         else:
 
-            app.logger.info("Weekday Play PM = True")
+            #app.logger.info("Weekday Play PM = True")
             get = "SELECT SessionID FROM Session WHERE SessionType = (?)"
             q.execute(get, ["Weekday Play PM"])
 
@@ -481,15 +482,15 @@ class Booking:
         q.execute(checkplaysession, details)
         exists=q.fetchone()[0]
 
-        app.logger.info(f"Details: CID: {CustomerID}, SID: {CustomerID}, Date: {BookingDate}, Exists: {exists}")
+        #app.logger.info(f"Details: CID: {CustomerID}, SID: {CustomerID}, Date: {BookingDate}, Exists: {exists}")
 
         if exists < 75:
-            app.logger.info("Session is open, redirecting to confirm booking page")
+            #app.logger.info("Session is open, redirecting to confirm booking page")
 
             return True, None
 
         else:
-            app.logger.info("Too many bookings for Weekday Play Session: {BookingDate}, {BookingTime}")
+            #app.logger.info("Too many bookings for Weekday Play Session: {BookingDate}, {BookingTime}")
 
             return False, "Sorry, there are too many bookings for this Weekday Play Session, please book another day or time."
     
@@ -507,7 +508,7 @@ class Booking:
 
         if self.BookingTime == "10:00-14:00":
 
-            app.logger.info("Weekend Play AM = True")
+            #app.logger.info("Weekend Play AM = True")
             get = "SELECT SessionID FROM Session WHERE SessionType = (?)"
             q.execute(get, ["Weekend Play AM"])
 
@@ -515,7 +516,7 @@ class Booking:
 
         else:
 
-            app.logger.info("Weekend Play PM = True")
+            #app.logger.info("Weekend Play PM = True")
             get = "SELECT SessionID FROM Session WHERE SessionType = (?)"
             q.execute(get, ["Weekend Play PM"])
 
@@ -532,12 +533,12 @@ class Booking:
         exists=q.fetchone()[0]
 
         if exists < 75:
-            app.logger.info("Session is open, redirecting to confirm booking page")
+            #app.logger.info("Session is open, redirecting to confirm booking page")
             
             return True, None
 
         else:
-            app.logger.info("Too many bookings for Weekday Play Session: {BookingDate}, {BookingTime}")
+            #app.logger.info("Too many bookings for Weekday Play Session: {BookingDate}, {BookingTime}")
             
             return False, "Sorry, there are too many bookings for this Weekday Play Session, please book another day or time."
     
@@ -550,7 +551,7 @@ class Booking:
         session["numberadults"] = self.NumberOfAdults
         session["numberchildren"] = self.NumberOfChildren
 
-        app.logger.info(f"{self.BookingTime}")
+        #app.logger.info(f"{self.BookingTime}")
         
         try:
             if self.BookingTime == "11:00-13:30":
@@ -571,16 +572,16 @@ class Booking:
             details = (CustomerID, SessionID, BookingDate)
             q.execute(checkparty, details)
             exists=q.fetchone()[0]
-            app.logger.info(f"Details: CID: {CustomerID}, SID: {self.SessionID}, Date: {BookingDate}, Exists: {exists}")
+            #app.logger.info(f"Details: CID: {CustomerID}, SID: {self.SessionID}, Date: {BookingDate}, Exists: {exists}")
 
             if exists < 2:
 
-                app.logger.info("Party Session is open, redirecting to confirm booking page")
+                #app.logger.info("Party Session is open, redirecting to confirm booking page")
                 return True, None
 
             else:
 
-                app.logger.info("Too many bookings for Party: {BookingDate}, {BookingTime}")
+                #app.logger.info("Too many bookings for Party: {BookingDate}, {BookingTime}")
                 
                 return False, "Sorry, there are no party booking available for this date or time, please book another day or time."
 
@@ -604,7 +605,7 @@ class Booking:
             session["SessionID"] = SessionID
 
             checkexists = "SELECT count(*) FROM Booking WHERE SessionID IN (7, 8, 9) AND Date = (?)"
-            app.logger.info(f"Looking for private hire booking with and Booking date = {self.BookingDate}")
+            #app.logger.info(f"Looking for private hire booking with and Booking date = {self.BookingDate}")
             q.execute(checkexists, [self.BookingDate])
             exists=q.fetchone()[0]
 
@@ -612,7 +613,7 @@ class Booking:
 
                 session["PrivateHire"] = True
 
-                app.logger.info("Session is open, redirecting to confirm booking page")
+                #app.logger.info("Session is open, redirecting to confirm booking page")
 
                 return True, None
 
@@ -631,7 +632,7 @@ class Booking:
 
                 SessionID = session["SessionID"]
                 
-                app.logger.info(SessionID)
+                #app.logger.info(SessionID)
                 getprices = "SELECT AdultPrice, ChildPrice FROM Session WHERE SessionID = (?)"
                 q.execute(getprices, [SessionID])
                 prices = q.fetchone()
@@ -649,7 +650,7 @@ class Booking:
 
                 Price = adulttotal + childtotal
 
-                app.logger.info(f"({adultprice} * {NumberAdults} = {adulttotal}) + ({childprice} * {NumberChildren} = {childtotal}) = {Price}")
+                #app.logger.info(f"({adultprice} * {NumberAdults} = {adulttotal}) + ({childprice} * {NumberChildren} = {childtotal}) = {Price}")
 
             elif PrivateHireType == "Adventure Play Private Hire":
                 
@@ -696,7 +697,7 @@ class Booking:
         
         try:
 
-            app.logger.info(f"Making booking with details: CustomerID = {self.CustomerID}, SessionID =  {self.SessionID}, Booking Date = {self.BookingDate}, Booking Time = {self.BookingTime}, Price = {self.BookingPrice}, ExtraNotes = {self.ExtraNotes}")
+            #app.logger.info(f"Making booking with details: CustomerID = {self.CustomerID}, SessionID =  {self.SessionID}, Booking Date = {self.BookingDate}, Booking Time = {self.BookingTime}, Price = {self.BookingPrice}, ExtraNotes = {self.ExtraNotes}")
 
             ExtraNotesSTR = ', '.join(self.ExtraNotes)
             
@@ -705,7 +706,7 @@ class Booking:
             q.execute(new, details)
             sql.commit()
 
-            app.logger.info(f"Retrieving booking ID, data = {self.CustomerID}, {self.SessionID}, {self.BookingDate}, {self.BookingTime}")
+            #app.logger.info(f"Retrieving booking ID, data = {self.CustomerID}, {self.SessionID}, {self.BookingDate}, {self.BookingTime}")
 
             get = "SELECT BookingID FROM Booking WHERE CustomerID = (?) AND SessionID = (?) AND Date = (?) AND Time = (?)"
             details = (self.CustomerID, self.SessionID, self.BookingDate, self.BookingTime)
@@ -713,7 +714,7 @@ class Booking:
             fetch = q.fetchone()
             BookingID = fetch[0]
 
-            app.logger.info(f"BookingID: {BookingID} Redirecting to Manage Booking template")
+            #app.logger.info(f"BookingID: {BookingID} Redirecting to Manage Booking template")
 
             session["BookingID"] = BookingID
 
@@ -741,14 +742,14 @@ class Booking:
     
     def DeleteBooking(self):
 
-        app.logger.info(f"Deleting Booking with Booking ID: {self.BookingID}")
+        #app.logger.info(f"Deleting Booking with Booking ID: {self.BookingID}")
 
         DeleteBooking = "DELETE FROM Booking WHERE BookingID = (?)"
 
         try:
             q.execute(DeleteBooking, [self.BookingID])
             sql.commit()
-            app.logger.info("Booking Deleted Succesfully")
+            #app.logger.info("Booking Deleted Succesfully")
 
             return True, None
 
@@ -1012,7 +1013,7 @@ def sessiontype():
     else:
         
         checkexists = "SELECT count(*) FROM Booking WHERE SessionID IN (7, 8, 9) AND Date = (?)"
-        app.logger.info(f"Looking for private hire booking with and Booking date = {BookingDate}")
+        #app.logger.info(f"Looking for private hire booking with and Booking date = {BookingDate}")
         q.execute(checkexists, [BookingDate])
         exists=q.fetchone()[0]
 
@@ -1153,7 +1154,7 @@ def extras():
             ExtraNotes = request.form.getlist("Extra")
             session["ExtraNotes"] = ExtraNotes
                     
-            app.logger.info(f"Extras: {ExtraNotes}")
+            #app.logger.info(f"Extras: {ExtraNotes}")
             
         except Exception as error:
             app.logger.info(f"Either no Extra Notes selected or an error happened: {error}")
@@ -1187,7 +1188,7 @@ def managebooking():
         session["SessionType"] = SessionType
         session["ExtraNotes"] = ExtraNotes
 
-        app.logger.info(f"Session Type: {SessionType}")
+        #app.logger.info(f"Session Type: {SessionType}")
 
         return redirect(url_for("booking"))
 
@@ -1349,7 +1350,7 @@ def managerlogin():
 
                 session["ManagerUsername"] = Username
 
-                app.logger.info(f"Manager with Username {Username} found, checking password then redirecting to account page")
+                #app.logger.info(f"Manager with Username {Username} found, checking password then redirecting to account page")
 
                 try:
 
@@ -1369,7 +1370,7 @@ def managerlogin():
 
             else:
 
-                app.logger.info(f"Manager with Username {Username} does not exist, redirecting to error page")
+                #app.logger.info(f"Manager with Username {Username} does not exist, redirecting to error page")
 
                 return render_template('/error.html', error="Account Doesn't Exist")
 
@@ -1432,13 +1433,13 @@ def managereditbooking():
 
             q.execute(getactivebookings)
             activebookings = q.fetchall()
-            app.logger.info(f"{getactivebookings} ,{activebookings}")
+            #app.logger.info(f"{getactivebookings} ,{activebookings}")
 
             return render_template("manager/selectbooking.html", activebookings=activebookings)
 
         else:
 
-            app.logger.info("Redirecting to booking page")
+            #app.logger.info("Redirecting to booking page")
 
             BookingID = request.form["BookingID"]
             BookingDate = request.form["BookingDate"]
@@ -1492,14 +1493,14 @@ def managerbooking():
 
     if request.method == "POST":
 
-        app.logger.info(f"Deleting Booking with Booking ID: {BookingID}")
+        #app.logger.info(f"Deleting Booking with Booking ID: {BookingID}")
 
         DeleteBooking = "DELETE FROM Booking WHERE BookingID = (?)"
 
         try:
             q.execute(DeleteBooking, [BookingID])
             sql.commit()
-            app.logger.info("Booking Deleted Succesfully")
+            #app.logger.info("Booking Deleted Succesfully")
 
             return redirect(url_for("managereditbooking"))
 
@@ -1575,7 +1576,7 @@ def managercustomer():
     
                     if not valid:
     
-                        app.logger.info(f"Error while validating details: {error}")
+                        #app.logger.info(f"Error while validating details: {error}")
     
                         return render_template("error.html", error=error)
                         #return False, f"Error while validating details: {error}"
@@ -1583,7 +1584,7 @@ def managercustomer():
     
                         details = (NewFirst, NewLast, NewPhone, CustomerID)
     
-                        app.logger.info(f"Editing account details, New name = {NewFirst} {NewLast}, New phone = {NewPhone}, CustomerID = {CustomerID}")
+                        #app.logger.info(f"Editing account details, New name = {NewFirst} {NewLast}, New phone = {NewPhone}, CustomerID = {CustomerID}")
     
                         update = "UPDATE Customer SET FirstName = (?), LastName = (?), PhoneNumber = (?) WHERE CustomerID = (?)"
     
@@ -1602,14 +1603,14 @@ def managercustomer():
                 return render_template("error.html", error=error)
 
         else:
-            app.logger.info(f"Deleting Customer with Customer ID: {CustomerID}")
+            #app.logger.info(f"Deleting Customer with Customer ID: {CustomerID}")
 
             DeleteCustomer = "DELETE FROM Customer WHERE CustomerID = (?)"
 
             try:
                 q.execute(DeleteCustomer, [CustomerID])
                 sql.commit()
-                app.logger.info("Customer Deleted Succesfully")
+                #app.logger.info("Customer Deleted Succesfully")
                 return redirect(url_for("managereditcustomer"))
             
             except Exception as error:
@@ -1676,11 +1677,10 @@ def devtest():
         
         i + 1
     
-    app.logger.info(SessionVarsFound)
+    #app.logger.info(SessionVarsFound)
     
     return render_template("devtest.html", SessionVarsFound=SessionVarsFound)
 
 
 if __name__ == '__main__':
-    #db.create_all()
     app.run(host="0.0.0.0", port=5000, debug=True)
