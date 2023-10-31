@@ -1,3 +1,5 @@
+<script src="https://kit.fontawesome.com/9d35a24d36.js" crossorigin="anonymous"></script>
+
 <head>
     <title>Home</title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
@@ -5,11 +7,11 @@
 </head>
 
 <div class="sidebar">
-    <a class="active" href="/manager/account"><img src"{{url_for('static',filename='/images/icons/editbooking.png') }}"/>Home</a>
-    <a href="/manager/editbooking">Booking Report</a>
-    <a href="/manager/editcustomer">Edit a Customer</a>
-    <a href="/manager/holidays">Upcoming Holidays</a>
-    <a href="/logout"> Log Out</a>
+    <a class="active" href="/manager/account"><i class="fa-solid fa-house-chimney"></i>   Home</a>
+    <a href="/manager/editbooking"><i class="fa-solid fa-clipboard-list"></i>   Booking Report</a>
+    <a href="/manager/editcustomer"><i class="fa-solid fa-user-pen"></i>   Edit a Customer</a>
+    <a href="/manager/holidays"><i class="fa-solid fa-gift"></i>   Upcoming Holidays</a>
+    <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>   Log Out</a>
 </div>
 <body>
     <div class="content">

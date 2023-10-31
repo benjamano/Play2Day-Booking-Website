@@ -517,7 +517,7 @@ progress::-moz-progress-bar {
     margin-bottom: 30px;
 }
 
-.nextbutton :hover {
+.nextbutton:hover {
 
     background-color: #bc1e2ed8;
 
@@ -616,7 +616,7 @@ input[type=checkbox] {
     display: block;
     max-width: 80%;
     background-color: white;
-    margin-top: 10px;
+    margin-top: 32px;
     border-radius: 20px;
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
 }
