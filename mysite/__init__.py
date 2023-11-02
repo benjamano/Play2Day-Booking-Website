@@ -264,7 +264,7 @@ class Customer:
             code = "SELECT Password, PasswordSalt FROM Customer WHERE Email = (?)"
             q.execute(code, [self.Email])
             Fetch = q.fetchone()
-            
+
             StoredPassword = Fetch[0]
             StoredSalt = Fetch[1]
         except Exception as error:
@@ -289,26 +289,26 @@ class Customer:
             Email = session["Email"]
 
             details = findcustomerdetails(Email=Email, CustomerID = "")
-            
+
             CustomerID = details[0]
             FirstName = details[1]
-            
+
             Date = date.today()
-            
+
             activebookings = "SELECT Booking.Date, Booking.Time FROM Booking WHERE Booking.Date >= (?) AND Booking.Arrived = 'False' AND Booking.CustomerID = (?) ORDER BY Booking.Date ASC"
             try:
                 q.execute(activebookings, [Date, CustomerID])
                 bookings = q.fetchone()
                 NearestBookingDate = bookings[0]
                 NearestBookingTime = bookings[1]
-                
+
                 return True, None, FirstName, NearestBookingDate, NearestBookingTime
-            
+
             except Exception as error:
                 app.logger.info(f"Either no bookings were found, or an error orrcured: {error}")
-                
+
                 return True, None, FirstName, "None", "None"
-            
+
         except Exception as error:
             return False, f"Error while grabbing user's details or the upcoming bookings: {error}", None, None, None
 
@@ -412,9 +412,9 @@ class Booking:
                 # If booking date is on the weekend
                 #app.logger.info("Booking is beng made on the weekend")
                 session["WeekdayBooking"] = False
-            
+
             session["BookingDate"] = self.BookingDate
-        
+
         except Exception as error:
 
             return False, f"Error while checking booking date validility: {error}"
@@ -453,7 +453,7 @@ class Booking:
         session["numberchildren"] = self.NumberOfChildren
 
         if checkdate(Date=BookingDate) == False:
-            
+
             return False, "Please book a date in the future!"
 
         if self.BookingTime == "10:00-14:00":
@@ -493,9 +493,9 @@ class Booking:
             #app.logger.info("Too many bookings for Weekday Play Session: {BookingDate}, {BookingTime}")
 
             return False, "Sorry, there are too many bookings for this Weekday Play Session, please book another day or time."
-    
+
     def WeekendOrHoliday(self):
-        
+
         BookingDate = session["BookingDate"]
         CustomerID = session["CustomerID"]
 
@@ -534,16 +534,16 @@ class Booking:
 
         if exists < 75:
             #app.logger.info("Session is open, redirecting to confirm booking page")
-            
+
             return True, None
 
         else:
             #app.logger.info("Too many bookings for Weekday Play Session: {BookingDate}, {BookingTime}")
-            
+
             return False, "Sorry, there are too many bookings for this Weekday Play Session, please book another day or time."
-    
+
     def Party(self):
-        
+
         CustomerID = session["CustomerID"]
         BookingDate = session["BookingDate"]
 
@@ -552,12 +552,12 @@ class Booking:
         session["numberchildren"] = self.NumberOfChildren
 
         #app.logger.info(f"{self.BookingTime}")
-        
+
         try:
             if self.BookingTime == "11:00-13:30":
 
                 SessionID = "5"
-        
+
                 session["PartyType"] = "Party AM"
 
             elif self.BookingTime == "15:00-17:30":
@@ -582,19 +582,19 @@ class Booking:
             else:
 
                 #app.logger.info("Too many bookings for Party: {BookingDate}, {BookingTime}")
-                
+
                 return False, "Sorry, there are no party booking available for this date or time, please book another day or time."
 
         except Exception as error:
             return False, f"Error while making party booking: {error}"
-    
+
     def PrivateHire(self, PrivateHireType):
 
         session["numberadults"] = self.NumberOfAdults
         session["numberchildren"] = self.NumberOfChildren
         session["PrivateHireType"] = PrivateHireType
         session["BookingTime"] = "18:30 - 20:30"
-        
+
         try:
 
             get = "SELECT SessionID FROM Session WHERE SessionType = (?)"
@@ -622,16 +622,16 @@ class Booking:
 
         except Exception as error:
             return False, f"Error while making private hire booking: {error}"
-    
+
     def GetFinalPrice(self, BookingType, PrivateHireType):
-              
+
         try:
-            
-            
+
+
             if BookingType != "Private Hire":
 
                 SessionID = session["SessionID"]
-                
+
                 #app.logger.info(SessionID)
                 getprices = "SELECT AdultPrice, ChildPrice FROM Session WHERE SessionID = (?)"
                 q.execute(getprices, [SessionID])
@@ -653,54 +653,54 @@ class Booking:
                 #app.logger.info(f"({adultprice} * {NumberAdults} = {adulttotal}) + ({childprice} * {NumberChildren} = {childtotal}) = {Price}")
 
             elif PrivateHireType == "Adventure Play Private Hire":
-                
+
                 Price = 300.0
-                
+
             elif PrivateHireType == "Laser Tag Private Hire":
-                
+
                 Price = 200.0
-                
+
             elif PrivateHireType == "Laser Tag + Adventure Play Private Hire":
-                
+
                 Price = 400.0
-            
+
             else:
-                
+
                 return False, f"Something went wrong", None
 
             if self.ExtraNotes == "Buffet":
-                
+
                 Price += 100.0
-            
+
             if self.ExtraNotes == "PizzaParty":
-                
+
                 Price += 80.0
-                
+
             if self.ExtraNotes == "LaserParty":
-                
+
                 Price += 50.0
-                
+
             if self.ExtraNotes == "PartyBags":
-                
+
                 Price += 10.0
-                
+
             #if self.ExtraNotes == "":
 
             session["Price"] = Price
-            
-            return True, None, Price            
+
+            return True, None, Price
 
         except Exception as error:
             return False, f"Error while grabbing booking details: {error}", None
-        
+
     def CreateBooking(self):
-        
+
         try:
 
             #app.logger.info(f"Making booking with details: CustomerID = {self.CustomerID}, SessionID =  {self.SessionID}, Booking Date = {self.BookingDate}, Booking Time = {self.BookingTime}, Price = {self.BookingPrice}, ExtraNotes = {self.ExtraNotes}")
 
             ExtraNotesSTR = ', '.join(self.ExtraNotes)
-            
+
             new = "INSERT INTO Booking(CustomerID, SessionID, Date, Time, NumberOfChildren, NumberOfAdults, Price, Arrived, ExtraNotes) VALUES (?,?,?,?,?,?,?,'False',?)"
             details = [self.CustomerID, self.SessionID, self.BookingDate, self.BookingTime, self.NumberOfChildren, self.NumberOfAdults, self.BookingPrice, ExtraNotesSTR]
             q.execute(new, details)
@@ -721,25 +721,25 @@ class Booking:
             return True, None
 
         except Exception as error:
-            
+
             return False, f"Error while creating booking: {error}"
-    
+
     def ManageBooking(self):
-        
+
         try:
 
             Date = date.today()
-            
+
             getactivebookings = "SELECT Booking.BookingID, Booking.Date, Booking.Time, Session.SessionType, Booking.ExtraNotes, Booking.Price FROM Booking INNER JOIN Session ON Booking.SessionID = Session.SessionID WHERE Booking.CustomerID = ? AND Booking.Date >= ? ORDER BY Booking.Date ASC;"
             q.execute(getactivebookings, [self.CustomerID, Date])
             activebookings = q.fetchall()
 
-            return True, None, activebookings           
+            return True, None, activebookings
 
         except Exception as error:
 
             return False, f"Error while opening manage booking template: {error}", None
-    
+
     def DeleteBooking(self):
 
         #app.logger.info(f"Deleting Booking with Booking ID: {self.BookingID}")
@@ -754,7 +754,7 @@ class Booking:
             return True, None
 
         except Exception as error:
-            
+
             return False, f"Error while deleting booking: {error}"
 
 #class Manager:
@@ -781,7 +781,7 @@ def login():
 
         if Success:
             session["Email"] = Email
-            
+
             return redirect(url_for("account"))
 
         else:
@@ -840,7 +840,7 @@ def signup():
 
         if Success:
             session["Email"] = Email
-            
+
             return redirect(url_for("account"))
 
         else:
@@ -967,7 +967,7 @@ def newbooking():
         BookingDate = request.form["BookingDate"]
 
         NewBooking = Booking(CustomerID=CustomerID, BookingID=None,SessionID=None, NumberOfAdults=None, NumberOfChildren=None, ExtraNotes=None, BookingDate=BookingDate, BookingTime=None, BookingPrice=None)
-        
+
         Result = NewBooking.AddBookingDate()
 
         Success = Result[0]
@@ -990,7 +990,7 @@ def sessiontype():
 
     WeekdayBooking = session["WeekdayBooking"]
     BookingDate = session["BookingDate"]
-    
+
     # This checks the option grabbed from the html template and redirects the user accordingly.
     if request.method == "POST":
         option = request.form["bookingtype"]
@@ -1011,7 +1011,7 @@ def sessiontype():
 
     # The variable "WeekdayBooking" is a boolean which tells the booking page if the booking is being made on the weekday or weekend
     else:
-        
+
         checkexists = "SELECT count(*) FROM Booking WHERE SessionID IN (7, 8, 9) AND Date = (?)"
         #app.logger.info(f"Looking for private hire booking with and Booking date = {BookingDate}")
         q.execute(checkexists, [BookingDate])
@@ -1023,7 +1023,7 @@ def sessiontype():
 
         else:
             PHBooked = True
-        
+
         return render_template("newbooking.html", WeekdayBooking = WeekdayBooking, PHBooked = PHBooked)
 
 @app.route('/account/newbooking/playsession/weekday',  methods=["POST","GET"])
@@ -1046,7 +1046,7 @@ def weekdayplaysession():
         error = Result[1]
 
         if Success:
-            return redirect(url_for("extras"))    
+            return redirect(url_for("extras"))
 
         else:
             return render_template("error.html", error=error)
@@ -1065,17 +1065,17 @@ def weekendplaysession():
         BookingTime = request.form["bookingtime"]
         numberadults = request.form["numberadults"]
         numberchildren = request.form["numberchildren"]
-        
+
         NewBooking = Booking(CustomerID=None, BookingID=None, SessionID=None, BookingDate=None, BookingTime=BookingTime, NumberOfChildren=numberchildren, NumberOfAdults=numberadults, BookingPrice=None, ExtraNotes=None)
 
         Result = NewBooking.WeekendOrHoliday()
 
         Success = Result[0]
         error = Result[1]
-        
+
         if Success:
-            return redirect(url_for("extras"))    
-            
+            return redirect(url_for("extras"))
+
         else:
             return render_template("error.html", error=error)
 
@@ -1094,20 +1094,20 @@ def party():
         BookingTime = request.form["bookingtime"]
         NumberAdults = request.form["numberadults"]
         NumberChildren = request.form["numberchildren"]
-        
+
         NewBooking = Booking(CustomerID=None, BookingID=None, SessionID=None, BookingDate=None, BookingTime=BookingTime, NumberOfChildren=NumberChildren, NumberOfAdults=NumberAdults, BookingPrice=None, ExtraNotes=None)
 
         Result = NewBooking.Party()
 
         Success = Result[0]
         error = Result[1]
-        
+
         if Success:
             return redirect(url_for("extras"))
-        
+
         else:
             return render_template("error.html", error=error)
-        
+
     else:
         return render_template("party.html")
 
@@ -1129,9 +1129,9 @@ def privatehire():
 
         Success = Result[0]
         error = Result[1]
-        
+
         if Success:
-            return redirect(url_for("extras"))        
+            return redirect(url_for("extras"))
         else:
             return render_template("error.html", error=error)
 
@@ -1140,25 +1140,25 @@ def privatehire():
 
 @app.route("/account/newbooking/optionalextras", methods=["POST","GET"])
 def extras():
-    
+
     if customerloggedin() == False:
         return redirect(url_for("index"))
-    
+
     PrivateHireType = session["PrivateHireType"]
     BookingType = session["BookingType"]
-    
+
     if request.method == "POST":
-        
+
         try:
-            
+
             ExtraNotes = request.form.getlist("Extra")
             session["ExtraNotes"] = ExtraNotes
-                    
+
             #app.logger.info(f"Extras: {ExtraNotes}")
-            
+
         except Exception as error:
             app.logger.info(f"Either no Extra Notes selected or an error happened: {error}")
-            
+
         return redirect(url_for("confirmbooking"))
 
     else:
@@ -1180,7 +1180,7 @@ def managebooking():
         SessionType = request.form["SessionType"]
         ExtraNotes = request.form["ExtraNotes"]
         BookingPrice = request.form["BookingPrice"]
-        
+
         session["BookingPrice"] = BookingPrice
         session["BookingID"] = BookingID
         session["BookingDate"] = BookingDate
@@ -1193,18 +1193,18 @@ def managebooking():
         return redirect(url_for("booking"))
 
     else:
-        
+
         NewBooking = Booking(CustomerID=CustomerID, BookingID=None,BookingDate=None, BookingTime=None,BookingPrice=None, SessionID=None, NumberOfAdults=None, NumberOfChildren=None, ExtraNotes=None)
-        
+
         Result = NewBooking.ManageBooking()
-        
+
         Success = Result[0]
         error = Result[1]
         activebookings = Result[2]
-        
+
         if Success:
             return render_template("managebooking.html", activebookings = activebookings)
-        
+
         else:
             return render_template("error.html", error=error)
 
@@ -1223,7 +1223,7 @@ def booking():
 
     if request.method == "POST":
         return redirect(url_for("deletebooking"))
-    
+
     else:
 
         return render_template("booking.html", BookingID = BookingID, BookingDate = BookingDate, BookingTime = BookingTime, ExtraNotes = ExtraNotes, SessionType = SessionType, BookingPrice = BookingPrice)
@@ -1239,10 +1239,10 @@ def deletebooking():
 
     Success = Result[0]
     error = Result[1]
-    
+
     if Success:
         return redirect(url_for("managebooking"))
-    
+
     else:
         return render_template("error.html", error=error)
 
@@ -1256,7 +1256,7 @@ def confirmbooking():
         return redirect(url_for("createbooking"))
 
     else:
-        
+
         NumberOfAdults = session["numberadults"]
         NumberOfChildren = session["numberchildren"]
         BookingType = session["BookingType"]
@@ -1265,7 +1265,7 @@ def confirmbooking():
         PrivateHireType = session["PrivateHireType"]
         SessionID = session["SessionID"]
         ExtraNotes = session["ExtraNotes"]
-        
+
         NewBooking = Booking(CustomerID=None, BookingID = None, SessionID=SessionID, BookingDate=None, BookingTime=None,NumberOfChildren=NumberOfChildren, NumberOfAdults=NumberOfAdults, BookingPrice=None, ExtraNotes=ExtraNotes)
 
         Result = NewBooking.GetFinalPrice(BookingType=BookingType, PrivateHireType=PrivateHireType)
@@ -1273,10 +1273,10 @@ def confirmbooking():
         Success = Result[0]
         error = Result[1]
         Price = Result[2]
-        
+
         if Success:
             return render_template("confirmbooking.html", BookingType = BookingType, BookingTime = BookingTime, BookingDate = BookingDate, PrivateHireType = PrivateHireType, NumberAdults = NumberOfAdults, NumberChildren = NumberOfChildren, Price = Price, ExtraNotes = ExtraNotes)
-        
+
         else:
             return render_template("error.html", error=error)
 
@@ -1301,10 +1301,10 @@ def createbooking():
 
     Success = Result[0]
     error = Result[1]
-    
+
     if Success:
         return redirect(url_for("managebooking"))
-    
+
     else:
         return render_template("error.html", error=error)
 
@@ -1556,50 +1556,50 @@ def managercustomer():
     Phone = session["Phone"]
 
     if request.method == "POST":
-        
+
         Delete = request.form["delete"]
-        
+
         if Delete == "False":
-            
+
             try:
-    
+
                 NewFirst = request.form["NewFirst"]
                 NewLast = request.form["NewLast"]
                 NewPhone = request.form["NewPhone"]
-    
+
                 if NewFirst != First or NewLast != Last or NewPhone != Phone:
-    
+
                     Fetch = CheckInputValid(FirstName=NewFirst, LastName=NewLast, Email=Email, PhoneNumber=NewPhone, Password="", Function="IgnoreEmailandPassword")
-    
+
                     valid = Fetch[0]
                     error = Fetch[1]
-    
+
                     if not valid:
-    
+
                         #app.logger.info(f"Error while validating details: {error}")
-    
+
                         return render_template("error.html", error=error)
                         #return False, f"Error while validating details: {error}"
                     else:
-    
+
                         details = (NewFirst, NewLast, NewPhone, CustomerID)
-    
+
                         #app.logger.info(f"Editing account details, New name = {NewFirst} {NewLast}, New phone = {NewPhone}, CustomerID = {CustomerID}")
-    
+
                         update = "UPDATE Customer SET FirstName = (?), LastName = (?), PhoneNumber = (?) WHERE CustomerID = (?)"
-    
+
                         q.execute(update, details)
-    
+
                         sql.commit()
-    
+
                         return redirect(url_for("managereditcustomer"))
-                
+
                 else:
-                    
+
                     return redirect(url_for("managereditcustomer"))
-                
+
             except Exception as error:
-                
+
                 return render_template("error.html", error=error)
 
         else:
@@ -1612,10 +1612,10 @@ def managercustomer():
                 sql.commit()
                 #app.logger.info("Customer Deleted Succesfully")
                 return redirect(url_for("managereditcustomer"))
-            
+
             except Exception as error:
                 return render_template("error.html", error=error)
-        
+
     else:
 
         return render_template("manager/customer.html", CustomerID = CustomerID, FirstName = First, LastName = Last, Email = Email, PhoneNumber = Phone)
@@ -1624,53 +1624,53 @@ def managercustomer():
 def manageholidays():
 
     if request.method == "POST":
-        
+
         return #handle deleting holiday here
-        
+
     else:
-        
+
         getholidays = "SELECT * FROM Holiday"
         q.execute(getholidays)
-    
+
         holidays = q.fetchall()
-        
+
         app.logger.info(f"Returned holidays: {holidays}")
 
         return render_template("/manager/manageholidays.html", holidays = holidays)
-    
+
 @app.route("/manager/newholiday", methods=["POST", "GET"])
 def createholiday():
-    
+
     if request.method == "POST":
-        
+
         try:
             StartDate = request.form["startdate"]
             EndDate = request.form["enddate"]
             Name = request.form["name"]
             Description = request.form["description"]
-            
+
             #app.logger.info(f"Start Date: {StartDate} End Date: {EndDate} Name: {Name} Description: {Description}")
-            
+
             if StartDate == "" or EndDate == "" or Name == "":
-                
+
                 return render_template("error.html", error="You must not leave any field blank!")
-            
+
             if StartDate == EndDate:
-                
+
                 return render_template("error.html", error="The start and end date cant be the same!")
-            
+
             else:
-                
+
                 addholiday = "INSERT INTO Holiday (Name, StartDate, EndDate, Description) VALUES (?,?,?,?)"
 
                 q.execute(addholiday, [Name, StartDate, EndDate, Description])
                 sql.commit()
-                    
-                    
+
+
         except Exception as error:
-        
+
             return render_template("error.html", error=error)
-    
+
     else:
         return render_template("manager/newholiday.html")
 
@@ -1705,35 +1705,35 @@ def mark_arrived():
 
 @app.route("/account/developer")
 def devtest():
-    
+
     i = 0
-    
+
     SessionVars = ["CustomerID","Email","Phone","First","Last","FirstName","LastName","NumberChildren","NumberAdults","BookingPrice","ExtraNotes","SessionType","BookingTime","BookingDate","BookingID","ManagerID","ManagerUsername","PrivateHireType","numberadults","numberchildren","WeekdayBooking","PlaySession","PrivateHire","Party","PlaySessionType","Price","PartyType","SessionID"]
     SessionVarsFound = []
-    
+
     # This is grabbing every session variable with the names stated in the "SessionVars" list, then showing it in the html template
     for i in range(len(SessionVars)):
-        
+
         try:
-        
+
             data = session[SessionVars[i]]
-            
+
             if data == "":
-            
+
                 SessionVarsFound.append(f"{SessionVars[i]} : Null")
-        
+
             else:
-                
+
                 SessionVarsFound.append(f"{SessionVars[i]} : {data}")
-            
+
             i + 1
-        
+
         except:
-            
+
             i + 1
-    
+
     #app.logger.info(SessionVarsFound)
-    
+
     return render_template("devtest.html", SessionVarsFound=SessionVarsFound)
 
 
