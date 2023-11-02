@@ -675,7 +675,7 @@ input[type=checkbox] {
     margin-top: 20px;
     margin-bottom: 20px;
     word-wrap: break-word;
-    padding: 10px;
+    padding: 8px;
 }
 
 table:hover {background-color: #D6EEEE;}
