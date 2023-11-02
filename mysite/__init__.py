@@ -142,7 +142,7 @@ def isweekday(BookingDate):
     # Check if the day is a weekday (Monday to Friday)
     if HolidaysThatDay > 0:
         
-        return True
+        return False
         
     else:
         if 0 <= DayOfWeek <= 4:
