@@ -1633,6 +1633,8 @@ def manageholidays():
         q.execute(getholidays)
     
         holidays = q.fetchall()
+        
+        app.logger.info(f"Returned holidays: {holidays}")
 
         return render_template("/manager/manageholidays.html", holidays = holidays)
     
