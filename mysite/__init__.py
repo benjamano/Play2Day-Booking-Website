@@ -1665,8 +1665,14 @@ def createholiday():
 
                 q.execute(addholiday, [Name, StartDate, EndDate, Description])
                 sql.commit()
+<<<<<<< HEAD
 
 
+=======
+            
+            return redirect(url_for("manageholidays")) 
+                    
+>>>>>>> ab97a2c2fc67e6f99d34ebaf0f4dac32310d805b
         except Exception as error:
 
             return render_template("error.html", error=error)
