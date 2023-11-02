@@ -139,6 +139,8 @@ def isweekday(BookingDate):
     q.execute(checkexists, [BookingDate, BookingDate])
     HolidaysThatDay=q.fetchone()[0]
 
+    app.logger.info(f"Holidays that day: {HolidaysThatDay}")
+
     # Check if the day is a weekday (Monday to Friday)
     if HolidaysThatDay > 0:
         
