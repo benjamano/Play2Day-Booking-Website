@@ -1651,7 +1651,7 @@ def createholiday():
             
             #app.logger.info(f"Start Date: {StartDate} End Date: {EndDate} Name: {Name} Description: {Description}")
             
-            if StartDate == "" or EndDate == "" or Name == "" or Description == "":
+            if StartDate == "" or EndDate == "" or Name == "":
                 
                 return render_template("error.html", error="You must not leave any field blank!")
             
