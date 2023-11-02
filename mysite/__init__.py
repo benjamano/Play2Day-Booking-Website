@@ -92,7 +92,7 @@ def onStart():
 
         tblSession = "CREATE TABLE IF NOT EXISTS Session (SessionID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, SessionType TEXT NOT NULL, AdultPrice REAL NOT NULL, ChildPrice REAL NOT NULL)"
 
-        tblHolidays = "CREATE TABLE IF NOT EXISTS Holiday (HolidayID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Holiday Name TEXT NOT NULL, StartDate VARCHAR(20) NOT NULL, EndDate VARCHAR(20) NOT NULL, Description VARCHAR(255) NOT NULL)"
+        tblHolidays = "CREATE TABLE IF NOT EXISTS Holiday (HolidayID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL, StartDate VARCHAR(20) NOT NULL, EndDate VARCHAR(20) NOT NULL, Description VARCHAR(255) NOT NULL)"
 
         q.execute(tblCustomer)
         q.execute(tblManager)
@@ -1620,9 +1620,25 @@ def managercustomer():
 
         return render_template("manager/customer.html", CustomerID = CustomerID, FirstName = First, LastName = Last, Email = Email, PhoneNumber = Phone)
 
-@app.route("/manager/holidays", methods=["POST", "GET"])
+@app.route("/manager/manageholidays", methods=["POST", "GET"])
 def manageholidays():
 
+    if request.method == "POST":
+        
+        return #handle deleting holiday here
+        
+    else:
+        
+        getholidays = "SELECT * FROM Holiday"
+        q.execute(getholidays)
+    
+        holidays = q.fetchall()
+
+        return render_template("/manager/manageholidays.html", holidays = holidays)
+    
+@app.route("/manager/newholiday", methods=["POST", "GET"])
+def createholiday():
+    
     if request.method == "POST":
         
         try:
@@ -1641,13 +1657,20 @@ def manageholidays():
                 
                 return render_template("error.html", error="The start and end date cant be the same!")
             
+            else:
+                
+                addholiday = "INSERT INTO Holiday (Name, StartDate, EndDate, Description) VALUES (?,?,?,?)"
+
+                q.execute(addholiday, [Name, StartDate, EndDate, Description])
+                sql.commit()
+                    
+                    
         except Exception as error:
         
             return render_template("error.html", error=error)
-        
+    
     else:
-
-        return render_template("/manager/editholidays.html")
+        return render_template("newholiday.html")
 
 @app.route("/manager/arrived", methods=["POST", "GET"])
 def mark_arrived():

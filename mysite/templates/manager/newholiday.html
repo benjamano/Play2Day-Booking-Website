@@ -8,7 +8,7 @@
     <a href="/manager/account"><i class="fa-solid fa-house-chimney"></i>   Home</a>
     <a href="/manager/editbooking"><i class="fa-solid fa-clipboard-list"></i>   Booking Report</a>
     <a href="/manager/editcustomer"><i class="fa-solid fa-user-pen"></i>   Edit a Customer</a>
-    <a class="active" href="/manager/holidays"><i class="fa-solid fa-gift"></i>   Upcoming Holidays</a>
+    <a class="active" href="/manager/manageholidays"><i class="fa-solid fa-gift"></i>   Upcoming Holidays</a>
     <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>   Log Out</a>
 </div>
 
@@ -18,38 +18,33 @@
         <div class="pair">
             <center>
                 <h5>
-                    Manage upcoming public holidays
+                    Add a public holiday
                 </h5>
                 <form action="#" method="post">
-
                     <label>
                         Name
                         <input type="text" name="name">
                     </label>
-
                     <h2>
                         <label>
                             Start Date
-                            <input type="date" name="startdate">
+                            <input type="date" name="startdate" maxlength="20">
                         </label>
                         <label style="margin-left: 32px">
                             End Date
-                            <input type="date" name="enddate">
+                            <input type="date" name="enddate" maxlength="20">
                         </label>
                     </h2>
                     <br>
                     <br>
                     <label>
                         Brief Decription
-                        <input type="text" name="description" style="height: 100px; width: 250px;">
+                        <input type="text" name="description" style="height: 100px; width: 250px;" maxlength="255">
                     </label>
                     <br>
                     <br>
-                    <input type="submit" name="submit">
-
+                    <input type="submit" name="submit" disabled>
                 </form>
-
-
             </center>
         </div>
     </center>
