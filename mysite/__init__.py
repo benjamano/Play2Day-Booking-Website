@@ -1672,7 +1672,7 @@ def createholiday():
             return render_template("error.html", error=error)
     
     else:
-        return render_template("newholiday.html")
+        return render_template("manager/newholiday.html")
 
 @app.route("/manager/arrived", methods=["POST", "GET"])
 def mark_arrived():
