@@ -694,7 +694,9 @@ class Booking:
 
                 Price += 10.0
 
-            #if self.ExtraNotes == "":
+            if self.ExtraNotes == "AdultLaser":
+                
+                Price += 15.0
 
             session["Price"] = Price
 
