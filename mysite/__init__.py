@@ -1670,7 +1670,7 @@ def createholiday():
 
 =======
             
-            return redirect(url_for("manageholidays")) 
+                return redirect(url_for("manageholidays")) 
                     
 >>>>>>> ab97a2c2fc67e6f99d34ebaf0f4dac32310d805b
         except Exception as error:
