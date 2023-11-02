@@ -1635,12 +1635,14 @@ def manageholidays():
 
     else:
 
-        getholidays = "SELECT * FROM Holiday ORDER BY Date ASC"
-        q.execute(getholidays)
+        Date = date.today()
+
+        getholidays = "SELECT * FROM Holiday WHERE EndDate >= (?) ORDER BY StartDate ASC"
+        q.execute(getholidays, [Date])
 
         holidays = q.fetchall()
 
-        app.logger.info(f"Returned holidays: {holidays}")
+        #app.logger.info(f"Returned holidays: {holidays}")
 
         return render_template("/manager/manageholidays.html", holidays = holidays)
 
