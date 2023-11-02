@@ -1625,11 +1625,17 @@ def manageholidays():
 
     if request.method == "POST":
 
-        return #handle deleting holiday here
+        HolidayID = request.form["HolidayID"]
+
+        deleteholiday = "DELETE FROM Holiday WHERE HolidayID = (?)"
+        
+        q.execute(deleteholiday, [HolidayID])
+        
+        return redirect(url_for(manageholidays))
 
     else:
 
-        getholidays = "SELECT * FROM Holiday"
+        getholidays = "SELECT * FROM Holiday ORDER BY Date ASC"
         q.execute(getholidays)
 
         holidays = q.fetchall()

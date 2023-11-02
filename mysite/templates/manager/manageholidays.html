@@ -40,17 +40,12 @@
                                 <td>{{ holiday.1 }}</td>
                                 <td>{{ holiday.4 }}</td>
                                 <td>{{ holiday.2 }} - {{ holiday.3 }}</td>
-                                <td><button class="select" type="submit">Details</button></td>
-                                </form>
-                                    <td>
-                                        <center>
-                                        <form action="#" method="POST">
-                                            <input type="hidden" name="HolidayID" value="{{ holiday.0 }}">
-                                            <button type="submit">Delete</button>
-                                        </form>
-                                        </center>
-                                    </td>
-                                </form>
+                                <td>
+                                    <form action="#" method="POST">
+                                        <input type="hidden" name="HolidayID" value="{{ holiday.0 }}">
+                                        <button class="select" type="submit">Delete</button>
+                                    </form>
+                                </td>
                             </tr>
                     {% endfor %}
                 </table>
