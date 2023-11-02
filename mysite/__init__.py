@@ -134,7 +134,7 @@ def isweekday(BookingDate):
     # Get the day of the week (0 = Monday, 6 = Sunday)
     DayOfWeek = Date.weekday()
 
-    checkexists = "SELECT count(*) FROM Holiday WHERE Date >= (?) AND Date <= (?)"
+    checkexists = "SELECT count(*) FROM Holiday WHERE StartDate >= (?) AND EndDate <= (?)"
     #app.logger.info(f"Looking for private hire booking with and Booking date = {self.BookingDate}")
     q.execute(checkexists, [BookingDate, BookingDate])
     HolidaysThatDay=q.fetchone()[0]
