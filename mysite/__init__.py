@@ -1631,7 +1631,7 @@ def manageholidays():
         
         q.execute(deleteholiday, [HolidayID])
         
-        return redirect(url_for(manageholidays))
+        return redirect(url_for("manageholidays"))
 
     else:
 
