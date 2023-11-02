@@ -142,7 +142,6 @@ def isweekday(BookingDate):
 
     # Check if the day is a weekday (Monday to Friday) or the booking is being made during the holiday
     if HolidaysThatDay > 0:
-        
         return False
         
     else:
@@ -1163,6 +1162,8 @@ def extras():
         try:
 
             ExtraNotes = request.form.getlist("Extra")
+            ExtraNotes = ", ".join(ExtraNotes)
+            
             session["ExtraNotes"] = ExtraNotes
 
             #app.logger.info(f"Extras: {ExtraNotes}")
