@@ -128,6 +128,15 @@ def customerloggedin():
     else:
         return True
 
+def managerloggedin():
+    # Check the manager is logged in by checking if the username is present
+    if session["ManagerUsername"] == "":
+        #app.logger.info("Account not logged in")
+        return False
+
+    else:
+        return True
+
 def isweekday(BookingDate):
 
     Date = datetime.strptime(BookingDate, "%Y-%m-%d")
@@ -1299,7 +1308,7 @@ def createbooking():
 
     if customerloggedin() == False:
         return redirect(url_for("index"))
-
+        
     CustomerID = session["CustomerID"]
     SessionID = session["SessionID"]
     BookingTime = session["BookingTime"]
@@ -1394,6 +1403,9 @@ def managerlogin():
 
 @app.route("/manager/account", methods=["POST","GET"])
 def manageraccount():
+    
+    if managerloggedin() == False:
+        return redirect(url_for("index"))
 
     try:
         Today = date.today()
@@ -1416,6 +1428,10 @@ def manageraccount():
 
 @app.route("/manager/editbooking", methods=["POST", "GET"])
 def managereditbooking():
+    
+    if managerloggedin() == False:
+        return redirect(url_for("index"))
+    
     if request.method == "POST":
 
         if "Filter" in request.form != "Filter":
@@ -1493,6 +1509,9 @@ def managereditbooking():
 
 @app.route("/manager/managebooking/booking", methods=["POST", "GET"])
 def managerbooking():
+    
+    if managerloggedin() == False:
+        return redirect(url_for("index"))
 
     BookingID = session["BookingID"]
     BookingDate = session["BookingDate"]
@@ -1527,6 +1546,10 @@ def managerbooking():
 
 @app.route('/manager/editcustomer', methods=["POST","GET"])
 def managereditcustomer():
+    
+    if managerloggedin() == False:
+        return redirect(url_for("index"))
+    
     if request.method == "POST":
         try:
             CustomerID = request.form["CustomerID"]
@@ -1562,6 +1585,9 @@ def managereditcustomer():
 
 @app.route("/manager/editcustomer/customer", methods=["POST", "GET"])
 def managercustomer():
+    
+    if managerloggedin() == False:
+        return redirect(url_for("index"))
 
     CustomerID = session["CustomerID"]
     First = session["First"]
@@ -1636,6 +1662,9 @@ def managercustomer():
 
 @app.route("/manager/manageholidays", methods=["POST", "GET"])
 def manageholidays():
+    
+    if managerloggedin() == False:
+        return redirect(url_for("index"))
 
     if request.method == "POST":
 
@@ -1662,6 +1691,9 @@ def manageholidays():
 
 @app.route("/manager/newholiday", methods=["POST", "GET"])
 def createholiday():
+    
+    if managerloggedin() == False:
+        return redirect(url_for("index"))
 
     if request.method == "POST":
 
@@ -1699,6 +1731,9 @@ def createholiday():
 
 @app.route("/manager/arrived", methods=["POST", "GET"])
 def mark_arrived():
+    
+    if managerloggedin() == False:
+        return redirect(url_for("index"))
 
     if request.method == "POST":
         BookingID = request.form["BookingID"]#
