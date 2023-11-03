@@ -168,13 +168,13 @@ def bookingclosed(BookingDate):
         q.execute(getdescription, [BookingDate, BookingDate])
         descriptions = q.fetchall()
     
-        app.logger.info(f"{descriptions}")
+        #app.logger.info(f"{descriptions}")
 
         i = 0
 
         for description in descriptions:
             
-            app.logger.info(f"{description}, {i}")
+            #app.logger.info(f"{description}, {i}")
             
             if description[i] == "Closed":
         
@@ -869,6 +869,7 @@ def logout():
         session["numberadults"] = ""
         session["numberchildren"] = ""
         session["BookingType"] = ""
+        session["BookingValid"] = ""
 
 
         return redirect(url_for("index"))
@@ -1016,6 +1017,7 @@ def newbooking():
     session["numberchildren"] = ""
     session["WeekdayBooking"] = False
     session["ExtraNotes"] = ""
+    session["BookingValid"] = ""
 
 
     if request.method == "POST":
@@ -1060,9 +1062,11 @@ def sessiontype():
         urlname = Result[2]
 
         if Success:
+            session["BookingValid"] = "True"
             return redirect(url_for(urlname))
 
         else:
+            session["BookingValid"] = "False"
             return render_template("error.html", error=error)
 
     # The variable "WeekdayBooking" is a boolean which tells the booking page if the booking is being made on the weekday or weekend
@@ -1088,6 +1092,9 @@ def weekdayplaysession():
     if customerloggedin() == False:
         return redirect(url_for("index"))
 
+    if session["BookingValid"] == "False":
+        return redirect(url_for("newbooking"))
+    
     if request.method == "POST":
 
         BookingTime = request.form["bookingtime"]
@@ -1115,6 +1122,9 @@ def weekendplaysession():
 
     if customerloggedin() == False:
         return redirect(url_for("index"))
+    
+    if session["BookingValid"] == "False":
+        return redirect(url_for("newbooking"))
 
     if request.method == "POST":
 
@@ -1144,6 +1154,9 @@ def party():
 
     if customerloggedin() == False:
         return redirect(url_for("index"))
+    
+    if session["BookingValid"] == "False":
+        return redirect(url_for("newbooking"))
 
     if request.method == "POST":
 
@@ -1172,6 +1185,9 @@ def privatehire():
 
     if customerloggedin() == False:
         return redirect(url_for("index"))
+    
+    if session["BookingValid"] == "False":
+        return redirect(url_for("newbooking"))
 
     if request.method == "POST":
 
@@ -1199,6 +1215,9 @@ def extras():
 
     if customerloggedin() == False:
         return redirect(url_for("index"))
+    
+    if session["BookingValid"] == "False":
+        return redirect(url_for("newbooking"))
 
     PrivateHireType = session["PrivateHireType"]
     BookingType = session["BookingType"]
@@ -1361,6 +1380,7 @@ def createbooking():
     error = Result[1]
 
     if Success:
+        session["BookingValid"] = "False"
         return redirect(url_for("managebooking"))
 
     else:
