@@ -477,7 +477,7 @@ class Booking:
 
     def SelectSessionType(self, option):
 
-        app.logger.info(f"Option: {option}")
+        #app.logger.info(f"Option: {option}")
 
         if option == "Weekend Play Session":
             session["BookingType"] = "Weekend Play Session"
