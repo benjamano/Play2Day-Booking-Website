@@ -165,23 +165,23 @@ def bookingclosed(BookingDate):
     try:
         getdescription = "SELECT Description FROM Holiday WHERE StartDate <= (?) AND EndDate >= (?)"
     
+        q.execute(getdescription, [BookingDate, BookingDate])
+    
+        descriptions = q.fetchall()
+    
+        app.logger.info(f"{descriptions}")
+
+        for description in descriptions:
+            
+            if description == "Closed":
+        
+                return True
+    
+        return False    
+        
     except Exception as error:
         
         app.logger.info(f"Either no holidays at that time or an error occurred: {error}")
-        
-    q.execute(getdescription, [BookingDate, BookingDate])
-    
-    description = q.fetchone()[0]
-    
-    app.logger.info(f"{description}")
-    
-    if description == "Closed":
-        
-        return True
-    
-    else:
-        return False    
-    
 
 def findcustomerdetails(Email, CustomerID):
 
