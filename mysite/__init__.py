@@ -162,8 +162,13 @@ def isweekday(BookingDate):
         
 def bookingclosed(BookingDate):
     
-    getdescription = "SELECT Description FROM Holiday WHERE StartDate <= (?) AND EndDate >= (?)"
+    try:
+        getdescription = "SELECT Description FROM Holiday WHERE StartDate <= (?) AND EndDate >= (?)"
     
+    except Exception as error:
+        
+        app.logger.info(f"Either no holidays at that time or an error occurred: {error}")
+        
     q.execute(getdescription, [BookingDate, BookingDate])
     
     description = q.fetchone()[0]
