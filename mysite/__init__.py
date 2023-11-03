@@ -166,7 +166,7 @@ def bookingclosed(BookingDate):
     
     q.execute(getdescription, [BookingDate, BookingDate])
     
-    description = q.fethone()[0]
+    description = q.fetchone()[0]
     
     if description == "Closed":
         
