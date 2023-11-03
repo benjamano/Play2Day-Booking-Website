@@ -173,9 +173,9 @@ def bookingclosed(BookingDate):
 
         for description in descriptions:
             
-            app.logger.info(f"{description[0]}")
+            app.logger.info(f"{description}")
             
-            if description[0] == "Closed":
+            if description == "Closed":
         
                 return True
     
@@ -1742,10 +1742,6 @@ def createholiday():
             if StartDate == "" or EndDate == "" or Name == "":
 
                 return render_template("error.html", error="You must not leave any field blank!")
-
-            if StartDate == EndDate:
-
-                return render_template("error.html", error="The start and end date cant be the same!")
 
             else:
 
