@@ -151,13 +151,30 @@ def isweekday(BookingDate):
 
     # Check if the day is a weekday (Monday to Friday) or the booking is being made during the holiday
     if HolidaysThatDay > 0:
+    
         return False
-        
+
     else:
         if 0 <= DayOfWeek <= 4:
             return True
         else:
             return False
+        
+def bookingclosed(BookingDate):
+    
+    getdescription = "SELECT Desciption FROM Holiday StartDate <= (?) AND EndDate >= (?)"
+    
+    get = q.execute(getdescription, [BookingDate, BookingDate])
+
+    description = get[0]
+    
+    if description == "Closed":
+        
+        return True
+    
+    else:
+        return False    
+    
 
 def findcustomerdetails(Email, CustomerID):
 
@@ -417,22 +434,28 @@ class Booking:
     def AddBookingDate(self):
 
         try:
-
-            if checkdate(self.BookingDate) == False:
-                # If booking date is in the past
-                return False, "Please book a date in the future!"
-
-            elif isweekday(self.BookingDate) == True:
-                # If booking date is on a weekday
-                #app.logger.info("Booking is being made on a weekday")
-                session["WeekdayBooking"] = True
-
+            
+            if bookingclosed(self.BookingDate):
+                
+                return False, "Bookings are Closed this day"
+                
             else:
-                # If booking date is on the weekend
-                #app.logger.info("Booking is beng made on the weekend")
-                session["WeekdayBooking"] = False
 
-            session["BookingDate"] = self.BookingDate
+                if checkdate(self.BookingDate) == False:
+                    # If booking date is in the past
+                    return False, "Please book a date in the future!"
+
+                elif isweekday(self.BookingDate) == True:
+                    # If booking date is on a weekday
+                    #app.logger.info("Booking is being made on a weekday")
+                    session["WeekdayBooking"] = True
+
+                else:
+                    # If booking date is on the weekend
+                    #app.logger.info("Booking is beng made on the weekend")
+                    session["WeekdayBooking"] = False
+
+                session["BookingDate"] = self.BookingDate
 
         except Exception as error:
 
