@@ -173,9 +173,9 @@ def bookingclosed(BookingDate):
 
         for description in descriptions:
             
-            app.logger.info(f"{description}")
+            app.logger.info(f"{description[0]}")
             
-            if description == "Closed":
+            if description[0] == "Closed":
         
                 return True
     
