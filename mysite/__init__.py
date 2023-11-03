@@ -897,6 +897,11 @@ def signup():
 
         if Success:
             session["Email"] = Email
+            session["Phone"] = ""
+            session["First"] = ""
+            session["Last"] = ""
+            session["FirstName"] = ""
+            session["LastName"] = ""
 
             return redirect(url_for("account"))
 
