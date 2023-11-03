@@ -147,7 +147,7 @@ def isweekday(BookingDate):
     q.execute(checkexists, [BookingDate, BookingDate])
     HolidaysThatDay=q.fetchone()[0]
 
-    app.logger.info(f"Holidays that day: {HolidaysThatDay}")
+    #app.logger.info(f"Holidays that day: {HolidaysThatDay}")
 
     # Check if the day is a weekday (Monday to Friday) or the booking is being made during the holiday
     if HolidaysThatDay > 0:
@@ -168,7 +168,7 @@ def bookingclosed(BookingDate):
     
     description = q.fetchone()[0]
     
-    app.logger.info(f"{description}, {description[0]}")
+    app.logger.info(f"{description}")
     
     if description == "Closed":
         
