@@ -169,9 +169,11 @@ def bookingclosed(BookingDate):
     
         descriptions = q.fetchall()
     
-        app.logger.info(f"{descriptions}, {BookingDate}")
+        app.logger.info(f"{descriptions}")
 
         for description in descriptions:
+            
+            app.logger.info(f"{description}")
             
             if description == "Closed":
         
