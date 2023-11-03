@@ -1435,7 +1435,9 @@ def managereditbooking():
     if request.method == "POST":
 
         if "Filter" in request.form != "Filter":
-
+            
+            Date = date.today()
+            
             StartDate = request.form.get("StartDate")
             EndDate = request.form.get("EndDate")
             Filter = request.form.get("Filter")
@@ -1452,14 +1454,14 @@ def managereditbooking():
             elif Filter != "all":
                 # Filter by type only
                 if  Filter == "Private Hire":
-                    getactivebookings = "SELECT Booking.BookingID, Booking.Date, Booking.Time, Session.SessionType, Booking.ExtraNotes, Booking.Price, Booking.NumberOfChildren, Booking.NumberOfAdults , Customer.FirstName, Customer.LastName, Booking.Arrived FROM Booking INNER JOIN Session ON Booking.SessionID = Session.SessionID INNER JOIN Customer ON Booking.CustomerID = Customer.CustomerID WHERE Session.SessionID = 8 OR Session.SessionID = 9 OR Session.SessionID = 10 ORDER BY Booking.Date ASC"
+                    getactivebookings = f"SELECT Booking.BookingID, Booking.Date, Booking.Time, Session.SessionType, Booking.ExtraNotes, Booking.Price, Booking.NumberOfChildren, Booking.NumberOfAdults , Customer.FirstName, Customer.LastName, Booking.Arrived FROM Booking INNER JOIN Session ON Booking.SessionID = Session.SessionID INNER JOIN Customer ON Booking.CustomerID = Customer.CustomerID WHERE Session.SessionID = 8 OR Session.SessionID = 9 OR Session.SessionID = 10 AND Booking.Date >= '{Date}' ORDER BY Booking.Date ASC"
                 else:
-                    getactivebookings = f"SELECT Booking.BookingID, Booking.Date, Booking.Time, Session.SessionType, Booking.ExtraNotes, Booking.Price, Booking.NumberOfChildren, Booking.NumberOfAdults , Customer.FirstName, Customer.LastName, Booking.Arrived FROM Booking INNER JOIN Session ON Booking.SessionID = Session.SessionID INNER JOIN Customer ON Booking.CustomerID = Customer.CustomerID WHERE Session.SessionType = '{Filter}' ORDER BY Booking.Date ASC"
+                    getactivebookings = f"SELECT Booking.BookingID, Booking.Date, Booking.Time, Session.SessionType, Booking.ExtraNotes, Booking.Price, Booking.NumberOfChildren, Booking.NumberOfAdults , Customer.FirstName, Customer.LastName, Booking.Arrived FROM Booking INNER JOIN Session ON Booking.SessionID = Session.SessionID INNER JOIN Customer ON Booking.CustomerID = Customer.CustomerID WHERE Session.SessionType = '{Filter}' AND Booking.Date >= '{Date}' ORDER BY Booking.Date ASC"
             elif StartDate and EndDate:
                 # Filter by date range only
-                getactivebookings = f"SELECT Booking.BookingID, Booking.Date, Booking.Time, Session.SessionType, Booking.ExtraNotes, Booking.Price, Booking.NumberOfChildren, Booking.NumberOfAdults, Customer.FirstName, Customer.LastName, Booking.Arrived FROM Booking INNER JOIN Session ON Booking.SessionID = Session.SessionID INNER JOIN Customer ON Booking.CustomerID = Customer.CustomerID WHERE Booking.Date BETWEEN '{StartDate}' AND '{EndDate}' ORDER BY Booking.Date ASC"
+                getactivebookings = f"SELECT Booking.BookingID, Booking.Date, Booking.Time, Session.SessionType, Booking.ExtraNotes, Booking.Price, Booking.NumberOfChildren, Booking.NumberOfAdults, Customer.FirstName, Customer.LastName, Booking.Arrived FROM Booking INNER JOIN Session ON Booking.SessionID = Session.SessionID INNER JOIN Customer ON Booking.CustomerID = Customer.CustomerID WHERE Booking.Date BETWEEN '{StartDate}' AND '{EndDate}' AND Booking.Date >= '{Date}' ORDER BY Booking.Date ASC"
             else:
-                getactivebookings = "SELECT Booking.BookingID, Booking.Date, Booking.Time, Session.SessionType, Booking.ExtraNotes, Booking.Price, Booking.NumberOfChildren, Booking.NumberOfAdults, Customer.FirstName, Customer.LastName, Booking.Arrived FROM Booking INNER JOIN Session ON Booking.SessionID = Session.SessionID INNER JOIN Customer ON Booking.CustomerID = Customer.CustomerID ORDER BY Booking.Date ASC"
+                getactivebookings = f"SELECT Booking.BookingID, Booking.Date, Booking.Time, Session.SessionType, Booking.ExtraNotes, Booking.Price, Booking.NumberOfChildren, Booking.NumberOfAdults, Customer.FirstName, Customer.LastName, Booking.Arrived FROM Booking INNER JOIN Session ON Booking.SessionID = Session.SessionID INNER JOIN Customer ON Booking.CustomerID = Customer.CustomerID AND Booking.Date >= '{Date}' ORDER BY Booking.Date ASC"
 
             q.execute(getactivebookings)
             activebookings = q.fetchall()
