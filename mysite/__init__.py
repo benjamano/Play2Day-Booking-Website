@@ -168,6 +168,8 @@ def bookingclosed(BookingDate):
     
     description = q.fetchone()[0]
     
+    app.logger.info(f"{description}, {description[0]}")
+    
     if description == "Closed":
         
         return True
