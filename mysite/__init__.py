@@ -162,7 +162,7 @@ def isweekday(BookingDate):
         
 def bookingclosed(BookingDate):
     
-    getdescription = "SELECT Desciption FROM Holiday WHERE StartDate <= (?) AND EndDate >= (?)"
+    getdescription = "SELECT Description FROM Holiday WHERE StartDate <= (?) AND EndDate >= (?)"
     
     get = q.execute(getdescription, [BookingDate, BookingDate])
 
