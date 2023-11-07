@@ -212,7 +212,7 @@ def findcustomerdetails(Email, CustomerID):
         
     else:
         
-        Fetch = ""
+        Fetch = "Empty"
 
     app.logger.info(f"Fetch: {Fetch}, Email: {Email}, CID: {CustomerID}")
 
