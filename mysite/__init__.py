@@ -214,6 +214,8 @@ def findcustomerdetails(Email, CustomerID):
         
         Fetch = ""
 
+    app.logger.info(f"{Fetch}, {Email}, {CustomerID}")
+
     return Fetch
 
 def HashPassword(Password):
@@ -944,7 +946,7 @@ def signup():
             return redirect(url_for("account"))
 
         else:
-            return render_template("error.html", error=f"Error while registering: {error} 01")
+            return render_template("error.html", error=f"Error while registering: {error}")
 
     else:
         return render_template("signup.html")
