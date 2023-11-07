@@ -315,7 +315,7 @@ class Customer:
 
                     return False, error
 
-                CustomerID = findcustomerdetails(Email=self.Email, CustomerID = "")
+                CustomerID = findcustomerdetails(Email=self.Email, CustomerID = "")[0]
 
                 session["CustomerID"] = CustomerID
                 session["Email"] = self.Email
