@@ -212,7 +212,7 @@ def findcustomerdetails(Email, CustomerID):
         
     else:
         
-        return None
+        Fetch = None
 
     return Fetch
 
