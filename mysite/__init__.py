@@ -212,7 +212,7 @@ def findcustomerdetails(Email, CustomerID):
         
     else:
         
-        Fetch = None
+        Fetch = ""
 
     return Fetch
 
@@ -934,7 +934,7 @@ def signup():
         error = Result[1]
 
         if Success:
-            session["Email"] = str(Email)
+            session["Email"] = Email
             session["Phone"] = ""
             session["First"] = ""
             session["Last"] = ""
