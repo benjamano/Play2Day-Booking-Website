@@ -196,7 +196,7 @@ def findcustomerdetails(Email, CustomerID):
 
     if CustomerID == "" and Email != "":
 
-        code = "SELECT * FROM Customer WHERE Customer.Email = (?)"
+        code = "SELECT * FROM Customer WHERE Email = (?)"
 
         q.execute(code, [Email])
 
@@ -214,7 +214,7 @@ def findcustomerdetails(Email, CustomerID):
         
         Fetch = ""
 
-    #app.logger.info(f"{Fetch}, {Email}, {CustomerID}")
+    app.logger.info(f"Fetch: {Fetch}, Email: {Email}, CID: {CustomerID}")
 
     return Fetch
 
@@ -340,9 +340,9 @@ class Customer:
             return False, f"Account with Email: {Email} doesn't exist : {error}"
         if CheckPassword(self.Password, StoredSalt, StoredPassword):
             # Passwords match
-            CustomerID = findcustomerdetails(Email=self.Email, CustomerID = "")[0]
+            CustomerDetails = findcustomerdetails(Email=self.Email, CustomerID = "")
 
-            session["CustomerID"] = CustomerID
+            session["CustomerID"] = CustomerDetails[0]
             session["Email"] = self.Email
 
             return True, None
