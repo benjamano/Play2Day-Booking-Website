@@ -214,7 +214,7 @@ def findcustomerdetails(Email, CustomerID):
         
         Fetch = ""
 
-    app.logger.info(f"{Fetch}, {Email}, {CustomerID}")
+    #app.logger.info(f"{Fetch}, {Email}, {CustomerID}")
 
     return Fetch
 
@@ -315,7 +315,7 @@ class Customer:
 
                     return False, error
 
-                CustomerID = findcustomerdetails(Email=self.Email, CustomerID = "")[0]
+                CustomerID = findcustomerdetails(Email=self.Email, CustomerID = "")
 
                 session["CustomerID"] = CustomerID
                 session["Email"] = self.Email
