@@ -504,8 +504,7 @@ progress::-moz-progress-bar {
     cursor: pointer;
 }
 .nextbutton {
-    background-color: #bc1e2e7c;
-    border: none;
+    border: solid grey 5px;
     color: white;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     cursor: pointer;
@@ -515,6 +514,7 @@ progress::-moz-progress-bar {
     font-size: 30;
     margin-top: 30px;
     margin-bottom: 30px;
+    transition-duration: 0.4s;
 }
 
 .nextbutton:hover {
