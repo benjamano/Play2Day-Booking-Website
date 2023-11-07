@@ -944,7 +944,7 @@ def signup():
             return redirect(url_for("account"))
 
         else:
-            return render_template("error.html", error=error)
+            return render_template("error.html", error=f"Error while registering: {error} 01")
 
     else:
         return render_template("signup.html")
