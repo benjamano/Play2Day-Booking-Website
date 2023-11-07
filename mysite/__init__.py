@@ -202,7 +202,7 @@ def findcustomerdetails(Email, CustomerID):
 
         Fetch = q.fetchone()
 
-    if CustomerID != "":
+    elif CustomerID != "":
 
         code = "SELECT * FROM Customer WHERE CustomerID = (?)"
 
