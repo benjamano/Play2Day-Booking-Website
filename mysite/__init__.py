@@ -201,6 +201,7 @@ def findcustomerdetails(Email, CustomerID):
         q.execute(code, [Email])
 
         Fetch = q.fetchone()
+## jack and joe were here
 
     elif CustomerID != "":
 
@@ -214,7 +215,7 @@ def findcustomerdetails(Email, CustomerID):
         
         Fetch = "Empty"
 
-    app.logger.info(f"Fetch: {Fetch}, Email: {Email}, CID: {CustomerID}")
+    #app.logger.info(f"Fetch: {Fetch}, Email: {Email}, CID: {CustomerID}")
 
     return Fetch
 
