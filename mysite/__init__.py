@@ -162,6 +162,8 @@ def isweekday(BookingDate):
         
 def bookingclosed(BookingDate):
     
+    #This function checks if the booking is closed, due to a holiday being set that day by a manager, it returns a boolean value indicating whether the booking is closed or not, this is then used by the caller of the function to determine whether the booking is valid.
+    
     try:
         getdescription = "SELECT Description FROM Holiday WHERE StartDate <= (?) AND EndDate >= (?)"
     
@@ -189,6 +191,8 @@ def bookingclosed(BookingDate):
         app.logger.info(f"Either no holidays at that time or an error occurred: {error}")
 
 def findcustomerdetails(Email, CustomerID):
+    
+    #This is a simple function to find the customer details, depending on the values passed in, then returning another, for example, the email is not sent, but customer id is, so the email is found and returned. 
 
     if CustomerID == "" and Email != "":
 
@@ -205,21 +209,32 @@ def findcustomerdetails(Email, CustomerID):
         q.execute(code, [CustomerID])
 
         Fetch = q.fetchone()
+        
+    else:
+        
+        return None
 
     return Fetch
 
 def HashPassword(Password):
+    
+    #This function hashes the password entered by the user, either when signing in.
 
     Salt = bcrypt.gensalt()
     HashedPassword = bcrypt.hashpw(Password.encode("utf-8"), Salt)
     return Salt, HashedPassword
 
 def CheckPassword(Password, StoredSalt, StoredPassword):
+    
+    #This function checks the password using the stored salt that was stored in the database, the password entered when logging in and the stored password in the database.
 
     HashedPassword = bcrypt.hashpw(Password.encode("utf-8"), StoredSalt)
     return HashedPassword == StoredPassword
 
 def CheckInputValid(FirstName, LastName, Email, PhoneNumber, Password, Function):
+    
+    #This function is used to check the inputs from the edit details forms or the signup forms, and checks the validity of the inputed data, returning False if the data doesn't meet the criteria, this shouldn't need to take action, it's mainly incase someone changes the html requirements through inspect element to allow invalid data.
+    
 
     if len(FirstName) > 30 or len(LastName) > 30:
 
@@ -252,6 +267,8 @@ class Customer:
         self.PhoneNumber = PhoneNumber
 
     def Register(self):
+        
+        #This function is called when the customer is first registered to the system, it checks the validality of data and makes sure a customer with that email doesn't already exist. If all the requirements are met, the customer is created and added into the database.
 
         Fetch = CheckInputValid(self.FirstName, self.LastName, self.Email, self.PhoneNumber, self.Password, Function="Full")
 
@@ -308,6 +325,8 @@ class Customer:
                 return False, error
 
     def Login(self, Email, Password, FirstName=None, LastName=None, PhoneNumber=None):
+        
+        #This function is called when the user is logging in through the website, it checks the date inputted in the form is valid, and checks the password to see if it is correct.
         try:
             code = "SELECT Password, PasswordSalt FROM Customer WHERE Email = (?)"
             q.execute(code, [self.Email])
@@ -332,6 +351,8 @@ class Customer:
             return False, "Email or password incorrect, please re-enter your details"
 
     def account(self, Email=None, Password=None, FirstName=None, LastName=None, PhoneNumber=None):
+        
+        # Gets the account details, and gets the nearest booking that is set as not arrived and isn't in the past.
         try:
 
             Email = session["Email"]
@@ -362,6 +383,8 @@ class Customer:
 
     def EditDetails(self, NewFirst, NewLast, NewPhone, Edit, Email=None, Password=None, FirstName=None, LastName=None, PhoneNumber=None):
 
+        #This function is called when the user open the edit account details page, the "Edit" variable is either 1 or 0, if it is 0, the function gets the customer's account details, if is is 1, the edited details are checked against some validation requirements, then the record is edited using the new details. 
+        
         if Edit == 0:
 
             Email = session["Email"]
@@ -404,6 +427,8 @@ class Customer:
                 return False, f"Error while updating account details: {error}"
 
     def DeleteAccount(self):
+        
+        #This function is called when the account is to be deleted, it deletes all the bookings associated with the account to be deleted as well as the account being deleted. 
         CustomerID = session["CustomerID"]
 
         try:
@@ -444,7 +469,8 @@ class Booking:
         self.BookingID = BookingID
 
     def AddBookingDate(self):
-
+        
+        #This function is called on the first page of the new bookings page, it checks if bookings are closed on that date and checks to see it's not in the past, and then finds if the date is the weekend or not, causing the select session page to be different depending on the variable session['WeekdayBooking'].
         try:
             
             if bookingclosed(self.BookingDate):
@@ -476,6 +502,8 @@ class Booking:
         return True, None
 
     def SelectSessionType(self, option):
+        
+        # This function uses the passed "option" variable to determine the session the customer is booking, then redirecting the user to the correct page.
 
         #app.logger.info(f"Option: {option}")
 
@@ -498,6 +526,8 @@ class Booking:
             return False, "Option selected is not valid!"
 
     def Weekday(self):
+        
+        #This function checks what time the play session is being booked in, this is then used to find out if the maximum number of bookings has been reached, it also gets the SessionID from the database to be stored and used later.
 
         BookingDate = session["BookingDate"]
         CustomerID = session["CustomerID"]
@@ -643,6 +673,8 @@ class Booking:
             return False, f"Error while making party booking: {error}"
 
     def PrivateHire(self, PrivateHireType):
+        
+        #This function is similar to those above it, but it checks wether a private hire is available in a different way.
 
         session["numberadults"] = self.NumberOfAdults
         session["numberchildren"] = self.NumberOfChildren
@@ -678,6 +710,9 @@ class Booking:
             return False, f"Error while making private hire booking: {error}"
 
     def GetFinalPrice(self, BookingType, PrivateHireType):
+
+        #This function is used to find the final price for the booking being made, it will get the adult and child price from the database using the previously stored sessionID, then using the number of adults and children to workout the total price, unless it is a private hire, where the price will be dependant on the type of private hire being made.
+        #It also adds any optional extras selected onto the extra price, returning the final price to be stored in the database when the booking is created.
 
         try:
 
@@ -751,6 +786,7 @@ class Booking:
 
     def CreateBooking(self):
 
+        #This function is called when  the booking details have been confirmed and the system is ready to create the booking, it irst makes the extra notes a better, easier to view format by turning it into a string instead of a list. Then it creates the booking using the pre-determine booking data, created earlier in the process, then creates the booking by inserting into the sql.
         try:
 
             #app.logger.info(f"Making booking with details: CustomerID = {self.CustomerID}, SessionID =  {self.SessionID}, Booking Date = {self.BookingDate}, Booking Time = {self.BookingTime}, Price = {self.BookingPrice}, ExtraNotes = {self.ExtraNotes}")
@@ -781,6 +817,8 @@ class Booking:
             return False, f"Error while creating booking: {error}"
 
     def ManageBooking(self):
+        
+        #This function is called when the customer wants to view all the bookings they have created, it grabs all the bookings the user has created, where the booking date is the date that day or the future.
 
         try:
 
@@ -797,6 +835,8 @@ class Booking:
             return False, f"Error while opening manage booking template: {error}", None
 
     def DeleteBooking(self):
+        
+        #This function is called when a booking is to be deleted, using the the BookingID to delete the booking from the database.
 
         #app.logger.info(f"Deleting Booking with Booking ID: {self.BookingID}")
 
@@ -812,9 +852,7 @@ class Booking:
         except Exception as error:
 
             return False, f"Error while deleting booking: {error}"
-
-#class Manager:
-
+        
 # ------------------------------------------------------------------------------------------------------------------------------------------------------ #
 @app.route('/')
 def index():
@@ -896,7 +934,7 @@ def signup():
         error = Result[1]
 
         if Success:
-            session["Email"] = Email
+            session["Email"] = str(Email)
             session["Phone"] = ""
             session["First"] = ""
             session["Last"] = ""
