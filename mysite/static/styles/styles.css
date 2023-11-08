@@ -149,6 +149,7 @@ h1 {
     padding-left: 20px;
     padding-right: 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    transition-duration: 0.4s;
 }
 
 h2{
@@ -163,17 +164,20 @@ h2{
     color: rgb(0, 0, 0);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     background-color: white;
+    transition-duration: 0.4s;
 }
 
 h3{
     color:black;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 40;
+    transition-duration: 0.4s;
 }
 h4{
     color:red;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 40;
+    transition-duration: 0.4s;
 }
 h5{
     color: black;
@@ -184,12 +188,14 @@ h5{
     margin-bottom: 0px;
     padding: 10px;
     border-radius: 20px 20px 0px 0px;
+    transition-duration: 0.4s;
 }
 h6{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 30;
     margin-top: 40px !important;
     margin-bottom: 20px !important;
+    transition-duration: 0.4s;
 }
 h7{
     color:#bc1e2e;
@@ -200,6 +206,7 @@ h7{
     margin-bottom: 0px !important;
     padding: 10px;
     border-radius: 0px 0px 20px 20px;
+    transition-duration: 0.4s;
 }
 h8{
     text-align: center;
@@ -213,11 +220,13 @@ h8{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     background-color: white;
     font-size: 20;
+    transition-duration: 0.4s;
 }
 h9{
     color:black;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 40;
+    transition-duration: 0.4s;
 }
 h10{
     display: inline;
@@ -231,28 +240,33 @@ h10{
     color: rgb(0, 0, 0);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     background-color: white;
+    transition-duration: 0.4s;
 }
 h11{
     display: inline;
     color: black;
     font-size:90;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    transition-duration: 0.4s;
 }
 h12{
     color: black;
     font-size:30;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    transition-duration: 0.4s;
 }
 h13{
     color:black;
     font-size: 20;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    transition-duration: 0.4s;
 }
 h14{
     color: black;
     font-size:30;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: left !important;
+    transition-duration: 0.4s;
 }
 
 
