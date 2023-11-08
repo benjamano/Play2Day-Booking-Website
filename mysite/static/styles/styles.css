@@ -546,6 +546,15 @@ progress::-moz-progress-bar {
     background-color: #E84A5A;
     color: white;
 }
+
+.darkmodebutton{
+    background-color: #262626;
+    color: white;
+}
+.darkmodebutton .dark-mode{
+    background-color: #f7941d;
+    color: black;
+}
 input[type=submit] {
     background-color: #bc1e2d;
     border: none;
