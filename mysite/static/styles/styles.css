@@ -554,11 +554,15 @@ progress::-moz-progress-bar {
     font-size: 17;
     background-color: #f7941d;
     color: black;
+    padding: 8px;
+    border: solid orange 9px;
 }
 
 .dark-mode .darkmodebutton{
     background-color: #262626;
     color: white;
+    border: solid orange 9px;
+    
 }
 
 input[type=submit] {
