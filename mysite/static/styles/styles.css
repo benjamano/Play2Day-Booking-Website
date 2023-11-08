@@ -561,7 +561,7 @@ progress::-moz-progress-bar {
 .dark-mode .darkmodebutton{
     background-color: #262626;
     color: white;
-    border: solid orange 9px;
+    border: solid darkblue 9px;
     
 }
 
