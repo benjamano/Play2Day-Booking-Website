@@ -658,6 +658,7 @@ input[type=checkbox] {
     margin-top: 32px;
     border-radius: 20px;
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+    transition-duration: 0.4s;
 }
 .numberpair{
     padding: 32px;
@@ -671,6 +672,7 @@ input[type=checkbox] {
     border-radius: 20px;
     text-align: center;
     display: inline-block;
+    transition-duration: 0.4s;
 }
 
 .numberpair-slideshow {
