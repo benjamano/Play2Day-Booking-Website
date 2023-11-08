@@ -551,7 +551,7 @@ progress::-moz-progress-bar {
     background-color: #262626;
     color: white;
 }
-.darkmodebutton .dark-mode{
+.dark-mode .darkmodebutton{
     background-color: #f7941d;
     color: black;
 }
