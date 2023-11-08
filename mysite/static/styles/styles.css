@@ -34,6 +34,7 @@
 }
 
 .sidebar {
+    transition-duration: 0.4s;
     display: flex;
     flex-direction: column;
     margin: 0;
@@ -537,6 +538,7 @@ progress::-moz-progress-bar {
     margin-top: 15px !important;
     background-color: #8DFF97;
     cursor: pointer;
+    transition-duration: 0.4s;
 }
 .arrived-true {
     background-color: #8DFF97;
@@ -674,6 +676,7 @@ input[type=checkbox] {
 }
 
  table, th, td {
+    transition-duration: 0.4s;
     table-layout: fixed ;
     border: 2px solid #cccccc;
     border-collapse: collapse;
