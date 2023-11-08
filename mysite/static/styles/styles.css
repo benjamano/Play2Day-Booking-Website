@@ -549,6 +549,8 @@ progress::-moz-progress-bar {
 }
 
 .darkmodebutton{
+    margin-top: auto;
+    margin-bottom: 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: bold;
     font-size: 17;
@@ -561,7 +563,7 @@ progress::-moz-progress-bar {
 .dark-mode .darkmodebutton{
     background-color: #262626;
     color: white;
-    border: solid darkblue 9px;
+    border: solid rgb(14, 100, 186) 9px;
     
 }
 
