@@ -11,7 +11,9 @@
     <a href="/centerinfo"><i class="fa-solid fa-circle-info"></i>    Play2Day Information</a>
     <a href="/account/editaccountdetails"><i class="fa-solid fa-user-pen"></i>    Edit Account Details</a>
     <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>    Log Out</a>
-    <button onclick="ToggleDarkMode()">Toggle Dark Mode</button>
+    <a class="bottom">
+        <button class="darkmodebutton"onclick="ToggleDarkMode()">Toggle Dark Mode</button>
+    </a>
 </div>
 <center>
     <div class="content">
@@ -44,6 +46,7 @@
       var fontsToStyle = document.querySelectorAll(".dark-font");
       var pairElement = document.querySelector(".pair");
       var numberpairElement = document.querySelector(".numberpair");
+      var darkmodebuttonElement = document.querySelector(".darkmodebutton");
   
       var isDarkMode = bodyElement.classList.contains("dark-mode");
   
@@ -85,6 +88,9 @@
       if (pairElement) pairElement.classList.toggle("dark-mode", isDarkMode);
   
       var numberpairElement = document.querySelector(".numberpair");
+      if (numberpairElement) numberpairElement.classList.toggle("dark-mode", isDarkMode);
+
+      var numberpairElement = document.querySelector(".darkmodebutton");
       if (numberpairElement) numberpairElement.classList.toggle("dark-mode", isDarkMode);
   
       var tableElements = document.querySelectorAll("table, th, td");
