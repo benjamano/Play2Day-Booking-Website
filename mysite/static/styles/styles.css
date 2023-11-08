@@ -558,6 +558,8 @@ progress::-moz-progress-bar {
     color: black;
     padding: 8px;
     border: solid orange 9px;
+    transition-duration: 0.4s;
+    cursor: pointer;
 }
 
 .dark-mode .darkmodebutton{
