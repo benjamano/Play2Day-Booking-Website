@@ -25,44 +25,42 @@
                     <h3>
                         Select the type of booking
                     </h3>
-                    <div class="selections-container">
-                        <form action="#" method="post">
-                            <p>
-                                {% if WeekdayBooking == True %}
-                                    <label>
-                                        <input type="radio" id="bookingtype" name="bookingtype" value="Weekday Play Session">
-                                        Weekday Session
-                                    </label>
-                                {% else %}
-                                    <label>
-                                        <input type="radio" id="bookingtype" name="bookingtype" value="Weekend Play Session" required>
-                                        Weekend or Holiday Session
-                                    </label>
-                                {% endif %}
-                            </p>
-                            <p>
+                    <form action="#" method="post">
+                        <p>
+                            {% if WeekdayBooking == True %}
                                 <label>
-                                    <input type="radio" id="bookingtype" name="bookingtype" value="Party">
-                                    Party
+                                    <input type="radio" id="bookingtype" name="bookingtype" value="Weekday Play Session">
+                                    Weekday Session
                                 </label>
-                            </p>
-                            <p>
-                                <Label>
-                                    {% if PHBooked == False %}
-                                        <input type="radio" id="bookingtype" name="bookingtype" value="Private Hire">
-                                        Private Hire
-                                    {% else %}
-                                        <input type="radio" id="bookingtype" name="bookingtype" value="Private Hire" disabled title="This session is booked this day">
-                                        Private Hire
-                                        <h4 style="font-size: 15 !important; margin-top: 0 !important; display: inline !important;">*Private Hire Booked This Day</h4>
-                                    {% endif %}
-                                </Label>
-                            </p>
-                            <p>
-                                <input type="submit" name="Submit" value="Next"/>
-                            </p>
-                        </form>
-                    </div>
+                            {% else %}
+                                <label>
+                                    <input type="radio" id="bookingtype" name="bookingtype" value="Weekend Play Session" required>
+                                    Weekend or Holiday Session
+                                </label>
+                            {% endif %}
+                        </p>
+                        <p>
+                            <label>
+                                <input type="radio" id="bookingtype" name="bookingtype" value="Party">
+                                Party
+                            </label>
+                        </p>
+                        <p>
+                            <Label>
+                                {% if PHBooked == False %}
+                                    <input type="radio" id="bookingtype" name="bookingtype" value="Private Hire">
+                                    Private Hire
+                                {% else %}
+                                    <input type="radio" id="bookingtype" name="bookingtype" value="Private Hire" disabled title="This session is booked this day">
+                                    Private Hire
+                                    <h4 style="font-size: 15 !important; margin-top: 0 !important; display: inline !important;">*Private Hire Booked This Day</h4>
+                                {% endif %}
+                            </Label>
+                        </p>
+                        <p>
+                            <input type="submit" name="Submit" value="Next"/>
+                        </p>
+                    </form>
                     <progress value="30" max="100"> 30% </progress>
                 </body>
             </div>
