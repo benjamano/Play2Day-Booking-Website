@@ -131,6 +131,8 @@ img.one {
     padding-right: 0 !important;
     padding-left: 0 !important;
     padding-top: 0 !important;
+    transition-duration: 0.4s;
+    z-index:0;
 
 }
 img.menus {
