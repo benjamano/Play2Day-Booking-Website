@@ -46,16 +46,18 @@
                             </label>
                         </p>
                         <p>
-                            <Label>
-                                {% if PHBooked == False %}
+                            {% if PHBooked == False %}
+                                <label>
                                     <input type="radio" id="bookingtype" name="bookingtype" value="Private Hire">
                                     Private Hire
-                                {% else %}
+                                </label>
+                            {% else %}
+                                <Label>
                                     <input type="radio" id="bookingtype" name="bookingtype" value="Private Hire" disabled title="This session is booked this day">
                                     Private Hire
                                     <h4 style="font-size: 15 !important; margin-top: 0 !important; display: inline !important;">*Private Hire Booked This Day</h4>
-                                {% endif %}
-                            </Label>
+                                </Label>
+                            {% endif %}
                         </p>
                         <p>
                             <input type="submit" name="Submit" value="Next"/>

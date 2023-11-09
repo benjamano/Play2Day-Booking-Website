@@ -295,7 +295,7 @@ h14{
 }
 
 .dark-mode h4{
-    color:rgb(201, 0, 0);
+    color:#7e2f37;
 }
 
 .dark-mode h5{
@@ -763,14 +763,6 @@ input[type=checkbox] {
     background-color: #333333;
     color: white;
     border: 2px solid #cccccc;
-    border-collapse: collapse;
-    text-align: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    max-width: 90%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    word-wrap: break-word;
-    padding: 8px;
 }
 
 table:hover {background-color: #D6EEEE;}
