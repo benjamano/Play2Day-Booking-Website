@@ -84,11 +84,11 @@ elif function == 3:
 def onStart():
     try:
         
-        sql = "DELETE FROM Manager WHERE Username = 'Ben'"
-        q.execute(sql)
+        #sql = "DELETE FROM Manager WHERE Username = 'Ben'"
+        #q.execute(sql)
         
-        sql = "INSERT INTO Manager (Username, Password) VALUES ('Ben','choc1234')"
-        q.execute(sql)
+        #sql = "INSERT INTO Manager (Username, Password) VALUES ('Ben','choc1234')"
+        #q.execute(sql)
 
         tblCustomer = "CREATE TABLE IF NOT EXISTS Customer (CustomerID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, FirstName TEXT NOT NULL, LastName TEXT NOT NULL, Email TEXT NOT NULL, PhoneNumber VARCHAR(11), Password VARCHAR(255) NOT NULL, PasswordSalt VARCHAR(255))"
 
