@@ -613,7 +613,6 @@ progress::-moz-progress-bar {
     background-color: #262626;
     color: white;
     border: solid rgb(14, 100, 186) 9px;
-    
 }
 
 input[type=submit] {
@@ -628,8 +627,17 @@ input[type=submit] {
     font-size: 30;
     margin-top: 30px;
     margin-bottom: 30px;
-
 }
+
+input[type=date] {
+    font: 30 black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 8px;
+    border: grey solid 4px;
+    border-radius: 10px;
+    cursor: help;
+}
+
 input[type=text]{
     background-color: #cccccc;
     outline: none;
@@ -640,8 +648,8 @@ input[type=text]{
     font-size: 20;
     padding-left:20px;
     margin-top: 20px;
-
 }
+
 input[type=email]{
     outline: none;
     border: none;
@@ -653,6 +661,7 @@ input[type=email]{
     background-color: #cccccc;
     margin-top: 20px;
 }
+
 input[type=password]{
     outline: none;
     border: none;
