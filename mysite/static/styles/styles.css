@@ -629,6 +629,10 @@ input[type=submit] {
     margin-bottom: 30px;
 }
 
+.dark-mode input[type=submit]{
+    background-color: #7e2f37;
+}
+
 input[type=date] {
     font-size: 30;
     color: black;
@@ -637,6 +641,10 @@ input[type=date] {
     border: grey solid 4px;
     border-radius: 10px;
     cursor: help;
+}
+.dark-mode  input[type=date]{
+    color: white;
+    background-color: #2727352e;
 }
 
 input[type=text]{
