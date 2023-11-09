@@ -1,6 +1,10 @@
+body{
+    transition-duration: 0.4s;
+}
+
 .dark-mode {
-    color: rgba(255, 255, 255, 0.63);
-    background-color: #262626;
+    color: rgba(255, 255, 255, 0.651);
+    background-color: #121212;
 }
 
 .centered-content {
@@ -741,7 +745,7 @@ input[type=checkbox] {
 }
 
 .dark-mode .pair {
-    background-color: #333333;
+    background-color: #1e1e1e;
 }
 
  table, th, td {
