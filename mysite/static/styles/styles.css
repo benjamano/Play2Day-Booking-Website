@@ -630,7 +630,8 @@ input[type=submit] {
 }
 
 input[type=date] {
-    font: 30 black;
+    font-size: 30;
+    color: black;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     margin: 8px;
     border: grey solid 4px;
