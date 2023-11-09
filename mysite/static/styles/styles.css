@@ -338,13 +338,26 @@ h14{
 label{
     display: inline-block;
     border-radius: 9px;
-    border: solid 4px grey;
+    border: solid 4px #8080805c;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     padding: 16px;
     font-size: x-large;
     transition-duration: 0.4s;
 }
 label:hover, label:active {
+    background: #2727352e
+}
+
+.dark-mode label{
+    display: inline-block;
+    border-radius: 9px;
+    border: solid 4px grey;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 16px;
+    font-size: x-large;
+    transition-duration: 0.4s;
+}
+.dark-mode label:hover, label:active {
     background: #1d1d24
  }
 
