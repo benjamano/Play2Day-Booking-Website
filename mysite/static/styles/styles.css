@@ -336,6 +336,8 @@ h14{
 }
 
 label{
+    border-radius: 8px;
+    border: solid 4px grey;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 ul li{
