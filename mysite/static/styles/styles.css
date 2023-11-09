@@ -336,10 +336,17 @@ h14{
 }
 
 label{
-    border-radius: 4px;
+    display: inline-block;
+    border-radius: 9px;
     border: solid 4px grey;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 16px;
+    font-size: x-large;
 }
+label:hover, label:active {
+    background:yellow;
+ }
+
 ul li{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
