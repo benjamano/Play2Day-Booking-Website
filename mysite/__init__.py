@@ -121,21 +121,29 @@ def checkdate(Date):
 
 def customerloggedin():
     # Check the customer is logged in by checking if the email is present
-    if session["Email"] == "":
-        #app.logger.info("Account not logged in")
-        return False
+    try:
+        
+        if session["Email"] == "":
+            #app.logger.info("Account not logged in")
+            return False
 
-    else:
-        return True
+        else:
+            return True
+    
+    except:
+        return False
 
 def managerloggedin():
-    # Check the manager is logged in by checking if the username is present
-    if session["ManagerUsername"] == "":
-        #app.logger.info("Account not logged in")
-        return False
+        # Check the manager is logged in by checking if the username is present
+    try:
+        if session["ManagerUsername"] == "":
+            #app.logger.info("Account not logged in")
+            return False
 
-    else:
-        return True
+        else:
+            return True
+    except:
+        return False
 
 def isweekday(BookingDate):
 
