@@ -709,7 +709,7 @@ input[type=checkbox] {
     position: relative; 
     bottom: 1px; 
 } 
-.dark-mode input[type=checkbox]{
+.dark-mode input[type=radio]{
     background-color: #333;
     color: #a7b0b3;
     color-scheme: dark;
