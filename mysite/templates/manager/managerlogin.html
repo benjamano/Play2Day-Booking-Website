@@ -26,3 +26,66 @@
         </center>
     </body>
 </html>
+<script>
+    function ToggleDarkMode() {
+      var bodyElement = document.body;
+      var sidebar = document.querySelector(".sidebar");
+      var tableElements = document.querySelectorAll("table, th, td");
+      var fontsToStyle = document.querySelectorAll(".dark-font");
+      var pairElement = document.querySelector(".pair");
+      var numberpairElement = document.querySelector(".numberpair");
+      var darkmodebuttonElement = document.querySelector(".darkmodebutton");
+  
+      var isDarkMode = bodyElement.classList.contains("dark-mode");
+  
+      // Toggle the dark mode
+      isDarkMode = !isDarkMode;
+  
+      bodyElement.classList.toggle("dark-mode", isDarkMode);
+      if (sidebar) sidebar.classList.toggle("dark-mode", isDarkMode);
+  
+      tableElements.forEach(function (el) {
+          el.classList.toggle("dark-mode", isDarkMode);
+      });
+  
+      fontsToStyle.forEach(function (el) {
+          el.classList.toggle("dark-mode", isDarkMode);
+      });
+  
+      if (pairElement) pairElement.classList.toggle("dark-mode", isDarkMode);
+      if (numberpairElement) numberpairElement.classList.toggle("dark-mode", isDarkMode);
+  
+      // Update the local storage with the new dark mode state
+      localStorage.setItem("darkMode", isDarkMode.toString());
+    }
+  
+    function applyInitialDarkMode() {
+      var isDarkMode = localStorage.getItem("darkMode") === "true";
+      var bodyElement = document.body;
+      var sidebarElement = document.querySelector(".sidebar");
+  
+      if (bodyElement) bodyElement.classList.toggle("dark-mode", isDarkMode);
+      if (sidebarElement) sidebarElement.classList.toggle("dark-mode", isDarkMode);
+  
+      var fontsToStyle = document.querySelectorAll(".dark-font");
+      fontsToStyle.forEach(function (el) {
+          el.classList.toggle("dark-mode", isDarkMode);
+      });
+  
+      var pairElement = document.querySelector(".pair");
+      if (pairElement) pairElement.classList.toggle("dark-mode", isDarkMode);
+  
+      var numberpairElement = document.querySelector(".numberpair");
+      if (numberpairElement) numberpairElement.classList.toggle("dark-mode", isDarkMode);
+
+      var numberpairElement = document.querySelector(".darkmodebutton");
+      if (numberpairElement) numberpairElement.classList.toggle("dark-mode", isDarkMode);
+  
+      var tableElements = document.querySelectorAll("table, th, td");
+      tableElements.forEach(function (el) {
+          el.classList.toggle("dark-mode", isDarkMode);
+      });
+    }
+  
+    applyInitialDarkMode();
+  </script>

@@ -359,8 +359,8 @@ label{
     font-size: x-large;
     transition-duration: 0.4s;
 }
-label:hover {
-    background: #b8b8ba
+label:hover, label:active {
+    background: #2727352e
 }
 
 .dark-mode label{
