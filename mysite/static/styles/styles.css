@@ -380,6 +380,7 @@ ul li{
 }
 
 progress {
+    transition-duration: 1s;
     width: 0;
     min-width: 100%;
     height: 25px;
