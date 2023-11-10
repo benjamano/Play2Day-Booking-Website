@@ -1819,7 +1819,10 @@ def createholiday():
             EndDate = request.form["enddate"]
             Name = request.form["name"]
             Description = request.form["description"]
-
+            
+            if len(Description) >= 50 or len(Name) >= 30:
+                
+                return render_template("error.html", error=f"Description or holiday name is too long")
             #app.logger.info(f"Start Date: {StartDate} End Date: {EndDate} Name: {Name} Description: {Description}")
 
             if StartDate == "" or EndDate == "" or Name == "":
