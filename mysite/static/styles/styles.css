@@ -46,7 +46,7 @@ body{
     transition-duration: 0.4s;
     display: flex;
     flex-direction: column;
-    margin: 0;
+    margin: -10;
     padding: 0;
     width: 250px;
     background-color: #f1f1f1;
@@ -75,6 +75,7 @@ body{
     text-decoration: none;
     font-weight: normal;
     font-size: 17;
+    border-top: solid 1px #b8b8ba;
 }
 
 .sidebar a.active {
