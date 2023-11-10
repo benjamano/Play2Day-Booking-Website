@@ -286,22 +286,22 @@ h14{
 
 /* Dark mode styles for the text */
 .dark-mode h1 {
-    color: white;
+    color: #a7b0b3;
 }
 
 
 .dark-mode h2 {
-    color: white;
+    color: #a7b0b3;
     background-color: #a8a7a756;
     border-color: grey;
 }
 
 .dark-mode h3 {
-    color: white;
+    color: #a7b0b3;
 }
 
 .dark-mode h4{
-    color:#7e2f37;
+    color:#8f1521;
 }
 
 .dark-mode h5{
@@ -310,7 +310,7 @@ h14{
 }
 
 .dark-mode h6{
-    color: white
+    color: #a7b0b3
 
 }
 
@@ -327,26 +327,26 @@ h14{
 }
 
 .dark-mode h9{
-    color:white;
+    color:#a7b0b3;
 }
 
 .dark-mode h10 {
-    color: white;
+    color: #a7b0b3;
     background-color: #333;
 }
 
 .dark-mode h11 {
-    color: white;
+    color: #a7b0b3;
 }
 
 .dark-mode h12 {
-    color: white;
+    color: #a7b0b3;
 }
 .dark-mode h13{
-    color:white;
+    color:#a7b0b3;
 }
 .dark-mode h14{
-    color: white;
+    color: #a7b0b3;
 }
 
 label{
@@ -372,7 +372,7 @@ label:hover, label:active {
     transition-duration: 0.4s;
 }
 .dark-mode label:hover, label:active {
-    background: #1d1d24
+    background: #17175e
  }
 
 ul li{
@@ -618,7 +618,7 @@ progress::-moz-progress-bar {
 .dark-mode .darkmodebutton{
     background-color: #262626;
     color: white;
-    border: solid rgb(14, 100, 186) 9px;
+    border: solid rgb(14, 5, 116);
 }
 
 input[type=submit] {
@@ -638,6 +638,7 @@ input[type=submit] {
 
 .dark-mode input[type=submit]{
     background-color: #7e2f37;
+    color: #a7b0b3
 }
 
 input[type=date] {
@@ -652,7 +653,7 @@ input[type=date] {
     padding: 8px;
 }
 .dark-mode  input[type=date]{
-    color: white;
+    color: #a7b0b3;
     background-color: #2727352e;
     color-scheme: dark;
 }
@@ -708,6 +709,11 @@ input[type=checkbox] {
     position: relative; 
     bottom: 1px; 
 } 
+.dark-mode input[type=checkbox]{
+    background-color: #333;
+    color: #a7b0b3;
+    color-scheme: dark;
+}
 .pair{
     text-align: center;
     border: none;
