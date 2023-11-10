@@ -84,7 +84,6 @@ elif function == 3:
 def onStart():
     try:
         
-        
         #sql = "DELETE FROM Manager WHERE Username = 'Ben'"
         #q.execute(sql)
         
