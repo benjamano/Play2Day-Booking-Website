@@ -22,21 +22,29 @@
                 <h5>Select the booking</h5>
                 <p>
                     <form method="POST" action="#">
-                        <label for="Filter">Filter by Type:</label>
-                        <select name="Filter" id="Filter">
-                            <option value="all">All</option>
-                            <option value="Weekend Play AM">Weekend Play AM</option>
-                            <option value="Weekend Play PM">Weekend Play PM</option>
-                            <option value="Party AM">Party AM</option>
-                            <option value="Party PM">Party PM</option>
-                            <option value="Private Hire">Private Hire</option>
-                        </select>
-                        <p>
-                            <label for="StartDate">Start Date:</label>
-                            <input type="date" name="StartDate" id="StartDate">
-                            <label for="EndDate">End Date:</label>
-                            <input type="date" name="EndDate" id="EndDate">
-                        </p>
+                        <label>
+                            Filter by Type:
+                            <select name="Filter" id="Filter">
+                                <option value="all">All</option>
+                                <option value="Weekend Play AM">Weekend Play AM</option>
+                                <option value="Weekend Play PM">Weekend Play PM</option>
+                                <option value="Party AM">Party AM</option>
+                                <option value="Party PM">Party PM</option>
+                                <option value="Private Hire">Private Hire</option>
+                            </select>
+                        </label>
+                        <label>
+                            <p>
+                                <label>
+                                    Start Date:
+                                    <input type="date" name="StartDate" id="StartDate">
+                                </label>
+                                <label>
+                                    End Date:
+                                    <input type="date" name="EndDate" id="EndDate">
+                                </label>
+                            </p>
+                        </label>
                         <p>
                             <button class="filter" type="submit" name="Filter" value="Filter">Filter Results</button>
                         </p>
