@@ -1970,6 +1970,8 @@ def mark_arrived():
 
 @app.route("/account/developer")
 def devtest():
+    
+    sendEmail("benmercer76@btinternet.com", "Test")
 
     i = 0
 
