@@ -1,8 +1,13 @@
-import sqlite3, bcrypt
+import sqlite3, bcrypt, ssl, smtplib
+
+from email.message import EmailMessage
 
 from flask import Flask, render_template, redirect, request, url_for, session
 
 from datetime import datetime, date, timedelta
+
+emailsender = "benjamano12@gmail.com"
+emailpassword = "bhpm pbna aajb gxwg"
 
 app = Flask(__name__)
 app.secret_key = "ComputingNEASoSecure"
@@ -269,6 +274,53 @@ def CheckInputValid(FirstName, LastName, Email, PhoneNumber, Password, Function)
 
         return True, None
 
+def sendEmail(Email, Option):
+    
+    if Email == "" or Email == None or Email == "None":
+        return False, "Error while sending email: No Email Entered or was empty"
+    
+    if Option == "Confirm":
+
+        emailreceiver = Email
+
+        subject = "Welcome to Play2Day!"
+        body = """Hello!
+        You've signed up to Play2Day with this email!
+        
+        We can't wait to see you here soon!
+        
+        If you didn't sign up, please reply to this email and we'll delete your account.
+
+        The Play2Day Team"""
+
+    elif Option == "CheckEmail":
+        return
+    elif Option == "CheckPhone":
+        return
+    elif Option == "DeleteAccount":
+        return
+    elif Option == "Test":
+        return
+    
+    else:
+        return False, "Error while sending email: Invalid Option Selected"
+    
+    context = ssl.create_default_context()
+
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
+        smtp.login(emailsender, emailpassword)
+        smtp.sendmail(emailsender, emailreceiver, em.as_string())
+    
+    em = EmailMessage()
+    em["From"] = emailsender
+    em["To"] = emailreceiver
+    em["subject"] = subject
+    em.set_content(body)
+    
+    app.logger.info(f"Email sent to {emailreceiver} with subject {subject} and body {body}")
+    
+    return True, None
+
 # ------------------------------------------------------------------------------------------------------------- #
 
 onStart()
@@ -335,6 +387,11 @@ class Customer:
                 session["CustomerID"] = CustomerID
                 session["Email"] = self.Email
 
+                results = sendEmail("benmercer76@btinternet.com", "Confirm")
+                
+                if not results[0]:
+                    app.logger.info(f"Error while sending email: {results[1]}")
+                
                 return True, None
             except Exception as error:
                 app.logger.info(f"Error while registering customer: {error}")
