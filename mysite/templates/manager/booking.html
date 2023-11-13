@@ -1,53 +1,3 @@
-<script src="https://kit.fontawesome.com/9d35a24d36.js" crossorigin="anonymous"></script>
-
-<head>
-    <title>Manage A Booking</title>
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
-    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
-</head>
-<div class="sidebar">
-    <a href="/manager/account"><i class="fa-solid fa-house-chimney"></i>   Home</a>
-    <a class="active" href="/manager/editbooking"><i class="fa-solid fa-clipboard-list"></i>   Booking Report</a>
-    <a href="/manager/editcustomer"><i class="fa-solid fa-user-pen"></i>   Edit a Customer</a>
-    <a href="/manager/manageholidays"><i class="fa-solid fa-gift"></i>   Upcoming Holidays</a>
-    <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>   Log Out</a>
-    <button class="darkmodebutton"onclick="ToggleDarkMode()">Toggle Dark Mode</button>
-</div>
-
-<div class="content">
-    <center>
-        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/manager/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
-        <div class="pair">
-            <center>
-                <h5>
-                    Manage Booking
-                </h5>
-                <h2>
-                    Name: {{FirstName}} {{LastName}}
-                </h2>
-                <h2>
-                    Booking Type: {{SessionType}}
-                </h2>
-                <h2>
-                    Booking Date: {{BookingDate}}
-                </h2>
-                <h2>
-                    Booking Time: {{BookingTime}}
-                </h2>
-                <h2>
-                    Booking Price: £{{BookingPrice}}
-                </h2>
-                <h2>Number of Adults: {{NumberAdults}}<br> Number of Children: {{NumberChildren}}</h2>
-                <h2>
-                    Extra Notes: {{ExtraNotes}}
-                </h2>
-                <form method="POST" action="#">
-                    <button type="submit" class="deletebutton" onclick="return confirm('Are you sure you want to delete this Booking?')">Delete Booking</button>
-                </form>
-            </center>
-        </div>
-    </center>
-</div>
 <script>
     function ToggleDarkMode() {
       var bodyElement = document.body;
@@ -111,3 +61,54 @@
   
     applyInitialDarkMode();
   </script>
+
+<script src="https://kit.fontawesome.com/9d35a24d36.js" crossorigin="anonymous"></script>
+
+<head>
+    <title>Manage A Booking</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+</head>
+<div class="sidebar">
+    <a href="/manager/account"><i class="fa-solid fa-house-chimney"></i>   Home</a>
+    <a class="active" href="/manager/editbooking"><i class="fa-solid fa-clipboard-list"></i>   Booking Report</a>
+    <a href="/manager/editcustomer"><i class="fa-solid fa-user-pen"></i>   Edit a Customer</a>
+    <a href="/manager/manageholidays"><i class="fa-solid fa-gift"></i>   Upcoming Holidays</a>
+    <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>   Log Out</a>
+    <button class="darkmodebutton"onclick="ToggleDarkMode()">Toggle Dark Mode</button>
+</div>
+
+<div class="content">
+    <center>
+        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/manager/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+        <div class="pair">
+            <center>
+                <h5>
+                    Manage Booking
+                </h5>
+                <h2>
+                    Name: {{FirstName}} {{LastName}}
+                </h2>
+                <h2>
+                    Booking Type: {{SessionType}}
+                </h2>
+                <h2>
+                    Booking Date: {{BookingDate}}
+                </h2>
+                <h2>
+                    Booking Time: {{BookingTime}}
+                </h2>
+                <h2>
+                    Booking Price: £{{BookingPrice}}
+                </h2>
+                <h2>Number of Adults: {{NumberAdults}}<br> Number of Children: {{NumberChildren}}</h2>
+                <h2>
+                    Extra Notes: {{ExtraNotes}}
+                </h2>
+                <form method="POST" action="#">
+                    <button type="submit" class="deletebutton" onclick="return confirm('Are you sure you want to delete this Booking?')">Delete Booking</button>
+                </form>
+            </center>
+        </div>
+    </center>
+</div>

@@ -1,59 +1,3 @@
-<script src="https://kit.fontawesome.com/9d35a24d36.js" crossorigin="anonymous"></script>
-
-<head>
-    <title>Manage upcoming holidays </title>
-    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
-</head>
-<div class="sidebar">
-    <a href="/manager/account"><i class="fa-solid fa-house-chimney"></i>   Home</a>
-    <a href="/manager/editbooking"><i class="fa-solid fa-clipboard-list"></i>   Booking Report</a>
-    <a href="/manager/editcustomer"><i class="fa-solid fa-user-pen"></i>   Edit a Customer</a>
-    <a class="active" href="/manager/manageholidays"><i class="fa-solid fa-gift"></i>   Upcoming Holidays</a>
-    <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>   Log Out</a>
-    <button class="darkmodebutton"onclick="ToggleDarkMode()">Toggle Dark Mode</button>
-</div>
-
-<div class="content">
-    <center>
-        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/manager/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
-        <div class="pair">
-            <center>
-                <h5>
-                    Manage upcoming public holidays
-                </h5>
-                <button class="printbutton" onclick="location.href = 'https://benjamano.pythonanywhere.com/manager/newholiday'" style="margin-top: 32px !important; margin-bottom: 32px !important;">Add a new Holiday</button>
-                <table style="width:90%">
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Start Date - End Date</th>
-                        <th>Delete</th>
-                    </tr>
-                    {% for holiday in holidays %}
-                        <form action="#" method="POST">
-                            <input type="hidden" name="HolidayID" value="{{ holiday.0 }}">
-                            <input type="hidden" name="Name" value="{{ holiday.1 }}">
-                            <input type="hidden" name="StartDate" value="{{ holiday.2 }}">
-                            <input type="hidden" name="EndDate" value="{{ holiday.3 }}">
-                            <input type="hidden" name="Description" value="{{ holiday.4 }}">
-                            <tr>
-                                <td>{{ holiday.1 }}</td>
-                                <td>{{ holiday.4 }}</td>
-                                <td>{{ holiday.2 }} - {{ holiday.3 }}</td>
-                                <td>
-                                    <form action="#" method="POST">
-                                        <input type="hidden" name="HolidayID" value="{{ holiday.0 }}">
-                                        <button class="select" type="submit">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                    {% endfor %}
-                </table>
-            </center>
-        </div>
-    </center>
-</div>
 <script>
     function ToggleDarkMode() {
       var bodyElement = document.body;
@@ -117,3 +61,60 @@
   
     applyInitialDarkMode();
   </script>
+
+<script src="https://kit.fontawesome.com/9d35a24d36.js" crossorigin="anonymous"></script>
+
+<head>
+    <title>Manage upcoming holidays </title>
+    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+</head>
+<div class="sidebar">
+    <a href="/manager/account"><i class="fa-solid fa-house-chimney"></i>   Home</a>
+    <a href="/manager/editbooking"><i class="fa-solid fa-clipboard-list"></i>   Booking Report</a>
+    <a href="/manager/editcustomer"><i class="fa-solid fa-user-pen"></i>   Edit a Customer</a>
+    <a class="active" href="/manager/manageholidays"><i class="fa-solid fa-gift"></i>   Upcoming Holidays</a>
+    <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>   Log Out</a>
+    <button class="darkmodebutton"onclick="ToggleDarkMode()">Toggle Dark Mode</button>
+</div>
+
+<div class="content">
+    <center>
+        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/manager/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+        <div class="pair">
+            <center>
+                <h5>
+                    Manage upcoming public holidays
+                </h5>
+                <button class="printbutton" onclick="location.href = 'https://benjamano.pythonanywhere.com/manager/newholiday'" style="margin-top: 32px !important; margin-bottom: 32px !important;">Add a new Holiday</button>
+                <table style="width:90%">
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Start Date - End Date</th>
+                        <th>Delete</th>
+                    </tr>
+                    {% for holiday in holidays %}
+                        <form action="#" method="POST">
+                            <input type="hidden" name="HolidayID" value="{{ holiday.0 }}">
+                            <input type="hidden" name="Name" value="{{ holiday.1 }}">
+                            <input type="hidden" name="StartDate" value="{{ holiday.2 }}">
+                            <input type="hidden" name="EndDate" value="{{ holiday.3 }}">
+                            <input type="hidden" name="Description" value="{{ holiday.4 }}">
+                            <tr>
+                                <td>{{ holiday.1 }}</td>
+                                <td>{{ holiday.4 }}</td>
+                                <td>{{ holiday.2 }} - {{ holiday.3 }}</td>
+                                <td>
+                                    <form action="#" method="POST">
+                                        <input type="hidden" name="HolidayID" value="{{ holiday.0 }}">
+                                        <button class="select" type="submit">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                    {% endfor %}
+                </table>
+            </center>
+        </div>
+    </center>
+</div>

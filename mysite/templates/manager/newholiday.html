@@ -1,56 +1,3 @@
-<script src="https://kit.fontawesome.com/9d35a24d36.js" crossorigin="anonymous"></script>
-
-<head>
-    <title>Manage upcoming holidays </title>
-    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
-</head>
-<div class="sidebar">
-    <a href="/manager/account"><i class="fa-solid fa-house-chimney"></i>   Home</a>
-    <a href="/manager/editbooking"><i class="fa-solid fa-clipboard-list"></i>   Booking Report</a>
-    <a href="/manager/editcustomer"><i class="fa-solid fa-user-pen"></i>   Edit a Customer</a>
-    <a class="active" href="/manager/manageholidays"><i class="fa-solid fa-gift"></i>   Upcoming Holidays</a>
-    <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>   Log Out</a>
-    <button class="darkmodebutton"onclick="ToggleDarkMode()">Toggle Dark Mode</button>
-</div>
-
-<div class="content">
-    <center>
-        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/manager/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
-        <div class="pair">
-            <center>
-                <h5>
-                    Add a public holiday
-                </h5>
-                <form action="#" method="post">
-                    <label>
-                        Name *
-                        <input type="text" name="name" required maxlength="30">
-                    </label>
-                    <h2>
-                        <label style = "width: 400px">
-                            Start Date *
-                            <input type="date" name="startdate" maxlength="20" required>
-                        </label>
-                        <label style="width: 400px">
-                            End Date *
-                            <input type="date" name="enddate" maxlength="20" required>
-                        </label>
-                    </h2>
-                    <br>
-                    <br>
-                    <label>
-                        Brief Decription
-                        <input type="text" name="description" style="height: 100px; width: 450px;" maxlength="50" placeholder="Add the text 'Closed' to close Bookings that day">
-                    </label>
-                    <br>
-                    <br>
-                    <input type="submit" name="submit">
-                </form>
-            </center>
-        </div>
-    </center>
-</div>
 <script>
     function ToggleDarkMode() {
       var bodyElement = document.body;
@@ -114,3 +61,57 @@
   
     applyInitialDarkMode();
   </script>
+
+<script src="https://kit.fontawesome.com/9d35a24d36.js" crossorigin="anonymous"></script>
+
+<head>
+    <title>Manage upcoming holidays </title>
+    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+</head>
+<div class="sidebar">
+    <a href="/manager/account"><i class="fa-solid fa-house-chimney"></i>   Home</a>
+    <a href="/manager/editbooking"><i class="fa-solid fa-clipboard-list"></i>   Booking Report</a>
+    <a href="/manager/editcustomer"><i class="fa-solid fa-user-pen"></i>   Edit a Customer</a>
+    <a class="active" href="/manager/manageholidays"><i class="fa-solid fa-gift"></i>   Upcoming Holidays</a>
+    <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>   Log Out</a>
+    <button class="darkmodebutton"onclick="ToggleDarkMode()">Toggle Dark Mode</button>
+</div>
+
+<div class="content">
+    <center>
+        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/manager/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+        <div class="pair">
+            <center>
+                <h5>
+                    Add a public holiday
+                </h5>
+                <form action="#" method="post">
+                    <label>
+                        Name *
+                        <input type="text" name="name" required maxlength="30">
+                    </label>
+                    <h2>
+                        <label style = "width: 400px">
+                            Start Date *
+                            <input type="date" name="startdate" maxlength="20" required>
+                        </label>
+                        <label style="width: 400px">
+                            End Date *
+                            <input type="date" name="enddate" maxlength="20" required>
+                        </label>
+                    </h2>
+                    <br>
+                    <br>
+                    <label>
+                        Brief Decription
+                        <input type="text" name="description" style="height: 100px; width: 450px;" maxlength="50" placeholder="Add the text 'Closed' to close Bookings that day">
+                    </label>
+                    <br>
+                    <br>
+                    <input type="submit" name="submit">
+                </form>
+            </center>
+        </div>
+    </center>
+</div>

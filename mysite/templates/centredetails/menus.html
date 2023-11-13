@@ -1,40 +1,3 @@
-<script src="https://kit.fontawesome.com/9d35a24d36.js" crossorigin="anonymous"></script>
-
-<head>
-    <title>Menu Info</title>
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
-    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
-</head>
-
-<div class="sidebar">
-    <a href="/centerinfo"><i class="fa-solid fa-circle-info"></i>    Centre Details Home</a>
-    <a href="/centerinfo/parties"><i class="fa-solid fa-cake-candles"></i>    Party Details</a>
-    <a class=active href="/centerinfo/menus"><i class="fa-solid fa-mug-hot"></i>    Food Menu</a>
-    <a href="/centerinfo/lasertag"><i class="fa-solid fa-gun"></i>    Laser Tag</a>
-    <button class="darkmodebutton"onclick="ToggleDarkMode()">Toggle Dark Mode</button>
-    <a class=bottom href="/account"><i class="fa-solid fa-house"></i> Account Home</a>
-</div>
-<div class="content">
-    <centre>
-        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
-        <br>
-        <br>
-        <center>
-            <h3>
-                Main Menu:
-            </h3>
-            <br>
-            <img class="menus" src="{{ url_for('static',filename='/images/menus/NewNewFoodMenu.png') }}"/>
-            <br>
-            <br>
-            <h3>
-                Private Hire Menu:
-            </h3>
-            <br>
-            <img class="menus" src="{{ url_for('static',filename='/images/menus/PHMenu.png') }}"/>
-        </center>
-    </centre>
-</div>
 <script>
     function ToggleDarkMode() {
         var bodyElement = document.body;
@@ -97,3 +60,41 @@
   
     applyInitialDarkMode();
   </script>
+
+<script src="https://kit.fontawesome.com/9d35a24d36.js" crossorigin="anonymous"></script>
+
+<head>
+    <title>Menu Info</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+</head>
+
+<div class="sidebar">
+    <a href="/centerinfo"><i class="fa-solid fa-circle-info"></i>    Centre Details Home</a>
+    <a href="/centerinfo/parties"><i class="fa-solid fa-cake-candles"></i>    Party Details</a>
+    <a class=active href="/centerinfo/menus"><i class="fa-solid fa-mug-hot"></i>    Food Menu</a>
+    <a href="/centerinfo/lasertag"><i class="fa-solid fa-gun"></i>    Laser Tag</a>
+    <button class="darkmodebutton"onclick="ToggleDarkMode()">Toggle Dark Mode</button>
+    <a class=bottom href="/account"><i class="fa-solid fa-house"></i> Account Home</a>
+</div>
+<div class="content">
+    <centre>
+        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+        <br>
+        <br>
+        <center>
+            <h3>
+                Main Menu:
+            </h3>
+            <br>
+            <img class="menus" src="{{ url_for('static',filename='/images/menus/NewNewFoodMenu.png') }}"/>
+            <br>
+            <br>
+            <h3>
+                Private Hire Menu:
+            </h3>
+            <br>
+            <img class="menus" src="{{ url_for('static',filename='/images/menus/PHMenu.png') }}"/>
+        </center>
+    </centre>
+</div>

@@ -1,67 +1,3 @@
-<script src="https://kit.fontawesome.com/9d35a24d36.js" crossorigin="anonymous"></script>
-<html>
-    <head>
-        <title>Manage Your Booking</title>
-        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
-        <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
-    </head>
-    <div class="sidebar">
-        <a href="/account"><i class="fa-solid fa-house"></i>    Home</a>
-        <a href="/account/newbooking"><i class="fa-solid fa-file-circle-plus"></i>    New Booking</a>
-        <a class="active" href="/account/managebooking"><i class="fa-solid fa-pen-to-square"></i>    Manage Bookings</a>
-        <a href="/centerinfo"><i class="fa-solid fa-circle-info"></i>    Play2Day Information</a>
-        <a href="/account/editaccountdetails"><i class="fa-solid fa-user-pen"></i>    Edit Account Details</a>
-        <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>    Log Out</a>
-        <button class="darkmodebutton"onclick="ToggleDarkMode()">Toggle Dark Mode</button>
-    </div>
-
-    <div class="content">
-        <center>
-            <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
-            <div class="pair">
-                <body>
-                    <center>
-                        <h5>
-                            Active Bookings
-                        </h5>
-                        {% if activebookings == [] %}
-                            <h3>You have no bookings!</h3>
-                            <h3><a href="https://benjamano.pythonanywhere.com/account/newbooking">Make a booking</a></h3>
-                            <br>
-                        {% endif %}
-                        <table style="width:100%">
-                            <tr>
-                                <th>Type</th>
-                                <th>Date & Time</th>
-                                <th>Final Price</th>
-                                <th>Details</th>
-                            </tr>
-                            <div id="active-bookings-container">
-                                {% for booking in activebookings %}
-                                    <form action="#" method="POST">
-                                        <input type="hidden" name="BookingID" value="{{ booking.0 }}">
-                                        <input type="hidden" name="BookingDate" value="{{ booking.1 }}">
-                                        <input type="hidden" name="BookingTime" value="{{ booking.2 }}">
-                                        <input type="hidden" name="SessionType" value="{{ booking.3 }}">
-                                        <input type="hidden" name="ExtraNotes" value="{{ booking.4 }}">
-                                        <input type="hidden" name="BookingPrice" value="{{ booking.5 }}">
-                                        <tr>
-                                            <td>{{ booking.3 }}</td>
-                                            <td>{{ booking.1 }}<br>{{ booking.2 }}</td>
-                                            <td>£{{ booking.5 }}</td>
-                                            <td><button class="select" type="submit">Details</button></td>
-                                        </tr>
-                                    </form>
-                                {% endfor %}
-                            </div>
-                        </table>
-                        <br>
-                    </center>
-                </body>
-            </div>
-        <center>
-    </div>
-</html>
 <script>
     function ToggleDarkMode() {
       var bodyElement = document.body;
@@ -125,3 +61,68 @@
   
     applyInitialDarkMode();
   </script>
+
+<script src="https://kit.fontawesome.com/9d35a24d36.js" crossorigin="anonymous"></script>
+<html>
+    <head>
+        <title>Manage Your Booking</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+        <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+    </head>
+    <div class="sidebar">
+        <a href="/account"><i class="fa-solid fa-house"></i>    Home</a>
+        <a href="/account/newbooking"><i class="fa-solid fa-file-circle-plus"></i>    New Booking</a>
+        <a class="active" href="/account/managebooking"><i class="fa-solid fa-pen-to-square"></i>    Manage Bookings</a>
+        <a href="/centerinfo"><i class="fa-solid fa-circle-info"></i>    Play2Day Information</a>
+        <a href="/account/editaccountdetails"><i class="fa-solid fa-user-pen"></i>    Edit Account Details</a>
+        <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>    Log Out</a>
+        <button class="darkmodebutton"onclick="ToggleDarkMode()">Toggle Dark Mode</button>
+    </div>
+
+    <div class="content">
+        <center>
+            <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+            <div class="pair">
+                <body>
+                    <center>
+                        <h5>
+                            Active Bookings
+                        </h5>
+                        {% if activebookings == [] %}
+                            <h3>Its pretty quiet in here, for now!</h3>
+                            <h3><a href="https://benjamano.pythonanywhere.com/account/newbooking">Make a booking</a></h3>
+                            <br>
+                        {% endif %}
+                        <table style="width:100%">
+                            <tr>
+                                <th>Type</th>
+                                <th>Date & Time</th>
+                                <th>Final Price</th>
+                                <th>Details</th>
+                            </tr>
+                            <div id="active-bookings-container">
+                                {% for booking in activebookings %}
+                                    <form action="#" method="POST">
+                                        <input type="hidden" name="BookingID" value="{{ booking.0 }}">
+                                        <input type="hidden" name="BookingDate" value="{{ booking.1 }}">
+                                        <input type="hidden" name="BookingTime" value="{{ booking.2 }}">
+                                        <input type="hidden" name="SessionType" value="{{ booking.3 }}">
+                                        <input type="hidden" name="ExtraNotes" value="{{ booking.4 }}">
+                                        <input type="hidden" name="BookingPrice" value="{{ booking.5 }}">
+                                        <tr>
+                                            <td>{{ booking.3 }}</td>
+                                            <td>{{ booking.1 }}<br>{{ booking.2 }}</td>
+                                            <td>£{{ booking.5 }}</td>
+                                            <td><button class="select" type="submit">Details</button></td>
+                                        </tr>
+                                    </form>
+                                {% endfor %}
+                            </div>
+                        </table>
+                        <br>
+                    </center>
+                </body>
+            </div>
+        <center>
+    </div>
+</html>
