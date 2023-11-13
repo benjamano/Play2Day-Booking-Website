@@ -1,3 +1,64 @@
+
+<script src="https://kit.fontawesome.com/9d35a24d36.js" crossorigin="anonymous"></script>
+<head>
+    <title>Confirm Your Booking</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+</head>
+<div class="sidebar">
+    <a href="/account"><i class="fa-solid fa-house"></i>    Home</a>
+    <a class="active" href="/account/newbooking"><i class="fa-solid fa-file-circle-plus"></i>    New Booking</a>
+    <a href="/account/managebooking"><i class="fa-solid fa-pen-to-square"></i>    Manage Bookings</a>
+    <a href="/centerinfo"><i class="fa-solid fa-circle-info"></i>    Play2Day Information</a>
+    <a href="/account/editaccountdetails"><i class="fa-solid fa-user-pen"></i>    Edit Account Details</a>
+    <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>    Log Out</a>
+    <button class="darkmodebutton"onclick="ToggleDarkMode()">Toggle Dark Mode</button>
+</div>
+<center>
+    <div class="content">
+        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+        <div class="pair">
+            <body>
+                <h5>
+                    Booking Confirmation
+                </h5>
+                <center>
+                    <form action="#" method="post">
+
+                        <h2>
+                           Session: {{ PrivateHireType }}
+                            {% if PrivateHireType == '' %}
+                                {{ BookingType }}
+                            {% endif %}
+                        </h2>
+                        <h2>
+                            Booking Date: {{BookingDate}}
+                        </h2>
+                        <h2>
+                            Booking Time: {{BookingTime}}
+                        </h2>
+                        <h2>
+                            Number of Children: {{NumberChildren}}
+                        </h2>
+                        <h2>
+                            Number of Adults: {{NumberAdults}}
+                        </h2>
+                        <h2>
+                            Optional Extras: {{ExtraNotes}}
+                        </h2>
+                        <h2>
+                            Final Price: £{{Price}}
+                        </h2>
+                        <p>
+                            <input type="submit" name="Submit" value="Confirm Details"/>
+                        </p>
+                    </form>
+                    <progress value="100" max="100"> 100% </progress>
+                </center>
+            </body>
+        </div>
+    </div>
+</center>
 <script>
     function ToggleDarkMode() {
       var bodyElement = document.body;
@@ -61,63 +122,3 @@
   
     applyInitialDarkMode();
   </script>
-<script src="https://kit.fontawesome.com/9d35a24d36.js" crossorigin="anonymous"></script>
-<head>
-    <title>Confirm Your Booking</title>
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
-    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
-</head>
-<div class="sidebar">
-    <a href="/account"><i class="fa-solid fa-house"></i>    Home</a>
-    <a class="active" href="/account/newbooking"><i class="fa-solid fa-file-circle-plus"></i>    New Booking</a>
-    <a href="/account/managebooking"><i class="fa-solid fa-pen-to-square"></i>    Manage Bookings</a>
-    <a href="/centerinfo"><i class="fa-solid fa-circle-info"></i>    Play2Day Information</a>
-    <a href="/account/editaccountdetails"><i class="fa-solid fa-user-pen"></i>    Edit Account Details</a>
-    <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>    Log Out</a>
-    <button class="darkmodebutton"onclick="ToggleDarkMode()">Toggle Dark Mode</button>
-</div>
-<center>
-    <div class="content">
-        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
-        <div class="pair">
-            <body>
-                <h5>
-                    Booking Confirmation
-                </h5>
-                <center>
-                    <form action="#" method="post">
-
-                        <h2>
-                           Session: {{ PrivateHireType }}
-                            {% if PrivateHireType == '' %}
-                                {{ BookingType }}
-                            {% endif %}
-                        </h2>
-                        <h2>
-                            Booking Date: {{BookingDate}}
-                        </h2>
-                        <h2>
-                            Booking Time: {{BookingTime}}
-                        </h2>
-                        <h2>
-                            Number of Children: {{NumberChildren}}
-                        </h2>
-                        <h2>
-                            Number of Adults: {{NumberAdults}}
-                        </h2>
-                        <h2>
-                            Optional Extras: {{ExtraNotes}}
-                        </h2>
-                        <h2>
-                            Final Price: £{{Price}}
-                        </h2>
-                        <p>
-                            <input type="submit" name="Submit" value="Confirm Details"/>
-                        </p>
-                    </form>
-                    <progress value="100" max="100"> 100% </progress>
-                </center>
-            </body>
-        </div>
-    </div>
-</center>
