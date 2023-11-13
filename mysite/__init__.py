@@ -279,12 +279,12 @@ def sendEmail(Email, Option):
     if Email == "" or Email == None or Email == "None":
         return False, "Error while sending email: No Email Entered or was empty"
     
+    emailreceiver = Email
+    
     if Option == "Confirm":
 
-        emailreceiver = Email
-
         subject = "Welcome to Play2Day!"
-        body = """Hello!
+        body = """
         You've signed up to Play2Day with this email!
         
         We can't wait to see you here soon!
@@ -294,13 +294,47 @@ def sendEmail(Email, Option):
         The Play2Day Team"""
 
     elif Option == "CheckEmail":
-        return
+        
+        subject = "We need to check your details"
+        
+        body = """
+        Hi, 
+        
+        We need to check your details are still correct, is your email 'Email'?
+        
+        If not please reply to this email
+        
+        Best, The Play2Day Team"""
+        
     elif Option == "CheckPhone":
-        return
+        
+        subject = "We need to check your details"
+        
+        body = """
+        Hi, 
+        
+        We need to check your details are still correct, is your Phone Number 'PhoneNumber'?
+        
+        If not please reply to this email
+        
+        Best, The Play2Day Team"""
+        
     elif Option == "DeleteAccount":
-        return
+        
+        subject = "You've just deleted your account"
+        
+        body = """
+        Hi, 
+        
+        We're so sorry to see you go, if you have any feedback please reply to this email, we are more than happy to help you!
+        
+        Best, The Play2Day Team"""
+        
     elif Option == "Test":
-        return
+        subject = "Test Email"
+        
+        body = """
+        This is a test email, if you can read this, the email system is working!"""
     
     else:
         return False, "Error while sending email: Invalid Option Selected"
