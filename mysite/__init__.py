@@ -281,10 +281,17 @@ def sendEmail(Email, Option):
     
     emailreceiver = Email
     
+    details = findcustomerdetails(Email, CustomerID = "")
+    
+    FirstName = details[1]
+    PhoneNumber = details[4]
+    
     if Option == "Confirm":
 
         subject = "Welcome to Play2Day!"
-        body = """
+        body = f"""
+        Hi, {FirstName}!
+        
         You've signed up to Play2Day with this email!
         
         We can't wait to see you here soon!
@@ -297,12 +304,10 @@ def sendEmail(Email, Option):
         
         subject = "We need to check your details"
         
-        body = """
-        Hi, 
+        body = f"""
+        Hi {FirstName}, 
         
-        We need to check your details are still correct, is your email 'Email'?
-        
-        If not please reply to this email
+        We need to check your details are still correct, please respond to this email to confirm this email is still active.
         
         Best, The Play2Day Team"""
         
@@ -310,10 +315,10 @@ def sendEmail(Email, Option):
         
         subject = "We need to check your details"
         
-        body = """
-        Hi, 
+        body = f"""
+        Hi {FirstName}, 
         
-        We need to check your details are still correct, is your Phone Number 'PhoneNumber'?
+        We need to check your details are still correct, is your Phone Number {PhoneNumber}?
         
         If not please reply to this email
         
@@ -323,8 +328,8 @@ def sendEmail(Email, Option):
         
         subject = "You've just deleted your account"
         
-        body = """
-        Hi, 
+        body = f"""
+        Hi {FirstName}, 
         
         We're so sorry to see you go, if you have any feedback please reply to this email, we are more than happy to help you!
         
@@ -333,8 +338,10 @@ def sendEmail(Email, Option):
     elif Option == "Test":
         subject = "Test Email"
         
-        body = """
-        This is a test email, if you can read this, the email system is working!"""
+        body = f"""
+        This is a test email, if you can read this, the email system is working!
+        
+        Email: {Email}, Phone Number: {PhoneNumber}, FirstName: {FirstName}"""
     
     else:
         return False, "Error while sending email: Invalid Option Selected"
@@ -558,6 +565,8 @@ class Customer:
 
             #app.logger.info("Account succesfully deleted")
 
+            sendEmail(session["Email"], "DeleteAccount")
+            
             return True, None
 
         except Exception as error:
