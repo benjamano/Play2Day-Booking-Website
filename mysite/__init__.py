@@ -306,16 +306,16 @@ def sendEmail(Email, Option):
         return False, "Error while sending email: Invalid Option Selected"
     
     context = ssl.create_default_context()
-
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
-        smtp.login(emailsender, emailpassword)
-        smtp.sendmail(emailsender, emailreceiver, em.as_string())
     
     em = EmailMessage()
     em["From"] = emailsender
     em["To"] = emailreceiver
     em["subject"] = subject
     em.set_content(body)
+    
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
+        smtp.login(emailsender, emailpassword)
+        smtp.sendmail(emailsender, emailreceiver, em.as_string())
     
     app.logger.info(f"Email sent to {emailreceiver} with subject {subject} and body {body}")
     
