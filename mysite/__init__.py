@@ -557,6 +557,8 @@ class Customer:
             return False, f"Error while delete customer bookings: {error}"
 
         try:
+            
+            sendEmail(session["Email"], "DeleteAccount")
 
             DeleteAccount = "DELETE FROM Customer WHERE CustomerID = (?)"
 
@@ -564,8 +566,6 @@ class Customer:
             sql.commit()
 
             #app.logger.info("Account succesfully deleted")
-
-            sendEmail(session["Email"], "DeleteAccount")
             
             return True, None
 
