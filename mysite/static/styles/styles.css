@@ -43,21 +43,29 @@ body{
 }
 
 .sidebar {
+    transition-duration: 0.4s;
+    display: flex;
+    flex-direction: column;
+    margin: -10;
+    padding: 0;
     width: 250px;
-    height: 100%;
+    background-color: #f1f1f1;
     position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #333;
-    padding-top: 20px;
+    height: 100%;
+    overflow: auto;
+    z-index: 1;
 }
 
 .sidebar a {
-    padding: 15px;
-    text-decoration: none;
-    font-size: 18px;
-    color: #fff;
+    transition-duration: 0.4s;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+    font-weight: normal;
+    font-size: 17;
+    border-top: solid 1px #b8b8ba;
 }
 
 .sidebar a:hover {
@@ -99,13 +107,20 @@ body{
 }
 
 .darkmodebutton {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #555;
-    color: #fff;
-    border: none;
+    margin-top: auto;
+    margin-bottom: 0px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 17;
+    background-color: #f7941d;
+    color: black;
+    border: solid orange 9px;
+    transition-duration: 0.4s;
     cursor: pointer;
+    width: inherit;
 }
+
+
 div.content {
   margin-left: 200px;
   padding: 1px 16px;
