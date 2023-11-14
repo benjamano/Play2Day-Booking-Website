@@ -1387,7 +1387,9 @@ def extras():
         try:
 
             ExtraNotes = request.form.getlist("Extra")
+            app.logger.info(f"Extras before: {ExtraNotes}")
             ExtraNotes = ", ".join(ExtraNotes)
+            app.logger.info(f"Extras after: {ExtraNotes}")
             
             session["ExtraNotes"] = ExtraNotes
 
@@ -1666,6 +1668,15 @@ def managereditbooking():
                 # Filter by type and date range
 
                 getactivebookings = f"SELECT Booking.BookingID, Booking.Date, Booking.Time, Session.SessionType, Booking.ExtraNotes, Booking.Price, Booking.NumberOfChildren, Booking.NumberOfAdults , Customer.FirstName, Customer.LastName, Booking.Arrived FROM Booking INNER JOIN Session ON Booking.SessionID = Session.SessionID INNER JOIN Customer ON Booking.CustomerID = Customer.CustomerID WHERE Session.SessionType = '{Filter}' AND Booking.Date BETWEEN '{StartDate}' AND '{EndDate}' ORDER BY Booking.Date ASC"
+            
+            elif Filter != "all" and StartDate == "" and EndDate != "":
+                
+                getactivebookings = f"SELECT Booking.BookingID, Booking.Date, Booking.Time, Session.SessionType, Booking.ExtraNotes, Booking.Price, Booking.NumberOfChildren, Booking.NumberOfAdults , Customer.FirstName, Customer.LastName, Booking.Arrived FROM Booking INNER JOIN Session ON Booking.SessionID = Session.SessionID INNER JOIN Customer ON Booking.CustomerID = Customer.CustomerID WHERE Session.SessionType = '{Filter}' AND Booking.Date > '{StartDate}' ORDER BY Booking.Date ASC"
+            
+            elif Filter != "all" and StartDate != "" and EndDate == "":
+                
+                getactivebookings = f"SELECT Booking.BookingID, Booking.Date, Booking.Time, Session.SessionType, Booking.ExtraNotes, Booking.Price, Booking.NumberOfChildren, Booking.NumberOfAdults , Customer.FirstName, Customer.LastName, Booking.Arrived FROM Booking INNER JOIN Session ON Booking.SessionID = Session.SessionID INNER JOIN Customer ON Booking.CustomerID = Customer.CustomerID WHERE Session.SessionType = '{Filter}' AND Booking.Date < '{EndDate}' ORDER BY Booking.Date ASC"
+                
             elif Filter != "all":
                 # Filter by type only
                 if  Filter == "Private Hire":
