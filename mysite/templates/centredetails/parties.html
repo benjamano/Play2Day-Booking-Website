@@ -7,12 +7,25 @@
 </head>
 
 <div class="sidebar">
-    <a href="/centerinfo"><i class="fa-solid fa-circle-info"></i>    Centre Details Home</a>
-    <a class=active href="/centerinfo/parties"><i class="fa-solid fa-cake-candles"></i>    Party Details</a>
-    <a href="/centerinfo/menus"><i class="fa-solid fa-mug-hot"></i>    Food Menu</a>
-    <a href="/centerinfo/lasertag"><i class="fa-solid fa-gun"></i>    Laser Tag</a>
+    <a href="/account"><i class="fa-solid fa-house"></i>    Home</a>
+    <a href="/account/newbooking"><i class="fa-solid fa-file-circle-plus"></i>    New Booking</a>
+    <a href="/account/managebooking"><i class="fa-solid fa-pen-to-square"></i>    Manage Bookings</a>
+    <div class="dropdown">
+      <a class="dropdown-toggle" href="#" id="play2dayDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa-solid fa-circle-info"></i> Play2Day Information
+      </a>
+      <div class="dropdown-menu" aria-labelledby="play2dayDropdown">
+          <a class="dropdown-item" href="/centerinfo"><i class="fa-solid fa-circle-info"></i> Home</a>
+          <a class="dropdown-item" href="/centerinfo/lasertag"><i class="fa-solid fa-gun"></i> Laser Tag</a>
+          <a class="dropdown-item" href="/centerinfo/partyinfo"><i class="fa-solid fa-cake-candles"></i> Parties</a>
+          <a class="dropdown-item" href="/centerinfo/menus"><i class="fa-solid fa-mug-hot"></i> Food Menu</a>
+          <a class="dropdown-item" href="/centerinfo/contact"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+      </div>
+    </div>
+    <a href="/account/editaccountdetails"><i class="fa-solid fa-user-pen"></i>    Edit Account Details</a>
+    <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>    Log Out</a>
     <button class="darkmodebutton"onclick="ToggleDarkMode()">Toggle Dark Mode</button>
-    <a class=bottom href="/account"><i class="fa-solid fa-house"></i> Account Home</a>
+
 </div>
 <script>
     function ToggleDarkMode() {
