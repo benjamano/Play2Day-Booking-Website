@@ -1710,7 +1710,7 @@ def managereditbooking():
             FirstName = request.form["FirstName"]
             LastName = request.form["LastName"]
             
-            app.logger.info(f"BookingID: {BookingID} BookingDate: {BookingDate} BookingTime: {BookingTime} SessionType: {SessionType} ExtraNotes: {ExtraNotes} BookingPrice: {BookingPrice} NumberAdults: {NumberAdults} NumberChildren: {NumberChildren} FirstName: {FirstName} LastName: {LastName}")
+            #app.logger.info(f"BookingID: {BookingID} BookingDate: {BookingDate} BookingTime: {BookingTime} SessionType: {SessionType} ExtraNotes: {ExtraNotes} BookingPrice: {BookingPrice} NumberAdults: {NumberAdults} NumberChildren: {NumberChildren} FirstName: {FirstName} LastName: {LastName}")
 
             session["BookingID"] = BookingID
             session["BookingPrice"] = BookingPrice
@@ -1754,6 +1754,8 @@ def managerbooking():
     FirstName = session["FirstName"]
     LastName = session["LastName"]
 
+    #app.logger.info(f"BookingID: {BookingID} BookingDate: {BookingDate} BookingTime: {BookingTime} SessionType: {SessionType} ExtraNotes: {ExtraNotes} BookingPrice: {BookingPrice} NumberAdults: {NumberAdults} NumberChildren: {NumberChildren} FirstName: {FirstName} LastName: {LastName} ")
+
     if request.method == "POST":
 
         #app.logger.info(f"Deleting Booking with Booking ID: {BookingID}")
@@ -1772,7 +1774,7 @@ def managerbooking():
 
     else:
 
-        return render_template("manager/booking.html", BookingID = BookingID, BookingDate = BookingDate, BookingTime = BookingTime, Extra = ExtraNotes, SessionType = SessionType, BookingPrice = BookingPrice, NumberAdults = NumberAdults, NumberChildren = NumberChildren, FirstName = FirstName, LastName = LastName)
+        return render_template("manager/booking.html", BookingID = BookingID, BookingDate = BookingDate, BookingTime = BookingTime, ExtraNotes = ExtraNotes, SessionType = SessionType, BookingPrice = BookingPrice, NumberAdults = NumberAdults, NumberChildren = NumberChildren, FirstName = FirstName, LastName = LastName)
 
 @app.route('/manager/editcustomer', methods=["POST","GET"])
 def managereditcustomer():
