@@ -10,10 +10,15 @@
     <a href="/account/newbooking"><i class="fa-solid fa-file-circle-plus"></i>    New Booking</a>
     <a href="/account/managebooking"><i class="fa-solid fa-pen-to-square"></i>    Manage Bookings</a>
     <div class="dropdown">
-      <div class="dropdown-content">
-          <a href="/centerinfo/about">CenterInfo</a>
+      <a class="dropdown-toggle" href="#" id="play2dayDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa-solid fa-circle-info"></i> Play2Day Information
+      </a>
+      <div class="dropdown-menu" aria-labelledby="play2dayDropdown">
+          <a class="dropdown-item" href="/centerinfo/lasertag"><i class="fa-solid fa-laser"></i> LaserTag</a>
+          <a class="dropdown-item" href="/centerinfo/partyinfo"><i class="fa-solid fa-party"></i> Party Info</a>
+          <a class="dropdown-item" href="/centerinfo/contactus"><i class="fa-solid fa-envelope"></i> Contact Us</a>
       </div>
-  </div>
+    </div>
     <a href="/account/editaccountdetails"><i class="fa-solid fa-user-pen"></i>    Edit Account Details</a>
     <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>    Log Out</a>
     <button class="darkmodebutton"onclick="ToggleDarkMode()">Toggle Dark Mode</button>
