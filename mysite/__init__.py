@@ -1387,9 +1387,9 @@ def extras():
         try:
 
             ExtraNotes = request.form.getlist("Extra")
-            app.logger.info(f"Extras before: {ExtraNotes}")
+            #app.logger.info(f"Extras before: {ExtraNotes}")
             ExtraNotes = ", ".join(ExtraNotes)
-            app.logger.info(f"Extras after: {ExtraNotes}")
+            #app.logger.info(f"Extras after: {ExtraNotes}")
             
             session["ExtraNotes"] = ExtraNotes
 
@@ -1726,7 +1726,7 @@ def managereditbooking():
     else:
         try:
 
-            getactivebookings = "SELECT Booking.BookingID, Booking.Date, Booking.Time, Session.SessionType, Booking.ExtraNotes, Booking.Price, Booking.NumberOfChildren, Booking.NumberOfAdults, Customer.FirstName, Customer.LastName, Booking.Arrived FROM Booking INNER JOIN Session ON Booking.SessionID = Session.SessionID INNER JOIN Customer ON Booking.CustomerID = Customer.CustomerID ORDER BY Booking.Date ASC"
+            getactivebookings = f"SELECT Booking.BookingID, Booking.Date, Booking.Time, Session.SessionType, Booking.ExtraNotes, Booking.Price, Booking.NumberOfChildren, Booking.NumberOfAdults, Customer.FirstName, Customer.LastName, Booking.Arrived FROM Booking INNER JOIN Session ON Booking.SessionID = Session.SessionID INNER JOIN Customer ON Booking.CustomerID = Customer.CustomerID AND Booking.Date >= '{Date}' ORDER BY Booking.Date ASC"
             q.execute(getactivebookings)
             activebookings = q.fetchall()
 
