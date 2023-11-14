@@ -1646,14 +1646,14 @@ def manageraccount():
 @app.route("/manager/editbooking", methods=["POST", "GET"])
 def managereditbooking():
     
+    Date = date.today()
+    
     if managerloggedin() == False:
         return redirect(url_for("index"))
     
     if request.method == "POST":
 
         if "Filter" in request.form != "Filter":
-            
-            Date = date.today()
             
             StartDate = request.form.get("StartDate")
             EndDate = request.form.get("EndDate")
