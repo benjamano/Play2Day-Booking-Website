@@ -1691,7 +1691,7 @@ def managereditbooking():
 
             q.execute(getactivebookings)
             activebookings = q.fetchall()
-            app.logger.info(f"{getactivebookings} ,{activebookings}")
+            #app.logger.info(f"{getactivebookings} ,{activebookings}")
 
             return render_template("manager/selectbooking.html", activebookings=activebookings)
 
@@ -1709,6 +1709,8 @@ def managereditbooking():
             NumberChildren = request.form["NumberChildren"]
             FirstName = request.form["FirstName"]
             LastName = request.form["LastName"]
+            
+            app.logger.info(f"BookingID: {BookingID} BookingDate: {BookingDate} BookingTime: {BookingTime} SessionType: {SessionType} ExtraNotes: {ExtraNotes} BookingPrice: {BookingPrice} NumberAdults: {NumberAdults} NumberChildren: {NumberChildren} FirstName: {FirstName} LastName: {LastName}")
 
             session["BookingID"] = BookingID
             session["BookingPrice"] = BookingPrice
