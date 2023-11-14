@@ -1657,7 +1657,7 @@ def managereditbooking():
             EndDate = request.form.get("EndDate")
             Filter = request.form.get("Filter")
 
-            app.logger.info(f"{StartDate} {EndDate} {Filter}")
+            #app.logger.info(f"{StartDate} {EndDate} {Filter}")
 
             if Filter == "all" and StartDate and EndDate:
                 # Filter by date range
@@ -1680,7 +1680,7 @@ def managereditbooking():
 
             q.execute(getactivebookings)
             activebookings = q.fetchall()
-            #app.logger.info(f"{getactivebookings} ,{activebookings}")
+            app.logger.info(f"{getactivebookings} ,{activebookings}")
 
             return render_template("manager/selectbooking.html", activebookings=activebookings)
 
