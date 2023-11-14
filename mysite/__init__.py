@@ -331,7 +331,7 @@ def sendEmail(Email, Option):
         body = f"""
         Hi {FirstName}, 
         
-        We're so sorry to see you go, if you have any feedback please reply to this email, we are more than happy to help you!
+        We're so sorry to see you go, if you have any feedback please reply to this email, we are more than happy to help!
         
         Best, The Play2Day Team"""
         
