@@ -428,7 +428,7 @@ class Customer:
                 session["CustomerID"] = CustomerID
                 session["Email"] = self.Email
 
-                results = sendEmail("benmercer76@btinternet.com", "Confirm")
+                results = sendEmail(self.Email, "Confirm")
                 
                 if not results[0]:
                     app.logger.info(f"Error while sending email: {results[1]}")
