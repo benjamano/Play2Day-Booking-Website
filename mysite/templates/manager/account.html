@@ -11,7 +11,9 @@
     <a href="/manager/editbooking"><i class="fa-solid fa-clipboard-list"></i>   Booking Report</a>
     <a href="/manager/editcustomer"><i class="fa-solid fa-user-pen"></i>   Edit a Customer</a>
     <a href="/manager/manageholidays"><i class="fa-solid fa-gift"></i>   Upcoming Holidays</a>
-    <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>   Log Out</a>
+    <a href="/logout" id="logoutButton" onmouseover="changeIcon(true)" onmouseout="changeIcon(false)">
+        <i class="fa-solid" id="logoutIcon"></i> Log Out
+    </a>
     <button class="darkmodebutton"onclick="ToggleDarkMode()">Toggle Dark Mode</button>
 </div>
 <body>
@@ -102,3 +104,13 @@
   
     applyInitialDarkMode();
   </script>
+  <script>
+    function changeIcon(isHovered) {
+        var logoutIcon = document.getElementById('logoutIcon');
+        if (isHovered) {
+            logoutIcon.className = 'fa-solid fa-door-open';
+        } else {
+            logoutIcon.className = 'fa-solid fa-door-closed';
+        }
+    }
+</script>

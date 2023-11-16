@@ -416,7 +416,7 @@ label:hover, label:active {
     transition-duration: 0.4s;
 }
 .dark-mode label:hover, .dark-mode label:active {
-    background: #000028
+    background: #2e2e2e
  }
 
 ul li{
