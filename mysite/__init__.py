@@ -2025,7 +2025,7 @@ def selectsession():
             
             app.logger.info(f"Active Sessions: {activesessions}")
     
-            return render_template("manager/selectticket.html", activesessions = activesessions)
+            return render_template("manager/selectticket.html", activetickets = activesessions)
 
 # ---------------------------------------------------------------------------------------------------------------- #
 
