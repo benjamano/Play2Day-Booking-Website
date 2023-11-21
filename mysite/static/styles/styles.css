@@ -560,18 +560,20 @@ progress::-moz-progress-bar {
     cursor: pointer;
 }
 .filter{
-    height: 30px;
-    width: 130px;
+    height: auto;
+    width: auto;
     color: black;
     border-radius: 10px;
     font-weight: bold;
-    font-size: 17;
+    font-size: 20;
     margin-right: 0px;
     margin-left: 0px;
     margin-top: 10px !important;
     margin-bottom: 10px !important;
     background-color: #E5E4E2;
     cursor: pointer;
+    border-width: medium;
+    padding: 8px;
 }
 .savebutton {
     height: 80px;
@@ -688,15 +690,15 @@ input[type=submit] {
 }
 
 input[type=date] {
-    font-size: 30;
+    font-size: 25;
     color: black;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    margin: 8px;
+    margin: 6px;
     border: grey solid 4px;
     border-radius: 10px;
     cursor: help;
     transition-duration: 0.4s;
-    padding: 8px;
+    padding: 4px;
 }
 .dark-mode  input[type=date]{
     color: #a7b0b3;
