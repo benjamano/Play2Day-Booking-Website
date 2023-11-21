@@ -388,6 +388,7 @@ h14{
 }
 
 label{
+    padding-top: inherit;
     display: inline-block;
     border-radius: 9px;
     border: solid 4px #8080805c;
@@ -395,6 +396,8 @@ label{
     padding: 16px;
     font-size: x-large;
     transition-duration: 0.4s;
+    margin-top: 20px;
+    background-color: moccasin;
 }
 label:hover, label:active {
     background: #2727352e
