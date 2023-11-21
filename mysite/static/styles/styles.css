@@ -411,6 +411,7 @@ label:hover, label:active {
     padding: 16px;
     font-size: x-large;
     transition-duration: 0.4s;
+    background: transparent
 }
 .dark-mode label:hover, .dark-mode label:active {
     background: #2e2e2e
