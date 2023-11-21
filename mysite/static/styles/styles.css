@@ -111,6 +111,7 @@ body{
     min-width: 200px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
+    color: black
 }
 
 .sidebar .dropdown:hover .dropdown-menu {
@@ -119,7 +120,7 @@ body{
 
 .sidebar .dropdown-item {
     padding: 12px;
-    color: #fff;
+    color: black;
     display: block;
     text-decoration: none;
 }
@@ -130,10 +131,11 @@ body{
 
 .dark-mode .sidebar .dropdown-menu {
     background-color: #333;
+    color: white;
 }
 
 .dark-mode .sidebar .dropdown-item {
-    color: #a7b0b3;
+    color: white;
 }
 
 .dark-mode .sidebar .dropdown-item:hover {
