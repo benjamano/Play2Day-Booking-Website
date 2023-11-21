@@ -1898,7 +1898,7 @@ def managercustomer():
         return render_template("manager/customer.html", CustomerID = CustomerID, FirstName = First, LastName = Last, Email = Email, PhoneNumber = Phone)
 
 @app.route("/manager/manageholidays", methods=["POST", "GET"])
-def manageholidays():
+def managermanageholidays():
     
     if managerloggedin() == False:
         return redirect(url_for("index"))
@@ -1927,7 +1927,7 @@ def manageholidays():
         return render_template("/manager/manageholidays.html", holidays = holidays)
 
 @app.route("/manager/newholiday", methods=["POST", "GET"])
-def createholiday():
+def managercreateholiday():
     
     if managerloggedin() == False:
         return redirect(url_for("index"))
@@ -1996,36 +1996,78 @@ def mark_arrived():
         return redirect(url_for("managereditbooking"))
     
 @app.route("/manager/selectsession", methods=["POST", "GET"])
-def selectsession():
+def managerselectsession():
         
-        if managerloggedin() == False:
-            return redirect(url_for("index"))
-    
-        if request.method == "POST":
-    
+    if managerloggedin() == False:
+        return redirect(url_for("index"))
+
+    if request.method == "POST":
+
+        try:
             SessionID = request.form["SessionID"]
             SessionName = request.form["SessionName"]
             AdultPrice = request.form["AdultPrice"]
             ChildPrice = request.form["ChildPrice"]   
-    
+
             session["SessionID"] = SessionID
             session["SessionName"] = SessionName
             session["AdultPrice"] = AdultPrice
             session["ChildPrice"] = ChildPrice
-            
-    
+
             return redirect(url_for("managereditsession"))
-    
-        else:
-            
+
+        except Exception as error:
+            return render_template("error.html", error=f"Error: {error}")
+
+    else:
+        try:
             getsessions = "SELECT * FROM Session ORDER BY SessionID ASC"
+            
             q.execute(getsessions)
             
             activesessions = q.fetchall()
             
-            app.logger.info(f"Active Sessions: {activesessions}")
+            #app.logger.info(f"Active Sessions: {activesessions}")
+            
+            return render_template("manager/selectticket.html", activetickets=activesessions)
+
+        except Exception as error:
+            return render_template("error.html", error=f"Error: {error}")
+
+
+@app.route("/manager/editsession", methods=["POST", "GET"])
+def managereditsession():
     
-            return render_template("manager/selectticket.html", activetickets = activesessions)
+    SessionID = session["SessionID"]
+    SessionName = session["SessionName"]
+    AdultPrice = session["AdultPrice"]
+    ChildPrice = session["ChildPrice"]
+    
+    if managerloggedin() == False:
+        return redirect(url_for("index"))
+    
+    if request.method == "POST":
+        
+        try:
+            newadultprice = request.form["NewAdultPrice"]
+            newchildprice = request.form["NewChildPrice"]
+        
+            editsession = "UPDATE Session SET AdultPrice = (?), ChildPrice = (?) WHERE SessionID = (?)"
+            
+            q.execute(editsession, [newadultprice, newchildprice, SessionID])
+            
+            sql.commit()
+            
+            app.logger.info(f"Session with ID {SessionID} edited successfully with details {newadultprice}, {newchildprice}")
+            
+            return redirect(url_for('managerselectsession'))
+        
+        except Exception as error:
+            return render_template("error.html", error=f"Error: {error}")
+    
+    else:
+        
+        return render_template("manager/editticket.html", SessionID = SessionID, SessionName = SessionName, AdultPrice = AdultPrice, ChildPrice = ChildPrice)        
 
 # ---------------------------------------------------------------------------------------------------------------- #
 
