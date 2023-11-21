@@ -1994,6 +1994,36 @@ def mark_arrived():
 
     else:
         return redirect(url_for("managereditbooking"))
+    
+@app.route("/manager/selectsession", methods=["POST", "GET"])
+def selectsession():
+        
+        if managerloggedin() == False:
+            return redirect(url_for("index"))
+    
+        if request.method == "POST":
+    
+            SessionID = request.form["SessionID"]
+            SessionName = request.form["SessionName"]
+            AdultPrice = request.form["AdultPrice"]
+            ChildPrice = request.form["ChildPrice"]   
+    
+            session["SessionID"] = SessionID
+            session["SessionName"] = SessionName
+            session["AdultPrice"] = AdultPrice
+            session["ChildPrice"] = ChildPrice
+            
+    
+            return redirect(url_for("managereditsession"))
+    
+        else:
+            
+            getsessions = "SELECT * FROM Session ORDER BY SessionID ASC"
+            q.execute(getsessions)
+            
+            activesessions = q.fetchall()
+    
+            return render_template("manager/selectticket.html", activesessions = activesessions)
 
 # ---------------------------------------------------------------------------------------------------------------- #
 

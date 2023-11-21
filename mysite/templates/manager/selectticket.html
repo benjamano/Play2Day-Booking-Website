@@ -1,0 +1,120 @@
+<script src="https://kit.fontawesome.com/9d35a24d36.js" crossorigin="anonymous"></script>
+
+<head>
+    <title>Select Ticket to edit</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+</head>
+
+<div class="sidebar">
+    <a href="/manager/account"><i class="fa-solid fa-house-chimney"></i>   Home</a>
+    <a href="/manager/editbooking"><i class="fa-solid fa-clipboard-list"></i>   Booking Report</a>
+    <a href="/manager/editcustomer"><i class="fa-solid fa-user-pen"></i>   Edit a Customer</a>
+    <a href="/manager/manageholidays"><i class="fa-solid fa-gift"></i>   Upcoming Holidays</a>
+    <a href="/manager/selectsession"><i class="fa-solid fa-ticket"></i>   Edit Tickets</a>
+    <a href="/logout" onmouseover="this.querySelector('i').className='fa-solid fa-door-open'" onmouseout="this.querySelector('i').className='fa-solid fa-door-closed'"><i class="fa-solid fa-door-closed"></i>   Log Out</a>
+    <button class="darkmodebutton"onclick="ToggleDarkMode()">Toggle Dark Mode</button>
+</div>
+
+<div class="content">
+    <center>
+        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/manager/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+        <center>
+            <div class="pair">
+                <h5>Select the Ticket</h5>
+                <center>
+                    <table style="width:90%">
+                        <tr>
+                            <th>SessionID</th>
+                            <th>Name</th>
+                            <th>Adult Price</th>
+                            <th>Child Price</th>
+                            <th>Edit</th>
+                        </tr>
+                        {% for ticket in activetickets %}
+                            <form action="#" method="POST">
+                                <input type="hidden" name="SessionID" value="{{ ticket.0 }}">
+                                <input type="hidden" name="SessionName" value="{{ ticket.1 }}">
+                                <input type="hidden" name="AdultPrice" value="{{ ticket.2 }}">
+                                <input type="hidden" name="ChildPrice" value="{{ ticket.3 }}">
+                                <center>
+                                    <tr class="ticketRow">
+                                        <td>{{ ticket.0 }}</td>
+                                        <td>{{ ticket.1 }}</td>
+                                        <td>{{ ticket.3 }}</td>
+                                        <td>{{ ticket.4 }}</td>
+                                        <td><button class="select" type="submit">Edit</button></td>
+                                    </tr>
+                                </center>
+                            </form>
+                        {% endfor %}
+                    </table>
+                    <br>
+                </center>
+            </div>
+        </center>
+    </center>
+</div>
+<script>
+    function ToggleDarkMode() {
+      var bodyElement = document.body;
+      var sidebar = document.querySelector(".sidebar");
+      var tableElements = document.querySelectorAll("table, th, td");
+      var fontsToStyle = document.querySelectorAll(".dark-font");
+      var pairElement = document.querySelector(".pair");
+      var numberpairElement = document.querySelector(".numberpair");
+      var darkmodebuttonElement = document.querySelector(".darkmodebutton");
+  
+      var isDarkMode = bodyElement.classList.contains("dark-mode");
+  
+      // Toggle the dark mode
+      isDarkMode = !isDarkMode;
+  
+      bodyElement.classList.toggle("dark-mode", isDarkMode);
+      if (sidebar) sidebar.classList.toggle("dark-mode", isDarkMode);
+  
+      tableElements.forEach(function (el) {
+          el.classList.toggle("dark-mode", isDarkMode);
+      });
+  
+      fontsToStyle.forEach(function (el) {
+          el.classList.toggle("dark-mode", isDarkMode);
+      });
+  
+      if (pairElement) pairElement.classList.toggle("dark-mode", isDarkMode);
+      if (numberpairElement) numberpairElement.classList.toggle("dark-mode", isDarkMode);
+  
+      // Update the local storage with the new dark mode state
+      localStorage.setItem("darkMode", isDarkMode.toString());
+    }
+  
+    function applyInitialDarkMode() {
+      var isDarkMode = localStorage.getItem("darkMode") === "true";
+      var bodyElement = document.body;
+      var sidebarElement = document.querySelector(".sidebar");
+  
+      if (bodyElement) bodyElement.classList.toggle("dark-mode", isDarkMode);
+      if (sidebarElement) sidebarElement.classList.toggle("dark-mode", isDarkMode);
+  
+      var fontsToStyle = document.querySelectorAll(".dark-font");
+      fontsToStyle.forEach(function (el) {
+          el.classList.toggle("dark-mode", isDarkMode);
+      });
+  
+      var pairElement = document.querySelector(".pair");
+      if (pairElement) pairElement.classList.toggle("dark-mode", isDarkMode);
+  
+      var numberpairElement = document.querySelector(".numberpair");
+      if (numberpairElement) numberpairElement.classList.toggle("dark-mode", isDarkMode);
+
+      var numberpairElement = document.querySelector(".darkmodebutton");
+      if (numberpairElement) numberpairElement.classList.toggle("dark-mode", isDarkMode);
+  
+      var tableElements = document.querySelectorAll("table, th, td");
+      tableElements.forEach(function (el) {
+          el.classList.toggle("dark-mode", isDarkMode);
+      });
+    }
+
+    applyInitialDarkMode();
+</script>
