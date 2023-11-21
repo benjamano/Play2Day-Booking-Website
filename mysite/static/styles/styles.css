@@ -404,12 +404,7 @@ label:hover, label:active {
 }
 
 .dark-mode label{
-    display: inline-block;
-    border-radius: 9px;
     border: solid 4px grey;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    padding: 16px;
-    font-size: x-large;
     transition-duration: 0.4s;
     background: transparent
 }
