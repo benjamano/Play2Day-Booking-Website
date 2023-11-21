@@ -1567,7 +1567,7 @@ def menuinfo():
     return render_template("centredetails/menus.html")
 
 @app.route("/centerinfo/contact")
-def menuinfo():
+def contact():
     return render_template("centredetails/contact.html")
 
 # ---------------------------------------------| Manager |--------------------------------------------- #
