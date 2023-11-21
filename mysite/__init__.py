@@ -1566,6 +1566,10 @@ def partyinfo():
 def menuinfo():
     return render_template("centredetails/menus.html")
 
+@app.route("/centerinfo/contact")
+def menuinfo():
+    return render_template("centredetails/contact.html")
+
 # ---------------------------------------------| Manager |--------------------------------------------- #
 
 @app.route("/managerlogin", methods=["POST","GET"])

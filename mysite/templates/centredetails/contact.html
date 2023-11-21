@@ -1,0 +1,109 @@
+<script src="https://kit.fontawesome.com/9d35a24d36.js" crossorigin="anonymous"></script>
+<head>
+    <title>Contact Us</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
+    <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
+</head>
+
+<div class="sidebar">
+    <a href="/account"><i class="fa-solid fa-house"></i>    Home</a>
+    <a href="/account/newbooking"><i class="fa-solid fa-file-circle-plus"></i>    New Booking</a>
+    <a href="/account/managebooking"><i class="fa-solid fa-pen-to-square"></i>    Manage Bookings</a>
+    <div class="dropdown">
+      <a class="dropdown-toggle" href="#" id="play2dayDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa-solid fa-circle-info"></i> Play2Day Information
+      </a>
+      <div class="dropdown-menu" aria-labelledby="play2dayDropdown">
+          <a class="dropdown-item" href="/centerinfo"><i class="fa-solid fa-circle-info"></i> Home</a>
+          <a class="dropdown-item" href="/centerinfo/lasertag"><i class="fa-solid fa-gun"></i> Laser Tag</a>
+          <a class="dropdown-item" href="/centerinfo/parties"><i class="fa-solid fa-cake-candles"></i> Parties</a>
+          <a class="dropdown-item" href="/centerinfo/menus"><i class="fa-solid fa-mug-hot"></i> Food Menu</a>
+          <a href="/centerinfo/contact" onmouseover="this.querySelector('i').className='fa-solid fa-envelope-open-text'" onmouseout="this.querySelector('i').className='fa-regular fa-envelope'"><i class="fa-regular fa-envelope"></i>    Contact Us</a>
+      </div>
+    </div>
+    <a href="/account/editaccountdetails" onmouseover="this.querySelector('i').className='fa-solid fa-gear fa-spin'" onmouseout="this.querySelector('i').className='fa-solid fa-gear'"><i class="fa-solid fa-gear"></i>    Edit Account Details</a>
+    <a href="/logout" onmouseover="this.querySelector('i').className='fa-solid fa-door-open'" onmouseout="this.querySelector('i').className='fa-solid fa-door-closed'"><i class="fa-solid fa-door-closed"></i>   Log Out</a>
+    <button class="darkmodebutton"onclick="ToggleDarkMode()">Toggle Dark Mode</button>
+
+  </div>
+
+<div class="content">
+    <center>
+        <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/centerinfo';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
+
+        <h11>Contact Us</h11>
+
+        <h6>Email: play2dayipswich@gmail.com</h6>
+        <h6>Phone: 01473611333</h6>
+        <h6>Post: 11 Gloster Rd, Martlesham Heath, Martlesham, Ipswich IP5 3RJ</h6>
+
+        <h6>Alternatively, message us on Facebook</h6>
+
+        <img style="display: flex;"onclick = "location.href = 'https://www.facebook.com/play2dayipswich/';" src="{{ url_for('static',filename='/images/FacebookIcon.png') }}"/>
+
+
+    </center>
+
+<script>
+    function ToggleDarkMode() {
+      var bodyElement = document.body;
+      var sidebar = document.querySelector(".sidebar");
+      var tableElements = document.querySelectorAll("table, th, td");
+      var fontsToStyle = document.querySelectorAll(".dark-font");
+      var pairElement = document.querySelector(".pair");
+      var numberpairElement = document.querySelector(".numberpair");
+      var darkmodebuttonElement = document.querySelector(".darkmodebutton");
+  
+      var isDarkMode = bodyElement.classList.contains("dark-mode");
+  
+      // Toggle the dark mode
+      isDarkMode = !isDarkMode;
+  
+      bodyElement.classList.toggle("dark-mode", isDarkMode);
+      if (sidebar) sidebar.classList.toggle("dark-mode", isDarkMode);
+  
+      tableElements.forEach(function (el) {
+          el.classList.toggle("dark-mode", isDarkMode);
+      });
+  
+      fontsToStyle.forEach(function (el) {
+          el.classList.toggle("dark-mode", isDarkMode);
+      });
+  
+      if (pairElement) pairElement.classList.toggle("dark-mode", isDarkMode);
+      if (numberpairElement) numberpairElement.classList.toggle("dark-mode", isDarkMode);
+  
+      // Update the local storage with the new dark mode state
+      localStorage.setItem("darkMode", isDarkMode.toString());
+    }
+  
+    function applyInitialDarkMode() {
+      var isDarkMode = localStorage.getItem("darkMode") === "true";
+      var bodyElement = document.body;
+      var sidebarElement = document.querySelector(".sidebar");
+  
+      if (bodyElement) bodyElement.classList.toggle("dark-mode", isDarkMode);
+      if (sidebarElement) sidebarElement.classList.toggle("dark-mode", isDarkMode);
+  
+      var fontsToStyle = document.querySelectorAll(".dark-font");
+      fontsToStyle.forEach(function (el) {
+          el.classList.toggle("dark-mode", isDarkMode);
+      });
+  
+      var pairElement = document.querySelector(".pair");
+      if (pairElement) pairElement.classList.toggle("dark-mode", isDarkMode);
+  
+      var numberpairElement = document.querySelector(".numberpair");
+      if (numberpairElement) numberpairElement.classList.toggle("dark-mode", isDarkMode);
+
+      var numberpairElement = document.querySelector(".darkmodebutton");
+      if (numberpairElement) numberpairElement.classList.toggle("dark-mode", isDarkMode);
+  
+      var tableElements = document.querySelectorAll("table, th, td");
+      tableElements.forEach(function (el) {
+          el.classList.toggle("dark-mode", isDarkMode);
+      });
+    }
+  
+    applyInitialDarkMode();
+  </script>
