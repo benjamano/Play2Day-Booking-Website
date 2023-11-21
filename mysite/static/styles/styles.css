@@ -142,30 +142,25 @@ body{
     width: inherit;
 }
 
-
-div.content {
-  margin-left: 200px;
-  padding: 1px 16px;
-  height: auto;
-}
-
 @media screen and (max-width: 700px) {
   .sidebar {
     width: 100%;
     height: auto;
     position: relative;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
   }
-  .sidebar a {float: left;}
+  .sidebar a {float: none;}
   div.content {margin-left: 0;}
-
 }
 
-@media screen and (max-width: 400px) {
-  .sidebar a {
-    text-align: center;
-    float: none;
-  }
-  
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: auto;
 }
 
 .dark-mode img.one{
