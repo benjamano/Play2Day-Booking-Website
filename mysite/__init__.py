@@ -2021,9 +2021,9 @@ def selectsession():
             getsessions = "SELECT * FROM Session ORDER BY SessionID ASC"
             q.execute(getsessions)
             
-            app.logger.info(f"Active Sessions: {activesessions}")
-            
             activesessions = q.fetchall()
+            
+            app.logger.info(f"Active Sessions: {activesessions}")
     
             return render_template("manager/selectticket.html", activesessions = activesessions)
 
