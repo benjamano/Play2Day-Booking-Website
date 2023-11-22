@@ -1,7 +1,7 @@
 <script src="https://kit.fontawesome.com/9d35a24d36.js" crossorigin="anonymous"></script>
 
 <head>
-    <title>Manage A Customer</title>
+    <title>Manage A Ticket</title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/styles.css') }}"/>
     <link rel="icon" href="{{url_for('static', filename='/images/RedLogoIcon.png')}}"/>
 </head>
@@ -30,19 +30,19 @@
                         <input type="hidden" id="delete" name="delete" value="False"/>
                         <h12>SessionID</h12>
                         <br>
-                        <input type="text" id="SessionID" name="SessionID" value={{SessionID}} readonly>
+                        <input type="text" id="SessionID" name="SessionID" value={{SessionID}} readonly style="cursor: not-allowed">
                         <p>
                         <br>
                         <br>
                         <h12>Session Name</h12>
                         <br>
-                        <input type="text" id="SessionName" name="SessionName" value={{SessionName}} readonly>
+                        <input type="text" id="SessionName" name="SessionName" value={{SessionName}} readonly style="cursor: not-allowed">
                         </p>
                         <br>
                         <p>
                         <h12>Adult Price (£)</h12>
                         <br>
-                        <input type="number" id="NewAdultPrice" name="NewAdultPrice" value={{AdultPrie}} required>
+                        <input type="number" id="NewAdultPrice" name="NewAdultPrice" value={{AdultPrice}} required>
                         </p>
                         <br>
                         <br>
