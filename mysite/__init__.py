@@ -1077,7 +1077,7 @@ def editaccountdetails():
     
     sql.commit()
 
-    q.execute("CREATE TABLE IF NOT EXISTS Manager (ManagerID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Username TEXT, Password VARCHAR(255), PasswordSalt VARCHAR(255))")
+    q.execute("CREATE TABLE IF NOT EXISTS Manager (ManagerID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Username VARCHAR(255), Password VARCHAR(255), PasswordSalt VARCHAR(255))")
     
     sql.commit()
     
