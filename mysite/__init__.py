@@ -1769,7 +1769,7 @@ def managereditbooking():
             q.execute(getactivebookings)
             activebookings = q.fetchall()
 
-            return render_template("manager/selectbooking.html", activebookings=activebookings, StartDate=StartDate, EndDate=EndDate, Filter=Filter)
+            return render_template("manager/selectbooking.html", activebookings=activebookings)
 
         except Exception as error:
             return render_template("error.html", error=error)
