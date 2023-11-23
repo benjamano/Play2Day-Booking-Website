@@ -1641,7 +1641,7 @@ def managerlogin():
 
             except Exception as error:
 
-                return render_template("error.html", error=f"Password Incorrect, {error}")
+                return render_template("error.html", error=f"Password Incorrect<br><br>{error}")
 
     else:
 
