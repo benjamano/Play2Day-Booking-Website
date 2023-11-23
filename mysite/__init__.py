@@ -2059,11 +2059,15 @@ def managereditsession():
             
             if type(newadultprice) != int or type(newchildprice) != int:
                 
-                return render_template("error.html", error=f"Error: Price must be a number")
+                try:
+                    newadultprice = float(newadultprice)
+                    newchildprice = float(newchildprice)
+                    newadultprice = round(newadultprice, 2)
+                    newchildprice = round(newchildprice, 2)
+                
+                except:
+                    return render_template("error.html", error=f"Error: Price must be a valid decimal number")
             
-            newadultprice = round(newadultprice, 2)
-            newchildprice = round(newchildprice, 2)
-        
             editsession = "UPDATE Session SET AdultPrice = (?), ChildPrice = (?) WHERE SessionID = (?)"
             
             q.execute(editsession, [newadultprice, newchildprice, SessionID])
