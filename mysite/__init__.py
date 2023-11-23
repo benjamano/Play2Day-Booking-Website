@@ -1639,9 +1639,9 @@ def managerlogin():
 
                 return redirect(url_for("manageraccount"))
 
-            except Exception:
+            except Exception as error:
 
-                return render_template("error.html", error="Password Incorrect")
+                return render_template("error.html", error=f"Password Incorrect, {error}")
 
     else:
 
