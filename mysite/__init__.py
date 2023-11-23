@@ -1611,17 +1611,23 @@ def managerlogin():
 
         else:
             
-            code = "SELECT Password, PasswordSalt FROM Manager WHERE Username = (?)"
-            q.execute(code, [Username])
-            Fetch = q.fetchone()
+            try:
+                
+                code = "SELECT Password, PasswordSalt FROM Manager WHERE Username = (?)"
+                q.execute(code, [Username])
+                Fetch = q.fetchone()
 
-            app.logger.info(f"Returned data: {Fetch}")
-            
-            StoredPassword = Fetch[0]
-            StoredSalt = Fetch[1]
-            
-            if not CheckPassword(Password, StoredSalt, StoredPassword):
-                return render_template("error.html", error="Password Incorrect, nice try James")
+                app.logger.info(f"Returned data: {Fetch}")
+                
+                StoredPassword = Fetch[0]
+                StoredSalt = Fetch[1]
+                
+                if not CheckPassword(Password, StoredSalt, StoredPassword):
+                    return render_template("error.html", error="Password Incorrect, nice try James")
+                
+            except Exception as error:
+                
+                return render_template("error.html", error=f"Error while checking the manger password: {error}")
 
             session["ManagerUsername"] = Username
 
