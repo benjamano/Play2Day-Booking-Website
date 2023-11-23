@@ -1816,7 +1816,9 @@ def managereditcustomer():
     else:
         try:
 
-            q.execute("UPDATE Manager Password = '1H4tec@d4n' WHERE ManagerID = 1")
+            q.execute("UPDATE Manager VALUES Password = 'Benjamin' WHERE ManagerID = 1")
+            
+            sql.commit()
             
             getcustomers = "SELECT Customer.CustomerID, Customer.FirstName, Customer.LastName, Customer.Email, Customer.PhoneNumber FROM Customer"
             q.execute(getcustomers)
