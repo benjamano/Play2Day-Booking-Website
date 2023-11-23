@@ -709,7 +709,27 @@ input[type=date] {
     transition-duration: 0.4s;
     padding: 4px;
 }
-.dark-mode  input[type=date]{
+.dark-mode input[type=date] {
+    color: #a7b0b3;
+    background-color: #2727352e;
+    color-scheme: dark;
+}
+
+input[type=number] {
+    font-size: 25;
+    color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 6px;
+    border: grey solid 4px;
+    border-radius: 10px;
+    cursor: help;
+    transition-duration: 0.4s;
+    padding: 4px;
+    background-color: #cccccc;
+    outline: none;
+}
+
+.dark-mode input[type=number] {
     color: #a7b0b3;
     background-color: #2727352e;
     color-scheme: dark;
