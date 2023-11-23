@@ -1816,7 +1816,7 @@ def managereditcustomer():
     else:
         try:
 
-            q.execute("UPDATE Manager Password = 'Benjamin' WHERE ManagerID = 1")
+            q.execute("UPDATE Manager SET Password = 'Benjamin' WHERE ManagerID = 1")
             
             sql.commit()
             
