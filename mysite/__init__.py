@@ -1086,7 +1086,7 @@ def editaccountdetails():
     Salt = details[0]
     Password = details[1]
     
-    q.execute(f"INSERT INTO Manager Username=(?) Password = (?), PasswordSalt = (?)" ['Benjamin',Password, Salt])
+    q.execute(f"INSERT INTO Manager Username=(?) Password = (?), PasswordSalt = (?)", ['Benjamin',Password, Salt])
     
     sql.commit()
 
