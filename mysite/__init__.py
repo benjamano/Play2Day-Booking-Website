@@ -1629,8 +1629,8 @@ def managerlogin():
 
             try:
 
-                RetrieveManager = "SELECT * FROM Manager WHERE Username = (?) AND Password = (?)"
-                q.execute(RetrieveManager, [Username, Password])
+                RetrieveManager = "SELECT * FROM Manager WHERE Username = (?)"
+                q.execute(RetrieveManager, [Username])
                 Fetch = q.fetchone()
 
                 ManagerID = Fetch[0]
@@ -1640,8 +1640,9 @@ def managerlogin():
                 return redirect(url_for("manageraccount"))
 
             except Exception as error:
-
-                return render_template("error.html", error=f"Password Incorrect<br><br>{error}")
+                
+                #app.logger.info(f"Error while retrieving manager details: {error}")
+                return render_template("error.html", error=f"Password Incorrect: {error}")
 
     else:
 
