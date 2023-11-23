@@ -976,6 +976,7 @@ def index():
     
     session["Email"] = ""
     session["Password"] = ""
+    session["ManagerUsername"] = ""
     return render_template("index.html")
 
 @app.route('/login', methods=["POST","GET"])
