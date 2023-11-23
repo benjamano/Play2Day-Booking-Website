@@ -406,7 +406,7 @@ label{
     border-radius: 9px;
     border: solid 4px #8080805c;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    padding: 16px;
+    padding: 16px !important;
     font-size: x-large;
     transition-duration: 0.4s;
     margin-top: 20px;

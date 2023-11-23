@@ -1730,7 +1730,7 @@ def managereditbooking():
             activebookings = q.fetchall()
             #app.logger.info(f"{getactivebookings} ,{activebookings}")
 
-            return render_template("manager/selectbooking.html", activebookings=activebookings)
+            return render_template("manager/selectbooking.html", activebookings=activebookings, StartDate=StartDate, EndDate=EndDate, Filter=Filter)
 
         else:
 
@@ -1769,7 +1769,7 @@ def managereditbooking():
             q.execute(getactivebookings)
             activebookings = q.fetchall()
 
-            return render_template("manager/selectbooking.html", activebookings=activebookings)
+            return render_template("manager/selectbooking.html", activebookings=activebookings, StartDate=StartDate, EndDate=EndDate, Filter=Filter)
 
         except Exception as error:
             return render_template("error.html", error=error)
