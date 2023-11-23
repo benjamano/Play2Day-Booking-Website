@@ -1615,6 +1615,8 @@ def managerlogin():
             q.execute(code, [Username])
             Fetch = q.fetchone()
 
+            app.logger.info(f"Returned data: {Fetch}")
+            
             StoredPassword = Fetch[0]
             StoredSalt = Fetch[1]
             
