@@ -1622,38 +1622,26 @@ def managerlogin():
             
             if not CheckPassword(Password, StoredSalt, StoredPassword):
                 return render_template("error.html", error="Password Incorrect, nice try James")
-            
-            CheckManagerExists = "SELECT COUNT(*) FROM Manager WHERE Username = (?) AND Password = (?)"
-            q.execute(CheckManagerExists, [Username, Password])
-            result = q.fetchone()
 
-            if result[0] > 0:
+            session["ManagerUsername"] = Username
 
-                session["ManagerUsername"] = Username
+            #app.logger.info(f"Manager with Username {Username} found, checking password then redirecting to account page")
 
-                #app.logger.info(f"Manager with Username {Username} found, checking password then redirecting to account page")
+            try:
 
-                try:
+                RetrieveManager = "SELECT * FROM Manager WHERE Username = (?) AND Password = (?)"
+                q.execute(RetrieveManager, [Username, Password])
+                Fetch = q.fetchone()
 
-                    RetrieveManager = "SELECT * FROM Manager WHERE Username = (?) AND Password = (?)"
-                    q.execute(RetrieveManager, [Username, Password])
-                    Fetch = q.fetchone()
+                ManagerID = Fetch[0]
 
-                    ManagerID = Fetch[0]
+                session["ManagerID"] = ManagerID
 
-                    session["ManagerID"] = ManagerID
+                return redirect(url_for("manageraccount"))
 
-                    return redirect(url_for("manageraccount"))
+            except Exception:
 
-                except Exception:
-
-                    return render_template("error.html", error="Password Incorrect")
-
-            else:
-
-                #app.logger.info(f"Manager with Username {Username} does not exist, redirecting to error page")
-
-                return render_template('/error.html', error="Account Doesn't Exist")
+                return render_template("error.html", error="Password Incorrect")
 
     else:
 
