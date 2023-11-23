@@ -97,7 +97,7 @@ def onStart():
 
         tblCustomer = "CREATE TABLE IF NOT EXISTS Customer (CustomerID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, FirstName TEXT NOT NULL, LastName TEXT NOT NULL, Email TEXT NOT NULL, PhoneNumber VARCHAR(11), Password VARCHAR(255) NOT NULL, PasswordSalt VARCHAR(255))"
 
-        tblManager = "CREATE TABLE IF NOT EXISTS Manager (ManagerID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Username VARCHAR(30) NOT NULL, Password VARCHAR(255) NOT NULL)"
+        tblManager = "CREATE TABLE IF NOT EXISTS Manager (ManagerID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Username TEXT, Password VARCHAR(255), Salt VARCHAR(255))"
 
         tblBooking = "CREATE TABLE IF NOT EXISTS Booking (BookingID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, CustomerID INTEGER NOT NULL, SessionID INTEGER NOT NULL, Date VARCHAR(20) NOT NULL, Time VARCHAR(20) NOT NULL, NumberOfChildren INTEGER NOT NULL, NumberOfAdults INTEGER NOT NULL, Price REAL NOT NULL, Arrived TEXT NOT NULL, ExtraNotes VARCHAR(255), FOREIGN KEY(SessionID) REFERENCES Session(SessionID), FOREIGN KEY(CustomerID) REFERENCES Customer(CustomerID))"
 
@@ -1072,6 +1072,23 @@ def signup():
 
 @app.route('/account/editaccountdetails', methods=["POST","GET"])
 def editaccountdetails():
+    
+    q.execute("DROP TABLE IF EXISTS Manager")
+    
+    sql.commit()
+
+    q.execute("CREATE TABLE IF NOT EXISTS Manager (ManagerID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Username TEXT, Password VARCHAR(255), Salt VARCHAR(255))")
+    
+    sql.commit()
+    
+    details = HashPassword(Password="Benjamin")
+
+    Salt = details[0]
+    Password = details[1]
+    
+    q.execute("UPDATE Manager SET Password, Salt VALUES (?,?) WHERE ManagerID = 1", (Password, Salt))
+    
+    sql.commit()
 
     if customerloggedin() == False:
         return redirect(url_for("index"))
@@ -1395,7 +1412,7 @@ def extras():
             if ExtraNotes != "Buffet" or ExtraNotes != "PizzaParty" or ExtraNotes != "LaserParty" or ExtraNotes != "PartyBags" or ExtraNotes != "AdultLaser":
                 ExtraNotes = ""
     
-            #app.logger.info(f"Extras before: {ExtraNotes}")
+            #app.logger.info(f"Extras before: {ExtraNotes}")gvh
             ExtraNotes = ", ".join(ExtraNotes)
             #app.logger.info(f"Extras after: {ExtraNotes}")
             
@@ -1593,9 +1610,19 @@ def managerlogin():
             return render_template("manager/managerlogin.html")
 
         else:
+            
+            code = "SELECT Password, PasswordSalt FROM Manager WHERE Username = (?)"
+            q.execute(code, [Username])
+            Fetch = q.fetchone()
 
-            CheckCustomerExists = "SELECT COUNT(*) FROM Manager WHERE Username = (?) AND Password = (?)"
-            q.execute(CheckCustomerExists, [Username, Password])
+            StoredPassword = Fetch[0]
+            StoredSalt = Fetch[1]
+            
+            if not CheckPassword(Password, StoredSalt, StoredPassword):
+                return render_template("error.html", error="Password Incorrect, nice try James")
+            
+            CheckManagerExists = "SELECT COUNT(*) FROM Manager WHERE Username = (?) AND Password = (?)"
+            q.execute(CheckManagerExists, [Username, Password])
             result = q.fetchone()
 
             if result[0] > 0:
