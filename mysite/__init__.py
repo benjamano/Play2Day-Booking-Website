@@ -6,8 +6,10 @@ from flask import Flask, render_template, redirect, request, url_for, session
 
 from datetime import datetime, date, timedelta
 
+import gmailcode.py as gmail
+
 emailsender = "benjamano12@gmail.com"
-emailpassword = "bhpm pbna aajb gxwg"
+emailpassword = gmail.emailcode
 
 app = Flask(__name__)
 app.secret_key = "ComputingNEASoSecure"
@@ -276,6 +278,8 @@ def CheckInputValid(FirstName, LastName, Email, PhoneNumber, Password, Function)
 
 def sendEmail(Email, Option):
     
+    #This function sends an email to a recipient's email stated by the vaiable 'Email'. The variable 'option' tell the function what type of email to send to the recipient. The function returns a boolean value indicating whether the email was sent or not, and if not, the error that occured.
+    
     if Email == "" or Email == None or Email == "None":
         return False, "Error while sending email: No Email Entered or was empty"
     
@@ -358,7 +362,7 @@ def sendEmail(Email, Option):
         smtp.login(emailsender, emailpassword)
         smtp.sendmail(emailsender, emailreceiver, em.as_string())
     
-    app.logger.info(f"Email sent to {emailreceiver} with subject {subject} and body {body}")
+    #app.logger.info(f"Email sent to {emailreceiver} with subject {subject} and body {body}")
     
     return True, None
 
@@ -1409,6 +1413,8 @@ def extras():
 
             ExtraNotes = request.form.getlist("Extra")
             
+            #As some extra protection, this checks to see if the user has selected any extras, if not, it sets the variable to an empty string, this is to prevent any invalid selections being saved.
+            
             if ExtraNotes != "Buffet" or ExtraNotes != "PizzaParty" or ExtraNotes != "LaserParty" or ExtraNotes != "PartyBags" or ExtraNotes != "AdultLaser":
                 ExtraNotes = ""
     
@@ -1599,6 +1605,8 @@ def contact():
 
 @app.route("/managerlogin", methods=["POST","GET"])
 def managerlogin():
+    
+    #This function is used to log the manager into the system, it checks the username and hashed password against the database, if they match, the user is logged in and redirected to the account page.
 
     if request.method == "POST":
 
@@ -1681,6 +1689,8 @@ def manageraccount():
 
 @app.route("/manager/editbooking", methods=["POST", "GET"])
 def managereditbooking():
+    
+    #This function is used to edit a booking, it first grabs all the bookings that are active and have not yet happened, if a filter is selected, gets the new bookings under the filters, then it checks to see if the user has selected a booking to edit, if they have, it grabs the booking details and redirects the user to the edit booking page, if not, it redirects the user to the select booking page.
     
     Date = date.today()
     
@@ -1777,6 +1787,8 @@ def managereditbooking():
 @app.route("/manager/managebooking/booking", methods=["POST", "GET"])
 def managerbooking():
     
+    #
+    
     if managerloggedin() == False:
         return redirect(url_for("index"))
 
@@ -1816,6 +1828,8 @@ def managerbooking():
 @app.route('/manager/editcustomer', methods=["POST","GET"])
 def managereditcustomer():
     
+    #This function is used to edit a customer, it first grabs all the customers, then it checks to see if the user has selected a customer to edit, if they have, it grabs the customer details and redirects the user to the edit customer page, if not, it redirects the user to the select customer page.
+    
     if managerloggedin() == False:
         return redirect(url_for("index"))
     
@@ -1854,6 +1868,8 @@ def managereditcustomer():
 
 @app.route("/manager/editcustomer/customer", methods=["POST", "GET"])
 def managercustomer():
+    
+    #This page is used when a specific customer is selected, it allows the manager to edit the customer details, or delete the customer.
     
     if managerloggedin() == False:
         return redirect(url_for("index"))
@@ -1932,6 +1948,8 @@ def managercustomer():
 @app.route("/manager/manageholidays", methods=["POST", "GET"])
 def managermanageholidays():
     
+    #This function is used to manage holidays, it first grabs all the holidays that are active, when triggered, it allows the holiday to be deleted, and also redirects to the new holiday creation page when selected.
+    
     if managerloggedin() == False:
         return redirect(url_for("index"))
 
@@ -1960,6 +1978,8 @@ def managermanageholidays():
 
 @app.route("/manager/newholiday", methods=["POST", "GET"])
 def managercreateholiday():
+    
+    #This function is used to create the holiday with the details that the the user has entered.
     
     if managerloggedin() == False:
         return redirect(url_for("index"))
@@ -2001,6 +2021,8 @@ def managercreateholiday():
 @app.route("/manager/arrived", methods=["POST", "GET"])
 def mark_arrived():
     
+    #This function is used to toggle a booking's arrived state, it uses the BookingID to detemine the booking.
+    
     if managerloggedin() == False:
         return redirect(url_for("index"))
 
@@ -2030,6 +2052,8 @@ def mark_arrived():
     
 @app.route("/manager/selectsession", methods=["POST", "GET"])
 def managerselectsession():
+    
+    #This function is used to select a session / ticket, it grabs all the active tickets and displays them, when selected, it redirects the user to the edit session page.
         
     if managerloggedin() == False:
         return redirect(url_for("index"))
@@ -2070,6 +2094,8 @@ def managerselectsession():
 
 @app.route("/manager/editsession", methods=["POST", "GET"])
 def managereditsession():
+    
+    #This function is used to edit a session / ticket, it first grabs all the sessions, it allows the ticket prices to be edited.
     
     SessionID = session["SessionID"]
     SessionName = session["SessionName"]
