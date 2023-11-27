@@ -6,10 +6,8 @@ from flask import Flask, render_template, redirect, request, url_for, session
 
 from datetime import datetime, date, timedelta
 
-import gmailcode.py as gmail
-
 emailsender = "benjamano12@gmail.com"
-emailpassword = gmail.emailcode
+emailpassword = "bhpm pbna aajb gxwg"
 
 app = Flask(__name__)
 app.secret_key = "ComputingNEASoSecure"
