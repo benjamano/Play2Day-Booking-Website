@@ -1377,6 +1377,14 @@ def privatehire():
         PrivateHireType = request.form["privatehiretype"]
         NumberAdults = request.form["numberadults"]
         NumberChildren = request.form["numberchildren"]
+        
+        if NumberAdults != "1-10" or NumberAdults != "10-30" or NumberAdults != "30-50" or NumberAdults != "50+":
+            
+            session["BookingValid"] = False
+
+        if NumberChildren != "0" or NumberChildren != "1-10" or NumberChildren != "10-30" or NumberChildren != "30-50" or NumberChildren != "50+": 
+            
+            session["BookingValid"] = False
 
         NewBooking = Booking(CustomerID=None, BookingID=None, SessionID=None, BookingDate=None, BookingTime=None, NumberOfChildren=NumberChildren, NumberOfAdults=NumberAdults, BookingPrice=None, ExtraNotes=None)
 
@@ -1633,7 +1641,7 @@ def managerlogin():
                 
             except Exception as error:
                 
-                return render_template("error.html", error=f"Error while checking the manger password: {error}")
+                return render_template("error.html", error=f"This password is incorrect : {error}")
 
             session["ManagerUsername"] = Username
 
