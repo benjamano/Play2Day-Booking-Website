@@ -1631,7 +1631,7 @@ def managerlogin():
                 q.execute(code, [Username])
                 Fetch = q.fetchone()
 
-                app.logger.info(f"Returned data: {Fetch}")
+                #app.logger.info(f"Returned data: {Fetch}")
                 
                 StoredPassword = Fetch[0]
                 StoredSalt = Fetch[1]
@@ -2134,7 +2134,7 @@ def managereditsession():
             
             sql.commit()
             
-            app.logger.info(f"Session with ID {SessionID} edited successfully with details {newadultprice}, {newchildprice}")
+            #app.logger.info(f"Session with ID {SessionID} edited successfully with details {newadultprice}, {newchildprice}")
             
             return redirect(url_for('managerselectsession'))
         
