@@ -796,7 +796,7 @@ class Booking:
         #This function is similar to those above it, but it checks wether a private hire is available in a different way.
 
         session["numberadults"] = self.NumberOfAdults
-        session["numberchildren"] = self.NumberOfChildren
+        session["numberchildren"] = self.NumberFOfChildren
         session["PrivateHireType"] = PrivateHireType
         session["BookingTime"] = "18:30 - 20:30"
 
@@ -845,8 +845,8 @@ class Booking:
                 q.execute(getprices, [SessionID])
                 prices = q.fetchone()
 
-                adultprice = prices[0]
-                childprice = prices[1]
+                adultprice = round(prices[0], 2)
+                childprice = round(prices[1], 2)
 
                 NumberAdults = int(self.NumberOfAdults)
                 NumberChildren = int(self.NumberOfChildren)
@@ -1075,22 +1075,22 @@ def signup():
 @app.route('/account/editaccountdetails', methods=["POST","GET"])
 def editaccountdetails():
     
-    q.execute("DROP TABLE IF EXISTS Manager")
+    # q.execute("DROP TABLE IF EXISTS Manager")
     
-    sql.commit()
+    # sql.commit()
 
-    q.execute("CREATE TABLE IF NOT EXISTS Manager (ManagerID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Username VARCHAR(255), Password VARCHAR(255), PasswordSalt VARCHAR(255))")
+    # q.execute("CREATE TABLE IF NOT EXISTS Manager (ManagerID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Username VARCHAR(255), Password VARCHAR(255), PasswordSalt VARCHAR(255))")
     
-    sql.commit()
+    # sql.commit()
     
-    details = HashPassword(Password="Benjamin")
+    # details = HashPassword(Password="Benjamin")
 
-    Salt = details[0]
-    Password = details[1]
+    # Salt = details[0]
+    # Password = details[1]
     
-    q.execute(f"INSERT INTO Manager (Username, Password, PasswordSalt) VALUES (?,?,?)", ['Benjamin',Password, Salt])
+    # q.execute(f"INSERT INTO Manager (Username, Password, PasswordSalt) VALUES (?,?,?)", ['Benjamin',Password, Salt])
     
-    sql.commit()
+    # sql.commit()
 
     if customerloggedin() == False:
         return redirect(url_for("index"))
@@ -2105,8 +2105,8 @@ def managereditsession():
     
     SessionID = session["SessionID"]
     SessionName = session["SessionName"]
-    AdultPrice = session["AdultPrice"]
-    ChildPrice = session["ChildPrice"]
+    AdultPrice = round(session["AdultPrice"], 2)
+    ChildPrice = round(session["ChildPrice"], 2)
     
     if managerloggedin() == False:
         return redirect(url_for("index"))
