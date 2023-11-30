@@ -436,6 +436,8 @@ progress {
     height: 25px;
     border-radius: 0px 0px 20px 20px;
     transition-duration: 1s;
+    transition-duration: 1s;
+    animation: slide-in 1s ease-in-out;
 }
 
 progress::-webkit-progress-bar {
@@ -443,6 +445,8 @@ progress::-webkit-progress-bar {
     height: 40px;
     border-radius: 0px 0px 20px 20px;
     transition-duration: 1s;
+    transition-duration: 1s;
+    animation: slide-in 1s ease-in-out;
 }
 progress::-webkit-progress-value {
     border: 0;
