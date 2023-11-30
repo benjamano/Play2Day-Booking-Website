@@ -431,12 +431,12 @@ ul li{
 }
 
 progress {
-    width: 0;
+    width: 100%;
     min-width: 100%;
     height: 25px;
     border-radius: 0px 0px 20px 20px;
     transition-duration: 1s;
-    transition: width 1s ease-in-out; 
+    transform: translateX(-100%); /* Initial position outside the container */
 }
 
 progress::-webkit-progress-bar {
@@ -444,30 +444,21 @@ progress::-webkit-progress-bar {
     height: 40px;
     border-radius: 0px 0px 20px 20px;
     transition-duration: 1s;
-    transition: width 1s ease-in-out; 
 }
+
 progress::-webkit-progress-value {
     border: 0;
     height: 40px;
     border-radius: 0px 0px 0px 20px;
     transition-duration: 1s;
-    transition: width 1s ease-in-out; 
+    transform: translateX(100%); /* Initial position outside the container */
 }
+
 progress::-moz-progress-bar {
     border: 0;
     height: 40px;
     border-radius: 0px 0px 20px 20px;
     transition-duration: 1s;
-    transition: width 1s ease-in-out; 
-}
-
-@keyframes slide-in {
-    0% {
-        width: 0;
-    }
-    100% {
-        width: 100%;
-    }
 }
 
 .buttonmanagerlogin {
