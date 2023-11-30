@@ -813,7 +813,7 @@ input[type=select]{
     border: none;
     display: block;
     max-width: 80%;
-    max-height: 500px;
+    height: 600px;
     background-color: white;
     margin-top: 32px;
     border-radius: 20px;
