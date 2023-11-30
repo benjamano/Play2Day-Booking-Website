@@ -431,10 +431,10 @@ ul li{
 }
 
 progress {
-    width: 100%;
+    width: 0;
+    min-width: 100%;
     height: 25px;
     border-radius: 0px 0px 20px 20px;
-    overflow: hidden; /* Added overflow property */
     transition-duration: 1s;
 }
 
@@ -444,16 +444,12 @@ progress::-webkit-progress-bar {
     border-radius: 0px 0px 20px 20px;
     transition-duration: 1s;
 }
-
 progress::-webkit-progress-value {
     border: 0;
     height: 40px;
     border-radius: 0px 0px 0px 20px;
-    background-color: green; /* Set the background color to green */
     transition-duration: 1s;
-    width: 0; /* Initially set width to 0 */
 }
-
 progress::-moz-progress-bar {
     border: 0;
     height: 40px;
@@ -812,11 +808,12 @@ input[type=select]{
     color: black;
     font-size: 20;
 }
-.pair{
+.bookingpair{
     text-align: center;
     border: none;
     display: block;
     max-width: 80%;
+    max-height: 500px;
     background-color: white;
     margin-top: 32px;
     border-radius: 20px;
