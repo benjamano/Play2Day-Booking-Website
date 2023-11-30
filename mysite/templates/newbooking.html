@@ -37,39 +37,33 @@
                         Select the type of booking
                     </h3>
                     <form action="#" method="post">
-                        <p>
-                            {% if WeekdayBooking == True %}
-                                <label>
-                                    <input type="radio" id="bookingtype" name="bookingtype" value="Weekday Play Session">
-                                    Weekday Session
-                                </label>
-                            {% else %}
-                                <label>
-                                    <input type="radio" id="bookingtype" name="bookingtype" value="Weekend Play Session" required>
-                                    Weekend or Holiday Session
-                                </label>
-                            {% endif %}
-                        </p>
-                        <p>
+                        {% if WeekdayBooking == True %}
                             <label>
-                                <input type="radio" id="bookingtype" name="bookingtype" value="Party">
-                                Party
+                                <input type="radio" id="bookingtype" name="bookingtype" value="Weekday Play Session">
+                                Weekday Session
                             </label>
-                        </p>
-                        <p>
-                            {% if PHBooked == False %}
-                                <label>
-                                    <input type="radio" id="bookingtype" name="bookingtype" value="Private Hire">
-                                    Private Hire
-                                </label>
-                            {% else %}
-                                <Label>
-                                    <input type="radio" id="bookingtype" name="bookingtype" value="Private Hire" disabled title="This session is booked this day">
-                                    Private Hire
-                                    <h4 style="font-size: 15 !important; margin-top: 0 !important; display: inline !important;">*Private Hire Booked This Day</h4>
-                                </Label>
-                            {% endif %}
-                        </p>
+                        {% else %}
+                            <label>
+                                <input type="radio" id="bookingtype" name="bookingtype" value="Weekend Play Session" required>
+                                Weekend or Holiday Session
+                            </label>
+                        {% endif %}
+                        <label>
+                            <input type="radio" id="bookingtype" name="bookingtype" value="Party">
+                            Party
+                        </label>
+                        {% if PHBooked == False %}
+                            <label>
+                                <input type="radio" id="bookingtype" name="bookingtype" value="Private Hire">
+                                Private Hire
+                            </label>
+                        {% else %}
+                            <Label>
+                                <input type="radio" id="bookingtype" name="bookingtype" value="Private Hire" disabled title="This session is booked this day">
+                                Private Hire
+                                <h4 style="font-size: 15 !important; margin-top: 0 !important; display: inline !important;">*Private Hire Booked This Day</h4>
+                            </Label>
+                        {% endif %}
                         <p>
                             <input type="submit" name="Submit" value="Next"/>
                         </p>
