@@ -435,6 +435,7 @@ progress {
     min-width: 0;
     height: 25px;
     border-radius: 0px 0px 20px 20px;
+    transition: width 1s ease; /* Use width for the transition */
 }
 
 progress::-webkit-progress-bar {
@@ -448,9 +449,9 @@ progress::-webkit-progress-value {
     border: 0;
     height: 40px;
     border-radius: 0px 0px 0px 20px;
-    transition-duration: 1s;
-    transform: scaleX(1); /* Full scale for stretching effect */
-    transform-origin: 0 0; /* Set the scaling origin to the left */
+    transition: transform 1s ease; /* Use transform for the transition */
+    transform: scaleX(0); /* Initial width is zero, effectively hidden */
+    transform-origin: 0 0; /* Set transform origin to the left */
 }
 
 progress::-moz-progress-bar {
@@ -458,8 +459,19 @@ progress::-moz-progress-bar {
     height: 40px;
     border-radius: 0px 0px 20px 20px;
     transition-duration: 1s;
-    transform-origin: 0 0; 
-    transform: scaleX(0);
+}
+
+/* When the progress value changes, set the width and scale accordingly */
+progress[value] {
+    width: calc(100% - (100% * var(--value)) );
+}
+
+progress[value]::-webkit-progress-value {
+    transform: scaleX(var(--value));
+}
+
+progress[value]::-moz-progress-bar {
+    width: var(--value);
 }
 
 .buttonmanagerlogin {
