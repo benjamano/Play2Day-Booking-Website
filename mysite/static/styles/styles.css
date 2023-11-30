@@ -432,10 +432,10 @@ ul li{
 
 progress {
     width: 100%;
-    min-width: 0;
     height: 25px;
     border-radius: 0px 0px 20px 20px;
-    transition: width 1s ease; /* Use width for the transition */
+    overflow: hidden; /* Added overflow property */
+    transition-duration: 1s;
 }
 
 progress::-webkit-progress-bar {
@@ -449,9 +449,9 @@ progress::-webkit-progress-value {
     border: 0;
     height: 40px;
     border-radius: 0px 0px 0px 20px;
-    transition: transform 1s ease; /* Use transform for the transition */
-    transform: scaleX(0); /* Initial width is zero, effectively hidden */
-    transform-origin: 0 0; /* Set transform origin to the left */
+    background-color: green; /* Set the background color to green */
+    transition-duration: 1s;
+    width: 0; /* Initially set width to 0 */
 }
 
 progress::-moz-progress-bar {
@@ -459,19 +459,6 @@ progress::-moz-progress-bar {
     height: 40px;
     border-radius: 0px 0px 20px 20px;
     transition-duration: 1s;
-}
-
-/* When the progress value changes, set the width and scale accordingly */
-progress[value] {
-    width: calc(100% - (100% * var(--value)) );
-}
-
-progress[value]::-webkit-progress-value {
-    transform: scaleX(var(--value));
-}
-
-progress[value]::-moz-progress-bar {
-    width: var(--value);
 }
 
 .buttonmanagerlogin {
