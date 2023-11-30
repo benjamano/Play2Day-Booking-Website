@@ -432,11 +432,12 @@ ul li{
 
 progress {
     width: 100%;
-    min-width: 100%;
+    min-width: 0; /* Set min-width to 0 for stretching effect */
     height: 25px;
     border-radius: 0px 0px 20px 20px;
     transition-duration: 1s;
-    transform: translateX(-100%); /* Initial position outside the container */
+    transform: scaleX(0); /* Initial scale, hide progress */
+    transform-origin: 0 0; /* Set the scaling origin to the left */
 }
 
 progress::-webkit-progress-bar {
@@ -451,7 +452,8 @@ progress::-webkit-progress-value {
     height: 40px;
     border-radius: 0px 0px 0px 20px;
     transition-duration: 1s;
-    transform: translateX(100%); /* Initial position outside the container */
+    transform: scaleX(1); /* Full scale for stretching effect */
+    transform-origin: 0 0; /* Set the scaling origin to the left */
 }
 
 progress::-moz-progress-bar {
