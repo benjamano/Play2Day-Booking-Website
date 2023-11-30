@@ -808,12 +808,11 @@ input[type=select]{
     color: black;
     font-size: 20;
 }
-.bookingpair{
+.pair{
     text-align: center;
     border: none;
     display: block;
     max-width: 80%;
-    height: 600px;
     background-color: white;
     margin-top: 32px;
     border-radius: 20px;

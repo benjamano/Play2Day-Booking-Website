@@ -28,7 +28,7 @@
     <center>
         <div class="content">
             <img class="one" onclick = "location.href = 'https://benjamano.pythonanywhere.com/account';" src="{{ url_for('static',filename='/images/LongerRedLogo.png') }}"/>
-            <div class="bookingpair">
+            <div class="pair">
                 <body>
                     <h5>
                         New Booking
@@ -52,6 +52,8 @@
                             <input type="radio" id="bookingtype" name="bookingtype" value="Party">
                             Party
                         </label>
+                        <br>
+                        <br>
                         {% if PHBooked == False %}
                             <label>
                                 <input type="radio" id="bookingtype" name="bookingtype" value="Private Hire">
