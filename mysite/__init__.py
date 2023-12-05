@@ -2022,7 +2022,7 @@ def managercreateholiday():
             Name = request.form["name"]
             Description = request.form["description"]
             
-            if len(Description) >= 50 or len(Name) >= 30:
+            if len(Description) >= 50 or len(Name) >= 30 or len(StartDate) >= 30 or len(EndDate):
                 
                 return render_template("error.html", error=f"Description or holiday name is too long")
             
@@ -2039,7 +2039,7 @@ def managercreateholiday():
                 q.execute(addholiday, [Name, StartDate, EndDate, Description])
                 sql.commit()
             
-                return redirect(url_for("manageholidays")) 
+                return redirect(url_for("managermanageholidays")) 
 
         except Exception as error:
 
