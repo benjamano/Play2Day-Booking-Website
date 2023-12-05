@@ -2,7 +2,7 @@ import sqlite3, bcrypt, ssl, smtplib
 
 from email.message import EmailMessage
 
-from flask import Flask, render_template, redirect, request, url_for, session
+from flask import Flask, render_template, redirect, request, url_for, session, flash
 
 from datetime import datetime, date, timedelta
 
@@ -1164,6 +1164,7 @@ def deleteaccount():
 def account():
 
     if customerloggedin() == False:
+        flash('Nice Tru, you must log in first')
         return redirect(url_for("index"))
 
     NewCustomer = Customer(Email = None, Password = None, FirstName = None, LastName = None, PhoneNumber = None)
