@@ -1076,22 +1076,22 @@ def signup():
 @app.route('/account/editaccountdetails', methods=["POST","GET"])
 def editaccountdetails():
     
-    q.execute("DROP TABLE IF EXISTS Manager")
+    # q.execute("DROP TABLE IF EXISTS Manager")
     
-    sql.commit()
+    # sql.commit()
 
-    q.execute("CREATE TABLE IF NOT EXISTS Manager (ManagerID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Username VARCHAR(255), Password VARCHAR(255), PasswordSalt VARCHAR(255))")
+    # q.execute("CREATE TABLE IF NOT EXISTS Manager (ManagerID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Username VARCHAR(255), Password VARCHAR(255), PasswordSalt VARCHAR(255))")
     
-    sql.commit()
+    # sql.commit()
     
-    details = HashPassword(Password="1H4tec@d4n")
+    # details = HashPassword(Password="blah")
 
-    Salt = details[0]
-    Password = details[1]
+    # Salt = details[0]
+    # Password = details[1]
     
-    q.execute(f"INSERT INTO Manager (Username, Password, PasswordSalt) VALUES (?,?,?)", ['Benjamin',Password, Salt])
+    # q.execute(f"INSERT INTO Manager (Username, Password, PasswordSalt) VALUES (?,?,?)", ['Benjamin',Password, Salt])
     
-    sql.commit()
+    # sql.commit()
 
     if customerloggedin() == False:
         return redirect(url_for("index"))
