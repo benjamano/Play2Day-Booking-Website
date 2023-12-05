@@ -1094,6 +1094,7 @@ def editaccountdetails():
     # sql.commit()
 
     if customerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
 
     if request.method == "POST":
@@ -1144,6 +1145,7 @@ def editaccountdetails():
 def deleteaccount():
 
     if customerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
 
     NewCustomer = Customer(Email = None, Password = None, FirstName = None, LastName = None, PhoneNumber = None)
@@ -1164,7 +1166,7 @@ def deleteaccount():
 def account():
 
     if customerloggedin() == False:
-        flash('Nice Tru, you must log in first')
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
 
     NewCustomer = Customer(Email = None, Password = None, FirstName = None, LastName = None, PhoneNumber = None)
@@ -1186,6 +1188,7 @@ def account():
 def newbooking():
 
     if customerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
 
     # Resetting all session variables that are used in this process
@@ -1229,6 +1232,7 @@ def newbooking():
 def sessiontype():
 
     if customerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
 
     WeekdayBooking = session["WeekdayBooking"]
@@ -1275,6 +1279,7 @@ def sessiontype():
 def weekdayplaysession():
 
     if customerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
 
     if session["BookingValid"] == "False":
@@ -1306,6 +1311,7 @@ def weekdayplaysession():
 def weekendplaysession():
 
     if customerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
     
     if session["BookingValid"] == False:
@@ -1338,6 +1344,7 @@ def weekendplaysession():
 def party():
 
     if customerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
     
     if session["BookingValid"] == False:
@@ -1369,6 +1376,7 @@ def party():
 def privatehire():
 
     if customerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
     
     if session["BookingValid"] == False:
@@ -1407,6 +1415,7 @@ def privatehire():
 def extras():
 
     if customerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
     
     if session["BookingValid"] == False:
@@ -1446,6 +1455,7 @@ def extras():
 def managebooking():
 
     if customerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
 
     CustomerID = session["CustomerID"]
@@ -1490,6 +1500,7 @@ def managebooking():
 def booking():
 
     if customerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
 
     BookingID = session["BookingID"]
@@ -1508,6 +1519,10 @@ def booking():
 
 @app.route("/account/managebooking/deletebooking", methods=["POST", "GET"])
 def deletebooking():
+    
+    if customerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
+        return redirect(url_for("index"))
 
     BookingID = session["BookingID"]
 
@@ -1528,6 +1543,7 @@ def deletebooking():
 def confirmbooking():
 
     if customerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
 
     if request.method == "POST":
@@ -1562,6 +1578,7 @@ def confirmbooking():
 def createbooking():
 
     if customerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
         
     CustomerID = session["CustomerID"]
@@ -1674,6 +1691,7 @@ def managerlogin():
 def manageraccount():
     
     if managerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
 
     try:
@@ -1703,6 +1721,7 @@ def managereditbooking():
     Date = date.today()
     
     if managerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
     
     if request.method == "POST":
@@ -1796,6 +1815,7 @@ def managereditbooking():
 def managerbooking():
     
     if managerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
 
     BookingID = session["BookingID"]
@@ -1837,6 +1857,7 @@ def managereditcustomer():
     #This function is used to edit a customer, it first grabs all the customers, then it checks to see if the user has selected a customer to edit, if they have, it grabs the customer details and redirects the user to the edit customer page, if not, it redirects the user to the select customer page.
     
     if managerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
     
     if request.method == "POST":
@@ -1878,6 +1899,7 @@ def managercustomer():
     #This page is used when a specific customer is selected, it allows the manager to edit the customer details, or delete the customer.
     
     if managerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
 
     CustomerID = session["CustomerID"]
@@ -1957,6 +1979,7 @@ def managermanageholidays():
     #This function is used to manage holidays, it first grabs all the holidays that are active, when triggered, it allows the holiday to be deleted, and also redirects to the new holiday creation page when selected.
     
     if managerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
 
     if request.method == "POST":
@@ -1988,6 +2011,7 @@ def managercreateholiday():
     #This function is used to create the holiday with the details that the the user has entered.
     
     if managerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
 
     if request.method == "POST":
@@ -2030,6 +2054,7 @@ def mark_arrived():
     #This function is used to toggle a booking's arrived state, it uses the BookingID to detemine the booking.
     
     if managerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
 
     if request.method == "POST":
@@ -2062,6 +2087,7 @@ def managerselectsession():
     #This function is used to select a session / ticket, it grabs all the active tickets and displays them, when selected, it redirects the user to the edit session page.
         
     if managerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
 
     if request.method == "POST":
@@ -2109,6 +2135,7 @@ def managereditsession():
     ChildPrice = round(session["ChildPrice"], 2)
     
     if managerloggedin() == False:
+        flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
     
     if request.method == "POST":
