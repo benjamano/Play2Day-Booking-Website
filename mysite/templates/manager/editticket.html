@@ -120,6 +120,10 @@
           el.classList.toggle("dark-mode", isDarkMode);
       });
     }
+
+    setInterval(function() {
+        location.reload();
+    }, 20 * 60 * 1000);
   
     applyInitialDarkMode();
   </script>
