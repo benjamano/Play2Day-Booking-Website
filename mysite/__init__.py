@@ -369,6 +369,9 @@ def sendEmail(Email, Option):
         return True, None
 
     except Exception as senderror:
+        
+        app.logger.info(error)
+        
         error = f"Error while sending email: {senderror}"
         
         return False, error
@@ -1208,7 +1211,7 @@ def account():
         
         if not session["EmailFailed"]:
         
-            flash("Email failed to send, please check your email address is correct and try again", "error")
+            flash(f"Email failed to send, please check your email address is correct and try again\n{error}", "error")
         
         return render_template("account.html", First=First, NearestBookingDate=NearestBookingDate, NearestBookingTime=NearestBookingTime)
 
