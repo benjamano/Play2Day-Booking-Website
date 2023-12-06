@@ -435,15 +435,15 @@ class Customer:
             try:
                 Salt, GrabbedHashedPassword = HashPassword(self.Password)
 
-                app.logger.info(f"{Salt}, {GrabbedHashedPassword}")
+                #app.logger.info(f"{Salt}, {GrabbedHashedPassword}")
                 try:
-                    app.logger.info(f"First: {self.FirstName}")
+                    #app.logger.info(f"First: {self.FirstName}")
 
                     NewCustomer = "INSERT INTO Customer (FirstName, LastName, Email, PhoneNumber, Password, PasswordSalt) VALUES (?,?,?,?,?,?)"
                     q.execute(NewCustomer, [self.FirstName,self.LastName,self.Email,self.PhoneNumber,GrabbedHashedPassword,Salt])
                     sql.commit()
                 except Exception as error:
-                    app.logger.info(f"Error while executing SQL: {error}")
+                    #app.logger.info(f"Error while executing SQL: {error}")
 
                     return False, error
 
@@ -458,7 +458,7 @@ class Customer:
                     
                     session["EmailFailed"] = True
                     
-                    app.logger.info(f"Error while sending email: {results[1]}")
+                    #app.logger.info(f"Error while sending email: {results[1]}")
                 
                 else:
                     
@@ -468,7 +468,7 @@ class Customer:
                 
             except Exception as error:
                 
-                app.logger.info(f"Error while registering customer: {error}")
+                #app.logger.info(f"Error while registering customer: {error}")
 
                 return False, error
 
