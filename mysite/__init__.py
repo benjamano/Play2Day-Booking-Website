@@ -447,8 +447,14 @@ class Customer:
                     
                     app.logger.info(f"Error while sending email: {results[1]}")
                 
-                return True, None
+                else:
+                    
+                    session["EmailFailed"] = False
+            
+                    return True, None
+                
             except Exception as error:
+                
                 app.logger.info(f"Error while registering customer: {error}")
 
                 return False, error
@@ -988,9 +994,11 @@ class Booking:
 @app.route('/')
 def index():
     
+    session["EmailFailed"] = False
     session["Email"] = ""
     session["Password"] = ""
     session["ManagerUsername"] = ""
+    
     return render_template("index.html")
 
 @app.route('/login', methods=["POST","GET"])
