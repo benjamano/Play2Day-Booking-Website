@@ -117,6 +117,15 @@
         </div>
     </div>
 </center>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div class="popup">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+{% endif %}
+{% endwith %}
 <script>
     function ToggleDarkMode() {
       var bodyElement = document.body;

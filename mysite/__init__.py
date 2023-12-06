@@ -1119,7 +1119,8 @@ def editaccountdetails():
                 return render_template("error.html", error=error)
 
         except Exception as error:
-            return render_template("error.html", error=f"Error in editing account details: {error}")
+            flash(f"An error occured while editing your account details: {error}")
+            return redirect(url_for("editaccountdetails"))
 
     else:
 
@@ -1136,9 +1137,11 @@ def editaccountdetails():
                 return render_template("accountdetails.html", First=Fetch[1], Last=Fetch[2], Email=Fetch[3], Phone=Fetch[4])
 
             except Exception as error:
-                return render_template("error.html", error=f"Error while rendering template for account details: {error}")
+                flash(f"An error occured while getting your account details: {error}")
+                return redirect(url_for("account"))
         else:
-            return render_template("error.html", error=f"Error while grabbing account details: {error}")
+            flash(f"An error occured while getting your account details: {error}")
+            return redirect(url_for("account"))
 
 
 
@@ -1159,7 +1162,8 @@ def deleteaccount():
     if Success:
         return redirect(url_for("index"))
     else:
-        return render_template("error.html", error=f"Error while deleting account: {error}")
+        flash(f"An error occured while deleting this account: {error}")
+        return redirect(url_for("editaccountdetails"))
 
 
 
@@ -1183,7 +1187,8 @@ def account():
         return render_template("account.html", First=First, NearestBookingDate=NearestBookingDate, NearestBookingTime=NearestBookingTime)
 
     else:
-        return render_template("error.html", error=error)
+        flash(f"An error occured while logging in: {error}")
+        return redirect(url_for("login"))
 
 @app.route('/account/newbooking', methods=["POST","GET"])
 def newbooking():
@@ -1224,7 +1229,8 @@ def newbooking():
             return redirect(url_for("sessiontype"))
 
         else:
-            return render_template("error.html", error=error)
+            flash(f"An error occured while selecting the date: {error}")
+            return redirect(url_for("newbooking"))
 
     else:
         return render_template("date.html")
@@ -1257,7 +1263,8 @@ def sessiontype():
 
         else:
             session["BookingValid"] = False
-            return render_template("error.html", error=error)
+            flash(f"An error occured while selecting the session type: {error}")
+            return redirect(url_for("sessiontype"))
 
     # The variable "WeekdayBooking" is a boolean which tells the booking page if the booking is being made on the weekday or weekend
     else:
@@ -1284,6 +1291,7 @@ def weekdayplaysession():
         return redirect(url_for("index"))
 
     if session["BookingValid"] == "False":
+        flash(f"This booking has invalid data, please restart the booking process.")
         return redirect(url_for("newbooking"))
     
     if request.method == "POST":
@@ -1303,7 +1311,8 @@ def weekdayplaysession():
             return redirect(url_for("extras"))
 
         else:
-            return render_template("error.html", error=error)
+            flash(f"An error occured while processing the request: {error}")
+            return redirect(url_for("weekdayplaysession"))
 
     else:
         return render_template("weekdayplaysession.html")
@@ -1316,6 +1325,7 @@ def weekendplaysession():
         return redirect(url_for("index"))
     
     if session["BookingValid"] == False:
+        flash(f"This booking has invalid data, please restart the booking process.")
         return redirect(url_for("newbooking"))
 
     if request.method == "POST":
@@ -1335,7 +1345,8 @@ def weekendplaysession():
             return redirect(url_for("extras"))
 
         else:
-            return render_template("error.html", error=error)
+            flash(f"An error occured while processing the request: {error}")
+            return redirect(url_for("weekendplaysession"))
 
     else:
         return render_template("weekendplaysession.html")
@@ -1349,6 +1360,7 @@ def party():
         return redirect(url_for("index"))
     
     if session["BookingValid"] == False:
+        flash(f"This booking has invalid data, please restart the booking process.")
         return redirect(url_for("newbooking"))
 
     if request.method == "POST":
@@ -1368,7 +1380,8 @@ def party():
             return redirect(url_for("extras"))
 
         else:
-            return render_template("error.html", error=error)
+            flash(f"An error occured while processing the request: {error}")
+            return redirect(url_for("party"))
 
     else:
         return render_template("party.html")
@@ -1381,6 +1394,7 @@ def privatehire():
         return redirect(url_for("index"))
     
     if session["BookingValid"] == False:
+        flash(f"This booking has invalid data, please restart the booking process.")
         return redirect(url_for("newbooking"))
 
     if request.method == "POST":
@@ -1407,7 +1421,8 @@ def privatehire():
         if Success:
             return redirect(url_for("extras"))
         else:
-            return render_template("error.html", error=error)
+            flash(f"An error occured while processing the request: {error}")
+            return redirect(url_for("privatehire"))
 
     else:
         return render_template("privatehire.html")
@@ -1420,6 +1435,7 @@ def extras():
         return redirect(url_for("index"))
     
     if session["BookingValid"] == False:
+        flash(f"This booking has invalid data, please restart the booking process.")
         return redirect(url_for("newbooking"))
 
     PrivateHireType = session["PrivateHireType"]
@@ -1445,6 +1461,7 @@ def extras():
             #app.logger.info(f"Extras: {ExtraNotes}")
 
         except Exception as error:
+            flash(f"You can ignore this error: {error}")
             app.logger.info(f"Either no Extra Notes selected or an error happened: {error}")
 
         return redirect(url_for("confirmbooking"))
@@ -1495,7 +1512,8 @@ def managebooking():
             return render_template("managebooking.html", activebookings = activebookings)
 
         else:
-            return render_template("error.html", error=error)
+            flash(f"An error occured while getting the active bookings: {error}")
+            return redirect(url_for("managebooking"))
 
 @app.route("/account/managebooking/booking", methods=["POST", "GET"])
 def booking():
@@ -1515,7 +1533,6 @@ def booking():
         return redirect(url_for("deletebooking"))
 
     else:
-
         return render_template("booking.html", BookingID = BookingID, BookingDate = BookingDate, BookingTime = BookingTime, ExtraNotes = ExtraNotes, SessionType = SessionType, BookingPrice = BookingPrice)
 
 @app.route("/account/managebooking/deletebooking", methods=["POST", "GET"])
@@ -1538,7 +1555,8 @@ def deletebooking():
         return redirect(url_for("managebooking"))
 
     else:
-        return render_template("error.html", error=error)
+        flash(f"An error occured while deleting the booking with BookingID '{BookingID}': {error}")
+        return redirect(url_for("managebooking"))
 
 @app.route("/account/newbooking/confirmbooking", methods=["POST","GET"])
 def confirmbooking():
@@ -1573,7 +1591,8 @@ def confirmbooking():
             return render_template("confirmbooking.html", BookingType = BookingType, BookingTime = BookingTime, BookingDate = BookingDate, PrivateHireType = PrivateHireType, NumberAdults = NumberOfAdults, NumberChildren = NumberOfChildren, Price = Price, ExtraNotes = ExtraNotes)
 
         else:
-            return render_template("error.html", error=error)
+            flash(f"An error occured while processing the booking: {error}")
+            return redirect(url_for("confirmbooking"))
 
 @app.route("/account/newbooking/createbooking")
 def createbooking():
@@ -1603,7 +1622,8 @@ def createbooking():
         return redirect(url_for("managebooking"))
 
     else:
-        return render_template("error.html", error=error)
+        flash(f"An error occured while creating the booking: {error}")
+        return redirect(url_for("confirmbooking"))
 
 # ---------------------------------------------| Information |----------------------------------------- #
 
