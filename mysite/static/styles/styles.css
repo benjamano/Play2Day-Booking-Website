@@ -887,7 +887,9 @@ table:hover {background-color: #D6EEEE;}
     z-index: 9999;
     transition: transform 0.4s cubic-bezier(0.41, -0.08, 0, 1.02);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: white
+    color: white;
+    max-width: calc(100% - 600px);
+    overflow-wrap: break-word;
 }
 
 .popup.active {
