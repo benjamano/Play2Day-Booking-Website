@@ -1209,7 +1209,7 @@ def account():
 
     if Success:
         
-        if not session["EmailFailed"]:
+        if session["EmailFailed"] == True:
         
             flash(f"Email failed to send, please check your email address is correct and try again\n{error}", "error")
         
