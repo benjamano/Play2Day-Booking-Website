@@ -1,5 +1,7 @@
 import sqlite3, bcrypt, ssl, smtplib
 
+import validate_email_address
+
 from email.message import EmailMessage
 
 from flask import Flask, render_template, redirect, request, url_for, session, flash
@@ -283,6 +285,7 @@ def sendEmail(Email, Option):
     if Email == "" or Email == None or Email == "None":
         return False, "Error while sending email: No Email Entered or was empty"
     
+        
     emailreceiver = Email
     
     details = findcustomerdetails(Email, CustomerID = "")
@@ -370,7 +373,7 @@ def sendEmail(Email, Option):
 
     except Exception as senderror:
         
-        app.logger.info(error)
+        #app.logger.info(senderror)
         
         error = f"Error while sending email: {senderror}"
         
@@ -423,6 +426,12 @@ class Customer:
         else:
             #app.logger.info(f"Customer with email '{self.Email}' does not exist, creating account")
 
+            emailvalid = validate_email_address.validate_email(self.Email)
+
+            if not emailvalid:
+        
+                return False, f"Error while sending email: Invalid Email Address : {self.Email}\nPlease set a valid email address"
+    
             try:
                 Salt, GrabbedHashedPassword = HashPassword(self.Password)
 
