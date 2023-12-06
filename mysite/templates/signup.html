@@ -53,11 +53,9 @@
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <div class="popup">
-                <ul>
-                    {% for message in messages %}
-                        <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
             </div>
         {% endif %}
     {% endwith %}
