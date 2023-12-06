@@ -878,8 +878,8 @@ table:hover {background-color: #D6EEEE;}
 .popup {
     position: fixed;
     bottom: 30px;
-    right: 300px;
-    transform: translate(50%, 50%);
+    right: 30px; /* Adjusted the right position */
+    transform: translate(0, 50%); /* Adjusted the transform */
     background-color: #ff8484;
     padding: 20px;
     border: 1px solid #ccc;
@@ -888,7 +888,7 @@ table:hover {background-color: #D6EEEE;}
     transition: transform 0.4s cubic-bezier(0.41, -0.08, 0, 1.02);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: white;
-    max-width: calc(100% - 600px);
+    max-width: calc(100% - 60px); /* Adjusted the max-width */
     overflow-wrap: break-word;
 }
 
