@@ -1068,7 +1068,8 @@ def signup():
             return redirect(url_for("account"))
 
         else:
-            return render_template("error.html", error=f"Error while registering: {error}")
+            flash(f"An error occured while creating your account: {error}")
+            return redirect(url_for("signup"))
 
     else:
         return render_template("signup.html")
