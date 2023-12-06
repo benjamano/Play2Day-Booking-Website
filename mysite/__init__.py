@@ -349,21 +349,29 @@ def sendEmail(Email, Option):
     else:
         return False, "Error while sending email: Invalid Option Selected"
     
-    context = ssl.create_default_context()
+    try:
+        
+        context = ssl.create_default_context()
     
-    em = EmailMessage()
-    em["From"] = emailsender
-    em["To"] = emailreceiver
-    em["subject"] = subject
-    em.set_content(body)
-    
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
-        smtp.login(emailsender, emailpassword)
-        smtp.sendmail(emailsender, emailreceiver, em.as_string())
-    
-    #app.logger.info(f"Email sent to {emailreceiver} with subject {subject} and body {body}")
-    
-    return True, None
+        em = EmailMessage()
+        em["From"] = emailsender
+        em["To"] = emailreceiver
+        em["subject"] = subject
+        em.set_content(body)
+
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
+            smtp.login(emailsender, emailpassword)
+            smtp.sendmail(emailsender, emailreceiver, em.as_string())
+            
+        #app.logger.info(f"Email sent to {emailreceiver} with subject {subject} and body {body}")
+
+        return True, None
+
+    except Exception as senderror:
+        error = f"Error while sending email: {senderror}"
+        
+        return False, error
+
 
 # ------------------------------------------------------------------------------------------------------------- #
 
@@ -434,6 +442,9 @@ class Customer:
                 results = sendEmail(self.Email, "Confirm")
                 
                 if not results[0]:
+                    
+                    session["EmailFailed"] = True
+                    
                     app.logger.info(f"Error while sending email: {results[1]}")
                 
                 return True, None
@@ -1015,6 +1026,7 @@ def logout():
 
         # ----| Clearing all the session vairiables then redirecting to the login page ----| #
 
+        session["EmailFailed"] = ""
         session["ManagerUsername"] = ""
         session["ManagerID"] = ""
         session["Password"] = ""
@@ -1184,6 +1196,11 @@ def account():
     NearestBookingTime = Result[4]
 
     if Success:
+        
+        if not session["EmailFailed"]:
+        
+            flash("Email failed to send, please check your email address is correct and try again", "error")
+        
         return render_template("account.html", First=First, NearestBookingDate=NearestBookingDate, NearestBookingTime=NearestBookingTime)
 
     else:
@@ -2202,7 +2219,7 @@ def devtest():
 
     i = 0
 
-    SessionVars = ["CustomerID","Email","Phone","First","Last","FirstName","LastName","NumberChildren","NumberAdults","BookingPrice","ExtraNotes","SessionType","BookingTime","BookingDate","BookingID","ManagerID","ManagerUsername","PrivateHireType","numberadults","numberchildren","WeekdayBooking","PlaySession","PrivateHire","Party","PlaySessionType","Price","PartyType","SessionID"]
+    SessionVars = ["CustomerID","Email","Phone","First","Last","FirstName","LastName","NumberChildren","NumberAdults","BookingPrice","ExtraNotes","SessionType","BookingTime","BookingDate","BookingID","ManagerID","ManagerUsername","PrivateHireType","numberadults","numberchildren","WeekdayBooking","PlaySession","PrivateHire","Party","PlaySessionType","Price","PartyType","SessionID", "EmailFailed"]
     SessionVarsFound = []
 
     # This is grabbing every session variable with the names stated in the "SessionVars" list, then showing it in the html template
