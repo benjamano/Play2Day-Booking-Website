@@ -879,19 +879,21 @@ table:hover {background-color: #D6EEEE;}
     position: fixed;
     bottom: 30px;
     right: 0px;
-    transform: translate(0, 50%);
     background-color: #ff8484;
     padding: 20px;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     z-index: 9999;
-    transition: transform 0.4s cubic-bezier(0.41, -0.08, 0, 1.02);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: white;
     max-width: calc(100% - 60px);
     overflow-wrap: break-word;
+    transition: background-color 0.4s cubic-bezier(0.41, -0.08, 0, 1.02),
+                box-shadow 0.4s cubic-bezier(0.41, -0.08, 0, 1.02);
+    font-size: large;
 }
 
-.popup.active {
-    transform: translate(0, 0);
+.popup:hover {
+    background-color: #ff6b6b; /* New background color for highlighting */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4); /* New box shadow for highlighting */
 }

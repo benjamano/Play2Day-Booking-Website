@@ -738,7 +738,10 @@ class Booking:
         session["numberchildren"] = self.NumberOfChildren
 
         if checkdate(Date=BookingDate) == False:
-            return render_template("error.html", error="Please book a date in the future!")
+            
+            flash("Please book a date in the future!", "error")
+            
+            return redirect(url_for("newbooking"))
 
         if self.BookingTime == "10:00-14:00":
 
@@ -1035,7 +1038,9 @@ def login():
             return redirect(url_for("account"))
 
         else:
-            return render_template("error.html", error=error)
+            
+            flash(f"An error occured while logging in: {error}")
+            return redirect(url_for("login"))
 
     else:
         return render_template('login.html')
@@ -1070,7 +1075,8 @@ def logout():
         return redirect(url_for("index"))
 
     except Exception as error:
-        return render_template("error.html", error=error)
+        flash(f"An error occured while clearing cookies: {error}")
+        return redirect(url_for("index"))
 
 @app.route('/signup', methods=["POST","GET"])
 def signup():
@@ -1149,7 +1155,9 @@ def editaccountdetails():
             if Success:
                 return redirect(url_for("editaccountdetails"))
             else:
-                return render_template("error.html", error=error)
+                
+                flash(f"An error occured while editing your account: {error}")
+                return redirect(url_for("editaccountdetails"))
 
         except Exception as error:
             flash(f"An error occured while editing your account details: {error}")
@@ -2092,7 +2100,9 @@ def managercreateholiday():
             
             if len(Description) >= 50 or len(Name) >= 30 or len(StartDate) >= 30 or len(EndDate) >= 30:
                 
-                return render_template("error.html", error=f"Description, holiday name or dates are too long")
+                flash(f"Description, holiday name or dates are too long")
+                return redirect(url_for("managercreateholiday"))
+                
             
             #app.logger.info(f"Start Date: {StartDate} End Date: {EndDate} Name: {Name} Description: {Description}")
 
