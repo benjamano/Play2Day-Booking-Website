@@ -827,7 +827,7 @@ class Booking:
         #This function is similar to those above it, but it checks wether a private hire is available in a different way.
 
         session["numberadults"] = self.NumberOfAdults
-        session["numberchildren"] = self.NumberFOfChildren
+        session["numberchildren"] = self.NumberOfChildren
         session["PrivateHireType"] = PrivateHireType
         session["BookingTime"] = "18:30 - 20:30"
 
