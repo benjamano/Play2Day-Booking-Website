@@ -1715,11 +1715,13 @@ def managerlogin():
                 StoredSalt = Fetch[1]
                 
                 if not CheckPassword(Password, StoredSalt, StoredPassword):
-                    return render_template("error.html", error="Password Incorrect, nice try James")
+                    flash(f"Incorrect username or password", "error")
+                    return redirect(url_for("managerlogin"))
                 
             except Exception as error:
                 
-                return render_template("error.html", error=f"This password is incorrect : {error}")
+                flash(f"Incorrect username or password", "error")
+                return redirect(url_for("managerlogin"))
 
             session["ManagerUsername"] = Username
 
@@ -1739,8 +1741,8 @@ def managerlogin():
 
             except Exception as error:
                 
-                #app.logger.info(f"Error while retrieving manager details: {error}")
-                return render_template("error.html", error=f"Password Incorrect: {error}")
+                flash(f"Incorrect username or password", "error")
+                return redirect(url_for("managerlogin"))
 
     else:
 
@@ -1768,7 +1770,8 @@ def manageraccount():
         TotalBookings = Fetch[0]
 
     except Exception as error:
-        return render_template("error.html", error=error)
+        
+        flash(f"An error occured while processing your request: {error}", "error")
 
     return render_template("manager/account.html", TotalBookings = TotalBookings, TommorowsBookings = TommorowsBookings)
 
@@ -1868,7 +1871,8 @@ def managereditbooking():
             return render_template("manager/selectbooking.html", activebookings=activebookings)
 
         except Exception as error:
-            return render_template("error.html", error=error)
+            
+            flash(f"An error occured when returning bookings: {error}", "error")
 
 @app.route("/manager/managebooking/booking", methods=["POST", "GET"])
 def managerbooking():
@@ -1904,8 +1908,9 @@ def managerbooking():
             return redirect(url_for("managereditbooking"))
 
         except Exception as error:
-            return render_template("/error.html", error=error)
-
+            
+            flash(f"An error occured while accessing this booking's data: {error}", "error")
+            return redirect(url_for("manageracount"))
     else:
 
         return render_template("manager/booking.html", BookingID = BookingID, BookingDate = BookingDate, BookingTime = BookingTime, ExtraNotes = ExtraNotes, SessionType = SessionType, BookingPrice = BookingPrice, NumberAdults = NumberAdults, NumberChildren = NumberChildren, FirstName = FirstName, LastName = LastName)
@@ -1936,7 +1941,7 @@ def managereditcustomer():
             return redirect(url_for("managercustomer"))
 
         except Exception as error:
-            return render_template("error.html", error=error)
+            flash(f"An error occured while processing this request: {error}", "error")
 
     else:
         try:
@@ -1949,7 +1954,8 @@ def managereditcustomer():
 
         except Exception as error:
 
-            return render_template("error.html", error=error)
+            flash(f"An error occured while getting customers: {error}", "error")
+
 
 
 @app.route("/manager/editcustomer/customer", methods=["POST", "GET"])
@@ -1990,7 +1996,8 @@ def managercustomer():
 
                         #app.logger.info(f"Error while validating details: {error}")
 
-                        return render_template("error.html", error=error)
+                        flash(f"Data entered is not valid: {error}", "error")
+                        return redirect(url_for("managercustomer"))
                         #return False, f"Error while validating details: {error}"
                     else:
 
@@ -2012,7 +2019,8 @@ def managercustomer():
 
             except Exception as error:
 
-                return render_template("error.html", error=error)
+                flash(f"An error occured while processing your request: {error}", "error")
+                return redirect(url_for("managereditcustomer"))
 
         else:
             #app.logger.info(f"Deleting Customer with Customer ID: {CustomerID}")
@@ -2026,7 +2034,8 @@ def managercustomer():
                 return redirect(url_for("managereditcustomer"))
 
             except Exception as error:
-                return render_template("error.html", error=error)
+                flash(f"An error occured while deleting this customer: {error}", "error")
+                return redirect(url_for("managereditcustomer"))
 
     else:
 
@@ -2089,7 +2098,8 @@ def managercreateholiday():
 
             if StartDate == "" or EndDate == "" or Name == "":
 
-                return render_template("error.html", error="You must not leave any field blank!")
+                flash(f"No fields can be left blank!: {error}", "error")
+                return redirect(url_for("managercreateholiday"))
 
             else:
 
@@ -2102,7 +2112,8 @@ def managercreateholiday():
 
         except Exception as error:
 
-            return render_template("error.html", error=error)
+            flash(f"An error occured while processing your request: {error}", "error")
+            return redirect(url_for("managercreateholiday"))
 
     else:
         return render_template("manager/newholiday.html")
@@ -2133,7 +2144,9 @@ def mark_arrived():
             sql.commit()
 
         except Exception as error:
-            return render_template("error.html", error=f"Error when executing SQL, when trying to change arrived status: {error}")
+            
+            flash(f"Error when executing SQL, when trying to change arrived status: {error}", "error")
+            return redirect(url_for("managereditbooking"))
 
         return redirect(url_for("managereditbooking"))
 
@@ -2165,7 +2178,8 @@ def managerselectsession():
             return redirect(url_for("managereditsession"))
 
         except Exception as error:
-            return render_template("error.html", error=f"Error: {error}")
+            flash(f"AAn error occured when selecting a session: {error}", "error")
+            return redirect(url_for("managerselectsession"))
 
     else:
         try:
@@ -2176,11 +2190,12 @@ def managerselectsession():
             activesessions = q.fetchall()
             
             #app.logger.info(f"Active Sessions: {activesessions}")
-            
-            return render_template("manager/selectticket.html", activetickets=activesessions)
 
         except Exception as error:
-            return render_template("error.html", error=f"Error: {error}")
+            
+            flash(f"An error occured when selecting a session: {error}", "error")
+        
+        return render_template("manager/selectticket.html", activetickets=activesessions)
 
 
 @app.route("/manager/editsession", methods=["POST", "GET"])
@@ -2212,7 +2227,10 @@ def managereditsession():
                     newchildprice = round(newchildprice, 2)
                 
                 except:
-                    return render_template("error.html", error=f"Error: Price must be a valid decimal number")
+                    
+                    flash(f"Error: Price must be a valid decimal number", "error")
+                    
+                    return redirect(url_for("managereditsession"))
             
             editsession = "UPDATE Session SET AdultPrice = (?), ChildPrice = (?) WHERE SessionID = (?)"
             
@@ -2225,7 +2243,10 @@ def managereditsession():
             return redirect(url_for('managerselectsession'))
         
         except Exception as error:
-            return render_template("error.html", error=f"Error: {error}")
+            
+            flash(f"An error occured while processing your request: {error}", "error")
+                    
+            return redirect(url_for("managereditsession"))
     
     else:
         
@@ -2236,37 +2257,45 @@ def managereditsession():
 @app.route("/account/developer")
 def devtest():
     
-    sendEmail("benmercer76@btinternet.com", "Test")
+    try:
+    
+        sendEmail("benmercer76@btinternet.com", "Test")
 
-    i = 0
+        i = 0
 
-    SessionVars = ["CustomerID","Email","Phone","First","Last","FirstName","LastName","NumberChildren","NumberAdults","BookingPrice","ExtraNotes","SessionType","BookingTime","BookingDate","BookingID","ManagerID","ManagerUsername","PrivateHireType","numberadults","numberchildren","WeekdayBooking","PlaySession","PrivateHire","Party","PlaySessionType","Price","PartyType","SessionID", "EmailFailed"]
-    SessionVarsFound = []
+        SessionVars = ["CustomerID","Email","Phone","First","Last","FirstName","LastName","NumberChildren","NumberAdults","BookingPrice","ExtraNotes","SessionType","BookingTime","BookingDate","BookingID","ManagerID","ManagerUsername","PrivateHireType","numberadults","numberchildren","WeekdayBooking","PlaySession","PrivateHire","Party","PlaySessionType","Price","PartyType","SessionID", "EmailFailed"]
+        SessionVarsFound = []
 
-    # This is grabbing every session variable with the names stated in the "SessionVars" list, then showing it in the html template
-    for i in range(len(SessionVars)):
+        # This is grabbing every session variable with the names stated in the "SessionVars" list, then showing it in the html template
+        for i in range(len(SessionVars)):
 
-        try:
+            try:
 
-            data = session[SessionVars[i]]
+                data = session[SessionVars[i]]
 
-            if data == "":
+                if data == "":
 
-                SessionVarsFound.append(f"{SessionVars[i]} : Null")
+                    SessionVarsFound.append(f"{SessionVars[i]} : Null")
 
-            else:
+                else:
 
-                SessionVarsFound.append(f"{SessionVars[i]} : {data}")
+                    SessionVarsFound.append(f"{SessionVars[i]} : {data}")
 
-            i + 1
+                i + 1
 
-        except:
+            except:
 
-            i + 1
+                i + 1
 
-    #app.logger.info(SessionVarsFound)
+        #app.logger.info(SessionVarsFound)
 
-    return render_template("devtest.html", SessionVarsFound=SessionVarsFound)
+        return render_template("devtest.html", SessionVarsFound=SessionVarsFound)
+    
+    except Exception as error:
+        
+        flash(f"An error occured while processing the request: {error}", "error")
+        
+        return render_template("devtest.html", SessionVarsFound=SessionVarsFound)
 
 
 if __name__ == '__main__':
