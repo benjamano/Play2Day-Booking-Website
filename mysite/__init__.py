@@ -2,6 +2,10 @@ import sqlite3, bcrypt, ssl, smtplib
 
 import validate_email_address
 
+import codes.py as codes
+
+gmail = codes.gmail
+
 from email.message import EmailMessage
 
 from flask import Flask, render_template, redirect, request, url_for, session, flash
@@ -9,7 +13,6 @@ from flask import Flask, render_template, redirect, request, url_for, session, f
 from datetime import datetime, date, timedelta
 
 emailsender = "benjamano12@gmail.com"
-emailpassword = "bhpm pbna aajb gxwg"
 
 app = Flask(__name__)
 app.secret_key = "ComputingNEASoSecure"
@@ -223,7 +226,6 @@ def findcustomerdetails(Email, CustomerID):
         q.execute(code, [Email])
 
         Fetch = q.fetchone()
-## jack and joe were here
 
     elif CustomerID != "":
 
@@ -364,7 +366,7 @@ def sendEmail(Email, Option):
         em.set_content(body)
 
         with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
-            smtp.login(emailsender, emailpassword)
+            smtp.login(emailsender, gmail)
             smtp.sendmail(emailsender, emailreceiver, em.as_string())
             
         #app.logger.info(f"Email sent to {emailreceiver} with subject {subject} and body {body}")
@@ -522,7 +524,7 @@ class Customer:
                 return True, None, FirstName, NearestBookingDate, NearestBookingTime
 
             except Exception as error:
-                app.logger.info(f"Either no bookings were found, or an error orrcured: {error}")
+                #app.logger.info(f"Either no bookings were found, or an error orrcured: {error}")
 
                 return True, None, FirstName, "None", "None"
 
@@ -1500,7 +1502,7 @@ def extras():
 
         except Exception as error:
             flash(f"You can ignore this error: {error}")
-            app.logger.info(f"Either no Extra Notes selected or an error happened: {error}")
+            #app.logger.info(f"Either no Extra Notes selected or an error happened: {error}")
 
         return redirect(url_for("confirmbooking"))
 
