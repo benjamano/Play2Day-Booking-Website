@@ -2,9 +2,7 @@ import sqlite3, bcrypt, ssl, smtplib
 
 import validate_email_address
 
-import codes.py as codes
-
-gmail = codes.gmail
+from codes import gmail
 
 from email.message import EmailMessage
 
