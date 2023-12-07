@@ -81,128 +81,66 @@
 {% endif %}
 {% endwith %}
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Other existing code...
-
-        document.querySelector("form").addEventListener("submit", function (event) {
-            event.preventDefault(); // Prevent the form from submitting immediately
-
-            // Start the raining effect
-            startRainingPoundSigns();
-            
-            // Optionally, you can wait for the animation to complete before submitting the form
-            setTimeout(function () {
-                document.querySelector("form").submit();
-            }, 5000); // Adjust the delay according to your preference
-        });
-
-        function startRainingPoundSigns() {
-            // Get the canvas element
-            var canvas = document.getElementById("poundCanvas");
-            var ctx = canvas.getContext("2d");
-
-            // Set canvas size
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            // Define pound sign image
-            var poundSignImage = new Image();
-            poundSignImage.src = "path/to/pound-sign-image.png"; // Replace with the path to your pound sign image
-
-            // Array to store pound signs
-            var poundSigns = [];
-
-            // Create pound signs
-            for (var i = 0; i < 50; i++) {
-                poundSigns.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    speed: Math.random() * 5 + 1,
-                });
-            }
-
-            // Function to draw pound signs
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                for (var i = 0; i < poundSigns.length; i++) {
-                    ctx.drawImage(poundSignImage, poundSigns[i].x, poundSigns[i].y, 20, 20); // Adjust the size as needed
-                    poundSigns[i].y += poundSigns[i].speed;
-
-                    // Reset pound sign position if it goes below the screen
-                    if (poundSigns[i].y > canvas.height) {
-                        poundSigns[i].y = 0;
-                        poundSigns[i].x = Math.random() * canvas.width;
-                    }
-                }
-
-                requestAnimationFrame(draw);
-            }
-
-            // Start the animation
-            draw();
-        }
-
-        function ToggleDarkMode() {
-        var bodyElement = document.body;
-        var sidebar = document.querySelector(".sidebar");
-        var tableElements = document.querySelectorAll("table, th, td");
-        var fontsToStyle = document.querySelectorAll(".dark-font");
-        var pairElement = document.querySelector(".pair");
-        var numberpairElement = document.querySelector(".numberpair");
-        var darkmodebuttonElement = document.querySelector(".darkmodebutton");
     
-        var isDarkMode = bodyElement.classList.contains("dark-mode");
-    
-        // Toggle the dark mode
-        isDarkMode = !isDarkMode;
-    
-        bodyElement.classList.toggle("dark-mode", isDarkMode);
-        if (sidebar) sidebar.classList.toggle("dark-mode", isDarkMode);
-    
-        tableElements.forEach(function (el) {
-            el.classList.toggle("dark-mode", isDarkMode);
-        });
-    
-        fontsToStyle.forEach(function (el) {
-            el.classList.toggle("dark-mode", isDarkMode);
-        });
-    
-        if (pairElement) pairElement.classList.toggle("dark-mode", isDarkMode);
-        if (numberpairElement) numberpairElement.classList.toggle("dark-mode", isDarkMode);
-    
-        // Update the local storage with the new dark mode state
-        localStorage.setItem("darkMode", isDarkMode.toString());
-        }
-    
-        function applyInitialDarkMode() {
-        var isDarkMode = localStorage.getItem("darkMode") === "true";
-        var bodyElement = document.body;
-        var sidebarElement = document.querySelector(".sidebar");
-    
-        if (bodyElement) bodyElement.classList.toggle("dark-mode", isDarkMode);
-        if (sidebarElement) sidebarElement.classList.toggle("dark-mode", isDarkMode);
-    
-        var fontsToStyle = document.querySelectorAll(".dark-font");
-        fontsToStyle.forEach(function (el) {
-            el.classList.toggle("dark-mode", isDarkMode);
-        });
-    
-        var pairElement = document.querySelector(".pair");
-        if (pairElement) pairElement.classList.toggle("dark-mode", isDarkMode);
-    
-        var numberpairElement = document.querySelector(".numberpair");
-        if (numberpairElement) numberpairElement.classList.toggle("dark-mode", isDarkMode);
+    function ToggleDarkMode() {
+      var bodyElement = document.body;
+      var sidebar = document.querySelector(".sidebar");
+      var tableElements = document.querySelectorAll("table, th, td");
+      var fontsToStyle = document.querySelectorAll(".dark-font");
+      var pairElement = document.querySelector(".pair");
+      var numberpairElement = document.querySelector(".numberpair");
+      var darkmodebuttonElement = document.querySelector(".darkmodebutton");
+  
+      var isDarkMode = bodyElement.classList.contains("dark-mode");
+  
+      // Toggle the dark mode
+      isDarkMode = !isDarkMode;
+  
+      bodyElement.classList.toggle("dark-mode", isDarkMode);
+      if (sidebar) sidebar.classList.toggle("dark-mode", isDarkMode);
+  
+      tableElements.forEach(function (el) {
+          el.classList.toggle("dark-mode", isDarkMode);
+      });
+  
+      fontsToStyle.forEach(function (el) {
+          el.classList.toggle("dark-mode", isDarkMode);
+      });
+  
+      if (pairElement) pairElement.classList.toggle("dark-mode", isDarkMode);
+      if (numberpairElement) numberpairElement.classList.toggle("dark-mode", isDarkMode);
+  
+      // Update the local storage with the new dark mode state
+      localStorage.setItem("darkMode", isDarkMode.toString());
+    }
+  
+    function applyInitialDarkMode() {
+      var isDarkMode = localStorage.getItem("darkMode") === "true";
+      var bodyElement = document.body;
+      var sidebarElement = document.querySelector(".sidebar");
+  
+      if (bodyElement) bodyElement.classList.toggle("dark-mode", isDarkMode);
+      if (sidebarElement) sidebarElement.classList.toggle("dark-mode", isDarkMode);
+  
+      var fontsToStyle = document.querySelectorAll(".dark-font");
+      fontsToStyle.forEach(function (el) {
+          el.classList.toggle("dark-mode", isDarkMode);
+      });
+  
+      var pairElement = document.querySelector(".pair");
+      if (pairElement) pairElement.classList.toggle("dark-mode", isDarkMode);
+  
+      var numberpairElement = document.querySelector(".numberpair");
+      if (numberpairElement) numberpairElement.classList.toggle("dark-mode", isDarkMode);
 
-        var numberpairElement = document.querySelector(".darkmodebutton");
-        if (numberpairElement) numberpairElement.classList.toggle("dark-mode", isDarkMode);
-    
-        var tableElements = document.querySelectorAll("table, th, td");
-        tableElements.forEach(function (el) {
-            el.classList.toggle("dark-mode", isDarkMode);
-        });
-        }
-    });
+      var numberpairElement = document.querySelector(".darkmodebutton");
+      if (numberpairElement) numberpairElement.classList.toggle("dark-mode", isDarkMode);
+  
+      var tableElements = document.querySelectorAll("table, th, td");
+      tableElements.forEach(function (el) {
+          el.classList.toggle("dark-mode", isDarkMode);
+      });
+    }
   
     applyInitialDarkMode();
   </script>
