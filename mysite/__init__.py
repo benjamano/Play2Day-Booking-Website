@@ -751,13 +751,20 @@ class Booking:
 
             session["PlaySessionType"] = "Weekend Play AM"
 
-        else:
-
+        elif self.BookingTime == "14:30 - 18:00":
+            
             #app.logger.info("Weekend Play PM = True")
             get = "SELECT SessionID FROM Session WHERE SessionType = (?)"
             q.execute(get, ["Weekend Play PM"])
 
             session["PlaySessionType"] = "Weekend Play PM"
+        
+        else:
+
+            session["BookingValid"] = False
+            flash("Please select a valid time", "error")
+            
+            return redirect(url_for("newbooking"))
 
         fetch = q.fetchone()
         SessionID = fetch[0]
@@ -802,6 +809,13 @@ class Booking:
                 SessionID = "6"
 
                 session["PartyType"] = "Party PM"
+            
+            else:
+                
+                session["BookingValid"] = False
+                flash("Please select a valid time", "error")
+            
+                return redirect(url_for("newbooking"))
 
             session["SessionID"] = SessionID
 
