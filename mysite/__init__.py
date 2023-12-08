@@ -493,7 +493,7 @@ class Customer:
 
             return True, None
         else:
-            # Passwords don't match
+            #Passwords don't match
             #app.logger.info("Email or Password Incorrect, redirecting to error page")
 
             return False, "Email or password incorrect, please re-enter your details"
@@ -686,7 +686,7 @@ class Booking:
         session["numberadults"] = self.NumberOfAdults
         session["numberchildren"] = self.NumberOfChildren
 
-        if checkdate(Date=BookingDate) == False:
+        if not checkdate(Date=BookingDate):
 
             return False, "Please book a date in the future!"
 
@@ -1059,7 +1059,7 @@ def login():
     else:
         return render_template('login.html')
 
-@app.route('/logout')
+@app.route("/logout")
 def logout():
 
     try:
@@ -1092,7 +1092,7 @@ def logout():
         flash(f"An error occured while clearing cookies: {error}")
         return redirect(url_for("index"))
 
-@app.route('/signup', methods=["POST","GET"])
+@app.route("/signup", methods=["POST","GET"])
 def signup():
 
     if request.method == "POST":
@@ -1127,7 +1127,7 @@ def signup():
     else:
         return render_template("signup.html")
 
-@app.route('/account/editaccountdetails', methods=["POST","GET"])
+@app.route("/account/editaccountdetails", methods=["POST","GET"])
 def editaccountdetails():
     
     # q.execute("DROP TABLE IF EXISTS Manager")
@@ -1198,8 +1198,6 @@ def editaccountdetails():
             flash(f"An error occured while getting your account details: {error}")
             return redirect(url_for("account"))
 
-
-
 @app.route("/account/delete_account", methods=['POST'])
 def deleteaccount():
 
@@ -1219,8 +1217,6 @@ def deleteaccount():
     else:
         flash(f"An error occured while deleting this account: {error}")
         return redirect(url_for("editaccountdetails"))
-
-
 
 @app.route("/account", methods=["POST","GET"])
 def account():
@@ -2287,7 +2283,7 @@ def devtest():
 
         i = 0
 
-        SessionVars = ["CustomerID","Email","Phone","First","Last","FirstName","LastName","NumberChildren","NumberAdults","BookingPrice","ExtraNotes","SessionType","BookingTime","BookingDate","BookingID","ManagerID","ManagerUsername","PrivateHireType","numberadults","numberchildren","WeekdayBooking","PlaySession","PrivateHire","Party","PlaySessionType","Price","PartyType","SessionID", "EmailFailed"]
+        SessionVars = ["CustomerID","Email","Phone","First","Last","FirstName","LastName","NumberChildren","NumberAdults","BookingPrice","ExtraNotes","SessionType","BookingTime","BookingDate","BookingID","ManagerID","ManagerUsername","PrivateHireType","numberadults","numberchildren","WeekdayBooking","PlaySession","PrivateHire","Party","PlaySessionType","Price","PartyType","SessionID", "EmailFailed", "BookingValid"]
         SessionVarsFound = []
 
         # This is grabbing every session variable with the names stated in the "SessionVars" list, then showing it in the html template
