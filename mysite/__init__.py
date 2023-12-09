@@ -1270,6 +1270,7 @@ def sessiontype():
 
         return render_template("newbooking.html", WeekdayBooking = WeekdayBooking, PHBooked = PHBooked)
 
+
 @app.route('/account/newbooking/playsession/weekday',  methods=["POST","GET"])
 def weekdayplaysession():
 
