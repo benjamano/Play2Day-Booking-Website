@@ -18,77 +18,8 @@ app.secret_key = "ComputingNEASoSecure"
 sql = sqlite3.connect("/home/benjamano/mysite/Bookings.db", check_same_thread=False)
 q = sql.cursor()
 
-# ----| If function = 1 create Customer ---- If function = 2 add the sessions into the Session table ---- If function = 3 add the manager details |---- #
-
-function = 0
-
 # ------------------------------------| Defining Functions |------------------------------------ #
 
-
-# -------------------------------------| Startup Function |------------------------------------- #
-
-if function == 1:
-    code = "INSERT INTO Customer (FirstName, LastName, Email, PhoneNumber, Password) VALUES (?,?,?,?,?)"
-    vals = ("Ben","Mercer","benmercer76@btinternet.com", "07860603962" ,"1234")
-    q.execute(code,vals)
-    sql.commit()
-
-    print(code,vals)
-
-elif function == 2:
-    code = "INSERT INTO Session (SessionType, AdultPrice, ChildPrice) VALUES (?,?,?)"
-    vals = ("Weekend Play AM", "2.00", "10.00")
-    q.execute(code,vals)
-
-    code = "INSERT INTO Session (SessionType, AdultPrice, ChildPrice) VALUES (?,?,?)"
-    vals = ("Weekend Play PM", "2.00", "10.00")
-    q.execute(code,vals)
-
-    code = "INSERT INTO Session (SessionType, AdultPrice, ChildPrice) VALUES (?,?,?)"
-    vals = ("Weekday Play AM", "5.00", "5.00")
-    q.execute(code,vals)
-
-    code = "INSERT INTO Session (SessionType, AdultPrice, ChildPrice) VALUES (?,?,?)"
-    vals = ("Weekday Play PM", "3.00", "11.00")
-    q.execute(code,vals)
-
-    code = "INSERT INTO Session (SessionType, AdultPrice, ChildPrice) VALUES (?,?,?)"
-    vals = ("Party AM", "5.00", "17.00")
-    q.execute(code,vals)
-
-    code = "INSERT INTO Session (SessionType, AdultPrice, ChildPrice) VALUES (?,?,?)"
-    vals = ("Party PM", "5.00", "17.00")
-    q.execute(code,vals)
-
-    code = "INSERT INTO Session (SessionType, AdultPrice, ChildPrice) VALUES (?,?,?)"
-    vals = ("Adventure Play Private Hire", "5.00", "15.00")
-    q.execute(code,vals)
-
-    code = "INSERT INTO Session (SessionType, AdultPrice, ChildPrice) VALUES (?,?,?)"
-    vals = ("Laser Tag Private Hire", "5.00", "13.00")
-    q.execute(code,vals)
-
-    code = "INSERT INTO Session (SessionType, AdultPrice, ChildPrice) VALUES (?,?,?)"
-    vals = ("Laser Tag + Adventure Play Private Hire", "5.00", "20.00")
-    q.execute(code,vals)
-
-    code = "INSERT INTO Session (SessionType, AdultPrice, ChildPrice) VALUES (?,?,?)"
-    vals = ("Adult Night", "10.00", "0.00")
-    q.execute(code,vals)
-
-    sql.commit()
-
-    print(code, vals)
-
-elif function == 3:
-
-    code = "INSERT INTO Manager (Username, Password) VALUES (?,?)"
-    vals = ("Ben", "1234")
-    q.execute(code, vals)
-
-    sql.commit()
-
-# --------------------------------------------------------------------------------------------- #
 
 def onStart():
     try:
@@ -1371,7 +1302,22 @@ def weekdayplaysession():
             return redirect(url_for("weekdayplaysession"))
 
     else:
-        return render_template("weekdayplaysession.html")
+        
+        Date = session["BookingDate"]
+        
+        AMavailableslots = "SELECT COUNT(*) FROM Booking WHERE SessionID = 3 AND Date = (?)"
+
+        q.execute(AMavailableslots, [Date])
+        
+        AMSpaces = q.fetchone()[0]
+        
+        PMavailableslots = "SELECT COUNT(*) FROM Booking WHERE SessionID = 4 AND Date = (?)"
+
+        q.execute(PMavailableslots, [Date])
+        
+        PMSpaces = q.fetchone()[0]
+
+        return render_template("weekdayplaysession.html", PMSpaces = PMSpaces, AMSpaces = AMSpaces)
 
 @app.route('/account/newbooking/playsession/weekendholiday',  methods=["POST","GET"])
 def weekendplaysession():
@@ -1405,7 +1351,22 @@ def weekendplaysession():
             return redirect(url_for("weekendplaysession"))
 
     else:
-        return render_template("weekendplaysession.html")
+        
+        Date = session["BookingDate"]
+        
+        AMavailableslots = "SELECT COUNT(*) FROM Booking WHERE SessionID = 1 AND Date = (?)"
+
+        q.execute(AMavailableslots, [Date])
+        
+        AMSpaces = q.fetchone()[0]
+        
+        PMavailableslots = "SELECT COUNT(*) FROM Booking WHERE SessionID = 2 AND Date = (?)"
+
+        q.execute(PMavailableslots, [Date])
+        
+        PMSpaces = q.fetchone()[0]
+
+        return render_template("weekendplaysession.html", PMSpaces = PMSpaces, AMSpaces = AMSpaces)
 
 
 @app.route('/account/newbooking/party', methods=["POST","GET"])
@@ -1440,7 +1401,22 @@ def party():
             return redirect(url_for("party"))
 
     else:
-        return render_template("party.html")
+        
+        Date = session["BookingDate"]
+        
+        AMavailableslots = "SELECT COUNT(*) FROM Booking WHERE SessionID = 5 AND Date = (?)"
+
+        q.execute(AMavailableslots, [Date])
+        
+        AMSpaces = q.fetchone()[0]
+        
+        PMavailableslots = "SELECT COUNT(*) FROM Booking WHERE SessionID = 6 AND Date = (?)"
+
+        q.execute(PMavailableslots, [Date])
+        
+        PMSpaces = q.fetchone()[0]
+
+        return render_template("party.html", PMSpaces = PMSpaces, AMSpaces = AMSpaces)
 
 @app.route("/account/newbooking/privatehire", methods=["POST","GET"])
 def privatehire():
