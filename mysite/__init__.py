@@ -1309,13 +1309,13 @@ def weekdayplaysession():
 
         q.execute(AMavailableslots, [Date])
         
-        AMSpaces = q.fetchone()[0]
+        AMSpaces = 75 - int(q.fetchone()[0])
         
         PMavailableslots = "SELECT COUNT(*) FROM Booking WHERE SessionID = 4 AND Date = (?)"
 
         q.execute(PMavailableslots, [Date])
         
-        PMSpaces = q.fetchone()[0]
+        PMSpaces = 75 - int(q.fetchone()[0])
 
         return render_template("weekdayplaysession.html", PMSpaces = PMSpaces, AMSpaces = AMSpaces)
 
@@ -1358,13 +1358,13 @@ def weekendplaysession():
 
         q.execute(AMavailableslots, [Date])
         
-        AMSpaces = q.fetchone()[0]
+        AMSpaces = 75 - int(q.fetchone()[0])
         
         PMavailableslots = "SELECT COUNT(*) FROM Booking WHERE SessionID = 2 AND Date = (?)"
 
         q.execute(PMavailableslots, [Date])
         
-        PMSpaces = q.fetchone()[0]
+        PMSpaces = 75 - int(q.fetchone()[0])
 
         return render_template("weekendplaysession.html", PMSpaces = PMSpaces, AMSpaces = AMSpaces)
 
@@ -1408,13 +1408,13 @@ def party():
 
         q.execute(AMavailableslots, [Date])
         
-        AMSpaces = q.fetchone()[0]
+        AMSpaces = 2 - int(q.fetchone()[0])
         
         PMavailableslots = "SELECT COUNT(*) FROM Booking WHERE SessionID = 6 AND Date = (?)"
 
         q.execute(PMavailableslots, [Date])
         
-        PMSpaces = q.fetchone()[0]
+        PMSpaces = 2 - int(q.fetchone()[0])
 
         return render_template("party.html", PMSpaces = PMSpaces, AMSpaces = AMSpaces)
 
