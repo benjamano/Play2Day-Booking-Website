@@ -1302,7 +1302,24 @@ def weekdayplaysession():
             return redirect(url_for("weekdayplaysession"))
 
     else:
-        return render_template("weekdayplaysession.html")
+        
+        Date = session["BookingDate"]
+        
+        AMavailableslots = "SELECT COUNT(*) FROM Booking WHERE SessionID = 3 AND Date = (?)"
+
+        q.execute(AMavailableslots, [Date])
+        
+        AMSpaces = q.fetchone()[0]
+        
+        PMavailableslots = "SELECT COUNT(*) FROM Booking WHERE SessionID = 4 AND Date = (?)"
+
+        q.execute(PMavailableslots, [Date])
+        
+        PMSpaces = q.fetchone()[0]
+
+        # Use the available_count variable as needed
+        
+        return render_template("weekdayplaysession.html", PMSpaces = PMSpaces, AMSpaces = AMSpaces)
 
 @app.route('/account/newbooking/playsession/weekendholiday',  methods=["POST","GET"])
 def weekendplaysession():
