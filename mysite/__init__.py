@@ -1317,8 +1317,6 @@ def weekdayplaysession():
         
         PMSpaces = q.fetchone()[0]
 
-        # Use the available_count variable as needed
-        
         return render_template("weekdayplaysession.html", PMSpaces = PMSpaces, AMSpaces = AMSpaces)
 
 @app.route('/account/newbooking/playsession/weekendholiday',  methods=["POST","GET"])
@@ -1353,7 +1351,22 @@ def weekendplaysession():
             return redirect(url_for("weekendplaysession"))
 
     else:
-        return render_template("weekendplaysession.html")
+        
+        Date = session["BookingDate"]
+        
+        AMavailableslots = "SELECT COUNT(*) FROM Booking WHERE SessionID = 1 AND Date = (?)"
+
+        q.execute(AMavailableslots, [Date])
+        
+        AMSpaces = q.fetchone()[0]
+        
+        PMavailableslots = "SELECT COUNT(*) FROM Booking WHERE SessionID = 2 AND Date = (?)"
+
+        q.execute(PMavailableslots, [Date])
+        
+        PMSpaces = q.fetchone()[0]
+
+        return render_template("weekendplaysession.html", PMSpaces = PMSpaces, AMSpaces = AMSpaces)
 
 
 @app.route('/account/newbooking/party', methods=["POST","GET"])
@@ -1388,7 +1401,22 @@ def party():
             return redirect(url_for("party"))
 
     else:
-        return render_template("party.html")
+        
+        Date = session["BookingDate"]
+        
+        AMavailableslots = "SELECT COUNT(*) FROM Booking WHERE SessionID = 5 AND Date = (?)"
+
+        q.execute(AMavailableslots, [Date])
+        
+        AMSpaces = q.fetchone()[0]
+        
+        PMavailableslots = "SELECT COUNT(*) FROM Booking WHERE SessionID = 6 AND Date = (?)"
+
+        q.execute(PMavailableslots, [Date])
+        
+        PMSpaces = q.fetchone()[0]
+
+        return render_template("party.html", PMSpaces = PMSpaces, AMSpaces = AMSpaces)
 
 @app.route("/account/newbooking/privatehire", methods=["POST","GET"])
 def privatehire():
