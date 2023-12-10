@@ -851,6 +851,27 @@ input[type=select]{
     background-color: #1e1e1e;
 }
 
+.anchorednumberpair {
+    text-align: right;
+    min-width: 200px;
+    padding: 32px;
+    border: solid;
+    border-color: #818589;
+    background-color: white;
+    margin-top: 10px;
+    margin-right: 20px !important;
+    margin-left: 20px !important;
+    margin-bottom: 32px;
+    border-radius: 20px;
+    display: inline-block;
+    transition-duration: 0.4s;
+}
+
+.dark-mode .anchorednumberpair{
+    background-color: #333333;
+
+}
+
  table, th, td {
     transition-duration: 0.2s;
     table-layout: fixed ;

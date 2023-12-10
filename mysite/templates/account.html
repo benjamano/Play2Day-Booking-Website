@@ -34,10 +34,9 @@
                   <h11 style="font-size: 40; margin-bottom: 16px">
                       Welcome, {{First}}
                   </h11>
-                  <div cla ss="pair">
-                    <div class="numberpair-slideshow">
+                  <div class="pair">
                       {% if NearestBookingDate != "None" or NearestBookingTime != "None" %}
-                        <div class="numberpair">
+                        <div class="anchorednumberpair">
                           <h11 style="font-size: 50">
                             {{NearestBookingDate}}<br>{{NearestBookingTime}}
                           </h11>
@@ -49,7 +48,7 @@
                         </div>
                       {% endif %}
                       <br>
-                      <div class="slideshow-container">
+                      <div class="slideshow-container" style>
                         <div class="mySlides fade">
                           <img src="{{ url_for('static',filename='/images/privatehiresslide.png') }}" style="max-width:60%; border: 5px solid #000000;">
                         </div>
@@ -61,7 +60,6 @@
                           <img src="{{ url_for('static',filename='/images/NewFriday8th.png') }}" style="max-width:50%; border: 5px solid #000000;">
                         </div>
                       </div>
-                    </div>
                     <div style="text-align:center">
                       <span class="dot"></span>
                       <span class="dot"></span>
