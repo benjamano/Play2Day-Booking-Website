@@ -2175,7 +2175,7 @@ def managerselectsession():
             return redirect(url_for("managereditsession"))
 
         except Exception as error:
-            flash(f"AAn error occured when selecting a session: {error}", "error")
+            flash(f"An error occured when selecting a session: {error}", "error")
             return redirect(url_for("managerselectsession"))
 
     else:
@@ -2202,8 +2202,8 @@ def managereditsession():
     
     SessionID = session["SessionID"]
     SessionName = session["SessionName"]
-    AdultPrice = round(session["AdultPrice"], 2)
-    ChildPrice = round(session["ChildPrice"], 2)
+    AdultPrice = session["AdultPrice"]
+    ChildPrice = session["ChildPrice"]
     
     if managerloggedin() == False:
         flash("Nice Try, you must log in first", "error")
