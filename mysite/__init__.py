@@ -1325,7 +1325,7 @@ def weekdayplaysession():
             flash(f"This booking has invalid data, please restart the booking process.")
             return redirect(url_for("newbooking"))
         
-        if numberchildren != "1" and numberchildren != "2" and numberchildren != "3" and numberchildren != "4" and numberchildren != "5" and numberchildren != "6":
+        elif numberchildren != "1" and numberchildren != "2" and numberchildren != "3" and numberchildren != "4" and numberchildren != "5" and numberchildren != "6":
             
             session["BookingValid"] = False
             flash(f"This booking has invalid data, please restart the booking process.")
@@ -1387,7 +1387,7 @@ def weekendplaysession():
             flash(f"This booking has invalid data, please restart the booking process.")
             return redirect(url_for("newbooking"))
         
-        if numberchildren != "1" and numberchildren != "2" and numberchildren != "3" and numberchildren != "4" and numberchildren != "5" and numberchildren != "6":
+        elif numberchildren != "1" and numberchildren != "2" and numberchildren != "3" and numberchildren != "4" and numberchildren != "5" and numberchildren != "6":
             
             session["BookingValid"] = False
             flash(f"This booking has invalid data, please restart the booking process.")
