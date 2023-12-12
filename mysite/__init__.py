@@ -174,7 +174,7 @@ def findcustomerdetails(Email, CustomerID):
 
 def HashPassword(Password):
     
-    #This function hashes the password entered by the user, either when signing in.
+    #This function hashes the password entered by the user, either when signing in or signing up. It returns the salt and hashed password to be stored in the database.
 
     Salt = bcrypt.gensalt()
     HashedPassword = bcrypt.hashpw(Password.encode("utf-8"), Salt)
@@ -1548,8 +1548,9 @@ def extras():
             #app.logger.info(f"Extras: {ExtraNotes}")
 
         except Exception as error:
-            flash(f"You can ignore this error: {error}")
-            #app.logger.info(f"Either no Extra Notes selected or an error happened: {error}")
+            pass
+            #flash(f"You can ignore this error: {error}"
+            #app.logger.info(f"Either no Extra Notes selected or an error occured: {error}")
 
         return redirect(url_for("confirmbooking"))
 
@@ -1815,8 +1816,8 @@ def manageraccount():
         Fetch = q.fetchone()
         TommorowsBookings = Fetch[0]
 
-        gettotalbookings = "SELECT count(*) FROM Booking"
-        q.execute(gettotalbookings)
+        gettotalbookings = "SELECT count(*) FROM Booking WHERE Date >= (?)"
+        q.execute(gettotalbookings, [Today])
         Fetch = q.fetchone()
         TotalBookings = Fetch[0]
 
