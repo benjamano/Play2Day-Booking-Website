@@ -1200,7 +1200,6 @@ def newbooking():
     session["PlaySession"] = False
     session["Party"] = False
     session["PrivateHire"] = False
-    session["CustomerID"] = ""
     session["PlaySessionType"] = ""
     session["BookingID"] = ""
     session["BookingDate"] = ""
@@ -1473,10 +1472,14 @@ def privatehire():
         if NumberAdults != "1-10" or NumberAdults != "10-30" or NumberAdults != "30-50" or NumberAdults != "50+":
             
             session["BookingValid"] = False
+            flash(f"This booking has invalid data, please restart the booking process.")
+            return redirect(url_for("newbooking"))
 
         if NumberChildren != "0" or NumberChildren != "1-10" or NumberChildren != "10-30" or NumberChildren != "30-50" or NumberChildren != "50+": 
             
             session["BookingValid"] = False
+            flash(f"This booking has invalid data, please restart the booking process.")
+            return redirect(url_for("newbooking"))
 
         NewBooking = Booking(CustomerID=None, BookingID=None, SessionID=None, BookingDate=None, BookingTime=None, NumberOfChildren=NumberChildren, NumberOfAdults=NumberAdults, BookingPrice=None, ExtraNotes=None)
 
