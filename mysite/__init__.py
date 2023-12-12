@@ -1419,13 +1419,13 @@ def party():
         NumberAdults = request.form["numberadults"]
         NumberChildren = request.form["numberchildren"]
         
-        if NumberAdults != "5" or NumberAdults != "10" or NumberAdults != "15" or NumberAdults != "30":
+        if NumberAdults != "5" and NumberAdults != "10" and NumberAdults != "15" and NumberAdults != "30":
             
             session["BookingValid"] = False
             flash(f"This booking has invalid data, please restart the booking process.")
             return redirect(url_for("newbooking"))
         
-        elif NumberChildren != "5" or NumberChildren != "10" or NumberChildren != "15" or NumberChildren != "30": 
+        elif NumberChildren != "5" and NumberChildren != "10" and NumberChildren != "15" and NumberChildren != "30": 
             
             session["BookingValid"] = False
             flash(f"This booking has invalid data, please restart the booking process.")
@@ -1481,15 +1481,15 @@ def privatehire():
         NumberAdults = request.form["numberadults"]
         NumberChildren = request.form["numberchildren"]
         
-        app.logger.info(f"NumberofAdults: {NumberAdults}, {type(NumberAdults)}, NumberofChildren: {NumberChildren}, {type(NumberChildren)}")
+        #app.logger.info(f"NumberofAdults: {NumberAdults}, {type(NumberAdults)}, NumberofChildren: {NumberChildren}, {type(NumberChildren)}")
         
-        if NumberAdults != "1-10" or NumberAdults != "10-30" or NumberAdults != "30-50" or NumberAdults != "50+":
+        if NumberAdults != "1-10" and NumberAdults != "10-30" and NumberAdults != "30-50" and NumberAdults != "50+":
             
             session["BookingValid"] = False
             flash(f"This booking has invalid data, please restart the booking process.")
             return redirect(url_for("newbooking"))
 
-        elif NumberChildren != "0" or NumberChildren != "1-10" or NumberChildren != "10-30" or NumberChildren != "30-50" or NumberChildren != "50+": 
+        elif NumberChildren != "0" and NumberChildren != "1-10" and NumberChildren != "10-30" and NumberChildren != "30-50" and NumberChildren != "50+": 
             
             session["BookingValid"] = False
             flash(f"This booking has invalid data, please restart the booking process.")
