@@ -1239,6 +1239,7 @@ def newbooking():
             return redirect(url_for("sessiontype"))
 
         else:
+            session["BookingValid"] = False
             flash(f"An error occured while selecting the date: {error}")
             return redirect(url_for("newbooking"))
 
