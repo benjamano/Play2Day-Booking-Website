@@ -1197,11 +1197,6 @@ def newbooking():
         return redirect(url_for("index"))
 
     # Resetting all session variables that are used in this process
-    session["EmailFailed"] = ""
-    session["ManagerUsername"] = ""
-    session["ManagerID"] = ""
-    session["Password"] = ""
-    session["Email"] = ""
     session["PlaySession"] = False
     session["Party"] = False
     session["PrivateHire"] = False
