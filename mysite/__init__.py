@@ -1481,7 +1481,7 @@ def privatehire():
         NumberAdults = request.form["numberadults"]
         NumberChildren = request.form["numberchildren"]
         
-        app.logger.info(f"NumberofAdults: {NumberAdults}, NumberofChildren: {NumberChildren}")
+        app.logger.info(f"NumberofAdults: {NumberAdults}, {type(NumberAdults)}, NumberofChildren: {NumberChildren}, {type(NumberChildren)}")
         
         if NumberAdults != "1-10" or NumberAdults != "10-30" or NumberAdults != "30-50" or NumberAdults != "50+":
             
