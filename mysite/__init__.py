@@ -1307,7 +1307,7 @@ def weekdayplaysession():
         flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
 
-    if session["BookingValid"] == "False":
+    if session["BookingValid"] == False:
         flash(f"This booking has invalid data, please restart the booking process.")
         return redirect(url_for("newbooking"))
     
