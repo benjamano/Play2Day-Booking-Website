@@ -1015,7 +1015,19 @@ def logout():
         session["numberchildren"] = ""
         session["BookingType"] = ""
         session["BookingValid"] = ""
-
+        session["BookingPrice"] = ""
+        session["NumberAdults"] = ""
+        session["SessionType"] = ""
+        session["NumberChildren"] = ""
+        session["Price"] = ""
+        session["sessionID"] = ""
+        session["WeekdayBooking"] = ""
+        session["PartyType"] = ""
+        session["First"] = ""
+        session["Last"] = ""
+        session["Phone"] = ""
+        session["FirstName"] = ""
+        session["LastName"] = ""
 
         return redirect(url_for("index"))
 
@@ -1185,21 +1197,37 @@ def newbooking():
         return redirect(url_for("index"))
 
     # Resetting all session variables that are used in this process
+    session["EmailFailed"] = ""
+    session["ManagerUsername"] = ""
+    session["ManagerID"] = ""
+    session["Password"] = ""
+    session["Email"] = ""
     session["PlaySession"] = False
     session["Party"] = False
     session["PrivateHire"] = False
+    session["CustomerID"] = ""
     session["PlaySessionType"] = ""
-    session["BookingSession"] = ""
     session["BookingID"] = ""
     session["BookingDate"] = ""
     session["PrivateHireType"] = ""
     session["BookingTime"] = ""
     session["numberadults"] = ""
     session["numberchildren"] = ""
-    session["WeekdayBooking"] = False
-    session["ExtraNotes"] = ""
-    session["BookingValid"] = False
-
+    session["BookingType"] = ""
+    session["BookingValid"] = ""
+    session["BookingPrice"] = ""
+    session["NumberAdults"] = ""
+    session["SessionType"] = ""
+    session["NumberChildren"] = ""
+    session["Price"] = ""
+    session["sessionID"] = ""
+    session["WeekdayBooking"] = ""
+    session["PartyType"] = ""
+    session["First"] = ""
+    session["Last"] = ""
+    session["Phone"] = ""
+    session["FirstName"] = ""
+    session["LastName"] = ""
 
     if request.method == "POST":
         CustomerID = session["CustomerID"]
@@ -1262,10 +1290,15 @@ def sessiontype():
         exists=q.fetchone()[0]
 
         if exists == 0:
+            
+            session["BookingValid"] = True
 
             PHBooked = False
 
         else:
+            
+            session["BookingValid"] = False
+            
             PHBooked = True
 
         return render_template("newbooking.html", WeekdayBooking = WeekdayBooking, PHBooked = PHBooked)
@@ -1296,6 +1329,7 @@ def weekdayplaysession():
         error = Result[1]
 
         if Success:
+            session["BookingValid"] = True
             return redirect(url_for("extras"))
 
         else:
@@ -1345,6 +1379,7 @@ def weekendplaysession():
         error = Result[1]
 
         if Success:
+            session["BookingValid"] = True
             return redirect(url_for("extras"))
 
         else:
@@ -1395,6 +1430,7 @@ def party():
         error = Result[1]
 
         if Success:
+            session["BookingValid"] = True
             return redirect(url_for("extras"))
 
         else:
@@ -1452,6 +1488,7 @@ def privatehire():
         error = Result[1]
 
         if Success:
+            session["BookingValid"] = True
             return redirect(url_for("extras"))
         else:
             flash(f"An error occured while processing the request: {error}")
@@ -1490,6 +1527,8 @@ def extras():
             #app.logger.info(f"Extras after: {ExtraNotes}")
             
             session["ExtraNotes"] = ExtraNotes
+            
+            session["BookingValid"] = True
 
             #app.logger.info(f"Extras: {ExtraNotes}")
 
@@ -1508,6 +1547,8 @@ def managebooking():
     if customerloggedin() == False:
         flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
+
+    session["BookingValid"] = False
 
     CustomerID = session["CustomerID"]
 
