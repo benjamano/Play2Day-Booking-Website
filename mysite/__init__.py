@@ -1235,6 +1235,7 @@ def newbooking():
         error = Result[1]
 
         if Success:
+            session["BookingValid"] = True
             return redirect(url_for("sessiontype"))
 
         else:
