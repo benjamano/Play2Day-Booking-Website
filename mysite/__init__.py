@@ -1297,8 +1297,6 @@ def sessiontype():
 
         else:
             
-            session["BookingValid"] = False
-            
             PHBooked = True
 
         return render_template("newbooking.html", WeekdayBooking = WeekdayBooking, PHBooked = PHBooked)
