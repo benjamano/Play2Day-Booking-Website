@@ -1418,6 +1418,18 @@ def party():
         BookingTime = request.form["bookingtime"]
         NumberAdults = request.form["numberadults"]
         NumberChildren = request.form["numberchildren"]
+        
+        if NumberAdults != "5" or NumberAdults != "10" or NumberAdults != "15" or NumberAdults != "30":
+            
+            session["BookingValid"] = False
+            flash(f"This booking has invalid data, please restart the booking process.")
+            return redirect(url_for("newbooking"))
+        
+        if NumberChildren != "5" or NumberChildren != "10" or NumberChildren != "15" or NumberChildren != "30": 
+            
+            session["BookingValid"] = False
+            flash(f"This booking has invalid data, please restart the booking process.")
+            return redirect(url_for("newbooking"))
 
         NewBooking = Booking(CustomerID=None, BookingID=None, SessionID=None, BookingDate=None, BookingTime=BookingTime, NumberOfChildren=NumberChildren, NumberOfAdults=NumberAdults, BookingPrice=None, ExtraNotes=None)
 
