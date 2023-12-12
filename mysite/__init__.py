@@ -1209,7 +1209,6 @@ def newbooking():
     session["numberadults"] = ""
     session["numberchildren"] = ""
     session["BookingType"] = ""
-    session["BookingValid"] = ""
     session["BookingPrice"] = ""
     session["NumberAdults"] = ""
     session["SessionType"] = ""
@@ -1252,6 +1251,10 @@ def sessiontype():
     if customerloggedin() == False:
         flash("Nice Try, you must log in first", "error")
         return redirect(url_for("index"))
+    
+    if session["BookingValid"] == False:
+        flash(f"This booking has invalid data, please restart the booking process.")
+        return redirect(url_for("newbooking"))
 
     WeekdayBooking = session["WeekdayBooking"]
     BookingDate = session["BookingDate"]
