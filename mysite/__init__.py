@@ -1534,7 +1534,7 @@ def extras():
             
             #As some extra protection, this checks to see if the user has selected any extras, if not, it sets the variable to an empty string, this is to prevent any invalid selections being saved.
             
-            if ExtraNotes != "Buffet" or ExtraNotes != "PizzaParty" or ExtraNotes != "LaserParty" or ExtraNotes != "PartyBags" or ExtraNotes != "AdultLaser":
+            if ExtraNotes != "Buffet" and ExtraNotes != "PizzaParty" and ExtraNotes != "LaserParty" and ExtraNotes != "PartyBags" and ExtraNotes != "AdultLaser":
                 ExtraNotes = ""
     
             #app.logger.info(f"Extras before: {ExtraNotes}")gvh
