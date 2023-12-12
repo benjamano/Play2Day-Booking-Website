@@ -1318,6 +1318,18 @@ def weekdayplaysession():
         BookingTime = request.form["bookingtime"]
         numberadults = request.form["numberadults"]
         numberchildren = request.form["numberchildren"]
+        
+        if numberadults != "1" and numberadults != "2" and numberadults != "3" and numberadults != "4" and numberadults != "5" and numberadults != "6":
+            
+            session["BookingValid"] = False
+            flash(f"This booking has invalid data, please restart the booking process.")
+            return redirect(url_for("newbooking"))
+        
+        if numberchildren != "1" and numberchildren != "2" and numberchildren != "3" and numberchildren != "4" and numberchildren != "5" and numberchildren != "6":
+            
+            session["BookingValid"] = False
+            flash(f"This booking has invalid data, please restart the booking process.")
+            return redirect(url_for("newbooking"))
 
         NewBooking = Booking(CustomerID=None, BookingID=None, SessionID=None, BookingDate=None, BookingTime=BookingTime, NumberOfChildren=numberchildren, NumberOfAdults=numberadults, BookingPrice=None, ExtraNotes=None)
 
@@ -1368,6 +1380,18 @@ def weekendplaysession():
         BookingTime = request.form["bookingtime"]
         numberadults = request.form["numberadults"]
         numberchildren = request.form["numberchildren"]
+        
+        if numberadults != "1" and numberadults != "2" and numberadults != "3" and numberadults != "4" and numberadults != "5" and numberadults != "6":
+            
+            session["BookingValid"] = False
+            flash(f"This booking has invalid data, please restart the booking process.")
+            return redirect(url_for("newbooking"))
+        
+        if numberchildren != "1" and numberchildren != "2" and numberchildren != "3" and numberchildren != "4" and numberchildren != "5" and numberchildren != "6":
+            
+            session["BookingValid"] = False
+            flash(f"This booking has invalid data, please restart the booking process.")
+            return redirect(url_for("newbooking"))
 
         NewBooking = Booking(CustomerID=None, BookingID=None, SessionID=None, BookingDate=None, BookingTime=BookingTime, NumberOfChildren=numberchildren, NumberOfAdults=numberadults, BookingPrice=None, ExtraNotes=None)
 
