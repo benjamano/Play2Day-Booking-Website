@@ -603,6 +603,7 @@ class Booking:
         elif option == "Private Hire":
             session["BookingType"] = "Private Hire"
             return True, None, "privatehire"
+        
         else:
             return False, "Option selected is not valid!"
 
