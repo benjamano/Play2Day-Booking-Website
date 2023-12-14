@@ -1555,7 +1555,7 @@ def extras():
 
         try:
 
-            ExtraNotes = request.form.getlist("Extra")
+            ExtraNotes = request.form("Extra")
             
             #As some extra protection, this checks to see if the user has selected any extras, if not, it sets the variable to an empty string, this is to prevent any invalid selections being saved.
             
