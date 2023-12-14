@@ -45,65 +45,50 @@
                 </h3>
                 <form action="#" method="post">
                     {% if BookingType == "Party" %}
-                    
                     <p>
-                        <p>
-                            <label>
-                                <input type="checkbox" id="Extra" name="Extra" value="PartyBags">
-                                Extra Party Bags +£10
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input type="checkbox" id="Extra" name="Extra" value="LaserParty">
-                                Laser-Tag Party +£50
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input type="checkbox" id="Extra" name="Extra" value="PizzaParty">
-                                Pizza Party +£50
-                            </label>
-                        </p>
+                        <label>
+                            <input type="checkbox" name="Extra" value="PartyBags">
+                            Extra Party Bags +£10
+                        </label>
                     </p>
-
-                    {% elif privatehiretype == "Laser Tag Private Hire" %}
-
-                        <p>
-                            <label>
-                                <input type="checkbox" id="Extra" name="Extra" value="Temp">
-                                Temp
-                            </label>
-                        </p>
-                    
-                    {% elif BookingType == "Weekday Play Session" or BookingType == "Weekend Play Session" %}
-
-                        <p>
-                            <label>
-                                <input type="checkbox" id="Extra" name="Extra" value="AdultLaser">
-                                Adult Laser Tag Upgrade +£15
-                            </label>
-                        </p>
-                    
-                    {% elif privatehiretype != "" and privatehiretype != "Laser Tag Private Hire" %}
-
-                        <p>
-                            <label>
-                                <input type="checkbox" id="Extra" name="Extra" value="Buffet">
-                                All you can eat buffet +£100
-                            </label>
-                        </p>
-                    
-                    {% else %}
-
-                        <h4>Huh, something went wrong, no idea how you managed to get here, James</h4>
-
-                    {% endif %}
-
+                    <p>
+                        <label>
+                            <input type="checkbox" name="Extra" value="LaserParty">
+                            Laser-Tag Party +£50
+                        </label>
                     </p>
-                        <input type="submit" name="Submit" value="Next"/>
+                    <p>
+                        <label>
+                            <input type="checkbox" name="Extra" value="PizzaParty">
+                            Pizza Party +£50
+                        </label>
                     </p>
-                </form>
+                {% elif privatehiretype == "Laser Tag Private Hire" %}
+                    <p>
+                        <label>
+                            <input type="checkbox" name="Extra" value="Temp">
+                            Temp
+                        </label>
+                    </p>
+                {% elif BookingType == "Weekday Play Session" or BookingType == "Weekend Play Session" %}
+                    <p>
+                        <label>
+                            <input type="checkbox" name="Extra" value="AdultLaser">
+                            Adult Laser Tag Upgrade +£15
+                        </label>
+                    </p>
+                {% elif privatehiretype != "" and privatehiretype != "Laser Tag Private Hire" %}
+                    <p>
+                        <label>
+                            <input type="checkbox" name="Extra" value="Buffet">
+                            All you can eat buffet +£100
+                        </label>
+                    </p>
+                {% else %}
+                    <h4>Huh, something went wrong, no idea how you managed to get here, James</h4>
+                {% endif %}
+                <input type="submit" name="Submit" value="Next"/>
+            </form>
                 <progress value="80" max="100"> 80% </progress>
             </div>
         </center>

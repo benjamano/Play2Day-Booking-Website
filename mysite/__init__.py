@@ -1555,7 +1555,7 @@ def extras():
 
         try:
 
-            ExtraNotes = request.form.get["Extra"]
+            ExtraNotes = request.form.getlist("Extra")
             
             #As some extra protection, this checks to see if the user has selected any extras, if not, it sets the variable to an empty string, this is to prevent any invalid selections being saved.
             
@@ -1563,7 +1563,7 @@ def extras():
                 ExtraNotes = ""
     
             #app.logger.info(f"Extras before: {ExtraNotes}")
-            #ExtraNotes = ", ".join(ExtraNotes)
+            ExtraNotes = ", ".join(ExtraNotes)
             #app.logger.info(f"Extras after: {ExtraNotes}")
             
             session["ExtraNotes"] = ExtraNotes
