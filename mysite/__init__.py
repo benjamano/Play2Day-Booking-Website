@@ -1559,9 +1559,9 @@ def extras():
             
             #As some extra protection, this checks to see if the user has selected any extras, if not, it sets the variable to an empty string, this is to prevent any invalid selections being saved.
             
-            valid_values = {"Buffet", "PizzaParty", "LaserParty", "PartyBags", "AdultLaser"}
+            validvalues = {"Buffet", "PizzaParty", "LaserParty", "PartyBags", "AdultLaser"}
 
-            if all(value in valid_values for value in extranotes_list):
+            if all(value in validvalues for value in ExtraNotes):
                 # All values are valid
                 pass
 
