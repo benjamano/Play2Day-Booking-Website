@@ -1589,6 +1589,10 @@ def extras():
         return redirect(url_for("confirmbooking"))
 
     else:
+        
+        if PrivateHireType == "Laser Tag Private Hire":
+            return redirect(url_for("confirmbooking"))
+        
         return render_template("optionalextras.html", BookingType = BookingType, privatehiretype = PrivateHireType)
 
 @app.route("/account/managebooking", methods=["POST","GET"])
