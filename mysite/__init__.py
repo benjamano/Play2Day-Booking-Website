@@ -1562,15 +1562,15 @@ def extras():
             if ExtraNotes != "Buffet" and ExtraNotes != "PizzaParty" and ExtraNotes != "LaserParty" and ExtraNotes != "PartyBags" and ExtraNotes != "AdultLaser":
                 ExtraNotes = ""
     
-            #app.logger.info(f"Extras before: {ExtraNotes}")gvh
+            app.logger.info(f"Extras before: {ExtraNotes}")gvh
             ExtraNotes = ", ".join(ExtraNotes)
-            #app.logger.info(f"Extras after: {ExtraNotes}")
+            app.logger.info(f"Extras after: {ExtraNotes}")
             
             session["ExtraNotes"] = ExtraNotes
             
             session["BookingValid"] = True
 
-            #app.logger.info(f"Extras: {ExtraNotes}")
+            app.logger.info(f"Extras: {ExtraNotes}")
 
         except Exception as error:
             pass
