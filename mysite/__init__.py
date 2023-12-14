@@ -1559,8 +1559,17 @@ def extras():
             
             #As some extra protection, this checks to see if the user has selected any extras, if not, it sets the variable to an empty string, this is to prevent any invalid selections being saved.
             
-            if ExtraNotes != "Buffet" and ExtraNotes != "PizzaParty" and ExtraNotes != "LaserParty" and ExtraNotes != "PartyBags" and ExtraNotes != "AdultLaser":
-                ExtraNotes = ""
+            valid_values = {"Buffet", "PizzaParty", "LaserParty", "PartyBags", "AdultLaser"}
+
+            if all(value in valid_values for value in extranotes_list):
+                # All values are valid
+                pass
+
+            else:
+                # At least one selected value is not valid
+                session["BookingValid"] = False
+                flash(f"This booking has invalid data, please restart the booking process.")
+                return redirect(url_for("newbooking"))
     
             #app.logger.info(f"Extras before: {ExtraNotes}")
             ExtraNotes = ", ".join(ExtraNotes)
