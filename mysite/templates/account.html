@@ -49,25 +49,25 @@
                         </div>
                       {% endif %}
                       <br>
-                      <div class="slideshow-container" style>
-                        <div class="mySlides fade">
-                          <img src="{{ url_for('static',filename='/images/privatehiresslide.png') }}" style="max-width:60%; border: 5px solid #000000;">
+                      <center>
+                        <div class="slideshow-container" style>
+                          <div class="mySlides fade">
+                            <img src="{{ url_for('static',filename='/images/privatehiresslide.png') }}" style="max-width:60%; border: 5px solid #000000;">
+                          </div>
+                          <div class="mySlides fade">
+                            <img src="{{ url_for('static',filename='/images/partybookingsslide.png') }}" style="max-width:60%; border: 5px solid #000000;">
+                          </div>
+      
+                          <div class="mySlides fade">
+                            <img src="{{ url_for('static',filename='/images/NewFriday8th.png') }}" style="max-width:50%; border: 5px solid #000000;">
+                          </div>
                         </div>
-                        <div class="mySlides fade">
-                          <img src="{{ url_for('static',filename='/images/partybookingsslide.png') }}" style="max-width:60%; border: 5px solid #000000;">
+                        <div style="text-align:center">
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
                         </div>
-    
-                        <div class="mySlides fade">
-                          <img src="{{ url_for('static',filename='/images/NewFriday8th.png') }}" style="max-width:50%; border: 5px solid #000000;">
-                        </div>
-                      </div>
-                    <div style="text-align:center">
-                      <span class="dot"></span>
-                      <span class="dot"></span>
-                      <span class="dot"></span>
-                  </div
-              </body>
-          </center>
+                      </center>
       </div>
       {% with messages = get_flashed_messages() %}
         {% if messages %}
