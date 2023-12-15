@@ -1273,6 +1273,11 @@ def sessiontype():
         urlname = Result[2]
 
         if Success:
+            
+            if urlname == "privatehire" and PHBooked == True:
+                flash("Private Hire is already booked for this date, please select another date")
+                return redirect(url_for("newbooking"))
+            
             session["BookingValid"] = True
             return redirect(url_for(urlname))
 
@@ -1290,8 +1295,6 @@ def sessiontype():
         exists=q.fetchone()[0]
 
         if exists == 0:
-            
-            session["BookingValid"] = True
 
             PHBooked = False
 
