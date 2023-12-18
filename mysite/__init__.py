@@ -1256,6 +1256,19 @@ def sessiontype():
     if session["BookingValid"] == False:
         flash(f"This booking has invalid data, please restart the booking process.")
         return redirect(url_for("newbooking"))
+    
+    checkexists = "SELECT count(*) FROM Booking WHERE SessionID IN (7, 8, 9) AND Date = (?)"
+    #app.logger.info(f"Looking for private hire booking with and Booking date = {BookingDate}")
+    q.execute(checkexists, [BookingDate])
+    exists=q.fetchone()[0]
+
+    if exists == 0:
+
+        PHBooked = False
+
+    else:
+        
+        PHBooked = True
 
     WeekdayBooking = session["WeekdayBooking"]
     BookingDate = session["BookingDate"]
@@ -1288,19 +1301,6 @@ def sessiontype():
 
     # The variable "WeekdayBooking" is a boolean which tells the booking page if the booking is being made on the weekday or weekend
     else:
-
-        checkexists = "SELECT count(*) FROM Booking WHERE SessionID IN (7, 8, 9) AND Date = (?)"
-        #app.logger.info(f"Looking for private hire booking with and Booking date = {BookingDate}")
-        q.execute(checkexists, [BookingDate])
-        exists=q.fetchone()[0]
-
-        if exists == 0:
-
-            PHBooked = False
-
-        else:
-            
-            PHBooked = True
 
         return render_template("newbooking.html", WeekdayBooking = WeekdayBooking, PHBooked = PHBooked)
 
