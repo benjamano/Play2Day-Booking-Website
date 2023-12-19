@@ -694,9 +694,6 @@ class Booking:
         else:
 
             session["BookingValid"] = False
-            flash("Please select a valid time", "error")
-            
-            return redirect(url_for("newbooking"))
 
         fetch = q.fetchone()
         SessionID = fetch[0]
