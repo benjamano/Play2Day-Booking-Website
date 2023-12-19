@@ -1257,6 +1257,8 @@ def sessiontype():
         flash(f"This booking has invalid data, please restart the booking process.")
         return redirect(url_for("newbooking"))
     
+    BookingDate = session["BookingDate"]
+    
     checkexists = "SELECT count(*) FROM Booking WHERE SessionID IN (7, 8, 9) AND Date = (?)"
     #app.logger.info(f"Looking for private hire booking with and Booking date = {BookingDate}")
     q.execute(checkexists, [BookingDate])
