@@ -1,5 +1,7 @@
 import sqlite3, bcrypt, ssl, smtplib
 
+import secrets
+
 import validate_email_address
 
 from codes import gmail
@@ -48,6 +50,13 @@ def onStart():
 
     except Exception as error:
         return render_template('error.html', error=error)
+
+def generate_csrf_token():
+    if 'csrf_token' not in session:
+        session['csrf_token'] = secrets.token_hex(16)
+    return session['csrf_token']
+
+app.jinja_env.globals['csrf_token'] = generate_csrf_token
 
 def checkdate(Date):
     try:
@@ -1728,7 +1737,20 @@ def confirmbooking():
         success = createbooking()
         
         if success:
-            return redirect(url_for("managebooking"))
+            if request.form.get('csrf_token') != session['csrf_token']:
+                flash("An error occured", "error")
+                return redirect(url_for("index"))
+            
+            else:
+
+                success = createbooking()
+
+                if success:
+                    flash("Booking created successfully", "success")
+                    return redirect(url_for("managebooking"))
+                else:
+                    flash("An error occurred while creating the booking", "error")
+                    return redirect(url_for("newbooking"))
         
         else:
             flash(f"An error occured while creating the booking: {error}")
