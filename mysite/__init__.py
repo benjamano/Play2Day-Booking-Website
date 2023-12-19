@@ -1726,6 +1726,8 @@ def confirmbooking():
 
 @app.route("/account/newbooking/createbooking")
 def createbooking():
+    
+    session["BookingValid"] = False
 
     if customerloggedin() == False:
         flash("Nice Try, you must log in first", "error")
@@ -1748,7 +1750,6 @@ def createbooking():
     error = Result[1]
 
     if Success:
-        session["BookingValid"] = False
         return redirect(url_for("managebooking"))
 
     else:
