@@ -311,35 +311,6 @@ def sendEmail(Email, Option):
         
         return False, error
 
-def createbooking():
-    
-    session["BookingValid"] = False
-
-    if customerloggedin() == False:
-        return False
-        
-    CustomerID = session["CustomerID"]
-    SessionID = session["SessionID"]
-    BookingTime = session["BookingTime"]
-    BookingDate = session["BookingDate"]
-    NumberOfAdults = session["numberadults"]
-    NumberOfChildren = session["numberchildren"]
-    Price = session["Price"]
-    ExtraNotes = session["ExtraNotes"]
-
-    NewBooking = Booking(CustomerID=CustomerID, BookingID=None, SessionID=SessionID, BookingDate=BookingDate, BookingTime=BookingTime,NumberOfChildren=NumberOfChildren, NumberOfAdults=NumberOfAdults, BookingPrice=Price, ExtraNotes=ExtraNotes)
-
-    Result = NewBooking.CreateBooking()
-
-    Success = Result[0]
-    error = Result[1]
-
-    if Success:
-        return True
-
-    else:
-        return False
-
 # ------------------------------------------------------------------------------------------------------------- #
 
 onStart()
@@ -1719,6 +1690,10 @@ def deletebooking():
 
 @app.route("/account/newbooking/confirmbooking", methods=["POST","GET"])
 def confirmbooking():
+    
+    if session["BookingValid"] == False:
+        flash(f"This booking has invalid data, please restart the booking process.")
+        return redirect(url_for("newbooking"))
 
     if customerloggedin() == False:
         flash("Nice Try, you must log in first", "error")
@@ -1726,16 +1701,28 @@ def confirmbooking():
 
     if request.method == "POST":
         
-        success = createbooking()
+        CustomerID = session["CustomerID"]
+        SessionID = session["SessionID"]
+        BookingTime = session["BookingTime"]
+        BookingDate = session["BookingDate"]
+        NumberOfAdults = session["numberadults"]
+        NumberOfChildren = session["numberchildren"]
+        Price = session["Price"]
+        ExtraNotes = session["ExtraNotes"]
+
+        NewBooking = Booking(CustomerID=CustomerID, BookingID=None, SessionID=SessionID, BookingDate=BookingDate, BookingTime=BookingTime,NumberOfChildren=NumberOfChildren, NumberOfAdults=NumberOfAdults, BookingPrice=Price, ExtraNotes=ExtraNotes)
+
+        Result = NewBooking.CreateBooking()
+
+        Success = Result[0]
+        error = Result[1]
         
-        if success:
+        if Success:
             return redirect(url_for("managebooking"))
         
         else:
             flash(f"An error occured while creating the booking: {error}")
             return redirect(url_for("newbooking"))
-        
-        return redirect(url_for("createbooking"))
 
     else:
 
