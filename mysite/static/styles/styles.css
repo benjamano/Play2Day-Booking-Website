@@ -192,6 +192,8 @@ img.one {
     padding-top: 0 !important;
     transition-duration: 0.4s;
     z-index:0;
+    margin-bottom: 32px;
+    margin-right: -45;
 
 }
 img.menus {
