@@ -62,7 +62,8 @@
                         </h2>
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                         <p>
-                            <input type="submit" name="Submit" value="Confirm Details"/>
+                            <input type="submit" id="submitButton" name="Submit" value="Confirm Details" onclick="disableButton()" />
+
                         </p>
                     </form>
                     <progress value="100" max="100"> 100% </progress>
@@ -81,6 +82,13 @@
 {% endif %}
 {% endwith %}
 <script>
+
+    function disableButton() {
+        var submitButton = document.getElementById('submitButton');
+        submitButton.disabled = true;
+        submitButton.value = 'Submitting...';
+    }
+    
     
     function ToggleDarkMode() {
       var bodyElement = document.body;

@@ -1108,7 +1108,7 @@ def editaccountdetails():
     
     # sql.commit()
     
-    # details = HashPassword(Password="blah")
+    # details = HashPassword(Password="")
 
     # Salt = details[0]
     # Password = details[1]
