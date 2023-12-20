@@ -86,6 +86,11 @@
         var submitButton = document.getElementById('submitButton');
         submitButton.disabled = true;
         submitButton.value = 'Submitting...';
+
+        var form = submitButton.closest('form');
+        if (form) {
+            form.submit();
+        }
     }
     
     function ToggleDarkMode() {
